@@ -17,8 +17,49 @@
 \begin{document}
 \maketitle
 
-\section*{Oppgave 1a)}
+\section*{Project 1a)}
 
+\begin{flalign*}
+   &-\frac{u_{i+1}+u_{i-1}-2u_i}{h^2} = f_i\\
+   &-(u_{i+1}+u_{i-1}-2u_i) = f_ih^2\\
+   &2u_i -u_{i+1}-u_{i-1}=f_ih^2
+\end{flalign*}
+This expands to
+\begin{flalign*}
+  2u_1 - u_0 - u_2 &= f_1h^2\\
+  2u_2 - u_1 - u_2 &= f_2h^2\\
+  &\vdots\\
+  2u_n - u_{n-1} - u_n+1 &= f_3h^2\\
+\end{flalign*}
+The boundary conditions give us $u_{n+1}=u(1)=0$ and $u_0=u(0)=0$. Then we can write this expression as
+\begin{flalign*}
+  \begin{bmatrix}
+    2 & -1 & 0 &\dots & 0 & 0\\
+    -1 & 2 & -1 & \dots & 0 & 0\\
+    0 & -1 & 2 & \dots & 0 & 0 \\
+    \vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+    0 & 0 & 0 &\dots& 2 & -1\\
+    0 & 0 & 0 &\dots& -1 & 2
+  \end{bmatrix}
+  \begin{bmatrix}
+    u_1\\
+    u_2\\
+    u_3\\
+    \vdots\\
+    u_{n-1}\\
+    u_n
+  \end{bmatrix} =
+  \begin{bmatrix}
+    f_1\\
+    f_2\\
+    f_3\\
+    \vdots\\
+    f_{n-1}\\
+    f_n
+  \end{bmatrix}
+\end{flalign*}
+
+\section*{Project 1b)}
 
 
 \end{document}
