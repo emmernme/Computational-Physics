@@ -33,3 +33,4 @@ def Df_2c(x, h):
     return (f(x + h) - f(x)) * 1/h + O(h)
 def Df_3c(x, h):
     return (f(x + h) - f(x - h)) * 1/(2*h) + O(h**2)
+
