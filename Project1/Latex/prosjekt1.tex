@@ -31,7 +31,7 @@ This expands to
   &\vdots\\
   2u_n - u_{n-1} - u_n+1 &= f_3h^2\\
 \end{flalign*}
-The boundary conditions give us $u_{n+1}=u(1)=0$ and $u_0=u(0)=0$. We also introduce $f_ih^2 = g_i$ Then we can write this expression as
+The boundary conditions give us $u_{n+1}=u(1)=0$ and $u_0=u(0)=0$. We also introduce $f_ih^2 = g_i$. We can then write this expression as
 \begin{flalign*}
   \begin{bmatrix}
     2 & -1 & 0 &\dots & 0 & 0\\
@@ -60,6 +60,38 @@ The boundary conditions give us $u_{n+1}=u(1)=0$ and $u_0=u(0)=0$. We also intro
 \end{flalign*}
 
 \section*{Project 1b)}
+
+\begin{flalign}
+  &b_1u_1 + c_1u_2 = \tilde{g}_1\\
+  &a_1u_1 + b_2u_2 + c_2u_3 = \tilde{g}_2\\
+  &a_2u_2 + b_3u_3 + c_3u_4 = \tilde{g}_3\\
+  &\vdots \notag\\
+  &a_{n-1}v_{n-1} + a_nv_n = \tilde{g}_n
+\end{flalign}
+Multiplying equation (1) with $\frac{a_1}{b_1}$, wich gives us.\\
+\begin{center}
+  $a_1u_1 + \frac{a_1c_1}{b_1}u_2 = \tilde{g_1}\frac{a_1}{b_1} $\\
+\end{center}
+\vspace{0.3cm}
+
+\noindent We then set equation (2) minus equation (1)\\
+\begin{flalign*}
+  a_1u_1- a_1u_1 + b_2u_2 - \frac{a_1c_1}{b_1}u_2 + c_2u_3 &= g_2 - g_1\frac{a_1}{b_1}\\
+  \left(b_2 - \frac{a_1c_1}{b_1} \right)u_2 + c_2u_3 &= g_2 - g_1\frac{a_1}{b_1}\\
+  \tilde{b}_2u_2 +c_2u_3 &= \tilde{g}_2
+\end{flalign*}
+
+\noindent The general expressions is
+\begin{flalign*}
+  \begin{aligned}
+    \tilde{b}_i = b_i - \frac{c_{i-1}a_{i-1}}{\tilde{b}_{i-1}}
+  \end{aligned},
+  \qquad \qquad
+  \begin{aligned}
+    \tilde{g}_i = g_i - g_{i-1}\frac{a_{i-1}}{\tilde{b}_{i-1}}
+  \end{aligned}
+\end{flalign*}
+Where $\tilde{b}_1 = b_1$ and $\tilde{g}_1 = g_1$
 
 
 \end{document}
