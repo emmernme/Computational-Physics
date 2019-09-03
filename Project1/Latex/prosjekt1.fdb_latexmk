@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1567497698 "prosjekt1.tex" "prosjekt1.pdf" "prosjekt1" 1567497699
+["pdflatex"] 1567499685 "prosjekt1.tex" "prosjekt1.pdf" "prosjekt1" 1567504912
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -75,8 +75,8 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1553522996 4220280 3080b691013e8af16335e3c5383bd040 ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "prosjekt1.aux" 1567497699 8 a94a2480d3289e625eea47cd1b285758 ""
-  "prosjekt1.tex" 1567497698 2471 4eafb185ba4298c49bc1d48579ffb96b ""
+  "prosjekt1.aux" 1567499686 8 a94a2480d3289e625eea47cd1b285758 ""
+  "prosjekt1.tex" 1567504912 2697 846306256e54726439ee950bca1afb11 ""
   (generated)
   "prosjekt1.pdf"
   "prosjekt1.log"

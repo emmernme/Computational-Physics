@@ -60,7 +60,7 @@ The boundary conditions give us $u_{n+1}=u(1)=0$ and $u_0=u(0)=0$. We also intro
 \end{flalign*}
 
 \section*{Project 1b)}
-
+The forward substitution algorithm is as followed.
 \begin{flalign}
   &b_1u_1 + c_1u_2 = \tilde{g}_1\\
   &a_1u_1 + b_2u_2 + c_2u_3 = \tilde{g}_2\\
@@ -91,7 +91,13 @@ Multiplying equation (1) with $\frac{a_1}{b_1}$, wich gives us.\\
     \tilde{g}_i = g_i - g_{i-1}\frac{a_{i-1}}{\tilde{b}_{i-1}}
   \end{aligned}
 \end{flalign*}
-Where $\tilde{b}_1 = b_1$ and $\tilde{g}_1 = g_1$
+Where $\tilde{b}_1 = b_1$ and $\tilde{g}_1 = g_1$\\
+
+We can then use this to compute the vector $\hat{u}$. This has the general solution\\
+\begin{flalign*}
+  u_i = \frac{\tilde{g}_i - a_i u_{i+a}}{\tilde{b}_i}
+\end{flalign*}
+
 
 
 \end{document}
