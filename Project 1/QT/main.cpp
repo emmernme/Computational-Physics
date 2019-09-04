@@ -68,31 +68,32 @@ int main (int argc, char* argv[]){
 	getline(input, line);
 	string_to_double_array(line, c);
 	*/
+
+/* 	Special case
+	for (int i = 0; i < n; i++){
+		b[i] = 2;
+		if (i < n-1){
+			a[i], c[i] = 1;
+		}
+	}
+*/
+
 	// Make random matrices
 	srand (time(NULL));
-	for (int i = 0; i < n-1; i++){
-		a[i] = (double)(rand() % 101) / 100;
-		//cout << a[i] << "	";
-	}
-	cout << endl;
 	for (int i = 0; i < n; i++){
-		b[i] = (double)(rand() % 101) / 100;
-		//cout << b[i] << "	";
+		b[i] = (double)(rand() % 100) / 100;
+		if (i < n-1){
+			a[i] = (double)(rand() % 100) / 100;
+			c[i] = (double)(rand() % 100) / 100;
+		}
 	}
-	cout << endl;
-	for (int i = 0; i < n-1; i++){
-		c[i] = (double)(rand() % 101) / 100;
-		//cout << c[i] << "	";
-	}
-	cout << endl;
-
-	b_tilde[0] = b[0];
 
 	// Calculate g-values
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
 	}
 	// Boundary conditions
+	b_tilde[0] = b[0];
 	g_tilde[0] = g[0];
 	u[0] = u[n] = 0;
 
@@ -103,30 +104,42 @@ int main (int argc, char* argv[]){
 	}
 
 	// Backward substitution
-	for (int i = n-1; i >= 0; i--){
+	for (int i = n-1; i >= 1; i--){
 		u[i] = g_tilde[i] - (a[i] * u[i+1]) / b_tilde[i];
 	}
 
-	// Print the result
-/*	for (int i = 0; i < n; i++){
-		cout << u[i] << "	";
-	}
-	cout << endl;
-	for (int i = 0; i < n; i++){
-		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
-		cout << test << "	";
-	}
-*/
 	// Save results to file
 	ofstream output;
 	output.open("n_" + to_string(n) + ".dat");
+
+	output << "u:" << endl;
 	for (int i = 0; i < n; i++){
-		output << u[i] << ",";
+		output << u[i] << ", ";
 	}
-	output << endl;
+	output << endl << "exact:" << endl;
 	for (int i = 0; i < n; i++){
 		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
-		output << test << ",";
+		output << test << ", ";
+	}
+	output << endl << "g:" << endl;
+	for (int i = 0; i < n; i++){
+		output << g[i] << ", ";
+	}
+	output << endl << "g_tilde:" << endl;
+	for (int i = 0; i < n; i++){
+		output << g_tilde[i] << ", ";
+	}
+	output << endl << "g:" << endl;
+	for (int i = 0; i < n; i++){
+		output << g[i] << ", ";
+	}
+	output << endl << "b_tilde:" << endl;
+	for (int i = 0; i < n; i++){
+		output << b_tilde[i] << ", ";
+	}
+	output << endl << "b:" << endl;
+	for (int i = 0; i < n; i++){
+		output << b[i] << ", ";
 	}
 	output.close();
 
