@@ -34,7 +34,7 @@ int main (int argc, char* argv[]){
 		2 = matrix file - line 1: b, line 2: a, line 3: c
 	}
 	*/
-    if (argc < 3){
+    /* if (argc < 3){
 		cout << "Not enough arguments (n, matrix file)" << endl;
 		system("pause");
 		return -1;
@@ -45,9 +45,10 @@ int main (int argc, char* argv[]){
 		cout << "Error opening output file" << endl;
 		system("pause");
 		return -1;
-	}
+	}*/
 
 	int n = atoi(argv[1]);
+
 	double h = 1/(double)(n+1);
 
 	double *b = new double[n];
@@ -70,27 +71,28 @@ int main (int argc, char* argv[]){
 	// Make random matrices
 	srand (time(NULL));
 	for (int i = 0; i < n-1; i++){
-		a[i] = (double)(rand() % 100) / 100;
-		cout << a[i] << "	";
+		a[i] = (double)(rand() % 101) / 100;
+		//cout << a[i] << "	";
 	}
 	cout << endl;
 	for (int i = 0; i < n; i++){
-		b[i] = (double)(rand() % 100) / 100;
-		cout << b[i] << "	";
+		b[i] = (double)(rand() % 101) / 100;
+		//cout << b[i] << "	";
 	}
 	cout << endl;
 	for (int i = 0; i < n-1; i++){
-		c[i] = (double)(rand() % 100) / 100;
-		cout << c[i] << "	";
+		c[i] = (double)(rand() % 101) / 100;
+		//cout << c[i] << "	";
 	}
 	cout << endl;
 
-
 	b_tilde[0] = b[0];
+
+	// Calculate g-values
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
 	}
-
+	// Boundary conditions
 	g_tilde[0] = g[0];
 	u[0] = u[n] = 0;
 
@@ -104,25 +106,9 @@ int main (int argc, char* argv[]){
 	for (int i = n-1; i >= 0; i--){
 		u[i] = g_tilde[i] - (a[i] * u[i+1]) / b_tilde[i];
 	}
-    /* PRINT VALUES
-	cout << endl;
 
-	for (int i = 0; i < n; i++){
-		cout << b_tilde[i] << "	";
-	}
-	cout << endl;
-
-	for (int i = 0; i < n; i++){
-		cout << g[i] << "	";
-	}
-	cout << endl;
-	for (int i = 0; i < n; i++){
-		cout << g_tilde[i] << "	";
-	}
-	cout << endl;
-	*/
-
-	for (int i = 0; i < n; i++){
+	// Print the result
+/*	for (int i = 0; i < n; i++){
 		cout << u[i] << "	";
 	}
 	cout << endl;
@@ -130,8 +116,19 @@ int main (int argc, char* argv[]){
 		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
 		cout << test << "	";
 	}
-
-
+*/
+	// Save results to file
+	ofstream output;
+	output.open("n_" + to_string(n) + ".dat");
+	for (int i = 0; i < n; i++){
+		output << u[i] << ",";
+	}
+	output << endl;
+	for (int i = 0; i < n; i++){
+		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
+		output << test << ",";
+	}
+	output.close();
 
 	return 0; // Success
 }
