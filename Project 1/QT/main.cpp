@@ -23,7 +23,7 @@ void string_to_double_array(string text, double *arr, int offset = 0){
 	arr[i] = atof(text.substr(last).c_str());
 }
 double f(double x){
-	return 100*exp(-10 * x);
+	return 100 * exp(-10 * x);
 }
 
 int main (int argc, char* argv[]){
@@ -69,17 +69,16 @@ int main (int argc, char* argv[]){
 	string_to_double_array(line, c);
 	*/
 
-/* 	Special case
+	// Special case
 	for (int i = 0; i < n; i++){
 		b[i] = 2;
 		if (i < n-1){
-			a[i], c[i] = 1;
+			a[i] = c[i] = -1;
 		}
 	}
-*/
 
 	// Make random matrices
-	srand (time(NULL));
+/*	srand (time(NULL));
 	for (int i = 0; i < n; i++){
 		b[i] = (double)(rand() % 100) / 100;
 		if (i < n-1){
@@ -87,44 +86,44 @@ int main (int argc, char* argv[]){
 			c[i] = (double)(rand() % 100) / 100;
 		}
 	}
-
-	// Calculate g-values
+*/
+	// Calculate g-values (b_tilde in proj desc)
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
 	}
-	// Boundary conditions
+	cout << g[0] << endl << g[1] << endl << g[2] << endl;
+
+	// Conditions
 	b_tilde[0] = b[0];
 	g_tilde[0] = g[0];
-	u[0] = u[n] = 0;
+	u[0] = 0;
 
 	// Forward substitution
-	for (int i = 1; i < n; i++){
-		b_tilde[i] = b[i] - (c[i-1] * a[i-1]) / b_tilde[i-1];
-		g_tilde[i] = g[i] - (g_tilde[i-1] * a[i-1]) / b_tilde[i-1];
+	for (int i = 1; i <= n; i++){
+		b_tilde[i] = b[i] - ((a[i-1] * c[i-1]) / b_tilde[i-1]);
+		g_tilde[i] = g[i] - ((g_tilde[i-1] * a[i-1]) / b_tilde[i-1]);
 	}
 
 	// Backward substitution
-	for (int i = n-1; i >= 1; i--){
-		u[i] = g_tilde[i] - (a[i] * u[i+1]) / b_tilde[i];
+	u[n-1] = g_tilde[n-1] / b_tilde[n-1];
+	for (int i = n-2; i > 0; i--){
+		u[i] = (g_tilde[i] - c[i] * u[i+1]) / b_tilde[i];
 	}
 
 	// Save results to file
 	ofstream output;
 	output.open("n_" + to_string(n) + ".dat");
 
-	output << "u:" << endl;
+	//output << "u:" << endl;
 	for (int i = 0; i < n; i++){
-		output << u[i] << ", ";
+		output << u[i] << ",";
 	}
-	output << endl << "exact:" << endl;
+	output << endl; // << "exact:" << endl;
 	for (int i = 0; i < n; i++){
 		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
-		output << test << ", ";
+		output << test << ",";
 	}
-	output << endl << "g:" << endl;
-	for (int i = 0; i < n; i++){
-		output << g[i] << ", ";
-	}
+	/*
 	output << endl << "g_tilde:" << endl;
 	for (int i = 0; i < n; i++){
 		output << g_tilde[i] << ", ";
@@ -140,7 +139,7 @@ int main (int argc, char* argv[]){
 	output << endl << "b:" << endl;
 	for (int i = 0; i < n; i++){
 		output << b[i] << ", ";
-	}
+	} */
 	output.close();
 
 	return 0; // Success
