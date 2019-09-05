@@ -2,13 +2,16 @@
 *	Main file for project 1
 *	Collaborators: Benedicte Allum Pedersen, Fredrik Forr, Emil Broll
 */
+// Requires Armadillo - compile like this: "c++ main.cpp -larmadillo"
 #include <iostream>	// Input/output
 #include <cmath>	// Math functions
 #include <cstdlib>	// atof function 
 #include <fstream>	// File stream
 #include <string>
+#include <armadillo>
 
 using namespace std; // Unwraps lots of stuff
+using namespace arma; // Unwraps Armadillo-functions
 
 void string_to_double_array(string text, double *arr, int offset = 0){
 	// Split at spaces
@@ -47,17 +50,19 @@ int main (int argc, char* argv[]){
 		return -1;
 	}*/
 
+	// Step size
 	int n = atoi(argv[1]);
-
 	double h = 1/(double)(n+1);
 
+	// Initialize vectors
 	double *b = new double[n];
 	double *b_tilde = new double[n];
 	double *g = new double[n];
 	double *g_tilde = new double[n];
 	double *a = new double[n-1];
 	double *c = new double[n-1];
-	double *u = new double[n];
+	double *v = new double[n];
+	double *exact = new double[n];
 
 	// Get data from file
 	/* string line;
@@ -91,56 +96,78 @@ int main (int argc, char* argv[]){
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
 	}
-	cout << g[0] << endl << g[1] << endl << g[2] << endl;
 
 	// Conditions
 	b_tilde[0] = b[0];
 	g_tilde[0] = g[0];
-	u[0] = 0;
+	v[0] = 0;
 
 	// Forward substitution
-	for (int i = 1; i <= n; i++){
+	for (int i = 1; i < n; i++){
 		b_tilde[i] = b[i] - ((a[i-1] * c[i-1]) / b_tilde[i-1]);
 		g_tilde[i] = g[i] - ((g_tilde[i-1] * a[i-1]) / b_tilde[i-1]);
 	}
 
 	// Backward substitution
-	u[n-1] = g_tilde[n-1] / b_tilde[n-1];
+	v[n-1] = g_tilde[n-1] / b_tilde[n-1];
 	for (int i = n-2; i > 0; i--){
-		u[i] = (g_tilde[i] - c[i] * u[i+1]) / b_tilde[i];
+		v[i] = (g_tilde[i] - c[i] * v[i+1]) / b_tilde[i];
 	}
 
 	// Save results to file
 	ofstream output;
 	output.open("n_" + to_string(n) + ".dat");
+	for (int i = 0; i < n; i++){
+		exact[i] = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
 
-	//output << "u:" << endl;
-	for (int i = 0; i < n; i++){
-		output << u[i] << ",";
+		output << v[i] << "," << exact[i] << endl;
 	}
-	output << endl; // << "exact:" << endl;
-	for (int i = 0; i < n; i++){
-		double test = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
-		output << test << ",";
-	}
-	/*
-	output << endl << "g_tilde:" << endl;
-	for (int i = 0; i < n; i++){
-		output << g_tilde[i] << ", ";
-	}
-	output << endl << "g:" << endl;
-	for (int i = 0; i < n; i++){
-		output << g[i] << ", ";
-	}
-	output << endl << "b_tilde:" << endl;
-	for (int i = 0; i < n; i++){
-		output << b_tilde[i] << ", ";
-	}
-	output << endl << "b:" << endl;
-	for (int i = 0; i < n; i++){
-		output << b[i] << ", ";
-	} */
 	output.close();
+
+	// Calculate relative error
+	double max_error = 0;
+	for (int i = 1; i < n; i++){
+		double error = log10( abs( (v[i] - exact[i])/exact[i] ) );
+		if (error > max_error){
+			max_error = error;
+		}
+	}
+	cout << "Max error: " << max_error << endl;
+
+	// Armadillo-solving
+	vec arma_g(n);
+	for (int i = 0; i < n; i++){
+		arma_g(i) = g[i];
+	}
+
+	mat A = mat(n,n); // nxn-matrix
+	A(0, 0) = A(n-1,n-1) = 2;
+	A(0, 1) = A(n-1,n-2) = -1;
+	for (int i = 1; i < n-1; i++){
+		A(i, i-1) = -1;
+		A(i, i) = 2;
+		A(i, i+1) = -1;
+	}
+	mat L, U, P;
+	lu(L, U, P, A);
+
+	vec u_arma;
+	solve(u_arma, (L*U), arma_g);
+
+	u_arma.print();
+
+
+
+	// Memory cleanup
+	delete[] b;
+	delete[] b_tilde;
+	delete[] g;
+	delete[] g_tilde;
+	delete[] a;
+	delete[] c;
+	delete[] v;
+	delete[] exact;
 
 	return 0; // Success
 }
+
