@@ -9,7 +9,6 @@
 #include <fstream>	// File stream
 #include <string>
 #include <armadillo>
-//#include <time.h>
 
 using namespace std; // Unwraps lots of stuff
 using namespace arma; // Unwraps Armadillo-functions
@@ -21,20 +20,17 @@ double f(double x){
 }
 
 int main (int argc, char* argv[]){
-	/*
-	argv[] = {
+/*	argv[] = {
 		0 = main.cpp
 		1 = n
 		2 = matrix file - line 1: b, line 2: a, line 3: c
 	}
-
 	// Read arguments from file-functionality
 	if (argc < 3){
 		cout << "Not enough arguments (n, matrix file)" << endl;
 		system("pause");
 		return -1;
 	}
-
 	ifstream input(argv[2]);
 	if (!input.is_open()){ // No such file
 		cout << "Error opening output file" << endl;
@@ -81,10 +77,9 @@ int main (int argc, char* argv[]){
 			a[i] = (double)(rand() % 100) / 100;
 			c[i] = (double)(rand() % 100) / 100;
 		}
-	}
-*/
+	} */
 
-	// Calculate g-values (b_tilde in proj desc)
+	// Pre-calculate g-values (b_tilde in proj desc)
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
 	}
@@ -94,10 +89,11 @@ int main (int argc, char* argv[]){
 	g_tilde[0] = g[0];
 	v[0] = 0;
 
-	// Algorithm timing
+	/*
+	*	Thomas Algorithm
+	*/
 	clock_t start, finish;
 	start = clock();
-
 	// Forward substitution
 	for (int i = 1; i < n; i++){
 		b_tilde[i] = b[i] - ((a[i-1] * c[i-1]) / b_tilde[i-1]);
@@ -110,6 +106,59 @@ int main (int argc, char* argv[]){
 	}
 	finish = clock();
 	double t1 = (double (finish-start)) / CLOCKS_PER_SEC;
+
+	/*
+	*	Special case algorithm
+	*/
+	double *special_b_tilde = new double[n];
+	double *special_g_tilde = new double[n];
+	double *special_v = new double[n];
+	special_b_tilde[0] = b[0];
+	special_g_tilde[0] = g[0];
+
+	start = clock();
+	// Forward substitution
+	for (int i = 1; i < n; i++){
+		special_b_tilde[i] = 2 - (double)(i-1)/i;
+		special_g_tilde[i] = g[i] + special_g_tilde[i-1] / special_b_tilde[i-1];
+	}
+	// Backward substitution
+	special_v[n-1] = special_g_tilde[n-1] / special_b_tilde[n-1];
+	for (int i = n-2; i > 0; i--){
+		special_v[i] = (special_g_tilde[i] + special_v[i+1]) / special_b_tilde[i];
+	}
+	finish = clock();
+	double tspecial = (double (finish-start)) / CLOCKS_PER_SEC;
+
+	/*
+	*	Armadillo LU-decompositon solving
+	*/
+	// Make arma-compatible vectors
+	vec arma_g(n);
+	mat L, U, P;
+	vec u_arma;
+	mat A = mat(n,n); // nxn-matrix
+	for (int i = 0; i < n; i++){
+		arma_g(i) = g[i];
+	}
+
+	// Prepare the matrix
+	A(0, 0) = A(n-1,n-1) = 2;
+	A(0, 1) = A(n-1,n-2) = -1;
+	for (int i = 1; i < n-1; i++){
+		A(i, i-1) = A(i, i+1) = -1;
+		A(i, i) = 2;
+	}
+
+	start = clock();
+	lu(L, U, P, A);
+	solve(u_arma, (L*U), arma_g);
+	finish = clock();
+	double t2 = (double (finish - start)) / CLOCKS_PER_SEC;
+
+	cout << "Backward and forward substitution took " << t1 << " seconds." << endl;
+	cout << "Special case took " << tspecial << " seconds." << endl;
+	cout << "LU decomposition using Armadillo took " << t2 << " seconds." << endl;
 
 	// Save results to file, but not for large n-values
 	if (n < 1001){
@@ -131,36 +180,6 @@ int main (int argc, char* argv[]){
 	}
 	cout << "Max error: " << max_error << endl;
 
-	// Armadillo-solving
-	// Make arma-compatible vectors
-	vec arma_g(n);
-	mat L, U, P;
-	vec u_arma;
-	mat A = mat(n,n); // nxn-matrix
-
-	for (int i = 0; i < n; i++){
-		arma_g(i) = g[i];
-	}
-
-	// Prepare the matrix
-	A(0, 0) = A(n-1,n-1) = 2;
-	A(0, 1) = A(n-1,n-2) = -1;
-	for (int i = 1; i < n-1; i++){
-		A(i, i-1) = A(i, i+1) = -1;
-		A(i, i) = 2;
-	}
-
-	// Time LU-decomposition
-	start = clock();
-	lu(L, U, P, A);
-	solve(u_arma, (L*U), arma_g);
-	finish = clock();
-
-	double t2 = (double (finish - start)) / CLOCKS_PER_SEC;
-
-	cout << "Backward and forward substitution took " << t1 << " seconds." << endl;
-	cout << "LU decomposition using armadillo took " << t2 << " seconds." << endl;
-
 	// Memory cleanup
 	delete[] b;
 	delete[] b_tilde;
@@ -170,6 +189,9 @@ int main (int argc, char* argv[]){
 	delete[] c;
 	delete[] v;
 	delete[] exact;
+	delete[] special_b_tilde;
+	delete[] special_g_tilde;
+	delete[] special_v;
 
 	return 0; // Success
 }
