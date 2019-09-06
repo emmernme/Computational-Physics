@@ -5,10 +5,11 @@
 // Requires Armadillo - compile like this: "c++ main.cpp -larmadillo"
 #include <iostream>	// Input/output
 #include <cmath>	// Math functions
-#include <cstdlib>	// atof function 
+#include <cstdlib>	// atof function
 #include <fstream>	// File stream
 #include <string>
 #include <armadillo>
+//#include <time.h>
 
 using namespace std; // Unwraps lots of stuff
 using namespace arma; // Unwraps Armadillo-functions
@@ -64,6 +65,7 @@ int main (int argc, char* argv[]){
 	double *v = new double[n];
 	double *exact = new double[n];
 
+
 	// Get data from file
 	/* string line;
 	getline(input, line);
@@ -102,6 +104,8 @@ int main (int argc, char* argv[]){
 	g_tilde[0] = g[0];
 	v[0] = 0;
 
+	clock_t start, finish;
+	start = clock();
 	// Forward substitution
 	for (int i = 1; i < n; i++){
 		b_tilde[i] = b[i] - ((a[i-1] * c[i-1]) / b_tilde[i-1]);
@@ -113,6 +117,11 @@ int main (int argc, char* argv[]){
 	for (int i = n-2; i > 0; i--){
 		v[i] = (g_tilde[i] - c[i] * v[i+1]) / b_tilde[i];
 	}
+	finish = clock();
+
+	double t1 = (double (finish-start)) / CLOCKS_PER_SEC;
+
+
 
 	// Save results to file
 	ofstream output;
@@ -134,11 +143,14 @@ int main (int argc, char* argv[]){
 	}
 	cout << "Max error: " << max_error << endl;
 
+	start = clock();
 	// Armadillo-solving
 	vec arma_g(n);
 	for (int i = 0; i < n; i++){
 		arma_g(i) = g[i];
 	}
+
+
 
 	mat A = mat(n,n); // nxn-matrix
 	A(0, 0) = A(n-1,n-1) = 2;
@@ -149,14 +161,20 @@ int main (int argc, char* argv[]){
 		A(i, i+1) = -1;
 	}
 	mat L, U, P;
+
+	start = clock();
 	lu(L, U, P, A);
 
 	vec u_arma;
 	solve(u_arma, (L*U), arma_g);
+	finish = clock();
 
 	u_arma.print();
 
+	double t2 = (double (finish - start)) / CLOCKS_PER_SEC;
 
+	cout << "Backward and forward substitution took " << t1 << " seconds.\n";
+	cout << "LU decomposition using armadillo took " << t2 << " seconds.\n";
 
 	// Memory cleanup
 	delete[] b;
@@ -170,4 +188,3 @@ int main (int argc, char* argv[]){
 
 	return 0; // Success
 }
-
