@@ -92,6 +92,7 @@ int main (int argc, char* argv[]){
 	/*
 	*	Thomas Algorithm
 	*/
+
 	clock_t start, finish;
 	start = clock();
 	// Forward substitution
@@ -107,9 +108,11 @@ int main (int argc, char* argv[]){
 	finish = clock();
 	double t1 = (double (finish-start)) / CLOCKS_PER_SEC;
 
+
 	/*
 	*	Special case algorithm
 	*/
+
 	double *special_b_tilde = new double[n];
 	double *special_g_tilde = new double[n];
 	double *special_v = new double[n];
@@ -130,9 +133,14 @@ int main (int argc, char* argv[]){
 	finish = clock();
 	double tspecial = (double (finish-start)) / CLOCKS_PER_SEC;
 
+	cout << "Backward and forward substitution took " << t1 << " seconds." << endl;
+	cout << "Special case took " << tspecial << " seconds." << endl;
+
+	if (n < 1001){
 	/*
 	*	Armadillo LU-decompositon solving
 	*/
+
 	// Make arma-compatible vectors
 	vec arma_g(n);
 	mat L, U, P;
@@ -156,12 +164,10 @@ int main (int argc, char* argv[]){
 	finish = clock();
 	double t2 = (double (finish - start)) / CLOCKS_PER_SEC;
 
-	cout << "Backward and forward substitution took " << t1 << " seconds." << endl;
-	cout << "Special case took " << tspecial << " seconds." << endl;
 	cout << "LU decomposition using Armadillo took " << t2 << " seconds." << endl;
 
+
 	// Save results to file, but not for large n-values
-	if (n < 1001){
 		ofstream output;
 		output.open("n_" + to_string(n) + ".dat");
 		for (int i = 0; i < n; i++){
