@@ -14,18 +14,8 @@
 using namespace std; // Unwraps lots of stuff
 using namespace arma; // Unwraps Armadillo-functions
 
-void string_to_double_array(string text, double *arr, int offset = 0){
-	// Split at spaces
-	int i = offset;
-	size_t last, next = 0;
-	while ((next = text.find(" ", last)) != string::npos) {
-		arr[i] = atof(text.substr(last, next-last).c_str());
-		last = next + 1;
-		i++;
-	}
-	// Last element:
-	arr[i] = atof(text.substr(last).c_str());
-}
+void string_to_double_array(string text, double *arr, int offset);
+
 double f(double x){
 	return 100 * exp(-10 * x);
 }
@@ -37,8 +27,9 @@ int main (int argc, char* argv[]){
 		1 = n
 		2 = matrix file - line 1: b, line 2: a, line 3: c
 	}
-	*/
-    /* if (argc < 3){
+
+	// Read arguments from file-functionality
+	if (argc < 3){
 		cout << "Not enough arguments (n, matrix file)" << endl;
 		system("pause");
 		return -1;
@@ -49,7 +40,16 @@ int main (int argc, char* argv[]){
 		cout << "Error opening output file" << endl;
 		system("pause");
 		return -1;
-	}*/
+	}
+	// Get data from file
+	string line;
+	getline(input, line);
+	string_to_double_array(line, b);
+	getline(input, line);
+	string_to_double_array(line, a);
+	getline(input, line);
+	string_to_double_array(line, c);
+	*/
 
 	// Step size
 	int n = atoi(argv[1]);
@@ -64,17 +64,6 @@ int main (int argc, char* argv[]){
 	double *c = new double[n-1];
 	double *v = new double[n];
 	double *exact = new double[n];
-
-
-	// Get data from file
-	/* string line;
-	getline(input, line);
-	string_to_double_array(line, b);
-	getline(input, line);
-	string_to_double_array(line, a);
-	getline(input, line);
-	string_to_double_array(line, c);
-	*/
 
 	// Special case
 	for (int i = 0; i < n; i++){
@@ -94,6 +83,7 @@ int main (int argc, char* argv[]){
 		}
 	}
 */
+
 	// Calculate g-values (b_tilde in proj desc)
 	for (int i = 0; i < n; i++){
 		g[i] = h*h * f(i*h);
@@ -104,77 +94,72 @@ int main (int argc, char* argv[]){
 	g_tilde[0] = g[0];
 	v[0] = 0;
 
+	// Algorithm timing
 	clock_t start, finish;
 	start = clock();
+
 	// Forward substitution
 	for (int i = 1; i < n; i++){
 		b_tilde[i] = b[i] - ((a[i-1] * c[i-1]) / b_tilde[i-1]);
 		g_tilde[i] = g[i] - ((g_tilde[i-1] * a[i-1]) / b_tilde[i-1]);
 	}
-
 	// Backward substitution
 	v[n-1] = g_tilde[n-1] / b_tilde[n-1];
 	for (int i = n-2; i > 0; i--){
 		v[i] = (g_tilde[i] - c[i] * v[i+1]) / b_tilde[i];
 	}
 	finish = clock();
-
 	double t1 = (double (finish-start)) / CLOCKS_PER_SEC;
 
+	// Save results to file, but not for large n-values
+	if (n < 1001){
+		ofstream output;
+		output.open("n_" + to_string(n) + ".dat");
+		for (int i = 0; i < n; i++){
+			exact[i] = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
 
-
-	// Save results to file
-	ofstream output;
-	output.open("n_" + to_string(n) + ".dat");
-	for (int i = 0; i < n; i++){
-		exact[i] = 1 - (1 - exp(-10)) * i*h - exp(-10 * i*h);
-
-		output << v[i] << "," << exact[i] << endl;
+			output << v[i] << "," << exact[i] << endl;
+		}
+		output.close();
 	}
-	output.close();
 
 	// Calculate relative error
 	double max_error = 0;
 	for (int i = 1; i < n; i++){
 		double error = log10( abs( (v[i] - exact[i])/exact[i] ) );
-		if (error > max_error){
-			max_error = error;
-		}
+		if (error > max_error) max_error = error;
 	}
 	cout << "Max error: " << max_error << endl;
 
-	start = clock();
 	// Armadillo-solving
+	// Make arma-compatible vectors
 	vec arma_g(n);
+	mat L, U, P;
+	vec u_arma;
+	mat A = mat(n,n); // nxn-matrix
+
 	for (int i = 0; i < n; i++){
 		arma_g(i) = g[i];
 	}
 
-
-
-	mat A = mat(n,n); // nxn-matrix
+	// Prepare the matrix
 	A(0, 0) = A(n-1,n-1) = 2;
 	A(0, 1) = A(n-1,n-2) = -1;
 	for (int i = 1; i < n-1; i++){
-		A(i, i-1) = -1;
+		A(i, i-1) = A(i, i+1) = -1;
 		A(i, i) = 2;
-		A(i, i+1) = -1;
 	}
-	mat L, U, P;
 
+	// Time LU-decomposition
 	start = clock();
 	lu(L, U, P, A);
-
-	vec u_arma;
 	solve(u_arma, (L*U), arma_g);
 	finish = clock();
 
-	u_arma.print();
-
 	double t2 = (double (finish - start)) / CLOCKS_PER_SEC;
 
-	cout << "Backward and forward substitution took " << t1 << " seconds.\n";
-	cout << "LU decomposition using armadillo took " << t2 << " seconds.\n";
+	cout << "Backward and forward substitution took " << t1 << " seconds." << endl;
+	cout << "LU decomposition using armadillo took " << t2 << " seconds." << endl;
 
 	// Memory cleanup
 	delete[] b;
@@ -187,4 +172,18 @@ int main (int argc, char* argv[]){
 	delete[] exact;
 
 	return 0; // Success
+}
+
+// Function to split input from file directly into an array
+void string_to_double_array(string text, double *arr, int offset = 0){
+	// Split at spaces
+	int i = offset;
+	size_t last, next = 0;
+	while ((next = text.find(" ", last)) != string::npos) {
+		arr[i] = atof(text.substr(last, next-last).c_str());
+		last = next + 1;
+		i++;
+	}
+	// Last element:
+	arr[i] = atof(text.substr(last).c_str());
 }
