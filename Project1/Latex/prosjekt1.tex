@@ -41,7 +41,7 @@ $r\rightarrow x$, the general one-dimensional Poisson equation will read:
 -u''(x) = f(x).
 \end{equation*}
 
-\subsection*{Project 1a)}
+\subsection*{Project 1 a)}
 
 \noindent We have solved the one-dimensional Poisson equation with Dirichlet boundary conditions and by rewriting it as a set of linear equations.
 
@@ -96,7 +96,7 @@ The boundary conditions give us $v_{n+1}=u(1)=0$ and $v_0=u(0)=0$. We also intro
 \end{flalign*}
 
 
-\subsection*{Project 1b)}
+\subsection*{Project 1 b)}
 
 
 We rewrite our matrix A in terms of one-dimensional vectors $\textit{a, b, c}$ of length 1 : $n$;
@@ -152,7 +152,7 @@ Where $\tilde{b}_1 = b_1$ and $\tilde{g}_1 = g_1$\\
 
 We have made a code for the algortihm and solved the problem for matrices of the size 10 x 10, 100 x 100 and 1000 x 1000. To reduce the problem and to save memory we only use the vectors $a, b$ and $c$, since the rest of the matrix only consist of zeros. Then the number of floating points are $O(9n)$.
 
-\subsection*{Project 1c)}
+\subsection*{Project 1 c)}
 
 Our matrix now have identical elements along the diagonal and identical values for the non diagonal elements, it will look like this:
 
@@ -191,6 +191,27 @@ Our matrix now have identical elements along the diagonal and identical values f
   \end{aligned},
 \end{flalign*}
 
+\subsection*{Project 1 d)}
+To compute the relative error in the data set $i = 1,...,n$ we set up:
+\[
+\epsilon_i = log_{10}(|\frac{v_i - u_i}{u_i}|)
+\]
+
+The max values for the relative errors are represented in table 1 below. We observe that the error is decreasing when $n$ is increasing.
+
+\begin{table}[h!]
+  \begin{center}
+    \caption{Relative errors.}
+    \label{tab: table1}
+    \begin{tabular}{l|r}
+      \textbf{n} & \textbf{Max error}\\
+      10 & 0.301744 \\
+      100 & 0.0374884  \\
+      1000 & 0.00384884 \\
+      10^7 &      \\
+    \end{tabular}
+  \end{center}
+\end{table}}
 
 
 
