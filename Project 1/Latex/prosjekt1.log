@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  9 SEP 2019 08:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  9 SEP 2019 15:09
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -374,6 +374,10 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 23.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
+Underfull \hbox (badness 10000) in paragraph at lines 47--48
+
+ []
+
 ./prosjekt1.tex:51: Misplaced alignment tab character &.
 l.51 &
       -\frac{v_{i+1}+v_{i-1}-2v_i}{h^2} = f_i
@@ -387,82 +391,44 @@ might try typing `S' now just to see what is salvageable.
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 116--118
+Underfull \hbox (badness 10000) in paragraph at lines 117--119
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+Underfull \hbox (badness 10000) in paragraph at lines 124--125
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 139--141
+Underfull \hbox (badness 10000) in paragraph at lines 140--142
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 142--143
+Underfull \hbox (badness 10000) in paragraph at lines 143--144
 
  []
 
 <plot1b.png, id=32, 462.528pt x 346.896pt>
 File: plot1b.png Graphic file (type png)
 <use plot1b.png>
-Package pdftex.def Info: plot1b.png  used on input line 152.
+Package pdftex.def Info: plot1b.png  used on input line 153.
 (pdftex.def)             Requested size: 345.0pt x 258.76335pt.
 [3] [4 <./plot1b.png>]
-./prosjekt1.tex:221: Missing $ inserted.
+./prosjekt1.tex:222: Missing $ inserted.
 <inserted text> 
                 $
-l.221       10^
+l.222       10^
                7 &   \approx{0}  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./prosjekt1.tex:221: Extra }, or forgotten $.
+./prosjekt1.tex:222: Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \hskip -.5\arrayrulewidth \vrule...
-l.221       10^7 &
+l.222       10^7 &
                      \approx{0}  \\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./prosjekt1.tex:221: Missing $ inserted.
-<inserted text> 
-                $
-l.221       10^7 &
-                     \approx{0}  \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./prosjekt1.tex:221: Missing } inserted.
-<inserted text> 
-                }
-l.221       10^7 &
-                     \approx{0}  \\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./prosjekt1.tex:221: Missing $ inserted.
-<inserted text> 
-                $
-l.221       10^7 &   \approx
-                            {0}  \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./prosjekt1.tex:222: Extra }, or forgotten $.
-<template> \unskip }
-                    \hskip \tabcolsep \endtemplate 
-l.222     \end
-              {tabular}
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -472,15 +438,53 @@ deleted material, e.g., by typing `I$}'.
 ./prosjekt1.tex:222: Missing $ inserted.
 <inserted text> 
                 $
-l.222     \end
-              {tabular}
+l.222       10^7 &
+                     \approx{0}  \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ./prosjekt1.tex:222: Missing } inserted.
 <inserted text> 
                 }
-l.222     \end
+l.222       10^7 &
+                     \approx{0}  \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./prosjekt1.tex:222: Missing $ inserted.
+<inserted text> 
+                $
+l.222       10^7 &   \approx
+                            {0}  \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./prosjekt1.tex:223: Extra }, or forgotten $.
+<template> \unskip }
+                    \hskip \tabcolsep \endtemplate 
+l.223     \end
+              {tabular}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./prosjekt1.tex:223: Missing $ inserted.
+<inserted text> 
+                $
+l.223     \end
+              {tabular}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./prosjekt1.tex:223: Missing } inserted.
+<inserted text> 
+                }
+l.223     \end
               {tabular}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -488,55 +492,17 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-./prosjekt1.tex:224: Too many }'s.
-l.224 \end{table}}
+./prosjekt1.tex:225: Too many }'s.
+l.225 \end{table}}
                   
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-./prosjekt1.tex:236: Missing $ inserted.
+./prosjekt1.tex:237: Missing $ inserted.
 <inserted text> 
                 $
-l.236       10 x 10 & 0.000114 & 2 x 10^
+l.237       10 x 10 & 0.000114 & 2 x 10^
                                         {-6} \\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./prosjekt1.tex:237: Extra }, or forgotten $.
-<template> \unskip \hfil }
-                          \hskip \tabcolsep \endtemplate 
-l.237       1
-             00 x 100 & 0.001317 & 7 x 10^{-6}\\
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-./prosjekt1.tex:237: Missing $ inserted.
-<inserted text> 
-                $
-l.237       1
-             00 x 100 & 0.001317 & 7 x 10^{-6}\\
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./prosjekt1.tex:237: Missing } inserted.
-<inserted text> 
-                }
-l.237       1
-             00 x 100 & 0.001317 & 7 x 10^{-6}\\
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./prosjekt1.tex:237: Missing $ inserted.
-<inserted text> 
-                $
-l.237       100 x 100 & 0.001317 & 7 x 10^
-                                          {-6}\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -544,7 +510,7 @@ you left one out. Proceed, with fingers crossed.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
 l.238       1
-             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
+             00 x 100 & 0.001317 & 7 x 10^{-6}\\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -555,7 +521,7 @@ deleted material, e.g., by typing `I$}'.
 <inserted text> 
                 $
 l.238       1
-             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
+             00 x 100 & 0.001317 & 7 x 10^{-6}\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -563,7 +529,7 @@ you left one out. Proceed, with fingers crossed.
 <inserted text> 
                 }
 l.238       1
-             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
+             00 x 100 & 0.001317 & 7 x 10^{-6}\\
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
@@ -573,16 +539,16 @@ my insertion and my current dilemma will both disappear.
 ./prosjekt1.tex:238: Missing $ inserted.
 <inserted text> 
                 $
-l.238       1000 x 1000 & 0.440127 & 2.4 x 10^
-                                              {-5} \\
+l.238       100 x 100 & 0.001317 & 7 x 10^
+                                          {-6}\\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ./prosjekt1.tex:239: Extra }, or forgotten $.
 <template> \unskip \hfil }
                           \hskip \tabcolsep \endtemplate 
-l.239     \end
-              {tabular}
+l.239       1
+             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
 I've deleted a group-closing symbol because it seems to be
 spurious, as in `$x}$'. But perhaps the } is legitimate and
 you forgot something else, as in `\hbox{$x}'. In such cases
@@ -592,15 +558,53 @@ deleted material, e.g., by typing `I$}'.
 ./prosjekt1.tex:239: Missing $ inserted.
 <inserted text> 
                 $
-l.239     \end
-              {tabular}
+l.239       1
+             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
 ./prosjekt1.tex:239: Missing } inserted.
 <inserted text> 
                 }
-l.239     \end
+l.239       1
+             000 x 1000 & 0.440127 & 2.4 x 10^{-5} \\
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+./prosjekt1.tex:239: Missing $ inserted.
+<inserted text> 
+                $
+l.239       1000 x 1000 & 0.440127 & 2.4 x 10^
+                                              {-5} \\
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./prosjekt1.tex:240: Extra }, or forgotten $.
+<template> \unskip \hfil }
+                          \hskip \tabcolsep \endtemplate 
+l.240     \end
+              {tabular}
+I've deleted a group-closing symbol because it seems to be
+spurious, as in `$x}$'. But perhaps the } is legitimate and
+you forgot something else, as in `\hbox{$x}'. In such cases
+the way to recover is to insert both the forgotten and the
+deleted material, e.g., by typing `I$}'.
+
+./prosjekt1.tex:240: Missing $ inserted.
+<inserted text> 
+                $
+l.240     \end
+              {tabular}
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./prosjekt1.tex:240: Missing } inserted.
+<inserted text> 
+                }
+l.240     \end
               {tabular}
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -608,36 +612,36 @@ With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
-./prosjekt1.tex:241: Too many }'s.
-l.241 \end{table}}
+./prosjekt1.tex:242: Too many }'s.
+l.242 \end{table}}
                   
 You've closed more groups than you opened.
 Such booboos are generally harmless, so keep going.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 257.
-[5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 257.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 254.
+[5] [6]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 254.
  (./prosjekt1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 257.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 257.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 254.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 254.
 Package rerunfilecheck Info: File `prosjekt1.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 257.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 254.
  ) 
 Here is how much of TeX's memory you used:
- 9118 strings out of 492649
- 136361 string characters out of 6129621
- 341222 words of memory out of 5000000
+ 9119 strings out of 492649
+ 136367 string characters out of 6129621
+ 339223 words of memory out of 5000000
  12886 multiletter control sequences out of 15000+600000
  11816 words of font info for 46 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,16n,39p,597b,373s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,16n,39p,599b,373s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7
 .pfb>
-Output written on prosjekt1.pdf (5 pages, 183080 bytes).
+Output written on prosjekt1.pdf (6 pages, 184460 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 21 named destinations out of 1000 (max. 500000)
+ 108 PDF objects out of 1000 (max. 8388607)
+ 84 compressed objects within 1 object stream
+ 22 named destinations out of 1000 (max. 500000)
  6 words of extra memory for PDF output out of 10000 (max. 10000000)
 
