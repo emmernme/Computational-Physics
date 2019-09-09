@@ -146,7 +146,7 @@ Where $\tilde{b}_1 = b_1$ and $\tilde{g}_1 = g_1$\\
 \end{flalign*}
 
 
-We have implemented the above algorithms in our C++-program and used that to solve problems with the matrix from 1a) of the sizez 10x10, 100x100 and 1000x1000. The results are showed in Figure 1. By reducing the problem by only using the vectors $a, b$ and $c$, we save memory, and the total number of floating points operations for the bacward and forward substitution will be $O(9n)$.
+We have implemented the above algorithms in our C++-program and used that to solve problems with the matrix from 1a) of the sizes 10 x 10, 100 x 100 and 1000 x 1000. The results are showed in Figure 1. By reducing the problem by only using the vectors $a, b$ and $c$, we save memory, and the total number of floating points operations for the bacward and forward substitution will be $O(9n)$.
 
 \begin{figure}[hbt]
 \begin{center}
@@ -172,7 +172,7 @@ For a general solution, the matrix now has identical elements along the diagonal
   \end{bmatrix}
 \end{flalign*}
 
-We then develop an algortihm for the forward substitution in the same way as earlier. Here $\tilde{b}_1 = b = 2$ and the algorithm will run with $i$ starting from 2 and going up to $n$.
+We then develop an algorithm for the forward substitution in the same way as earlier. Here $\tilde{b}_1 = b = 2$ and the algorithm will run with $i$ starting from 2 and going up to $n$.
 
 \begin{flalign*}
   \begin{aligned}

@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1568034584 "prosjekt1.tex" "prosjekt1.pdf" "prosjekt1" 1568034653
+["pdflatex"] 1568036156 "prosjekt1.tex" "prosjekt1.pdf" "prosjekt1" 1568036258
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -89,11 +89,11 @@
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1540818003 4220281 e3bcf09e03893b8a619ec9f7e4caf8ca ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
   "plot1b.png" 1567768495 39973 f03e759121ba8a2086c364dc2de0cad5 ""
-  "prosjekt1.aux" 1568034585 1756 2a942b404a2c57a09d1d6846aee4bd1b ""
-  "prosjekt1.out" 1568034584 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "prosjekt1.tex" 1568034652 9836 4307188ef6dfad85efcf8ff110289209 ""
+  "prosjekt1.aux" 1568036157 1756 2a942b404a2c57a09d1d6846aee4bd1b ""
+  "prosjekt1.out" 1568036157 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "prosjekt1.tex" 1568036257 9842 3b2e3efc4aa094b996b6d34616c47015 ""
   (generated)
-  "prosjekt1.aux"
+  "prosjekt1.out"
   "prosjekt1.log"
   "prosjekt1.pdf"
-  "prosjekt1.out"
+  "prosjekt1.aux"
