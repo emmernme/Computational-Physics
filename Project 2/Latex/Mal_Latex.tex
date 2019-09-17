@@ -1,0 +1,72 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage[fleqn]{amsmath}
+\usepackage{titling}
+\usepackage{graphicx,wrapfig,lipsum}
+\usepackage{amssymb}
+\usepackage{listings}
+\usepackage[font=small,labelsep=none]{caption}
+
+\setlength{\droptitle}{-10em}
+
+\title{Project 2}\vspace{-3ex}
+\author{Benedicte Allum Pedersen, Emil Heland Broll\\ Fredrik Oftedal Forr}
+\date{\vspace{-5ex}}
+
+\begin{document}
+\maketitle
+
+In this project we will have a look at some eigenvalueproblems with numerical calculations.
+
+
+\section*{Project 2a)}
+We have for three dimentions
+\begin{flalign*}
+  \begin{aligned}
+    \hat{U}=\begin{bmatrix}
+      u_{11} & u_{12} & u_{13}\\
+      u_{21} & u_{22} & u_{23}\\
+      u_{31} & u_{32} & u_{33}
+  \end{bmatrix}
+  \end{aligned}
+  \qquad \qquad
+  \begin{aligned}
+    \textbf{v}_i=\begin{bmatrix}
+      v_{i1}\\
+      v_{i2}\\
+      v_{i3}
+  \end{bmatrix}
+  \end{aligned}
+\end{flalign*}
+
+This gives us
+\begin{flalign*}
+  &\textbf{w}_i=\hat{U}\textbf{v}_i\\
+  &\begin{bmatrix}
+    w_{i1}\\
+    w_{i2}\\
+    w_{i3}
+  \end{bmatrix}= \begin{bmatrix}
+    u_{11}v_{i1} + u_{12}v_{i2} + u_{13}v_{i3}\\
+    u_{21}v_{i1} + u_{22}v_{i2} + u_{23}v_{i3}\\
+    u_{31}v_{i1} + u_{32}v_{i2} + u_{33}v_{i3}
+\end{bmatrix}
+\end{flalign*}
+
+If we then do the same for $\textbf{w}_j$ we get
+\begin{flalign*}
+  &\textbf{w}_j=\hat{U}\textbf{v}_i\\
+  &\begin{bmatrix}
+    w_{j1}\\
+    w_{j2}\\
+    w_{j3}
+  \end{bmatrix}= \begin{bmatrix}
+    u_{11}v_{j1} + u_{12}v_{j2} + u_{13}v_{j3}\\
+    u_{21}v_{j1} + u_{22}v_{j2} + u_{23}v_{j3}\\
+    u_{31}v_{j1} + u_{32}v_{j2} + u_{33}v_{j3}
+\end{bmatrix}
+\end{flalign*}
+wtf.................................
+
+\end{document}
