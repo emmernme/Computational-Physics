@@ -45,7 +45,7 @@ mat jacobi_rotate(mat A, int k, int l, int n){
 	}
 	cout << "k: " << k << ", l: " << l << endl;
 
-	mat B(3,3);
+	mat B(n,n);
 	B(0,0) = A(0,0);
 	B(k, k) = A(k,k)*pow(c,2)-2.0*A(k,l)*c*s + A(l,l)*pow(s,2);
 	B(l, l) = A(l,l)*pow(c,2)+2.0*A(k,l)*c*s + A(k,k)*pow(s,2);
@@ -96,21 +96,21 @@ int jacobi(mat A, int n){
 
 		iterations++;
 	}
-	cout << "Max:" << max << endl;
-	cout << "Iterations run:" << iterations << endl;
+	cout << "Max: " << max << endl;
+	cout << "Iterations run: " << iterations << endl;
 	return 1;
 }
 
 
 int main() {
-	int n = 3;
+	int n = 10;
 
 
-	mat A(3,3);
+	mat A(n,n);
 
-	A(0, 0) = A(3-1,3-1) = 2;
-	A(0, 1) = A(3-1,3-2) = -1;
-	for (int i = 1; i < 3-1; i++){
+	A(0, 0) = A(n-1,n-1) = 2;
+	A(0, 1) = A(n-1,n-2) = -1;
+	for (int i = 1; i < n-1; i++){
 		A(i, i-1) = A(i, i+1) = -1;
 		A(i, i) = 2;
 	}
