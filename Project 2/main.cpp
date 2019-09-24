@@ -20,7 +20,7 @@ tuple<vec, mat> armadillo_eig_solver(mat A){
 }
 
 // Function for solving with jacobi's method
-tuple<vec, mat> jacobi_rotate(mat A, int k, int l, int n){
+mat jacobi_rotate(mat A, int k, int l, int n, mat &eigvec){
 
 	double s, c; // sin, cos
 
@@ -52,7 +52,6 @@ tuple<vec, mat> jacobi_rotate(mat A, int k, int l, int n){
 	B(l, l) = A(l,l)*pow(c,2)+2.0*A(k,l)*c*s + A(k,k)*pow(s,2);
 	B(k, l) = B(l, k) = 0.0;
 	// Make mat holders for our eigvecs
-	mat eigvec;
 
 	// Set the non-diagonal elements for each row
 	for (int i = 0; i < n; i++){
@@ -63,12 +62,12 @@ tuple<vec, mat> jacobi_rotate(mat A, int k, int l, int n){
 			B(l, i) = B(i,l);
 		}
 		// Set the new eigenvectors
-		eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l);
+		eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l); 
 		eigvec(i,l) = c * eigvec(i,l) + s * eigvec(i,k);
 		// not sure why/how, but whatever.
-    cout << eigvec << endl;
+
 	}
-	return make_tuple(eigvec, B);
+	return B;
 }
 
 
@@ -87,8 +86,10 @@ double max_offdiag(mat A, int &k, int &l, int n){
 	return maxarg;
 }
 
-// Find the eigenvalues for a given matrix
+// Find the eigenvalues for a given matrix 
 tuple<vec, mat> eig_solver(mat A, int n){
+	// Set up our eigvec-matrix
+	mat eigvec;
 
 	// Setting initial values and tolerance
 	int k = 0;
@@ -101,17 +102,17 @@ tuple<vec, mat> eig_solver(mat A, int n){
 	// Run the Jacobi rotation until we reach the max num of iterations or the max element is within our tolerance
 	while (iterations < max_iterations && max_element > tol){
 		// Rotate and change our matrix to the rotated one
-		A = jacobi_rotate(A, k, l, n);
+		A = jacobi_rotate(A, k, l, n, eigvec);
 		// Find the new max. offdiagonal element
 		max_element = max_offdiag(A, k, l, n);
 
 		iterations++;
 	}
-
+	
 
 	cout << "Max: " << max_element << endl;
 	cout << "Iterations run: " << iterations << endl;
-	return make_tuple(eigvec, B);
+	return make_tuple(A.diag(), eigvec);
 }
 
 // Main function
@@ -134,8 +135,9 @@ int main() {
 	tie(arma_eigval, arma_eigvec) = armadillo_eig_solver(A); // std::tie unwraps a tuple
 
 	// Find the eigenvalues with our own solver
-	eig_solver(A, n);
-	//cout << B;
+	vec eigval;
+	mat eigvec;
+	tie(eigval, eigvec) = eig_solver(A, n);
 
 	return 1; //success
 }
