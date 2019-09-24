@@ -20,7 +20,7 @@ tuple<vec, mat> armadillo_eig_solver(mat A){
 }
 
 // Function for solving with jacobi's method
-mat jacobi_rotate(mat A, int k, int l, int n){
+tuple<vec, mat> jacobi_rotate(mat A, int k, int l, int n){
 
 	double s, c; // sin, cos
 
@@ -63,12 +63,12 @@ mat jacobi_rotate(mat A, int k, int l, int n){
 			B(l, i) = B(i,l);
 		}
 		// Set the new eigenvectors
-		eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l); 
+		eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l);
 		eigvec(i,l) = c * eigvec(i,l) + s * eigvec(i,k);
 		// not sure why/how, but whatever.
-
+    cout << eigvec << endl;
 	}
-	return B;
+	return make_tuple(eigvec, B);
 }
 
 
@@ -87,7 +87,7 @@ double max_offdiag(mat A, int &k, int &l, int n){
 	return maxarg;
 }
 
-// Find the eigenvalues for a given matrix 
+// Find the eigenvalues for a given matrix
 tuple<vec, mat> eig_solver(mat A, int n){
 
 	// Setting initial values and tolerance
@@ -107,11 +107,11 @@ tuple<vec, mat> eig_solver(mat A, int n){
 
 		iterations++;
 	}
-	
+
 
 	cout << "Max: " << max_element << endl;
 	cout << "Iterations run: " << iterations << endl;
-	return 1;
+	return make_tuple(eigvec, B);
 }
 
 // Main function
