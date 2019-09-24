@@ -9,7 +9,7 @@ using namespace std;
 using namespace arma;
 
 
-// test function for armadillo diagonalization tool.
+// Test function for armadillo diagonalization tool.
 int test(mat A){
 	vec eigval;
 	mat eigvec;
@@ -23,34 +23,40 @@ int test(mat A){
 	return 1;
 }
 
-//function for solving with jacobi's method
-
+// Function for solving with jacobi's method
 mat jacobi_rotate(mat A, int k, int l, int n){
 
 	double s, c; // sin, cos
 
+	// Skip some calculations if a_kl = 0
 	if (A(k,l) == 0){
 		s = 0.0;
 		c = 1.0;
 	} else {
 		double t, tau;
 		tau = (A(l,l) - A(k,k))/2*A(k,l);
+
+		// Not sure what this does
 		if (tau >= 0){
 			t = - tau + sqrt(1.0+ tau*tau);
 		} else {
 			t = - tau - sqrt(1.0+ tau*tau);
 		}
+
+		// Calculate cos, sin
 		c = 1.0/sqrt(1.0 + t*t);
 		s = t * c;
 	}
 	cout << "k: " << k << ", l: " << l << endl;
 
+	// Set up the new matrix w/specific values
 	mat B(3,3);
 	B(0,0) = A(0,0);
 	B(k, k) = A(k,k)*pow(c,2)-2.0*A(k,l)*c*s + A(l,l)*pow(s,2);
 	B(l, l) = A(l,l)*pow(c,2)+2.0*A(k,l)*c*s + A(k,k)*pow(s,2);
 	B(k, l) = B(l, k) = 0.0;
 
+	// Set the non-diagonal elements for each row
 	for (int i = 0; i < n; i++){
 		if (i != k && i!= l){
 			B(i, k) = A(i,k)*c - A(i,l)*s;
