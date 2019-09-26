@@ -6,13 +6,13 @@ using namespace std;
 using namespace arma;
 
 // Find the eigenvalues for a given matrix
-tuple<vec, mat> eig_solver(mat A, int n){
+tuple<vec, mat> eig_solver(mat A, int n, int &k, int &l){
 	// Set up our eigvec-matrix
 	mat eigvec(n,n);
 
 	// Setting initial values and tolerance
-	int k = 0;
-	int l = 0;
+	k = 0;
+	l = 0;
 	double tol = 10e-8;
 	double max_iterations = pow(n, 3);
 	double max_element = max_offdiag(A, k, l, n);

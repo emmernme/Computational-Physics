@@ -12,27 +12,42 @@
 using namespace std;
 using namespace arma;
 
+int n = 1200;
+
+double pmax = 50;
+double p0 = 0;
+double h = (pmax-p0)/double(n+1);
+double e = -1.0/(h*h);
+
+
+double di(int i){
+
+  double Vi = pow(p0 + h*(i+1),2);
+
+  double d = 2.0/(h*h)+Vi;
+
+  return d;
+}
+
 // Main function
 int main(){
 	// Dimensionality of the matrix
-	int n = 3;
 	int k;
 	int l;
 
 	// Set up the matrix as a tridiagonal matrix
 	mat A(n,n, fill::zeros);
-	A(0, 0) = A(n-1,n-1) = 2.0;
-	A(0, 1) = A(n-1,n-2) = -1.0;
+	A(0, 0) = di(0);
+	A(0, 1) = A(n-1,n-2) = e;
 		for (int i = 1; i < n-1; i++){
-			A(i, i-1) = A(i, i+1) = -1.0;
-			A(i, i) = 2.0;
+			A(i, i-1) = A(i, i+1) = e;
+			A(i, i) = di(i);
 	}
-
 	// Find the eigenvalues with armadillo function
 	vec arma_eigval;
 	mat arma_eigvec;
 
-
+  cout << "n: " << n << "   Pmax" << pmax << endl;
 	// Find the eigenvalues with our own solver
 	vec eigval;
 	mat eigvec;
@@ -49,7 +64,7 @@ int main(){
 	finish = clock();
 
 	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-
+/*
 	//Start clock for jacobi method
 	start = clock();
 
@@ -58,8 +73,18 @@ int main(){
 	finish = clock();
 	double t1 = (double (finish- start)) /CLOCKS_PER_SEC;
 
-	cout << "Jacobi: " << t1 << "seconds" << endl << eigval << endl;
-	cout << "Arma: " << t2 << "seconds" << endl << arma_eigval << endl;
+	cout << "Jacobi: " << t1 << "seconds" << endl;
+
+	cout << "Arma: " << t2 << "seconds" << endl;
+
+  for(int i = 0; i < 10; i++){
+    cout << eigval(i) << endl;
+  }
+*/
+  for(int i = 0; i < 10; i++){
+    cout << arma_eigval(i) << endl;
+  }
+
 
 	return 1; //success
 }
