@@ -18,13 +18,20 @@
 \maketitle
 
 \section{Abstract}
+	\textit{Main summary of our work - in this project we have ...}
 	Eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well
 
 \section{Introduction}
+	\textit{Aims and rationale of the physics case, what you have done - end with brief summary of structure of report}
 	In this project we will solve eigenpair-problems using numerical calculations.
 	We will also implement unit testing in our code to avoid mathematical and programming errors.
 
+	We begin by explaining the theoretical models and algorithms we use to ompute the eigenvalues, along with technicalities related to the programming of these models.
+
+	We will then present and discuss our results, before finally reaching a conclusion regarding the methods we use in terms of efficiency and precision.
+
 \section{Methods}
+	\textit{Theoretical models and technicalities}
 	\subsection{Mathematics}
 		We will start off by proving that orhogonal or unitary transformations preserves the orthogonality/dot product of the vectors.
 
@@ -98,8 +105,89 @@
 			D = S_n^T S_{n-1}^T \cdots S_1^T A S_1 \cdots S_{n-1} S_n
 		\end{flalign*}
 
-		Since we have only performed orthogonal transformations, the eigenvalues for $D$ and $A$ will be the same. Since diagonal matrices have their eigenvalues on the diagonal, we can easily read off the eigenvalues.
+		Since we have only performed orthogonal transformations, the eigenvalues for $D$ and $A$ will be the same.
+		Since diagonal matrices have their eigenvalues on the diagonal, we can easily read off the eigenvalues.\\
 
+		\subsubsection{Quanton dots in three dimensions, one electron}
+			We will now consider a physical application of our algorithm by adapting it in order to solve the three dimensional Schrödinger Equation. The general radial form of this equation is:
+			\begin{flalign*}
+				-\frac{\hbar^2}{2m} \left(\frac{1}{r^2} \frac{d}{dr}r^2 \frac{d}{dr}-\frac{l(l+1)}{r^2}\right) R(r) + V(r) R(r) = E R(r)
+			\end{flalign*}
+
+			We can now do a series of subtitutions and insert some boundary conditions. We assume $l=0$.
+			\begin{flalign*}
+			&	R(r) = \frac{1}{r} u(r), \qquad u(0) = u(\infty) = 0\\
+			&	\rho = \frac{1}{\alpha} r\\
+			&	V(\rho) = \frac{1}{2} k \alpha^2 \rho^2\\
+			&	\frac{mk}{\hbar^2} \alpha^4 = 1 \Rightarrow \alpha = \left( \frac{\hbar^2}{mk} \right)^{1/4}\\
+			&	\lambda = \frac{2m\alpha^2}{\hbar^2} E
+			\end{flalign*}
+
+			We can then rewrite the Schröedinger Equation like this:
+			\begin{flalign*}
+				- \frac{d^2}{d\rho^2} u(\rho) + \rho^2 u(\rho) = \lambda u(\rho)
+			\end{flalign*}
+
+			We can now discretise this equation by defining the step length $h$ and $\rho_{min}=\rho_0$. We also need to approximate $\infty$, as the computer cannot represent infinity: $p_{max} = \rho_N$.
+			\begin{flalign*}
+				h = \frac{\rho_N - \rho_0}{N}\\
+				\rho_i = \rho_0 + ih, \qquad i = 1, \hdots, N
+			\end{flalign*}
+
+			The Schröedinger equation now becomes: 
+			\begin{flalign*}
+				- \frac{u_{i+1} - 2u_i + u_{i-1}}{h^2} + V_i u_i = \lambda u_i
+			\end{flalign*}
+
+			Where $u_i = u(\rho_i)$ and $u_{i\pm 1} = u(\rho_i) \pm h$ and $V_i = \rho_i^2$.
+			We can then see that the Schröedinger equation can be simplified even more:
+			\begin{flalign*}
+				d_i u_i + e_i u_{i-1} + e_i u_{i+1} = \lambda u_i\\
+				d_i = \frac{2}{h^2} + V_i\\
+				e_i = - \frac{1}{h^2} = e
+			\end{flalign*}
+
+			Where $d_i$ are the diagonal elements of our tridiagonal matrix, and $e_i$ are the non-diagonal elements, which are all equal.
+			This lets us rewrite the Schröedinger equation as a linear problem:
+
+			\begin{equation*}
+				\begin{bmatrix}
+					d_1 & e & 0   & 0    & \dots  &0     & 0 \\
+					e & d_2 & e & 0    & \dots  &0     &0 \\
+					0   & e & d_3 & e  &0       &\dots & 0\\
+					\dots  & \dots & \dots & \dots  &\dots      &\dots & \dots\\
+					0   & \dots & \dots & \dots  &\dots  e     &d_{N-2} & e\\
+					0   & \dots & \dots & \dots  &\dots       &e & d_{N-1}
+				\end{bmatrix} 
+				\begin{bmatrix}
+					u_{1} \\
+					u_{2} \\
+					\dots\\ \dots\\ \dots\\
+					u_{N-1}
+				\end{bmatrix}
+				= \lambda \begin{bmatrix}
+					u_{1} \\
+					u_{2} \\
+					\dots\\ \dots\\ \dots\\
+					u_{N-1}
+				\end{bmatrix}
+				\label{eq:sematrix}
+			\end{equation*}
+
+			We can now see that we can use our algorithm to solve our radial Schröedinger equation.
+			The resulting value $\lambda$ is a unitless number, which can be tranformed back into energies by using the value $\alpha$.\\
+			We can then run our algorithms with different number of integration points, $N$, and the approximation to $\infty$, $\rho_{max}$.
+		 
+		\subsubsection{Quantum dots in three dimensions, two electrons}
+			If we now consider a system with two electrons, the electron repulsion between them will come into play in the Schröedinger equation.
+			By doing a lot of the equivalent substitutions and rewriting the equation,
+			we get to a point where we end up with a linear problem, with a tridiagonal matrix with diagonal elements:
+			\begin{equation*}
+				d_i = \frac{2}{h^2} + \omega_r^2 \rho^2 + 1/\rho
+			\end{equation*}
+
+			Here, $\omega_r$ represents the strength of the oscillator potential.
+			We will study the cases $\omega_r = 0.01, 0.5, 1, 5$, for the ground state ($l = 0$), and compare these to known analytical solutions of the problem.
 
 	\subsection{Programming}
 		To avoid errors in our code, we implement unit tests at the following points:\\
@@ -107,7 +195,7 @@
 		* Test
 
 
-\section{Results}
+\section{Results, discussion}
 	For our eigenproblem-solver, we tested and found a reasonable tolerance, $10^{-8}$, so that the algorithm converges without reaching the maximum number of iterations, $n^3$. We test this using a tridiagonal matrix:
 	\begin{flalign*}
 		A =   \begin{bmatrix}
@@ -152,8 +240,11 @@
 
 
 
-\section{Conclusions}
-	In this project we will solve eigenpair-problems using numerical calculations.
+\section{Conclusions, perspectives}
+
+\section{Appendix, extra material}
+
+\section{Bibliography}
 
 
 
