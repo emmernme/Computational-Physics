@@ -25,19 +25,19 @@ mat jacobi_rotate(mat A, int k, int l, int n, mat &eigvec){
 
 	double s, c; // sin, cos
 
+
 	// Skip some calculations if a_kl = 0
 	if (A(k,l) == 0){
 		s = 0.0;
 		c = 1.0;
 	} else {
 		double t, tau;
-		tau = (A(l,l) - A(k,k))/2*A(k,l);
-
+		tau = (A(l,l) - A(k,k))/(2*A(k,l));
 		// Not sure what this does
 		if (tau >= 0){
-			t = - tau + sqrt(1.0+ tau*tau);
+			t = 1.0/(tau + sqrt(1.0+ tau*tau));
 		} else {
-			t = - tau - sqrt(1.0+ tau*tau);
+			t = -1.0 /(-tau + sqrt(1.0+ tau*tau));
 		}
 
 		// Calculate cos, sin
@@ -47,7 +47,7 @@ mat jacobi_rotate(mat A, int k, int l, int n, mat &eigvec){
 
 
 	// Set up the new matrix and the max values (of the old matrix)
-	mat B(n,n);
+	mat B = A;
 	B(0,0) = A(0,0);
 	B(k, k) = A(k,k)*pow(c,2)-2.0*A(k,l)*c*s + A(l,l)*pow(s,2);
 	B(l, l) = A(l,l)*pow(c,2)+2.0*A(k,l)*c*s + A(k,k)*pow(s,2);
@@ -80,7 +80,7 @@ double max_offdiag(mat A, int &k, int &l, int n){
 	double maxarg = 0;
 	for (int i = 0; i < n; i++){
 		for (int j = 0; j < n; j++){
-			if (i != j && fabs(maxarg) < fabs(A(i,j))){
+			if (i != j && (fabs(maxarg) < fabs(A(i,j)))){
 				maxarg = fabs(A(i,j));
 				k = i;
 				l = j;
@@ -110,7 +110,6 @@ tuple<vec, mat> eig_solver(mat A, int n){
 		A = jacobi_rotate(A, k, l, n, eigvec);
 		// Find the new max. offdiagonal element
 		max_element = max_offdiag(A, k, l, n);
-
 		iterations++;
 	}
 
@@ -127,12 +126,13 @@ tuple<vec, mat> eig_solver(mat A, int n){
 
 
 // Main function
-int lol() {
+int main(){
 	// Dimensionality of the matrix
 
 	int n = 50;
+	clock_t start,finish;
 
-	mat A(n,n);
+	mat A(n,n, fill::zeros);
 	A(0, 0) = A(n-1,n-1) = 2.0;
 	A(0, 1) = A(n-1,n-2) = -1.0;
 		for (int i = 1; i < n-1; i++){
@@ -140,18 +140,33 @@ int lol() {
 			A(i, i) = 2.0;
 	}
 
-	// Find the eigenvalues with armadillo functions
+	// Find the eigenvalues with armadillo function
 	vec arma_eigval;
 	mat arma_eigvec;
+
+	//start timing for armadillo solver
+
+	start = clock();
 	tie(arma_eigval, arma_eigvec) = armadillo_eig_solver(A); // std::tie unwraps a tuple
+	finish = clock();
+
+	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Find the eigenvalues with our own solver
 	vec eigval;
 	mat eigvec;
+
+	//Start clock for jacobi method
+
+	start = clock();
+
 	tie(eigval, eigvec) = eig_solver(A, n);
 
-	cout << "Jacobi: " << endl << eigval << endl;
-	cout << "Arma: " << endl << arma_eigval << endl;
+	finish = clock();
+	double t1 = (double (finish- start)) /CLOCKS_PER_SEC;
+
+	cout << "Jacobi: " << t1 << "seconds" <</* endl << eigval <<*/ endl;
+	cout << "Arma: " << t2 << "seconds" << /*endl << arma_eigval <<*/ endl;
 
 	return 1; //success
 }
