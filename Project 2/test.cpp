@@ -37,9 +37,14 @@ TEST_CASE("Testing eigenvalues"){
 		A(i, i-1) = A(i, i+1) = -1.0;
 		A(i, i) = 2.0;
 	}
-  eig_solver(A, n);
 
-  REQUIRE(eigval[0] == Approx(0.5857));
-  REQUIRE(eigval[1] == Approx(2.0000));
-  REQUIRE(eigval[2] == Approx(3.4142));
+  vec eigval;
+  mat eigvec;
+
+  tie(eigval, eigvec) = eig_solver(A, n);
+
+
+  REQUIRE(eigval(0) == Approx(0.5857));
+  REQUIRE(eigval(1) == Approx(2.0000));
+  REQUIRE(eigval(2) == Approx(3.4142));
 }

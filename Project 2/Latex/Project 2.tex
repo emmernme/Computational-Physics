@@ -117,7 +117,7 @@
 			\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
 			0 & 0 & 0 &\dots& 2 & -1\\
 			0 & 0 & 0 &\dots& -1 & 2
-		\end{bmatrix}	
+		\end{bmatrix}
 	\end{flalign*}
 
 	Tabel 1 shows the number of similarity transformations were needed to reach a point where all non-diagonal matrix elements approach 0, for matrix dimensionalities.\\
@@ -125,20 +125,23 @@
 	\begin{tabular}{c c c}
 		Dimensionality & \# of transformations\\
 		\hline
-		4 & 45 \\
-		10 & 1000 \textit{(wrong)} \\
-		20 & 1092 \\
-		50 & 433
+		4 & 6 \\
+		10 & 141 \\
+		20 & 551 \\
+		50 & 3529
 	\end{tabular}
 
-	We can see that it looks like \textit{dimensionality is proportional to the number of transformations (???)}.
+	We can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where i is number of iterations and n is dimensinality of the matix.
 
 	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver, on our tridiagonal matrix A.\\
 	\begin{tabular}{c c c}
 		$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Diff\\
 		\hline
-		0.0 & 0.0 & 0.0 \\
-		FILL & ME & PLEASE
+		0.2679 & 0.2679 & 0.0 \\
+		1.0000 & 1.0000 & 0.0 \\
+		2.0000 & 2.0000 & 0.0 \\
+		3.0000 & 3.0000 & 0.0 \\
+		3.7321 & 3.7321 & 0.0
 	\end{tabular} \\ \\
 
 	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation, for a 50x50-matrix.\\
@@ -146,8 +149,7 @@
 	\begin{tabular}{c c c}
 		Jacobi runtime & Armadillo runtime & Diff\\
 		\hline
-		0.0 & 0.0 & 0.0 \\
-		FILL & ME & PLEASE
+		0.090051s & 0.000405s & 0.089646s
 	\end{tabular}
 
 
