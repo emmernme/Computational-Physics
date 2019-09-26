@@ -10,9 +10,7 @@ using namespace arma;
 
 //  for solving with jacobi's method
 mat jacobi_rotate(mat A, int k, int l, int n, mat &eigvec){
-
 	double s, c; // sin, cos
-
 
 	// Skip some calculations if a_kl = 0
 	if (A(k,l) == 0){
@@ -52,13 +50,13 @@ mat jacobi_rotate(mat A, int k, int l, int n, mat &eigvec){
 			B(l, i) = B(i,l);
 		}
 
-    //saving eigvec(i,k) before defining a new one
-    mat e = eigvec;
+   		//saving eigvec(i,k) before defining a new one
+    	mat e = eigvec;
 
-    e(i,k) = eigvec(i,k);
+    	e(i,k) = eigvec(i,k);
 
 		// Set the new eigenvectors
-    eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l);
+    	eigvec(i,k) = c * eigvec(i,k) - s * eigvec(i,l);
 		eigvec(i,l) = c * eigvec(i,l) + s * e(i,k);
 	}
 
