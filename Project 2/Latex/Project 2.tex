@@ -17,77 +17,146 @@
 \begin{document}
 \maketitle
 
-In this project we will solve eigenpair-problems using numerical calculations.
+\section{Abstract}
+	Eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well
 
-We will start off by proving that orhogonal or unitary transformations preserves the orthogonality/dot product of the vectors.
+\section{Introduction}
+	In this project we will solve eigenpair-problems using numerical calculations.
+	We will also implement unit testing in our code to avoid mathematical and programming errors.
 
-Starting with an orthogonal basis of vectors, $\textbf{v}_i$, we know that:
+\section{Methods}
+	\subsection{Mathematics}
+		We will start off by proving that orhogonal or unitary transformations preserves the orthogonality/dot product of the vectors.
 
-\begin{flalign*}
-  \begin{aligned}
-	\textbf{v}_i = \begin{bmatrix}
-	  v_{i1} \\
-	  \vdots \\
-	  v_{in}
-	\end{bmatrix},
-  \end{aligned}
-  \qquad
-  \begin{aligned}
-	\textbf{v}_j^T \textbf{v}_i = \delta_{ij}
-  \end{aligned}
-\end{flalign*}
+		Starting with an orthogonal basis of vectors, $\textbf{v}_i$, we know that:
 
-An orthogonal transformation gives us the following:
-\begin{flalign*}
-  &\textbf{w}_i=U\textbf{v}_i, \text{where } U^TU=UU^T=\textbf{I}
-\end{flalign*}
+		\begin{flalign*}
+		\begin{aligned}
+			\textbf{v}_i = \begin{bmatrix}
+			v_{i1} \\
+			\vdots \\
+			v_{in}
+			\end{bmatrix},
+		\end{aligned}
+		\qquad
+		\begin{aligned}
+			\textbf{v}_j^T \textbf{v}_i = \delta_{ij}
+		\end{aligned}
+		\end{flalign*}
 
-We want to prove that orthogonality is preserved:
-\begin{flalign*}
-  \textbf{w}_i^T \textbf{w}_j = (U\textbf{v}_i)^T (U\textbf{v}_j) = \textbf{v}_i^T U^T U \textbf{v}_j = \textbf{v}_i^T \textbf{v}_j
-\end{flalign*}
+		An orthogonal transformation gives us the following:
+		\begin{flalign*}
+		&\textbf{w}_i=U\textbf{v}_i, \text{where } U^TU=UU^T=\textbf{I}
+		\end{flalign*}
 
-Now that we have proved that orthogonal transformations preserve orthogonality, we can move on to performing our Jacobi iterations. To do so, we use an orthogonal transformation matrix, S:
-\begin{flalign*}
-	S = \begin{bmatrix}
-		1 & 0 & \cdots \\
-		0 & 1 &  0 \\
-		\vdots & 0 & \ddots \\
-		& & & \cos{\theta} & 0 & \cdots & \sin{\theta} \\
-		& & & 0 & 1 & \cdots & 0 \\
-		& & & \vdots & \vdots & \ddots & \vdots \\
-		& & & -\sin{\theta} & 0 & \cdots & \cos{\theta}
-	\end{bmatrix}, \qquad S^T=S^{-1}
-\end{flalign*}
+		We want to prove that orthogonality is preserved:
+		\begin{flalign*}
+		\textbf{w}_i^T \textbf{w}_j = (U\textbf{v}_i)^T (U\textbf{v}_j) = \textbf{v}_i^T U^T U \textbf{v}_j = \textbf{v}_i^T \textbf{v}_j
+		\end{flalign*}
 
-We simpltfy by assigning:
-\begin{flalign*}
-	c = \cos{\theta}, s = \sin{\theta}, t = \tan{\theta} = \frac{s}{c}
-\end{flalign*}
+		Now that we have proved that orthogonal transformations preserve orthogonality, we can move on to performing our Jacobi iterations. To do so, we use an orthogonal transformation matrix, S:
+		\begin{flalign*}
+			S = \begin{bmatrix}
+				1 & 0 & \cdots \\
+				0 & 1 &  0 \\
+				\vdots & 0 & \ddots \\
+				& & & \cos{\theta} & 0 & \cdots & \sin{\theta} \\
+				& & & 0 & 1 & \cdots & 0 \\
+				& & & \vdots & \vdots & \ddots & \vdots \\
+				& & & -\sin{\theta} & 0 & \cdots & \cos{\theta}
+			\end{bmatrix}, \qquad S^T=S^{-1}
+		\end{flalign*}
 
-For our positive definite matrix ${A}$, we perform the transformation ${S^TA S = B}$, giving us the general expression:
-\begin{flalign*}
-&	b_{ii} = a_{ii}, i \neq k, i \neq l \\
-&	b_{ik} = a_{ik}c - a_{il} s, i \neq k, i\neq l \\
-&	b_{il} = a_{il} c + a_{ik} s, i \neq k, i\neq l \\
-&	b_{kk} = a_{kk} c^2 - 2a_{kl}cs + a_{ll} s^2 \\
-&	b_{ll} = a_{ll} c^2 - 2a_{kl}cs + a_{kk} s^2 \\
-&	b_{kl} = (a_{kk}-a_{ll})cs + a_{kl}(c^2-s^2)
-\end{flalign*}
+		We simpltfy by assigning:
+		\begin{flalign*}
+			c = \cos{\theta}, s = \sin{\theta}, t = \tan{\theta} = \frac{s}{c}
+		\end{flalign*}
 
-By choosing the largest non-diagonal element in the original matrix $A$, we can fix $\theta$ by choosing to set the largest non-diagonal element to zero. From this, we can deduce the required values of $c$ and $s$:
-\begin{flalign*}
-	c = \frac{1}{\sqrt(1+t^2)}, \qquad s = tc \\
-	t = -\tau \pm \sqrt{1+\tau^2}, \qquad \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}
-\end{flalign*}
+		For our positive definite matrix ${A}$, we perform the transformation \\${S^TA S = B}$, giving us the general expression:
+		\begin{flalign*}
+		&	b_{ii} = a_{ii}, i \neq k, i \neq l \\
+		&	b_{ik} = a_{ik}c - a_{il} s, i \neq k, i\neq l \\
+		&	b_{il} = a_{il} c + a_{ik} s, i \neq k, i\neq l \\
+		&	b_{kk} = a_{kk} c^2 - 2a_{kl}cs + a_{ll} s^2 \\
+		&	b_{ll} = a_{ll} c^2 - 2a_{kl}cs + a_{kk} s^2 \\
+		&	b_{kl} = (a_{kk}-a_{ll})cs + a_{kl}(c^2-s^2)
+		\end{flalign*}
 
-This will result in a new matrix, B. We can then find the largest non-diagonal element of the new matrix and repeat the algorithm until this value is less than a given tolerance.\\
-We have tested multiple tolerances and adjusted the maximum iterations to make sure the algorithm gets to finish properly. A table of our findings is below.\\
-Number of similarity iterations required to reach tolerance \\
-Estimate of number of iterations as a func of matrix dimensionality.\\
-TABLE HERE \\
-Compared to Armadillos \textit{eigsys}-solver: ... \\
-Time needed for running it...
+		By choosing the largest non-diagonal element in the original matrix $A$, we can fix $\theta$ by choosing to set the largest non-diagonal element to zero. From this, we can deduce the required values of $c$ and $s$:
+		\begin{flalign*}
+			c = \frac{1}{\sqrt(1+t^2)}, \qquad s = tc \\
+			t = -\tau \pm \sqrt{1+\tau^2}, \qquad \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}
+		\end{flalign*}
+
+		This will result in a new matrix, B. We can then find the largest non-diagonal element of the new matrix and repeat the algorithm until this value is less than a given tolerance.
+		\begin{flalign*}
+			B_2 = S_2^T B S_2
+		\end{flalign*}
+
+		When this is achieved, we will have a diagonal matrix, where all non-diagonal matrix elements are approaching 0.
+		\begin{flalign*}
+			D = S_n^T S_{n-1}^T \cdots S_1^T A S_1 \cdots S_{n-1} S_n
+		\end{flalign*}
+
+		Since we have only performed orthogonal transformations, the eigenvalues for $D$ and $A$ will be the same. Since diagonal matrices have their eigenvalues on the diagonal, we can easily read off the eigenvalues.
+
+
+	\subsection{Programming}
+		To avoid errors in our code, we implement unit tests at the following points:\\
+		* test
+		* Test
+
+
+\section{Results}
+	For our eigenproblem-solver, we tested and found a reasonable tolerance, $10^{-8}$, so that the algorithm converges without reaching the maximum number of iterations, $n^3$. We test this using a tridiagonal matrix:
+	\begin{flalign*}
+		A =   \begin{bmatrix}
+			2 & -1 & 0 &\dots & 0 & 0\\
+			-1 & 2 & -1 & \dots & 0 & 0\\
+			0 & -1 & 2 & \dots & 0 & 0 \\
+			\vdots & \vdots & \vdots & \ddots & \vdots & \vdots \\
+			0 & 0 & 0 &\dots& 2 & -1\\
+			0 & 0 & 0 &\dots& -1 & 2
+		\end{bmatrix}	
+	\end{flalign*}
+
+	Tabel 1 shows the number of similarity transformations were needed to reach a point where all non-diagonal matrix elements approach 0, for matrix dimensionalities.\\
+
+	\begin{tabular}{c c c}
+		Dimensionality & \# of transformations\\
+		\hline
+		4 & 45 \\
+		10 & 1000 \textit{(wrong)} \\
+		20 & 1092 \\
+		50 & 433
+	\end{tabular}
+
+	We can see that it looks like \textit{dimensionality is proportional to the number of transformations (???)}.
+
+	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver, on our tridiagonal matrix A.\\
+	\begin{tabular}{c c c}
+		$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Diff\\
+		\hline
+		0.0 & 0.0 & 0.0 \\
+		FILL & ME & PLEASE
+	\end{tabular} \\ \\
+
+	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation, for a 50x50-matrix.\\
+
+	\begin{tabular}{c c c}
+		Jacobi runtime & Armadillo runtime & Diff\\
+		\hline
+		0.0 & 0.0 & 0.0 \\
+		FILL & ME & PLEASE
+	\end{tabular}
+
+
+
+\section{Conclusions}
+	In this project we will solve eigenpair-problems using numerical calculations.
+
+
+
 
 
 \end{document}
