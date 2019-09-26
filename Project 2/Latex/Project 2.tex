@@ -7,6 +7,8 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage[font=small,labelsep=none]{caption}
+\usepackage{hyperref}
+\usepackage{caption}
 
 \setlength{\droptitle}{-10em}
 
@@ -19,21 +21,26 @@
 
 \section{Abstract}
 	\textit{Main summary of our work - in this project we have ...}
-	Eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well
+	Eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation
+	for two electrons in a three-dimensional harmonic oscillator well
 
 \section{Introduction}
-	\textit{Aims and rationale of the physics case, what you have done - end with brief summary of structure of report}
+	\textit{Aims and rationale of the physics case, what you have done - end with brief
+	summary of structure of report}
 	In this project we will solve eigenpair-problems using numerical calculations.
 	We will also implement unit testing in our code to avoid mathematical and programming errors.
 
-	We begin by explaining the theoretical models and algorithms we use to ompute the eigenvalues, along with technicalities related to the programming of these models.
+	We begin by explaining the theoretical models and algorithms we use to ompute the eigenvalues,
+	along with technicalities related to the programming of these models.
 
-	We will then present and discuss our results, before finally reaching a conclusion regarding the methods we use in terms of efficiency and precision.
+	We will then present and discuss our results, before finally reaching a conclusion
+	regarding the methods we use in terms of efficiency and precision.
 
 \section{Methods}
 	\textit{Theoretical models and technicalities}
 	\subsection{Mathematics}
-		We will start off by proving that orhogonal or unitary transformations preserves the orthogonality/dot product of the vectors.
+		We will start off by proving that orhogonal or unitary transformations preserves
+		the orthogonality/dot product of the vectors.
 
 		Starting with an orthogonal basis of vectors, $\textbf{v}_i$, we know that:
 
@@ -61,7 +68,9 @@
 		\textbf{w}_i^T \textbf{w}_j = (U\textbf{v}_i)^T (U\textbf{v}_j) = \textbf{v}_i^T U^T U \textbf{v}_j = \textbf{v}_i^T \textbf{v}_j
 		\end{flalign*}
 
-		Now that we have proved that orthogonal transformations preserve orthogonality, we can move on to performing our Jacobi iterations. To do so, we use an orthogonal transformation matrix, S:
+		Now that we have proved that orthogonal transformations preserve orthogonality,
+		we can move on to performing our Jacobi iterations.
+		To do so, we use an orthogonal transformation matrix, S:
 		\begin{flalign*}
 			S = \begin{bmatrix}
 				1 & 0 & \cdots \\
@@ -79,7 +88,8 @@
 			c = \cos{\theta}, s = \sin{\theta}, t = \tan{\theta} = \frac{s}{c}
 		\end{flalign*}
 
-		For our positive definite matrix ${A}$, we perform the transformation \\${S^TA S = B}$, giving us the general expression:
+		For our positive definite matrix ${A}$, we perform the transformation
+		\\${S^TA S = B}$, giving us the general expression:
 		\begin{flalign*}
 		&	b_{ii} = a_{ii}, i \neq k, i \neq l \\
 		&	b_{ik} = a_{ik}c - a_{il} s, i \neq k, i\neq l \\
@@ -89,27 +99,33 @@
 		&	b_{kl} = (a_{kk}-a_{ll})cs + a_{kl}(c^2-s^2)
 		\end{flalign*}
 
-		By choosing the largest non-diagonal element in the original matrix $A$, we can fix $\theta$ by choosing to set the largest non-diagonal element to zero. From this, we can deduce the required values of $c$ and $s$:
+		By choosing the largest non-diagonal element in the original matrix $A$,
+		we can fix $\theta$ by choosing to set the largest non-diagonal element to zero.
+		From this, we can deduce the required values of $c$ and $s$:
 		\begin{flalign*}
 			c = \frac{1}{\sqrt(1+t^2)}, \qquad s = tc \\
 			t = -\tau \pm \sqrt{1+\tau^2}, \qquad \tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}
 		\end{flalign*}
 
-		This will result in a new matrix, B. We can then find the largest non-diagonal element of the new matrix and repeat the algorithm until this value is less than a given tolerance.
+		This will result in a new matrix, B. We can then find the largest non-diagonal element
+		of the new matrix and repeat the algorithm until this value is less than a given tolerance.
 		\begin{flalign*}
 			B_2 = S_2^T B S_2
 		\end{flalign*}
 
-		When this is achieved, we will have a diagonal matrix, where all non-diagonal matrix elements are approaching 0.
+		When this is achieved, we will have a diagonal matrix, where all non-diagonal matrix elements
+		are approaching 0.
 		\begin{flalign*}
 			D = S_n^T S_{n-1}^T \cdots S_1^T A S_1 \cdots S_{n-1} S_n
 		\end{flalign*}
 
-		Since we have only performed orthogonal transformations, the eigenvalues for $D$ and $A$ will be the same.
+		Since we have only performed orthogonal transformations, the eigenvaluesfor $D$ and $A$ will be the same.
 		Since diagonal matrices have their eigenvalues on the diagonal, we can easily read off the eigenvalues.\\
 
-		\subsubsection{Quanton dots in three dimensions, one electron}
-			We will now consider a physical application of our algorithm by adapting it in order to solve the three dimensional Schrödinger Equation. The general radial form of this equation is:
+		\subsubsection{Quantum dots in three dimensions, one electron}
+			We will now consider a physical application of our algorithm by adapting it
+			in order to solve the three dimensional Schrödinger Equation.
+			The general radial form of this equation is:
 			\begin{flalign*}
 				-\frac{\hbar^2}{2m} \left(\frac{1}{r^2} \frac{d}{dr}r^2 \frac{d}{dr}-\frac{l(l+1)}{r^2}\right) R(r) + V(r) R(r) = E R(r)
 			\end{flalign*}
@@ -128,7 +144,8 @@
 				- \frac{d^2}{d\rho^2} u(\rho) + \rho^2 u(\rho) = \lambda u(\rho)
 			\end{flalign*}
 
-			We can now discretise this equation by defining the step length $h$ and $\rho_{min}=\rho_0$. We also need to approximate $\infty$, as the computer cannot represent infinity: $p_{max} = \rho_N$.
+			We can now discretise this equation by defining the step length $h$ and $\rho_{min}=\rho_0$.
+			We also need to approximate $\infty$, as the computer cannot represent infinity: $p_{max} = \rho_N$.
 			\begin{flalign*}
 				h = \frac{\rho_N - \rho_0}{N}\\
 				\rho_i = \rho_0 + ih, \qquad i = 1, \hdots, N
@@ -147,7 +164,8 @@
 				e_i = - \frac{1}{h^2} = e
 			\end{flalign*}
 
-			Where $d_i$ are the diagonal elements of our tridiagonal matrix, and $e_i$ are the non-diagonal elements, which are all equal.
+			Where $d_i$ are the diagonal elements of our tridiagonal matrix, and $e_i$ are
+			the non-diagonal elements, which are all equal.
 			This lets us rewrite the Schröedinger equation as a linear problem:
 
 			\begin{equation*}
@@ -175,19 +193,24 @@
 			\end{equation*}
 
 			We can now see that we can use our algorithm to solve our radial Schröedinger equation.
-			The resulting value $\lambda$ is a unitless number, which can be tranformed back into energies by using the value $\alpha$.\\
-			We can then run our algorithms with different number of integration points, $N$, and the approximation to $\infty$, $\rho_{max}$.
+			We can then run our algorithms with different number of integration points,
+			$N$, and the approximation to $\infty$, $\rho_{max}$.\\
+			The resulting $\lambda$ values are unitless numbers,
+			which can be tranformed back into energies by using the value $\alpha$.
 		 
 		\subsubsection{Quantum dots in three dimensions, two electrons}
-			If we now consider a system with two electrons, the electron repulsion between them will come into play in the Schröedinger equation.
+			If we now consider a system with two electrons,
+			the electron repulsion between them will come into play in the Schröedinger equation.
 			By doing a lot of the equivalent substitutions and rewriting the equation,
-			we get to a point where we end up with a linear problem, with a tridiagonal matrix with diagonal elements:
+			we get to a point where we end up with a linear problem,
+			with a tridiagonal matrix with diagonal elements:
 			\begin{equation*}
 				d_i = \frac{2}{h^2} + \omega_r^2 \rho^2 + 1/\rho
 			\end{equation*}
 
 			Here, $\omega_r$ represents the strength of the oscillator potential.
-			We will study the cases $\omega_r = 0.01, 0.5, 1, 5$, for the ground state ($l = 0$), and compare these to known analytical solutions of the problem.
+			We will study the cases $\omega_r = 0.01, 0.5, 1, 5$, for the ground state ($l = 0$),
+			and compare these to known analytical solutions of the problem.
 
 	\subsection{Programming}
 		To avoid errors in our code, we implement unit tests at the following points:\\
@@ -196,7 +219,9 @@
 
 
 \section{Results, discussion}
-	For our eigenproblem-solver, we tested and found a reasonable tolerance, $10^{-8}$, so that the algorithm converges without reaching the maximum number of iterations, $n^3$. We test this using a tridiagonal matrix:
+	For our eigenproblem-solver, we tested and found a reasonable tolerance,
+	$10^{-8}$, so that the algorithm converges without reaching the maximum number of iterations,
+	$n^3$. We test this using a tridiagonal matrix:
 	\begin{flalign*}
 		A =   \begin{bmatrix}
 			2 & -1 & 0 &\dots & 0 & 0\\
@@ -208,38 +233,131 @@
 		\end{bmatrix}
 	\end{flalign*}
 
-	Tabel 1 shows the number of similarity transformations were needed to reach a point where all non-diagonal matrix elements approach 0, for matrix dimensionalities.\\
+	Table 1 shows the number of similarity transformations were needed
+	to reach a point where all non-diagonal matrix elements approach 0,for matrix dimensionalities.
 
-	\begin{tabular}{c c c}
-		Dimensionality & \# of transformations\\
-		\hline
-		4 & 6 \\
-		10 & 141 \\
-		20 & 551 \\
-		50 & 3529
-	\end{tabular}
+	\begin{table}[h!]
+		\caption{: Dimensionality and number of similarity transformations required to reach the tolerance.}
+		\begin{tabular}{c c c}
+			Dimensionality & \# of transformations\\
+			\hline
+			4 & 6 \\
+			10 & 141 \\
+			20 & 551 \\
+			50 & 3529
+		\end{tabular}
+	\end{table}
 
-	We can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where i is number of iterations and n is dimensinality of the matix.\\
+	We can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where i is number of iterations
+	and n is dimensinality of the matix.\\
 
-	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver, on our tridiagonal matrix A.\\
-	\begin{tabular}{c c c}
-		$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Diff\\
-		\hline
-		0.2679 & 0.2679 & 0.0 \\
-		1.0000 & 1.0000 & 0.0 \\
-		2.0000 & 2.0000 & 0.0 \\
-		3.0000 & 3.0000 & 0.0 \\
-		3.7321 & 3.7321 & 0.0
-	\end{tabular} \\ \\
+	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver,
+	on our tridiagonal matrix A.
+	\begin{table}[h!]
+		\caption{: Eigenvalues using the Jacobi method and Armadillo.}
+		\begin{tabular}{c c c}
+			$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Diff\\
+			\hline
+			0.2679 & 0.2679 & 0.0 \\
+			1.0000 & 1.0000 & 0.0 \\
+			2.0000 & 2.0000 & 0.0 \\
+			3.0000 & 3.0000 & 0.0 \\
+			3.7321 & 3.7321 & 0.0
+		\end{tabular} \\ \\
+	\end{table}
 
-	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation, for a 50x50-matrix.\\
+	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation,
+	for a 50x50-matrix.
 
-	\begin{tabular}{c c c}
-		Jacobi runtime & Armadillo runtime & Diff\\
-		\hline
-		0.090051s & 0.000405s & 0.089646s
-	\end{tabular}
+	\begin{table}[h!]
+		\caption{: Runtimes using the Jacobi method and Armadillo, for $n=50$.}
+		\begin{tabular}{c c c}
+			Jacobi runtime & Armadillo runtime & Diff\\
+			\hline
+			0.090051s & 0.000405s & 0.089646s
+		\end{tabular}
+	\end{table}
 
+	\subsection{Quantum dots in three dimensions, one electron}
+		Table 4 shows the reslults of performing our algorithm with the modified diagonal matrix elements
+		of the Schröedinger equation, while varying the number of integration points, $N$. \\
+		Table 5 shows the reslult while varying the approximation of $\rho_{max} = \infty$. \\
+		The analytical eigenvalues are:
+		\begin{equation*}
+			\lambda = 3,7,11,15,\hdots
+		\end{equation*}
+		
+		\begin{table}[h!]
+			\caption{: Numerical eigenvalues, varying N ($\rho_{max} = 0.0$)}
+			\begin{tabular}{c c c}
+				$\lambda$ & $N$ \\
+				\hline
+				0.2679 & 100 \\
+				1.0000 & 100 \\
+				2.0000 & 100 \\
+				3.0000 & 100 \\
+				0.2679 & 1000 \\
+				1.0000 & 1000 \\
+				2.0000 & 1000 \\
+				3.0000 & 1000 \\
+				0.2679 & 10000 \\
+				1.0000 & 10000 \\
+				2.0000 & 10000 \\
+				3.0000 & 10000 \\
+			\end{tabular}
+		\end{table}
+		\begin{table}[h!]
+			\caption{: Numerical eigenvalues, varying $\rho_{max}$ ($N = 0000$).}
+			\begin{tabular}{c c c}
+				$\lambda$ & $\rho_{max}$\\
+				\hline
+				0.2679 & 5 \\
+				1.0000 & 5 \\
+				2.0000 & 5 \\
+				3.0000 & 5 \\
+				0.2679 & 10 \\
+				1.0000 & 10 \\
+				2.0000 & 10 \\
+				3.0000 & 10 \\
+				0.2679 & 50 \\
+				1.0000 & 50 \\
+				2.0000 & 50 \\
+				3.0000 & 50 \\
+			\end{tabular}
+		\end{table}
+		
+		\textit{How many integration points do you need to reproduce analytical results
+		within four leading digits (after the decimal points)?}
+
+	\subsection{Quantum dots in three dimensions, two electrons}
+		Through trial and error, we determine the ideal $N = xxxx$ and $\rho_{max} = 0.9999$.
+		Varying the strengths of $\omega_r$, we get the results in table 6.
+		
+		\begin{table}[h!]
+			\caption{: Numerical eigenvalues, varying $\omega_{max}$)}
+			\begin{tabular}{c c c}
+				$1/\omega_{max}$ & $E' = \lambda$ \\
+				\hline
+				4 & 0.6250 \\
+				20 & 0.1750 \\
+				54.7386 & 0.0822 \\
+				115.299 & 0.0477 \\
+			\end{tabular}
+		\end{table}
+		\begin{table}[h!]
+			\caption{: Numerical eigenvalues (\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}).}
+			\begin{tabular}{c c c}
+				$1/\omega_{max}$ & $E' = \lambda$ \\
+				\hline
+				4 & 0.6250 \\
+				20 & 0.1750 \\
+				54.7386 & 0.0822 \\
+				115.299 & 0.0477 \\
+			\end{tabular}
+		\end{table}
+		
+		\textit{How many integration points do you need to reproduce analytical results
+		within four leading digits (after the decimal points)?}
 
 
 \section{Conclusions, perspectives}
@@ -247,9 +365,6 @@
 \section{Appendix, extra material}
 
 \section{Bibliography}
-
-
-
-
+	\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}.
 
 \end{document}
