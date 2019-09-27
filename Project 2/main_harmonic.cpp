@@ -13,9 +13,9 @@ using namespace std;
 using namespace arma;
 
 int n = 1200;
-double omega = 1.0;
+double omega = 1.0/20;
 
-double pmax = 70;
+double pmax = 10000;
 double p0 = 0;
 double h = (pmax-p0)/double(n+1);
 double e = -1.0/(h*h);
@@ -62,23 +62,7 @@ int main(){
 	finish = clock();
 
 	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-/*
-	//Start clock for jacobi method
-	start = clock();
 
-	tie(eigval, eigvec) = eig_solver(A, n, k, l);
-
-	finish = clock();
-	double t1 = (double (finish- start)) /CLOCKS_PER_SEC;
-
-	cout << "Jacobi: " << t1 << "seconds" << endl;
-
-	cout << "Arma: " << t2 << "seconds" << endl;
-
-  for(int i = 0; i < 10; i++){
-    cout << eigval(i) << endl;
-  }
-*/
   for(int i = 0; i < 10; i++){
     cout << arma_eigval(i) << endl;
   }
