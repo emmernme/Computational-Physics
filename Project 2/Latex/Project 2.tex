@@ -11,6 +11,7 @@
 \usepackage{caption}
 
 \setlength{\droptitle}{-10em}
+\setlength\parindent{0pt}
 
 \title{Project 2}\vspace{-3ex}
 \author{Benedicte Allum Pedersen, Emil Heland Broll\\ Fredrik Oftedal Forr}
@@ -20,19 +21,11 @@
 \maketitle
 
 \section{Abstract}
-	\textit{Main summary of our work - in this project we have ...}
-	We have developed a code using the Jacobi method for solving eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well. We find that the Jacobi method and Armadillo's eigensystemsolver gives the exact same eigenvalues, but the runtime for Jacobi's method are higher. .....????
+	We have developed a code using the Jacobi method for solving eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well. We find that the Jacobi method and Armadillo's eigensystemsolver gives the exact same eigenvalues, but the runtime for Jacobi's method are higher.
 
 \section{Introduction}
-	\textit{Aims and rationale of the physics case, what you have done - end with brief
-	summary of structure of report}
-	In this project we will solve eigenpair-problems using numerical calculations.
-	We will also implement unit testing in our code to avoid mathematical and programming errors.
-
-	We begin by explaining the theoretical models and algorithms we use to compute the eigenvalues,
-	along with technicalities related to the programming of these models.
-
-	We will then present and discuss our results, before finally reaching a conclusion
+	In this project we will solve eigenpair-problems using numerical calculations. We will also implement unit testing in our code to avoid mathematical and programming errors. We begin by explaining the theoretical models and algorithms we use to compute the eigenvalues,
+	along with technicalities related to the programming of these models. We will then present and discuss our results, before finally reaching a conclusion
 	regarding the methods we use in terms of efficiency and precision.
 
 \section{Methods}
@@ -328,23 +321,37 @@ By using polynomial regression, see figure 1, we can see that it looks like $i =
 		\begin{table}[h!]
 			\caption{: Numerical eigenvalues, varying $\omega_{max}$)}
 			\begin{tabular}{c c c}
-				$1/\omega_{max}$ & $E' = \lambda$ \\
+				$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
 				\hline
-				4 & 0.6250 \\
-				20 & 0.1750 \\
-				54.7386 & 0.0822 \\
-				115.299 & 0.0477 \\
+				& 0.01 & 0.3120 \\
+				& 0.50 & 2.2301 \\
+				& 1.00 & 4.0579 \\
+			  & 5.00 & 17.4485 \\
 			\end{tabular}
 		\end{table}
+
+
+				\begin{table}[h!]
+					\caption{: Numerical eigenvalues, varying $\omega_{max}$, and $\rho_{max} = 100$)}
+					\begin{tabular}{c c c}
+						$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
+						\hline
+						4 & 0.25 & 1.2500 \\
+						20 & 0.05 & 0.3500 \\
+						54.7386 & 0.018 & 0.1626 \\
+						115.299 & 0.009 & 0.09799 \\
+					\end{tabular}
+				\end{table}
+
 		\begin{table}[h!]
-			\caption{: Numerical eigenvalues (\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}).}
+			\caption{: Analytical eigenvalues (\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}).}
 			\begin{tabular}{c c c}
-				$1/\omega_{max}$ & $E' = \lambda$ \\
+				$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
 				\hline
-				4 & 0.6250 \\
-				20 & 0.1750 \\
-				54.7386 & 0.0822 \\
-				115.299 & 0.0477 \\
+				4 & 0.25 & 1.250\\
+				20 & 0.05 & 0.350 \\
+				54.7386 & 0.018 & 0.1644 \\
+				115.299 & 0.009 & 0.0954 \\
 			\end{tabular}
 		\end{table}
 
@@ -357,6 +364,8 @@ By using polynomial regression, see figure 1, we can see that it looks like $i =
 \textit{State your main findings and interpretations
 • Try as far as possible to present perspectives for future work
 • Try to discuss the pros and cons of the methods and possible improvements}
+
+
 
 \section{Appendix, extra material}
 
