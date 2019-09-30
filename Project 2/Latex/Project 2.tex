@@ -21,8 +21,7 @@
 
 \section{Abstract}
 	\textit{Main summary of our work - in this project we have ...}
-	Eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation
-	for two electrons in a three-dimensional harmonic oscillator well
+	We have developed a code using the Jacobi method for solving eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well. We find that the Jacobi method and Armadillo's eigensystemsolver gives the exact same eigenvalues, but the runtime for Jacobi's method are higher. .....????
 
 \section{Introduction}
 	\textit{Aims and rationale of the physics case, what you have done - end with brief
@@ -30,7 +29,7 @@
 	In this project we will solve eigenpair-problems using numerical calculations.
 	We will also implement unit testing in our code to avoid mathematical and programming errors.
 
-	We begin by explaining the theoretical models and algorithms we use to ompute the eigenvalues,
+	We begin by explaining the theoretical models and algorithms we use to compute the eigenvalues,
 	along with technicalities related to the programming of these models.
 
 	We will then present and discuss our results, before finally reaching a conclusion
@@ -151,7 +150,7 @@
 				\rho_i = \rho_0 + ih, \qquad i = 1, \hdots, N
 			\end{flalign*}
 
-			The Schröedinger equation now becomes: 
+			The Schröedinger equation now becomes:
 			\begin{flalign*}
 				- \frac{u_{i+1} - 2u_i + u_{i-1}}{h^2} + V_i u_i = \lambda u_i
 			\end{flalign*}
@@ -176,7 +175,7 @@
 					\dots  & \dots & \dots & \dots  &\dots      &\dots & \dots\\
 					0   & \dots & \dots & \dots  &\dots  e     &d_{N-2} & e\\
 					0   & \dots & \dots & \dots  &\dots       &e & d_{N-1}
-				\end{bmatrix} 
+				\end{bmatrix}
 				\begin{bmatrix}
 					u_{1} \\
 					u_{2} \\
@@ -197,7 +196,7 @@
 			$N$, and the approximation to $\infty$, $\rho_{max}$.\\
 			The resulting $\lambda$ values are unitless numbers,
 			which can be tranformed back into energies by using the value $\alpha$.
-		 
+
 		\subsubsection{Quantum dots in three dimensions, two electrons}
 			If we now consider a system with two electrons,
 			the electron repulsion between them will come into play in the Schröedinger equation.
@@ -248,8 +247,16 @@
 		\end{tabular}
 	\end{table}
 
-	We can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where i is number of iterations
-	and n is dimensinality of the matix.\\
+By using polynomial regression, see figure 1, we can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where $i$ is number of iterations
+	and $n$ is dimensinality of the matix.\\
+
+	\begin{figure}[hbt]
+	\begin{center}
+	    \includegraphics[width=\textwidth]{bilde.jpg}
+	    \caption{:Plynomial regression to obtain the equation for $i$ as a function of n when $y=i$ and $x=n$}
+	    \label{fig:plot1b}
+	\end{center}
+	\end{figure}
 
 	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver,
 	on our tridiagonal matrix A.
@@ -262,7 +269,7 @@
 			1.0000 & 1.0000 & 0.0 \\
 			2.0000 & 2.0000 & 0.0 \\
 			3.0000 & 3.0000 & 0.0 \\
-			3.7321 & 3.7321 & 0.0
+			3.7321 & 3.7321 & 0.0 \\
 		\end{tabular} \\ \\
 	\end{table}
 
@@ -286,53 +293,38 @@
 		\begin{equation*}
 			\lambda = 3,7,11,15,\hdots
 		\end{equation*}
-		
+
+
 		\begin{table}[h!]
-			\caption{: Numerical eigenvalues, varying N ($\rho_{max} = 0.0$)}
+			\caption{: Numerical eigenvalues, varying N ($\rho_{max} = 10$)}
 			\begin{tabular}{c c c}
-				$\lambda$ & $N$ \\
+				$\lambda_{N=10000}$ & $\lambda_{N=1200}$ & $\lambda_{N=900}$ \\
 				\hline
-				0.2679 & 100 \\
-				1.0000 & 100 \\
-				2.0000 & 100 \\
-				3.0000 & 100 \\
-				0.2679 & 1000 \\
-				1.0000 & 1000 \\
-				2.0000 & 1000 \\
-				3.0000 & 1000 \\
-				0.2679 & 10000 \\
-				1.0000 & 10000 \\
-				2.0000 & 10000 \\
-				3.0000 & 10000 \\
+				3.0000 & 2.9998 & 2.9996  \\
+				6.9999 & 6.9990 & 6.9983  \\
+				11.0000 & 10.9976 & 10.9958  \\
+				14.9999 & 14.9956 & 14.9956  \\
 			\end{tabular}
 		\end{table}
 		\begin{table}[h!]
-			\caption{: Numerical eigenvalues, varying $\rho_{max}$ ($N = 0000$).}
+			\caption{: Numerical eigenvalues, varying $\rho_{max}$ ($N = 1200$).}
 			\begin{tabular}{c c c}
-				$\lambda$ & $\rho_{max}$\\
+				$\lambda_{\rho_{max} = 5}$ & $\lambda_{\rho_{max} = 10}$ & $\lambda_{\rho_{max} = 50}$\\
 				\hline
-				0.2679 & 5 \\
-				1.0000 & 5 \\
-				2.0000 & 5 \\
-				3.0000 & 5 \\
-				0.2679 & 10 \\
-				1.0000 & 10 \\
-				2.0000 & 10 \\
-				3.0000 & 10 \\
-				0.2679 & 50 \\
-				1.0000 & 50 \\
-				2.0000 & 50 \\
-				3.0000 & 50 \\
+				2.9999 & 2.9999 & 2.9996 \\
+				6.9999 & 6.9999 & 6.9983 \\
+				11.0001 & 10.9997 & 10.9958 \\
+				15.0060 & 14.9995 & 14.992 \\
 			\end{tabular}
 		\end{table}
-		
+
 		\textit{How many integration points do you need to reproduce analytical results
 		within four leading digits (after the decimal points)?}
 
 	\subsection{Quantum dots in three dimensions, two electrons}
 		Through trial and error, we determine the ideal $N = xxxx$ and $\rho_{max} = 0.9999$.
 		Varying the strengths of $\omega_r$, we get the results in table 6.
-		
+
 		\begin{table}[h!]
 			\caption{: Numerical eigenvalues, varying $\omega_{max}$)}
 			\begin{tabular}{c c c}
@@ -355,12 +347,16 @@
 				115.299 & 0.0477 \\
 			\end{tabular}
 		\end{table}
-		
+
 		\textit{How many integration points do you need to reproduce analytical results
 		within four leading digits (after the decimal points)?}
 
 
 \section{Conclusions, perspectives}
+
+\textit{State your main findings and interpretations
+• Try as far as possible to present perspectives for future work
+• Try to discuss the pros and cons of the methods and possible improvements}
 
 \section{Appendix, extra material}
 
