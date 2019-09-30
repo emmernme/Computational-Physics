@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1569827719 "Project 2.tex" "Project 2.pdf" "Project 2" 1569827722
+["pdflatex"] 1569849421 "Project 2.tex" "Project 2.pdf" "Project 2" 1569849422
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -94,14 +94,14 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1540818003 4220281 e3bcf09e03893b8a619ec9f7e4caf8ca ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "Project 2.aux" 1569827721 3605 4af62d34d629c81890041479d0365eca ""
-  "Project 2.out" 1569827721 878 d2fb23b76d25bd75730156326a0685e1 ""
-  "Project 2.tex" 1569827716 13593 1d4123f53df656b93a66d01add693fb7 ""
+  "Project 2.aux" 1569849422 3780 77e153f4a497d5e98850858136c21584 ""
+  "Project 2.out" 1569849422 878 d2fb23b76d25bd75730156326a0685e1 ""
+  "Project 2.tex" 1569849416 13855 29b418961733ac666088b1cfb73d3fc5 ""
   "bilde.jpg" 1569508479 42705 7404b3cbcb604481e93bb5c156e52064 ""
   (generated)
   "/Users/emil/Compfys/Project 2/Latex/Project 2.log"
+  "Project 2.pdf"
   "Project 2.aux"
   "Project 2.log"
-  "Project 2.pdf"
   "Project 2.out"
   "/Users/emil/Compfys/Project 2/Latex/Project 2.pdf"

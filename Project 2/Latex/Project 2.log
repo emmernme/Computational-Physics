@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  30 SEP 2019 09:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  30 SEP 2019 15:17
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -264,20 +264,20 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 ) (./Project 2.aux)
 \openout1 = `"Project 2.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
  (/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count121
@@ -308,7 +308,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: hyperref package is loaded.
 Package caption Info: End \AtBeginDocument code.
 \AtBeginShipoutBox=\box32
-Package hyperref Info: Link coloring OFF on input line 19.
+Package hyperref Info: Link coloring OFF on input line 20.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
  (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
@@ -316,55 +316,45 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count128
 )
-LaTeX Info: Redefining \ref on input line 19.
-LaTeX Info: Redefining \pageref on input line 19.
-LaTeX Info: Redefining \nameref on input line 19.
+LaTeX Info: Redefining \ref on input line 20.
+LaTeX Info: Redefining \pageref on input line 20.
+LaTeX Info: Redefining \nameref on input line 20.
  (./Project 2.out) (./Project 2.out)
 \@outlinefile=\write3
 \openout3 = `"Project 2.out"'.
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 21.
+LaTeX Font Info:    Try loading font information for U+msa on input line 22.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 21.
+LaTeX Font Info:    Try loading font information for U+msb on input line 22.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 121--123
+Underfull \hbox (badness 10000) in paragraph at lines 114--116
 
  []
 
-[2] [3]
-Overfull \hbox (1.16714pt too wide) in paragraph at lines 194--199
-[]\OT1/cmr/m/n/10 We can now see that we can use our al-go-rithm to solve our ra-dial Schr^^?oedinger
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 250--252
+[2] [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 243--245
 
  []
 
 <bilde.jpg, id=86, 503.8825pt x 403.5075pt>
 File: bilde.jpg Graphic file (type jpg)
 <use bilde.jpg>
-Package pdftex.def Info: bilde.jpg  used on input line 255.
+Package pdftex.def Info: bilde.jpg  used on input line 248.
 (pdftex.def)             Requested size: 345.0pt x 276.27783pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 265--274
+Underfull \hbox (badness 10000) in paragraph at lines 258--267
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 265--274
+Underfull \hbox (badness 10000) in paragraph at lines 258--267
 
- []
-
-
-Overfull \hbox (7.66725pt too wide) in paragraph at lines 261--275
-[]\OT1/cmr/m/n/10 Table 2 shows a com-par-i-son of eigen-val-ues found with Ar-madillo's eigensystem-
  []
 
 
@@ -377,37 +367,37 @@ LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[6 <./bilde.jpg>]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 359.
+[6 <./bilde.jpg>] [7]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 366.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 359.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 366.
- [7] [8]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 366.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 366.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 375.
+ [8]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 375.
  (./Project 2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 366.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 366.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 375.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 375.
 Package rerunfilecheck Info: File `"Project 2".out' has not changed.
 (rerunfilecheck)             Checksum: D2FB23B76D25BD75730156326A0685E1;878.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 366.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 375.
  ) 
 Here is how much of TeX's memory you used:
- 8624 strings out of 492649
- 127362 string characters out of 6129621
+ 8625 strings out of 492649
+ 127377 string characters out of 6129621
  325679 words of memory out of 5000000
  12387 multiletter control sequences out of 15000+600000
  14013 words of font info for 54 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,21n,39p,389b,413s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,21n,39p,379b,411s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9
 .pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "Project 2.pdf" (8 pages, 249478 bytes).
+Output written on "Project 2.pdf" (8 pages, 248214 bytes).
 PDF statistics:
- 182 PDF objects out of 1000 (max. 8388607)
- 151 compressed objects within 2 object streams
- 30 named destinations out of 1000 (max. 500000)
+ 184 PDF objects out of 1000 (max. 8388607)
+ 153 compressed objects within 2 object streams
+ 31 named destinations out of 1000 (max. 500000)
  110 words of extra memory for PDF output out of 10000 (max. 10000000)
 
