@@ -14,7 +14,7 @@ using namespace arma;
 // Main function
 int main(){
 	// Dimensionality of the matrix
-	int n = 3;
+	int n = 100;
 	int k, l;
 
 	// Set up the matrix as a tridiagonal matrix

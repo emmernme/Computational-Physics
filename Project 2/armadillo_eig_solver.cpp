@@ -10,9 +10,6 @@ using namespace arma;
 tuple<vec, mat> armadillo_eig_solver(mat A){
 	vec eigval;
 	mat eigvec;
-
 	eig_sym(eigval, eigvec, A);
-
-
 	return make_tuple(eigval, eigvec); // std::tuple can contain different data types
 }

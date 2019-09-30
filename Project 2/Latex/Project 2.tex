@@ -21,18 +21,17 @@
 \maketitle
 
 \section{Abstract}
-	We have developed a code using the Jacobi method for solving eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well. We find that the Jacobi method and Armadillo's eigensystemsolver gives the exact same eigenvalues, but the runtime for Jacobi's method are higher.
+	We have developed a program using the Jacobi method for solving eigenvalue problems, from the equations of a buckling beam to Schroedinger's equation for two electrons in a three-dimensional harmonic oscillator well. We discover that the Jacobi method and Armadillo's eigensystem-solver gives the exact same eigenvalues, but the runtime for Jacobi's method is a lot higher.
 
 \section{Introduction}
 	In this project we will solve eigenpair-problems using numerical calculations. We will also implement unit testing in our code to avoid mathematical and programming errors. We begin by explaining the theoretical models and algorithms we use to compute the eigenvalues,
-	along with technicalities related to the programming of these models. We will then present and discuss our results, before finally reaching a conclusion
-	regarding the methods we use in terms of efficiency and precision.
+	along with technicalities related to the programming of these models. We will then present and discuss our results, before finally reaching a conclusion regarding the methods we use
+	in terms of efficiency and precision.
 
 \section{Methods}
-	\textit{Theoretical models and technicalities}
 	\subsection{Mathematics}
-		We will start off by proving that orhogonal or unitary transformations preserves
-		the orthogonality/dot product of the vectors.
+		We will start off by proving that orthogonal or unitary transformations preserves
+		the orthogonality of the vectors.
 
 		Starting with an orthogonal basis of vectors, $\textbf{v}_i$, we know that:
 
@@ -75,7 +74,7 @@
 			\end{bmatrix}, \qquad S^T=S^{-1}
 		\end{flalign*}
 
-		We simpltfy by assigning:
+		We simplify by assigning:
 		\begin{flalign*}
 			c = \cos{\theta}, s = \sin{\theta}, t = \tan{\theta} = \frac{s}{c}
 		\end{flalign*}
@@ -111,7 +110,8 @@
 			D = S_n^T S_{n-1}^T \cdots S_1^T A S_1 \cdots S_{n-1} S_n
 		\end{flalign*}
 
-		Since we have only performed orthogonal transformations, the eigenvaluesfor $D$ and $A$ will be the same.
+		Since we have only performed orthogonal transformations,
+		the eigenvaluesfor $D$ and $A$ will be the same.
 		Since diagonal matrices have their eigenvalues on the diagonal, we can easily read off the eigenvalues.\\
 
 		\subsubsection{Quantum dots in three dimensions, one electron}
@@ -205,11 +205,12 @@
 			and compare these to known analytical solutions of the problem.
 
 	\subsection{Programming}
-		To avoid errors in our code, we implement unit tests at the following points:\\
-		* test
-		* Test
-
-
+		To avoid errors in our code, we implement unit tests at the following points:
+		\begin{itemize}
+			\item Testing the max\_offdiag-function to confirm it locates the largest non-diagonal element
+			\item Testing that the eigenvalues our eigensolver finds are within a given tolerance of the analytical values
+		\end{itemize}
+		
 \section{Results, discussion}
 	For our eigenproblem-solver, we tested and found a reasonable tolerance,
 	$10^{-8}$, so that the algorithm converges without reaching the maximum number of iterations,
@@ -226,7 +227,7 @@
 	\end{flalign*}
 
 	Table 1 shows the number of similarity transformations were needed
-	to reach a point where all non-diagonal matrix elements approach 0,for matrix dimensionalities.
+	to reach a point where all non-diagonal matrix elements approach 0, for the matrix $A$ with different dimensionalities.
 
 	\begin{table}[h!]
 		\caption{: Dimensionality and number of similarity transformations required to reach the tolerance.}
@@ -240,46 +241,46 @@
 		\end{tabular}
 	\end{table}
 
-By using polynomial regression, see figure 1, we can see that it looks like $i = 1.49n^2 - 1.63n - 4.23$, where $i$ is number of iterations
+	By using polynomial regression, see figure 1, we can see that it looks like
+	$i(n) = 1.49n^2 - 1.63n - 4.23$, where $i$ is number of iterations
 	and $n$ is dimensinality of the matix.\\
 
 	\begin{figure}[hbt]
 	\begin{center}
-	    \includegraphics[width=\textwidth]{bilde.jpg}
-	    \caption{:Plynomial regression to obtain the equation for $i$ as a function of n when $y=i$ and $x=n$}
+	    \includegraphics[width=200px]{bilde.jpg}
+	    \caption{: Polynomial regression to obtain the equation for $i$ as a function of n when $y=i$ and $x=n$}
 	    \label{fig:plot1b}
 	\end{center}
 	\end{figure}
 
-	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver,
-	on our tridiagonal matrix A.
+	Table 2 shows a comparison of eigenvalues found with Armadillo's eigensystem-solver
+	and our Jacobi rotating solver on our tridiagonal matrix A.
 	\begin{table}[h!]
-		\caption{: Eigenvalues using the Jacobi method and Armadillo.}
+		\caption{: Eigenvalues using the Jacobi method and Armadillo for $n=5$.}
 		\begin{tabular}{c c c}
-			$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Diff\\
+			$\lambda_{\text{Jacobi}}$ & $\lambda_{\text{Armadillo}}$ & Analytical \\
 			\hline
-			0.2679 & 0.2679 & 0.0 \\
-			1.0000 & 1.0000 & 0.0 \\
-			2.0000 & 2.0000 & 0.0 \\
-			3.0000 & 3.0000 & 0.0 \\
-			3.7321 & 3.7321 & 0.0 \\
-		\end{tabular} \\ \\
+			0.2679 & 0.2679 & 0.26795 \\
+			1.0000 & 1.0000 & 1 \\
+			2.0000 & 2.0000 & 2 \\
+			3.0000 & 3.0000 & 3 \\
+			3.7321 & 3.7321 & 3.73205 \\
+		\end{tabular}
 	\end{table}
 
-	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation,
-	for a 50x50-matrix.
+	Table 3 shows a comparison of runtimes of the Armadillo eigensystem-solver and our diagonalisation, for a 50x50-matrix.
 
 	\begin{table}[h!]
-		\caption{: Runtimes using the Jacobi method and Armadillo, for $n=50$.}
-		\begin{tabular}{c c c}
-			Jacobi runtime & Armadillo runtime & Diff\\
+		\caption{: Runtimes using the Jacobi method and Armadillo, for $n=1000$.}
+		\begin{tabular}{c c}
+			Jacobi runtime & Armadillo runtime\\
 			\hline
-			0.090051s & 0.000405s & 0.089646s
+			5.6104s (14026 iterations) & 0.00287s
 		\end{tabular}
 	\end{table}
 
 	\subsection{Quantum dots in three dimensions, one electron}
-		Table 4 shows the reslults of performing our algorithm with the modified diagonal matrix elements
+		Table 4 shows the reslults of finding the eigenvalues with the Armadillo solver with the modified diagonal matrix elements
 		of the Schröedinger equation, while varying the number of integration points, $N$. \\
 		Table 5 shows the reslult while varying the approximation of $\rho_{max} = \infty$. \\
 		The analytical eigenvalues are:
@@ -311,30 +312,28 @@ By using polynomial regression, see figure 1, we can see that it looks like $i =
 			\end{tabular}
 		\end{table}
 
-		\textit{How many integration points do you need to reproduce analytical results
-		within four leading digits (after the decimal points)?}
 
 	\subsection{Quantum dots in three dimensions, two electrons}
-		Through trial and error, we determine the ideal $N = xxxx$ and $\rho_{max} = 0.9999$.
+		Through trial and error, we determine the ideal $N = 1000$ and $\rho_{max} = 100$.
 		Varying the strengths of $\omega_r$, we get the results in table 6.
 
 		\begin{table}[h!]
-			\caption{: Numerical eigenvalues, varying $\omega_{max}$)}
-			\begin{tabular}{c c c}
-				$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
+			\caption{: Numerical eigenvalues, varying $\omega_{r}$)}
+			\begin{tabular}{c c}
+				$\omega_r$ & $E' = \lambda$ \\
 				\hline
-				& 0.01 & 0.3120 \\
-				& 0.50 & 2.2301 \\
-				& 1.00 & 4.0579 \\
-			  & 5.00 & 17.4485 \\
+				0.01 & 0.3120 \\
+				0.50 & 2.2301 \\
+				1.00 & 4.0579 \\
+			  	5.00 & 17.4485 \\
 			\end{tabular}
 		\end{table}
 
 
 				\begin{table}[h!]
-					\caption{: Numerical eigenvalues, varying $\omega_{max}$, and $\rho_{max} = 100$)}
+					\caption{: Numerical eigenvalues, varying $\omega_{r}$, and $\rho_{max} = 100$)}
 					\begin{tabular}{c c c}
-						$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
+						$1/\omega_{r}$ & $\omega_r$ & $E' = \lambda$ \\
 						\hline
 						4 & 0.25 & 1.2500 \\
 						20 & 0.05 & 0.3500 \\
@@ -346,7 +345,7 @@ By using polynomial regression, see figure 1, we can see that it looks like $i =
 		\begin{table}[h!]
 			\caption{: Analytical eigenvalues (\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}).}
 			\begin{tabular}{c c c}
-				$1/\omega_{max}$ & $\omega_r$ & $E' = \lambda$ \\
+				$1/\omega_{r}$ & $\omega_r$ & $E' = \lambda$ \\
 				\hline
 				4 & 0.25 & 1.250\\
 				20 & 0.05 & 0.350 \\
@@ -355,20 +354,25 @@ By using polynomial regression, see figure 1, we can see that it looks like $i =
 			\end{tabular}
 		\end{table}
 
-		\textit{How many integration points do you need to reproduce analytical results
-		within four leading digits (after the decimal points)?}
-
 
 \section{Conclusions, perspectives}
+	We discovered that our eigenvalue solver gave the exact same values as
+	the Armadillo eigensystem-solver, to a four decimal precision.\\
+	Our algorithm was however a lot slower, approximately 2000 times slower for a $n=100$ matrix.
+	This is probably to be expected, since the functionality is tailored for a dense,
+	symmetrical matrix, while the Armadillo solver most likely has
+	several optimization features which can utilize the simpler features of the Töeplitz matrix.\\
+	To optimize our solver further, we can tailor it to a non-dense matrix, and one with identical non-diagonal elements, like we have througout this project.\\
+	In order to effectively test and perform the calculations in the rest of the project, we have mainly used Armadillo's solver to get the values with the precision we wanted at a reasonable speed.\\
 
-\textit{State your main findings and interpretations
-• Try as far as possible to present perspectives for future work
-• Try to discuss the pros and cons of the methods and possible improvements}
+	We implemented two unit tests in the code, but we could also have included more to make sure the different parts of our code for this project was watertight. We could have performed the tests every time the code runs, just in case, but we felt that was overkill for this small project, so we made a separate test file we ran to check that these tests would pass. We could also have implemented a test for the 3D two-particle system, since we have analytical eigenvalues for this, and we could additionally have made a test that compares our algorithm's eigenvalues to those found by Armadillo, since we know they should be pretty accurate.\\\\
 
+	For the 3D one-particle system, we varied the number of integration points/the dimensionality of the matrix while keeping the approximation of $\rho_{max}$ constant. We discovered that increasing the dimensionality gives better results, and $n=10000$ reproduces the analytical results within three decimal points. When varying $\rho_{max}$, we see that smaller values gives more precise results, with $\rho_{max} = 5, n=1200$ gives almost equally precise results as $\rho_{max} = 10, n=10000$. This is surprising to us, because one would expect a higher value of $\rho_{max}$ would give a better approximation of infinity, and therefore improve the results, but our findings show that the opposite happens. We struggeled to understand this.\\\\
 
+	For the 3D two-particle system, by comparing the analytical and numerical eigenvalues, we discover that our model gives reasonable results for the different values of $\omega_r$ we test with. The larger values are more precise than the smaller ones, probably because of loss of numerical precision.\\\\
 
-\section{Appendix, extra material}
-
+	In conclusion, our algorithm is not the most efficient, but it gives reasonable precision, and works fine. In general though, it would be better to use Armadillo's functions or other optimized existing algorithms, for quick and precise results.
+	
 \section{Bibliography}
 	\href{http://prola.aps.org/abstract/PRA/v48/i5/p3561_1}{M. Taut, Phys. Rev. A 48, 3561 (1993)}.
 

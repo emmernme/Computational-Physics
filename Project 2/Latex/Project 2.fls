@@ -146,7 +146,6 @@ INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
-INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmti10.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm
@@ -160,6 +159,8 @@ INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm
 INPUT /usr/local/texlive/2019basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map
+INPUT /usr/local/texlive/2019basic/texmf-dist/tex/latex/base/omscmr.fd
+INPUT /usr/local/texlive/2019basic/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
 INPUT /Users/emil/Compfys/Project 2/Latex/bilde.jpg
 INPUT /Users/emil/Compfys/Project 2/Latex/bilde.jpg
@@ -169,8 +170,6 @@ INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
-INPUT /usr/local/texlive/2019basic/texmf-dist/tex/latex/base/omscmr.fd
-INPUT /usr/local/texlive/2019basic/texmf-dist/tex/latex/base/omscmr.fd
 INPUT /Users/emil/Compfys/Project 2/Latex/Project 2.aux
 INPUT /Users/emil/Compfys/Project 2/Latex/Project 2.out
 INPUT /Users/emil/Compfys/Project 2/Latex/Project 2.out
@@ -189,5 +188,4 @@ INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb
 INPUT /usr/local/texlive/2019basic/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
