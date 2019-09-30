@@ -1,4 +1,5 @@
 #include <iostream>
+#include <tuple>
 #include <cmath>
 #include <armadillo>
 
@@ -17,7 +18,6 @@ tuple<vec, mat> eig_solver(mat A, int n, int &k, int &l){
 	double max_iterations = pow(n, 3);
 	double max_element = max_offdiag(A, k, l, n);
 
-
 	double iterations = 0;
 	// Run the Jacobi rotation until we reach the max num of iterations or the max element is within our tolerance
 	while (iterations < max_iterations && max_element > tol){
@@ -27,7 +27,6 @@ tuple<vec, mat> eig_solver(mat A, int n, int &k, int &l){
 		max_element = max_offdiag(A, k, l, n);
 		iterations++;
 	}
-
 
 	cout << "Max: " << max_element << endl;
 	cout << "Iterations run: " << iterations << endl;

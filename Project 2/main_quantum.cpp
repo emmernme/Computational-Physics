@@ -1,6 +1,8 @@
 
-//This file uses armadillo, compile using "<compiler> <filename> -larmadillo"
-
+// Compile: g++ -std=c++11 main_quantum.cpp -o quantum.o -larmadillo -lblas
+#include <string>
+#include <set>
+#include <tuple>
 #include <iostream>
 #include <cmath>
 #include <armadillo>
@@ -12,28 +14,27 @@
 using namespace std;
 using namespace arma;
 
+bool only_arma = true;
+// Set up the constants we will use
 int n = 1200;
-
 double pmax = 50;
-double p0 = 0;
-double h = (pmax-p0)/double(n+1);
+double rho_0 = 0;
+double h = (pmax-rho_0)/double(n+1);
 double e = -1.0/(h*h);
 
-
+// Calculates the new diagonal elements
 double di(int i){
-
-  double Vi = pow(p0 + h*(i+1),2);
-
-  double d = 2.0/(h*h)+Vi;
-
-  return d;
+	double Vi = pow(rho_0 + h*(i+1),2);
+	double d = 2.0/(h*h)+Vi;
+	return d;
 }
 
 // Main function
 int main(){
+	cout << "n: " << n << ", rho(∞): " << pmax << endl;
+
 	// Dimensionality of the matrix
-	int k;
-	int l;
+	int k, l;
 
 	// Set up the matrix as a tridiagonal matrix
 	mat A(n,n, fill::zeros);
@@ -43,48 +44,26 @@ int main(){
 			A(i, i-1) = A(i, i+1) = e;
 			A(i, i) = di(i);
 	}
-	// Find the eigenvalues with armadillo function
+
+	// Find eigenvalues using armadillo
 	vec arma_eigval;
 	mat arma_eigvec;
-
-  cout << "n: " << n << "   Pmax" << pmax << endl;
-	// Find the eigenvalues with our own solver
-	vec eigval;
-	mat eigvec;
-
-
-
-	clock_t start,finish;
-
-	// Set up the matrix as a tridiagonal matrix
-
-	//start timing for armadillo solver
-	start = clock();
 	tie(arma_eigval, arma_eigvec) = armadillo_eig_solver(A); // std::tie unwraps a tuple
-	finish = clock();
+	cout << "Eigenvalues Arma:" << endl;
+	for (int i = 1; i < 5; i++){ // Print the eigvals (except first index, that's incorrect)
+		cout << arma_eigval(i) << endl;
+	}
 
-	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-/*
-	//Start clock for jacobi method
-	start = clock();
-
-	tie(eigval, eigvec) = eig_solver(A, n, k, l);
-
-	finish = clock();
-	double t1 = (double (finish- start)) /CLOCKS_PER_SEC;
-
-	cout << "Jacobi: " << t1 << "seconds" << endl;
-
-	cout << "Arma: " << t2 << "seconds" << endl;
-
-  for(int i = 0; i < 10; i++){
-    cout << eigval(i) << endl;
-  }
-*/
-  for(int i = 0; i < 10; i++){
-    cout << arma_eigval(i) << endl;
-  }
-
+	if (!only_arma){
+		// Find eigenvalues using our Jacobi-solver
+		vec eigval;
+		mat eigvec;
+		tie(eigval, eigvec) = eig_solver(A, n, k, l);
+		cout << "Eigenvalues Jacobi:" << endl;
+		for (int i = 0; i < 5; i++){
+			cout << eigval(i) << endl;
+		}
+	}
 
 	return 1; //success
 }
