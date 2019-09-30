@@ -1,7 +1,7 @@
 
-//This file uses armadillo, compile using "<compiler> <filename> -larmadillo"
-
+// Compile: g++ -std=c++11 main_harmonic.cpp -o harmonic.o -larmadillo -lblas
 #include <iostream>
+#include <tuple>
 #include <cmath>
 #include <armadillo>
 #include "jacobi_rotate.cpp"
@@ -12,61 +12,63 @@
 using namespace std;
 using namespace arma;
 
-int n = 1200;
-double omega = 1.0/20;
-
-double pmax = 10000;
-double p0 = 0;
-double h = (pmax-p0)/double(n+1);
+bool only_arma = true;
+int n = 2000;
+double omega = 0.05;
+double rho_max = 100;
+double rho_0 = 0;
+double h = (rho_max-rho_0)/double(n+1);
 double e = -1.0/(h*h);
 
+double rho(int i){
+	return rho_0 + h*(i+1);
+}
 
+// Diagonal elements
 double di(int i){
-
-  double d = (omega*omega)*((p0 + h*(i+1))*(p0 + h*(i+1))) + 1.0/(p0 + h*(i+1));
-
-  return d;
+	double rho_i = rho(i);
+	double d = 2.0/(h*h) + (omega*omega)*pow(rho_i,2) + 1.0/rho_i;
+ 	return d;
 }
 
 // Main function
 int main(){
 	// Dimensionality of the matrix
-	int k;
-	int l;
+	int k, l;
+
+	// Read omega from terminal
+	cout << "Omega: ";
+	cin >> omega;
+
 	// Set up the matrix as a tridiagonal matrix
 	mat A(n,n, fill::zeros);
 	A(0, 0) = di(0);
 	A(0, 1) = A(n-1,n-2) = e;
-		for (int i = 1; i < n-1; i++){
-			A(i, i-1) = A(i, i+1) = e;
-			A(i, i) = di(i);
+	for (int i = 1; i < n-1; i++){
+		A(i, i-1) = A(i, i+1) = e;
+		A(i, i) = di(i);
 	}
-	// Find the eigenvalues with armadillo function
+
+	cout << "n: " << n << ", rho(∞): " << rho_max << ", omega: " << omega << endl;
+
+	// Find the eigenvalues using Armadillo
 	vec arma_eigval;
 	mat arma_eigvec;
-
-  cout << "n: " << n << "   Pmax" << pmax << endl;
-	// Find the eigenvalues with our own solver
-	vec eigval;
-	mat eigvec;
-
-
-
-	clock_t start,finish;
-
-	// Set up the matrix as a tridiagonal matrix
-
-	//start timing for armadillo solver
-	start = clock();
 	tie(arma_eigval, arma_eigvec) = armadillo_eig_solver(A); // std::tie unwraps a tuple
-	finish = clock();
+	cout << "Eigenvalue Arma: " << endl;
+	for (int i = 0; i < 5; i++){
+		cout << arma_eigval(i) << endl;
+	}
 
-	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-
-  for(int i = 0; i < 10; i++){
-    cout << arma_eigval(i) << endl;
-  }
-
-
+	if (!only_arma){
+		// Find the eigenvalues with Jacobi function
+		vec eigval;
+		mat eigvec;
+		tie(eigval, eigvec) = eig_solver(A, n, k, l);	
+		cout << "Eigenvalue Jacobi: " << endl;
+		for (int i = 0; i < 5; i++){
+			cout << eigval(i) << endl;
+		}
+	}
 	return 1; //success
 }
