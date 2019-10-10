@@ -71,3 +71,9 @@ Thumbs.db
 *.dll
 *.exe
 
+
+# LaTeX
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz
