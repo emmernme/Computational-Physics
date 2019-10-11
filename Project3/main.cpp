@@ -7,14 +7,13 @@
 
 using namespace std;
 
-
 double int_function(double x);
 void gauss_laguerre(double *, double *, int, double);
 void gauss_legendre (double, double, double *, double *, int);
 
 int main()
 {
-  int N = 100; //number of integration points
+  int N = 2; //number of integration points
     double a = -0.45;
     double b = 0.45; //intergration limits
   /*
@@ -29,13 +28,6 @@ int main()
   //vectors containg the mesh points weights and
   //function values
   double *x = new double[N];
-  /*
-  double x2 = new double[n];
-  double y1 = new double[n];
-  double y2 = new double[n];
-  double z1 = new double[n];
-  double z2 = new double[n];
-  */
   double *w = new double[N];
 
   // set up the mesh points and weights
@@ -55,11 +47,10 @@ int main()
     }}}}}
   }
 
+  cout << int_gauss << endl;
+
   delete [] x;
   delete [] w;
   return 0;
-
-
-
 
 }

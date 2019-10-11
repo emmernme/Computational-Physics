@@ -9,20 +9,15 @@ a og b er grensene på integralet men de er lambda :- O
 
 void gauss_legendre(double a, double b, double x[], double w[], int N)
 {
-
-
-
-}//End function
-
   int         m,j,i;
   double      z1,z,xm,xl,pp,p3,p2,p1;
   double      const  pi = 3.14159265359;
   double      *x_low, *x_high, *w_low, *w_high;
-  double tol = 1.0E-10
+  double tol = 1.0E-10;
 
   m  = (N + 1)/2;                             // roots are symmetric in the interval
-  xm = 0.5 * (x2 + x1);
-  xl = 0.5 * (x2 - x1);
+  xm = 0.5 * (b + a);
+  xl = 0.5 * (b - a);
 
   x_low  = x;                                       // pointer initialization
   x_high = x + N - 1;
@@ -46,7 +41,7 @@ void gauss_legendre(double a, double b, double x[], double w[], int N)
           ** Legendre polynomial evaluated at x
           */
 
-  for(j = 1; j <= n; j++) {
+  for(j = 1; j <= N; j++) {
      p3 = p2;
      p2 = p1;
      p1 = ((2.0 * j - 1.0) * z * p2 - (j - 1.0) * p3)/j;
@@ -74,16 +69,7 @@ void gauss_legendre(double a, double b, double x[], double w[], int N)
      *(w_high--) = *(w_low++);
   }
 
-  /*
-  //legendre polynomene:
-  double r, s, t;
-  int m;
-  r = 0; s = 1;
 
-  for (m=0; m < N; m++)
-  {
-    t = r; r = s;
-    s = double((2*m+1)*x*r) - double(m*t);
-    s /= (m+1);
-  }
-  */
+
+
+}//End function
