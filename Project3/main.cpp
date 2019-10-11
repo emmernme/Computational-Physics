@@ -4,25 +4,24 @@
 #include <iomanip>
 #include "gauss_legendre.cpp"
 #include "int_function.cpp"
+#include "gauss_laguerre.cpp"
 
 using namespace std;
 
 double int_function(double x);
-void gauss_laguerre(double *, double *, int, double);
 void gauss_legendre (double, double, double *, double *, int);
 
 int main()
 {
-  int N = 2; //number of integration points
-    double a = -0.45;
-    double b = 0.45; //intergration limits
+  int N = 27; //number of integration points
+    double a = -2.89;
+    double b = 2.89; //intergration limits
   /*
   cout << "Number of integration points:"<< endl;
   cin >> N;
   cout <<"Integratiom limits(-lambda, lambda)" << endl;
   cin >> a >> b;
   */
-
   int alpha = 2;
 
   //vectors containg the mesh points weights and
@@ -42,13 +41,11 @@ int main()
       for (int l = 0; l<N; l++){
       for (int m = 0; m<N; m++){
       for (int n = 0; n<N; n++){
-  int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]
-  *int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
+  int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
-
-  cout << int_gauss << endl;
-
+  cout << "Exact value = 0.192765" << endl;
+  cout << "Gaussian Legendre quadrature = "<< setw(20) << setprecision(15) << int_gauss << endl;
   delete [] x;
   delete [] w;
   return 0;

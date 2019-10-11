@@ -68,8 +68,4 @@ void gauss_legendre(double a, double b, double x[], double w[], int N)
      *w_low      = 2.0 * xl/((1.0 - z * z) * pp * pp);
      *(w_high--) = *(w_low++);
   }
-
-
-
-
 }//End function
