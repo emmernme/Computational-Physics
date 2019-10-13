@@ -4,7 +4,6 @@
 #include <iomanip>
 #include "gauss_legendre.cpp"
 #include "int_function.cpp"
-#include "gauss_laguerre.cpp"
 
 using namespace std;
 
@@ -41,6 +40,7 @@ int main()
       for (int l = 0; l<N; l++){
       for (int m = 0; m<N; m++){
       for (int n = 0; n<N; n++){
+
   int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
