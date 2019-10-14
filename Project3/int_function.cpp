@@ -32,6 +32,6 @@ double int_function(double x1, double x2, double y1, double y2, double z1, doubl
     return 0;
   }
   else {
-    return value;
+    return value, r1, r2;
   }
 }
