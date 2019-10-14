@@ -10,14 +10,8 @@
 TEST_CASE("Testing the integration value for Gauss-Legendre"){
 
   int N = 27; //number of integration points
-    double a = -2.89;
-    double b = 2.89; //intergration limits
-  /*
-  cout << "Number of integration points:"<< endl;
-  cin >> N;
-  cout <<"Integratiom limits(-lambda, lambda)" << endl;
-  cin >> a >> b;
-  */
+  double a = -2.89;
+  double b = 2.89; //intergration limits
   int alpha = 2;
 
   //vectors containg the mesh points weights and

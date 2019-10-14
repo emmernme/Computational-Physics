@@ -42,6 +42,7 @@ int main()
   int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
+
   cout << "Exact value = 0.192765" << endl;
   cout << "Gaussian Legendre quadrature = "<< setw(20) << setprecision(15) << int_gauss << endl;
   delete [] x;
