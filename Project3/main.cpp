@@ -7,8 +7,6 @@
 
 using namespace std;
 
-double int_function(double x);
-void gauss_legendre (double, double, double *, double *, int);
 
 int main()
 {
