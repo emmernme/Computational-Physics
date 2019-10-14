@@ -21,9 +21,9 @@ void gauss_laguerre(double *x, double *w, int N, double alf)
 
 	for (i=1;i<=N;i++) {
 		if (i == 1) {
-			z=(1.0+alf)*(3.0+0.92*alf)/(1.0+2.4*n+1.8*alf);
+			z=(1.0+alf)*(3.0+0.92*alf)/(1.0+2.4*N+1.8*alf);
 		} else if (i == 2) {
-			z += (15.0+6.25*alf)/(1.0+0.9*alf+2.5*n);
+			z += (15.0+6.25*alf)/(1.0+0.9*alf+2.5*N);
 		} else {
 			ai=i-2;
 			z += ((1.0+2.55*ai)/(1.9*ai)+1.26*ai*alf/
@@ -32,7 +32,7 @@ void gauss_laguerre(double *x, double *w, int N, double alf)
 		for (its=1;its<=MAXIT;its++) {
 			p1=1.0;
 			p2=0.0;
-			for (j=1;j<=n;j++) {
+			for (j=1;j<=N;j++) {
 				p3=p2;
 				p2=p1;
 				p1=((2*j-1+alf-z)*p2-(j-1+alf)*p3)/j;
@@ -44,7 +44,7 @@ void gauss_laguerre(double *x, double *w, int N, double alf)
 		}
 		if (its > MAXIT) cout << "too many iterations in gaulag" << endl;
 		x[i]=z;
-		w[i] = -exp(gammln(alf+n)-gammln((double)n))/(pp*n*p2);
+		w[i] = -exp(gammln(alf+N)-gammln((double)N))/(pp*N*p2);
 	}
 }
 // end function gaulag

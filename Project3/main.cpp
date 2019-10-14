@@ -4,25 +4,22 @@
 #include <iomanip>
 #include "gauss_legendre.cpp"
 #include "int_function.cpp"
+#include "gauss_laguerre.cpp"
+#include "int_function_polar.cpp"
 
 using namespace std;
 
 double int_function(double x1, double x2, double y1, double y2, double z1, double z2);
-double int_function_polar(double x);
-void gauss_legendre (double, double, double *, double *, int);
-void gauss_laguerre(double *, double *, int N, double alf);
+double int_function_polar(double x1, double x2, double y1, double y2, double z1, double z2, double theta_1, double theta_2, double phi_1, double phi_2);
+void gauss_legendre(double a, double b, double x[], double w[], int N);
+void gauss_laguerre(double *x, double *w, int N, double alf);
 
 int main()
 {
   int N = 27; //number of integration points
-    double a = -2.89;
-    double b = 2.89; //intergration limits
-  /*
-  cout << "Number of integration points:"<< endl;
-  cin >> N;
-  cout <<"Integratiom limits(-lambda, lambda)" << endl;
-  cin >> a >> b;
-  */
+  double a = -2.89;
+  double b = 2.89; //intergration limits
+
   int alpha = 2;
   double      const  pi = 3.14159265359;
 
@@ -76,7 +73,7 @@ int main()
     }
 
   cout << "Exact value = 0.192765" << endl;
-  cout << "Gaussian Legendre quadrature = "<< setw(20) << setprecision(15) << int_gauss << endl;
+  cout << "Gaussian Legendre quadrature = " << setw(20) << setprecision(15) << int_gauss << endl;
   cout << "Gaussian Laguerre quadrature = " << setw(20) << setprecision(15) << int_gausslag << endl;
 
   delete [] x;
