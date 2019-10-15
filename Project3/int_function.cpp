@@ -12,8 +12,6 @@ double int_function(double x1, double x2, double y1, double y2, double z1, doubl
   double r2 = sqrt(x2*x2 + y2*y2 + z2*z2);
   double deno = sqrt(pow((x1-x2), 2) + pow((y1-y2), 2) + pow((z1-z2), 2));
   double value = exp(-2*alpha*(r1 + r2)) / deno ;
-<<<<<<< HEAD
-=======
 
 /*  //Writing values to file for plotting
   ofstream output;
@@ -30,11 +28,10 @@ double int_function(double x1, double x2, double y1, double y2, double z1, doubl
   output.close();
 */
 
->>>>>>> e7f4c9a8c8813e0f8eba40253ae547c572a41c75
   if (abs(deno) < 1E-8){
     return 0;
   }
   else {
-    return value, r1, r2;
+    return value;
   }
 }
