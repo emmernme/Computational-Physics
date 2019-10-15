@@ -24,10 +24,39 @@
 
 
 \section*{Introduction}
-In this report there will given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre Quaderature, and Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclution. At the end there are an appendix where additional data is located.
+In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadratyre as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion. At the end of this report you will find an appendix where additional data are located.\\
+
+The integral we have worked with is a six-dimensional integral which determines the ground state correlation energy between two electrons in a helium atom.\\
+
+The single-particle wave function for an electron $i$ in the $1s$ state in a hydrogen atom is as followed:
+
+\begin{flalign*}
+  \psi_{1s}(\textbf{r}_i)= e^{- \alpha r_i}
+\end{flalign*}
+
+where $\textbf{r}_i = x_i \textbf{e}_x + y_i \textbf{e}_y + z_i \textbf{e}_z +$, and the value of $r_i$ is given by:
+
+\begin{flalign*}
+  r_i = \sqrt{x_i^2 + y_i^2 +z_i^2}
+\end{flalign*}
+
+We set $\alpha = 2$ which corresponds to the charge of the helium atom, Z = 2. We assume that the wave function for each electron in the helium atom can be modelled like the single-particle wavefunction above. The wavefunction for two electron is then given bye the product of two single-particle wavefunctions:
+
+\begin{flalign*}
+  \Psi(\textbf{r}_1, \textbf{r}_2) = e^{-\alpha(r_1 + r_2)}
+\end{flalign*}
+
+We need to solve the intergral for the expectation value of the correlation energy between two electrons:
+
+\begin{flalign*}
+  \left<\frac{1}{|\textbf{r}_1 - \textbf{r}_2|}\right> = \integral_{-/inf}^{inf} d\textbf{r}_1 d\textbf{r}_2 e^{-\alpha(r_1 + r_2)} \frac{1}{|\textbf{r}_1 - \textbf{r}_2|
+\end{flalign*}
+
+
+
 
 \section*{Method}
-In this problem there have been used c++ as programming language and mainly a variety of functions to solve the problem. 
+In this problem there have been used c++ as programming language and mainly a variety of functions to solve the problem.
 
 \section*{Results}
 
