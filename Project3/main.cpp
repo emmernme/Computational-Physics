@@ -18,7 +18,7 @@ void gauss_laguerre(double *x, double *w, int N, double alf);
 
 int main()
 {
-  int N = 27; //number of integration points
+  int N = 15; //number of integration points
   double a = -2.89;
   double b = 2.89; //intergration limits
 
@@ -44,6 +44,9 @@ int main()
 
   // Gauss Legendre; set up the mesh points and weights
   gauss_legendre(a, b, x, w, N);
+
+  cout << *w_t << endl;
+
   gauss_legendre(0, pi, theta, w_t, N);
   gauss_legendre(0, 2*pi, phi, w_p, N);
 
@@ -57,6 +60,7 @@ int main()
       for (int m = 0; m<N; m++){
       for (int n = 0; n<N; n++){
 
+
   int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
@@ -64,17 +68,17 @@ int main()
   //evaluate the intergrak with the Gauss-Laguerre method
   // we initialize the sum
   double int_gausslag = 0.;
-  for (int i=1; i < N+1; i++){
-        for (int j = 1; j<N+1; j++){
+  for (int i=1; i < N; i++){
+        cout << r[i] << endl;
+        for (int j = 1; j<N; j++){
         for (int k = 0; k<N; k++){
         for (int l = 0; l<N; l++){
         for (int m = 0; m<N; m++){
         for (int n = 0; n<N; n++){
 
-    int_gausslag += w_r[i]*w_r[j]*w_r[k]*w_r[l]*w_r[m]*w_r[n]*int_function_polar(r[i], r[j], theta[k], theta[l], phi[m], phi[n]);
+    int_gausslag += w_r[i]*w_r[j]*w_t[k]*w_t[l]*w_p[m]*w_p[n]*int_function_polar(r[i], r[j], theta[k], theta[l], phi[m], phi[n]);
     }}}}}
-    }
-
+}
   cout << "Exact value = 0.192765" << endl;
   cout << "Gaussian Legendre quadrature = " << setw(20) << setprecision(15) << int_gauss << endl;
   cout << "Gaussian Laguerre quadrature = " << setw(15) << setprecision(15) << int_gausslag << endl;
