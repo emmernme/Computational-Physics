@@ -18,15 +18,18 @@ void gauss_laguerre(double *x, double *w, int N, double alf);
 
 int main()
 {
+<<<<<<< HEAD
   int N = 15; //number of integration points
+=======
+  int N = 31; //number of integration points
+>>>>>>> 81d58da9c462ae8a0ab74687360eec84c9c08b2c
   double a = -2.89;
   double b = 2.89; //intergration limits
 
   int alpha = 2;
   double      const  pi = 3.14159265359;
 
-  //vectors containg the mesh points weights and
-  //function values
+  //vectors containg the mesh points, weights and function values
   double *x = new double[N];
   double *w = new double[N];
 
@@ -52,7 +55,7 @@ int main()
 
   //Evaluate the integral with the Gauss-Legendre method
   double int_gauss = 0.;
-
+/*
   for (int i=0; i < N; i++){
       for (int j = 0; j<N; j++){
       for (int k = 0; k<N; k++){
@@ -64,7 +67,7 @@ int main()
   int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
-
+*/
   //evaluate the intergrak with the Gauss-Laguerre method
   // we initialize the sum
   double int_gausslag = 0.;
