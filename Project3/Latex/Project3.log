@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  15 OCT 2019 14:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  15 OCT 2019 14:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -340,167 +340,117 @@ Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
-Runaway argument?
- \left <\frac {1}{|\textbf {r}_1 - \textbf {r}_2|}\right > = \integral \ETC.
-./Project3.tex:54: Paragraph ended before \flalign* was complete.
-<to be read again> 
-                   \par 
-l.54 
-     
-I suspect you've forgotten a `}', causing me to apply this
-control sequence to too much text. How can we recover?
-My plan is to forget the whole thing and hope for the best.
-
-./Project3.tex:54: Missing $ inserted.
-<inserted text> 
-                $
-l.54 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./Project3.tex:54: Missing \endgroup inserted.
-<inserted text> 
-                \endgroup 
-l.54 
-     
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-./Project3.tex:54: Display math should end with $$.
-<to be read again> 
-                   \par 
-l.54 
-     
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-./Project3.tex:71: Missing $ inserted.
+Underfull \hbox (badness 10000) in paragraph at lines 67--68
+
+ []
+
+./Project3.tex:86: Missing $ inserted.
 <inserted text> 
                 $
-l.71 N=15, $\lambda = 2$ gauss_
+l.86 N=15, $\lambda = 2$ gauss_
                                legendre= 0.19947
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:72: Missing $ inserted.
+./Project3.tex:87: Missing $ inserted.
 <inserted text> 
                 $
-l.72 
+l.87 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:73: Missing $ inserted.
+./Project3.tex:88: Missing $ inserted.
 <inserted text> 
                 $
-l.73 N=31, $\lambda = 3.5$ gauss_
+l.88 N=31, $\lambda = 3.5$ gauss_
                                  legendre = 0.19397
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:74: Missing $ inserted.
+./Project3.tex:89: Missing $ inserted.
 <inserted text> 
                 $
-l.74 
+l.89 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:75: Missing $ inserted.
+./Project3.tex:90: Missing $ inserted.
 <inserted text> 
                 $
-l.75 N=35, $\lambda = 3.5$ gauss_
+l.90 N=35, $\lambda = 3.5$ gauss_
                                  legendre = 0.1914
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:76: Missing $ inserted.
+./Project3.tex:91: Missing $ inserted.
 <inserted text> 
                 $
-l.76 
+l.91 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:77: Missing $ inserted.
+./Project3.tex:92: Missing $ inserted.
 <inserted text> 
                 $
-l.77 N=27, $\lambda = 2.91$ gauss_
+l.92 N=27, $\lambda = 2.91$ gauss_
                                   legendre = 0.192801
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:78: Missing $ inserted.
+./Project3.tex:93: Missing $ inserted.
 <inserted text> 
                 $
-l.78 
+l.93 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:79: Missing $ inserted.
+./Project3.tex:94: Missing $ inserted.
 <inserted text> 
                 $
-l.79 N=27 $\lambda = 2.90$ gauss_
+l.94 N=27 $\lambda = 2.90$ gauss_
                                  legendre = 0.192725
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:80: Missing $ inserted.
+./Project3.tex:95: Missing $ inserted.
 <inserted text> 
                 $
-l.80 
+l.95 
      
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-
-./Project3.tex:90: LaTeX Error: \begin{flalign*} on input line 51 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.90 \end{document}
-                   
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 90.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 90.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
  (./Project3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 90.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 90.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
 Package rerunfilecheck Info: File `Project3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 90.
- )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 51 (\begingroup)
-### bottom level 
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
+ ) 
 Here is how much of TeX's memory you used:
- 8550 strings out of 492649
- 126338 string characters out of 6129621
- 318556 words of memory out of 5000000
+ 8552 strings out of 492649
+ 126365 string characters out of 6129621
+ 319556 words of memory out of 5000000
  12343 multiletter control sequences out of 15000+600000
- 11815 words of font info for 46 fonts, out of 8000000 for 9000
+ 12122 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,10n,38p,561b,367s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Project3.pdf (2 pages, 120025 bytes).
+ 36i,12n,38p,561b,332s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
+7.pfb>
+Output written on Project3.pdf (2 pages, 133787 bytes).
 PDF statistics:
- 74 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
- 10 named destinations out of 1000 (max. 500000)
+ 81 PDF objects out of 1000 (max. 8388607)
+ 63 compressed objects within 1 object stream
+ 12 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

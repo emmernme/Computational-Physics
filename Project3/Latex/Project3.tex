@@ -24,7 +24,7 @@
 
 
 \section*{Introduction}
-In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadratyre as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion. At the end of this report you will find an appendix where additional data are located.\\
+In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion. At the end of this report you will find an appendix where additional data are located.\\
 
 The integral we have worked with is a six-dimensional integral which determines the ground state correlation energy between two electrons in a helium atom.\\
 
@@ -49,14 +49,29 @@ We set $\alpha = 2$ which corresponds to the charge of the helium atom, Z = 2. W
 We need to solve the intergral for the expectation value of the correlation energy between two electrons:
 
 \begin{flalign*}
-  \left<\frac{1}{|\textbf{r}_1 - \textbf{r}_2|}\right> = \integral_{-/inf}^{inf} d\textbf{r}_1 d\textbf{r}_2 e^{-\alpha(r_1 + r_2)} \frac{1}{|\textbf{r}_1 - \textbf{r}_2|
+  \left<\frac{1}{|\textbf{r}_1 - \textbf{r}_2|}\right> = \int_{-\infty}^{\infty} d\textbf{r}_1 d\textbf{r}_2 e^{-\alpha(r_1 + r_2)} \frac{1}{|\textbf{r}_1 - \textbf{r}_2|}
 \end{flalign*}
-
 
 
 
 \section*{Method}
 In this problem there have been used c++ as programming language and mainly a variety of functions to solve the problem.
+
+\subsection*{Gaussian Quadrature}
+To compute the integral numerically we approximate the integral:
+
+\begin{flalign*}
+  I = \int_{a}^{b} f(x) dx = \int_{a}^{b} W(x)g(x) dx \approx \sum_{i=1}^{N} \omega_i f(x_i)
+\end{flalign*}
+
+Unlike other more basic methods for numerical integrations where the mesh points $x_i$ are equidistantly spaced, the mesh points in the gaussian quadrature are not equidistantly spaced. In the sum above $w_i$ correpsonds to the weights. Gaussian quadrature uses som orthonogonal polynomials, Legendre and Laguerre, to obtain the mesh points and weights.\\
+
+To obtain the value of the integral by using Gauss-Legendre quadrature, we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}.
+
+
+
+
+\subsection*{Monte Carlo integration}
 
 \section*{Results}
 
