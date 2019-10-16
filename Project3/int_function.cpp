@@ -17,7 +17,6 @@ double int_function(double x1, double x2, double y1, double y2, double z1, doubl
   ofstream output;
   output.open("plotting.dat");
 
-
   output << x2 << endl;
   output << y1 << endl;
   output << y2 << endl;

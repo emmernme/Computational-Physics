@@ -34,7 +34,7 @@ int main()
   double *w_p = new double [N]; //corresponding weights
 
   // gauss_laguerre; set up the mesh points and weights and the power of x^alf
-  double alf = 2.0;
+  double alf = 0;
   gauss_laguerre(r, w_r, N, alf);
 
   // Gauss Legendre; set up the mesh points and weights
