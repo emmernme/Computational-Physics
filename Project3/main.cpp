@@ -7,6 +7,8 @@
 #include "gauss_laguerre.cpp"
 #include "int_function_polar.cpp"
 
+#define ZERO 1.0e-10
+
 using namespace std;
 
 
@@ -16,7 +18,8 @@ int main()
   double a = -3;
   double b = 3; //intergration limits
 
-  clock_t start, finish;
+  double a = -2.89;
+  double b = 2.89; //intergration limits
 
   int alpha = 2;
   double      const  pi = 3.14159265359;
@@ -46,9 +49,7 @@ int main()
 
   //Evaluate the integral with the Gauss-Legendre method
   double int_gauss = 0.;
-
-  start = clock();
-
+/*
   for (int i=0; i < N; i++){
       for (int j = 0; j<N; j++){
       for (int k = 0; k<N; k++){
@@ -60,16 +61,10 @@ int main()
   int_gauss += w[i]*w[j]*w[k]*w[l]*w[m]*w[n]*int_function(x[i], x[j], x[k], x[l], x[m], x[n]);
     }}}}}
   }
-
-  finish = clock();
-
-  double t1 = (double (finish - start))/CLOCKS_PER_SEC;
-
+*/
   //evaluate the intergrak with the Gauss-Laguerre method
   // we initialize the sum
   double int_gausslag = 0.;
-
-  start = clock();
   for (int i=1; i < N; i++){
         for (int j = 1; j<N; j++){
         for (int k = 0; k<N; k++){
@@ -79,20 +74,9 @@ int main()
     int_gausslag += w_r[i]*w_r[j]*w_t[k]*w_t[l]*w_p[m]*w_p[n]*int_function_polar(r[i], r[j], theta[k], theta[l], phi[m], phi[n]);
     }}}}}
 }
-  finish = clock();
-  double t2 = (double (finish - start))/CLOCKS_PER_SEC;
-
-
-  double exact = 0.192765;
-  double diff1 = fabs(int_gauss - exact);
-  double diff2 = fabs(int_gausslag - exact);
-
-
-  cout << "Exact value: " << setw(26) << 0.192765 << endl;
-  cout << "Gaussian Legendre quadrature = " << fixed << setprecision(6) << int_gauss;
-  cout << "   Diff: " << diff1 << "  Time taken: " << t1 << endl;
-  cout << "Gaussian Laguerre quadrature = " << setprecision(6) << int_gausslag;
-  cout << "   Diff: " << diff2 << "  Time taken: " << t2 << endl;
+  cout << "Exact value = 0.192765" << endl;
+  cout << "Gaussian Legendre quadrature = " << setw(20) << setprecision(15) << int_gauss << endl;
+  cout << "Gaussian Laguerre quadrature = " << setw(15) << setprecision(15) << int_gausslag << endl;
 
   delete [] x;
   delete [] w;
