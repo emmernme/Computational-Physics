@@ -90,7 +90,7 @@ int main()
   double diff2 = fabs(int_gausslag - exact);
 
 
-  cout << "Exact value:" << setw(26) << exact << endl;
+  cout << "Exact value:" << setw(26) << exact << "  N:" << N << endl;
   cout << "Gaussian Legendre quadrature: " << setw(6) << fixed << setprecision(6);
   cout << int_gauss << "   Diff: " << diff1 << "   Time taken: "<< t1 << endl;
   cout << "Gaussian Laguerre quadrature: " << setw(6) << fixed << setprecision(6);
