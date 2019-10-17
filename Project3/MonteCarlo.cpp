@@ -15,7 +15,7 @@ Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fope
 double alpha = 2.0;
 double exact = 5*M_PI*M_PI / (16*16);
 // Number of points
-int N = 1e9; 
+int N = 1e7;
 // Tolerance to avoid r1-r2=0 (division by zero)
 double tol = 1e-10;
 
@@ -84,7 +84,6 @@ void MonteCarloImproved(double lim){
 
 	// Prepare Jacobi-determinant
 	double jacobi = 2*M_PI*2*M_PI * M_PI*M_PI / 16;
-
 	// Set up integral vars
 	double integral_sum = 0;
 	double sigma_sum = 0;
@@ -133,11 +132,12 @@ double abs_r(double r[]){
 // The function to be integrated
 double integration_func(double r1[], double r2[]){
 	double dist = dist_r(r1, r2);
-	if (dist < tol) return 0; 
+	if (dist < tol) return 0;
 	double num = exp(-2*alpha*(abs_r(r1) + abs_r(r2)));
 
 	return num / dist;
 }
+
 
 // Polar integration function
 double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  17 OCT 2019 14:46
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  17 OCT 2019 15:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -331,36 +331,57 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 22.
  (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 28--29
+Underfull \hbox (badness 10000) in paragraph at lines 27--28
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 30--31
+Underfull \hbox (badness 10000) in paragraph at lines 29--30
 
  []
 
 [1
 
 {/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 70--71
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+Underfull \hbox (badness 10000) in paragraph at lines 71--72
 
  []
 
 
-./Project3.tex:76: LaTeX Error: Environment falign* undefined.
+./Project3.tex:75: LaTeX Error: Environment falign* undefined.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.76 \begin{falign*}
+l.75 \begin{falign*}
                     
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./Project3.tex:76: Missing $ inserted.
+<inserted text> 
+                $
+l.76   d\textbf{r}_
+                   1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\th...
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+./Project3.tex:77: LaTeX Error: \begin{document} ended by \end{falign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.77 \end{falign*}
+                  
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
@@ -368,28 +389,7 @@ or  <return>  to continue without it.
 ./Project3.tex:77: Missing $ inserted.
 <inserted text> 
                 $
-l.77   d\textbf{r}_
-                   1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\th...
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-./Project3.tex:78: LaTeX Error: \begin{document} ended by \end{falign*}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.78 \end{falign*}
-                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-./Project3.tex:78: Missing $ inserted.
-<inserted text> 
-                $
-l.78 \end{falign*}
+l.77 \end{falign*}
                   
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
@@ -398,49 +398,62 @@ really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 80--81
+Underfull \hbox (badness 10000) in paragraph at lines 79--80
 
  []
 
 
-Overfull \hbox (24.39104pt too wide) detected at line 84
+Overfull \hbox (24.39104pt too wide) detected at line 83
 []
  []
 
 [2]
-<Wave_func.png, id=34, 462.528pt x 346.896pt>
+<Wave_func.png, id=33, 462.528pt x 346.896pt>
 File: Wave_func.png Graphic file (type png)
 <use Wave_func.png>
-Package pdftex.def Info: Wave_func.png  used on input line 109.
+Package pdftex.def Info: Wave_func.png  used on input line 108.
 (pdftex.def)             Requested size: 200.75073pt x 150.56506pt.
 
+Underfull \hbox (badness 10000) in paragraph at lines 114--115
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
+ []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 160.
-[3 <./Wave_func.png>] [4]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 160.
+[3 <./Wave_func.png>]
+<Leg_lag_int.png, id=51, 462.528pt x 346.896pt>
+File: Leg_lag_int.png Graphic file (type png)
+<use Leg_lag_int.png>
+Package pdftex.def Info: Leg_lag_int.png  used on input line 120.
+(pdftex.def)             Requested size: 200.75073pt x 150.56506pt.
+<Leg_lag_diff.png, id=52, 462.528pt x 346.896pt>
+File: Leg_lag_diff.png Graphic file (type png)
+<use Leg_lag_diff.png>
+Package pdftex.def Info: Leg_lag_diff.png  used on input line 158.
+(pdftex.def)             Requested size: 200.75073pt x 150.56506pt.
+ [4 <./Leg_lag_int.png>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 177.
+ [5 <./Leg_lag_diff.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 177.
  (./Project3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 160.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 160.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 177.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 177.
 Package rerunfilecheck Info: File `Project3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 160.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 177.
  ) 
 Here is how much of TeX's memory you used:
- 8574 strings out of 492649
- 126679 string characters out of 6129621
- 319800 words of memory out of 5000000
- 12356 multiletter control sequences out of 15000+600000
- 12421 words of font info for 48 fonts, out of 8000000 for 9000
+ 8597 strings out of 492649
+ 127010 string characters out of 6129621
+ 320100 words of memory out of 5000000
+ 12371 multiletter control sequences out of 15000+600000
+ 13667 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,12n,39p,505b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
-.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
-Output written on Project3.pdf (4 pages, 169334 bytes).
+ 36i,12n,39p,692b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.
+pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb>
+Output written on Project3.pdf (5 pages, 218655 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 18 named destinations out of 1000 (max. 500000)
- 6 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 122 PDF objects out of 1000 (max. 8388607)
+ 93 compressed objects within 1 object stream
+ 21 named destinations out of 1000 (max. 500000)
+ 16 words of extra memory for PDF output out of 10000 (max. 10000000)
 

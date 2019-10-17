@@ -21,8 +21,7 @@
 \maketitle
 
 \section*{Abstract}
-
-
+We have computed the integral for the expectation value of the correlation energy between to electrons in a helium atom by using Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. We experienced that the methods that were brute force gave a less satisfactory resulst compared to the methods that required some more thinking. The exact value of the integral should be 0.192765. The best value we got from Gauss-Legendre was 0.192651, while the best value from Gauss-Laguerre was 0.194779. We also experienced that Gauss-Laguerre gave better results when we increased the number of integration points, while this was not the case for Gauss-Legendre.
 
 \section*{Introduction}
 In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion.\\
@@ -69,7 +68,7 @@ To compute the integral numerically we do the approximation:
 
 Unlike other more basic methods for numerical integrations where the mesh points $x_i$ are equidistantly spaced, the mesh points in the gaussian quadrature are not equidistantly spaced. In the sum above $w_i$ correpsonds to the weights. Gaussian quadrature uses some orthonogonal Legendre- and Laguerre-polynomials, to obtain the mesh points and weights.\\
 
-Gauss-Legendre is a brute-force method and to obtain the value of the integral using this method we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}.\\
+Gauss-Legendre is a brute-force method and to obtain the value of the integral using this method we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}. We can replace the intigration limits $-\infty$ and $\infty$ with $-\lambda$ and $+\lambda$.\\
 
 While the Legendre polynomials are defined for $x \in [-1, 1]$ the Laguarre polynomials are defined for $x \in [0, \infty)$. We rewrite the integral and change to spherical coordinates.
 
@@ -102,7 +101,7 @@ Monte Carlo integration allows us to make a good approximation to
 
 \section*{Results}
 
-We have plotted the wave function for the electrons in the Helium atom in figure \ref{fig:wavefunc}. From this plot we can tell that the integral converges to zero for $-2 > x > 2$. Therefore the integral would not need to be evaluated for those values of x.
+We have plotted the wave function for the electrons in the Helium atom in figure \ref{fig:wavefunc}. From this plot we can tell that the integral converges to zero for $x < -2$ and $ x > 2$. Therefore the integral would not need to be evaluated for those values of x.
 
 \begin{figure}[hbt]
 \begin{center}
@@ -112,10 +111,20 @@ We have plotted the wave function for the electrons in the Helium atom in figure
 \end{center}
 \end{figure}
 
-Table \ref{Tab: Legendre} and table \ref{Tab: Laguerre} shows the results for the two Gaussian quadratures with different values of N. The tables also shows the difference from the exact value of the integral, namely 0.192765. You can also see a plot of the difference from the exact value for Gauss-Legendre and Gauss-Laguerre in figure
+Table \ref{Tab: Legendre} and table \ref{Tab: Laguerre} shows the results for the two Gaussian quadratures with different values of N. The tables also shows the difference from the exact value of the integral, namely 0.192765. The integral values for both of the Gaussian quadratures are plotted against different number of integration points in figure \ref{fig:int} You can also see a plot of the difference from the exact value for Gauss-Legendre and Gauss-Laguerre in figure \ref{fig:diff}.\\
+
+The Gauss-Legendre quadrature gave different results when we changed the limits of the integral, $-\lambda$ and $+\lambda$. We found that we got the best result for Gauss-Legendre using $\lambda = 2.89$ and $N=27$. The value of the integral then where 0.192651 with a difference 0.000114 from the exact value.
+
+\begin{figure}[hbt]
+\begin{center}
+    \includegraphics[width=200px]{Leg_lag_int.png}
+    \caption{: Calculated values for the integral against number of iterations using Gauss-Legendre and Gauss-Laguerre.}
+    \label{fig:int}
+\end{center}
+\end{figure}
 
 \begin{table}[h!]
-  \caption{: Integration using Gauss-Legendre, variying N}
+  \caption{: Integration using Gauss-Legendre, variying N, with $\lambda=3$ }
   \begin{tabular}{c c c}
     N & Legendre & Diff. from exact \\
     \hline
@@ -144,10 +153,18 @@ Table \ref{Tab: Legendre} and table \ref{Tab: Laguerre} shows the results for th
   \label{Tab: Laguerre}
 \end{table}
 
+\begin{figure}[hbt]
+\begin{center}
+    \includegraphics[width=200px]{Leg_lag_diff.png}
+    \caption{: Difference from the exact value of the integral for Gauss-Legendre and Gauss-Laguerre against number of iterations.}
+    \label{fig:diff}
+\end{center}
+\end{figure}
 
 
 \section*{Discussion}
-
+The Gauss-Legendre quadrature is a brute force method and we can see from our results that is is not a very good method. We had to try with different integration values and test which values that gave the best result. With increasing values of N the integrand got less exact insted of more close to the correct value.\\
+When we use the Gauss-Laguerre quadrature we have to do some more thinking by changing to spherical coordinates. T
 
 \section*{Conclution}
 

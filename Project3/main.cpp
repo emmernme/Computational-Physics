@@ -15,10 +15,10 @@ using namespace std;
 int main()
 {
 <<<<<<< HEAD
-  int N = 27; //number of integration points
+  int N = 15; //number of integration points
 =======
-  int N = 32; //number of integration points
->>>>>>> 161819073cbae121f2a935ec2fb3b89175e77f10
+  int N = 10; //number of integration points
+>>>>>>> 8e4c071b76b22d81e2cf0d90e2504ac2cb83eebd
   double a = -3;
   double b = 3; //intergration limits
 
@@ -94,7 +94,7 @@ int main()
   double diff2 = fabs(int_gausslag - exact);
 
 
-  cout << "Exact value:" << setw(26) << exact << endl;
+  cout << "Exact value:" << setw(26) << exact << "  N:" << N << endl;
   cout << "Gaussian Legendre quadrature: " << setw(6) << fixed << setprecision(6);
   cout << int_gauss << "   Diff: " << diff1 << "   Time taken: "<< t1 << endl;
   cout << "Gaussian Laguerre quadrature: " << setw(6) << fixed << setprecision(6);
