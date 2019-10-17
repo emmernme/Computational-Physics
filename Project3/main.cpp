@@ -12,9 +12,9 @@ using namespace std;
 
 int main()
 {
-  int N = 10; //number of integration points
-  double a = -5;
-  double b = 5; //intergration limits
+  int N = 27; //number of integration points
+  double a = -3;
+  double b = 3; //intergration limits
 
   clock_t start, finish;
 
