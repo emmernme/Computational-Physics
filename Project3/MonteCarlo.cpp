@@ -132,3 +132,19 @@ double integration_func(double r1[], double r2[]){
 
 	return num / dist;
 }
+<<<<<<< HEAD
+=======
+
+
+// Polar integration function
+double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){
+	double cosb = cos(theta_1)*cos(theta_2) + sin(theta_1)*sin(theta_2)*cos(phi_1-phi_2);
+	double deno = fabs(r1*r1+r2*r2-2*r1*r2*cosb);
+	double f = exp(-2*alpha*(r1+r2))*r1*r1*r2*r2*sin(theta_1)*sin(theta_2)/sqrt(deno);
+    if (deno > tol){
+		return f;
+	} else {
+		return 0;
+	}
+}
+>>>>>>> eac014c6cdc82d0434c44b88cd89a76caa770268
