@@ -80,12 +80,8 @@ void MonteCarloImproved(double lim){
 	exponential_distribution<double> r_dist(lim);
 
 	// Prepare Jacobi-determinant
-<<<<<<< HEAD
-	double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
-=======
-	double jacobi = lim*lim * 2*M_PI*2*M_PI * M_PI*M_PI;
 
->>>>>>> fe37bf31662fe2a8f28eb66659b3c16019827516
+	double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
 	// Set up integral vars
 	double integral_sum = 0;
 	double sigma_sum = 0;
@@ -137,7 +133,6 @@ double integration_func(double r1[], double r2[]){
 
 	return num / dist;
 }
-
 
 // Polar integration function
 double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){
