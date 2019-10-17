@@ -1,12 +1,14 @@
 /*
 Solving the integral in project 3 using Monte Carlo (MC) random method
-Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3
+Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 */
 #include <cmath>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <random>
+// Requirements: OpenMP (brew install clang-omp)
+#include <omp.h>
 
 // Constants
 #define _USE_MATH_DEFINES // Pi
@@ -44,6 +46,7 @@ void MonteCarlo(double lim){
 	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
+	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
 		double r1[] = {dist(engine), dist(engine), dist(engine)};
@@ -77,16 +80,22 @@ void MonteCarloImproved(double lim){
 	mt19937 engine(seeder());
 	uniform_real_distribution<double> phi_dist(0, 2*M_PI);
 	uniform_real_distribution<double> theta_dist(0, M_PI);
-	exponential_distribution<double> r_dist(lim);
+	exponential_distribution<double> r_dist(4);
 
 	// Prepare Jacobi-determinant
+<<<<<<< HEAD
 	double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
+=======
+	double jacobi = 2*M_PI*2*M_PI * M_PI*M_PI / 16;
+>>>>>>> 3f51f2cce78adfe6e3493a449a12500a698aef5e
 	// Set up integral vars
 	double integral_sum = 0;
 	double sigma_sum = 0;
+	int i;
 
 	// Loop through the desired number of MC samples
-	for (int i = 0; i < N; i++){
+	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
+	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
 		double coord1[] = {phi_dist(engine), theta_dist(engine), r_dist(engine)};
 		double coord2[] = {phi_dist(engine), theta_dist(engine), r_dist(engine)};
@@ -116,7 +125,7 @@ void MonteCarloImproved(double lim){
 
 // Calculate distance between r-vectors
 double dist_r(double r1[], double r2[]){
-	return sqrt( pow(r1[0]-r2[0], 2) + pow(r1[1]-r2[1], 2) + pow(r1[2]-r2[2], 2) );
+	return sqrt(pow(r1[0]-r2[0], 2) + pow(r1[1]-r2[1], 2) + pow(r1[2]-r2[2], 2));
 }
 
 // Calculate length of r-vector
@@ -138,9 +147,10 @@ double integration_func(double r1[], double r2[]){
 
 // Polar integration function
 double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){
-	double cosb = cos(theta_1)*cos(theta_2) + sin(theta_1)*sin(theta_2)*cos(phi_1-phi_2);
-	double deno = fabs(r1*r1+r2*r2-2*r1*r2*cosb);
-	double f = exp(-2*alpha*(r1+r2))*r1*r1*r2*r2*sin(theta_1)*sin(theta_2)/sqrt(deno);
+	double cosb = cos(theta_1)*cos(theta_2) + sin(theta_1)*sin(theta_2) * cos(phi_1-phi_2);
+	double deno = fabs(r1*r1 + r2*r2 - 2*r1*r2*cosb);
+	double f = r1*r1*r2*r2*sin(theta_1)*sin(theta_2)/sqrt(deno);
+
     if (deno > tol){
 		return f;
 	} else {
