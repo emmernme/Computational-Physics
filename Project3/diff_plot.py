@@ -5,8 +5,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-#N = [5, 7, 10, 12, 15, 17, 20, 22, 25, 27, 30, 32, 35]
-
 N = np.linspace(5, 35, 13)
 
 
