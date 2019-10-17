@@ -72,9 +72,9 @@ Gauss-Legendre is a brute-force method and to obtain the value of the integral u
 
 While the Legendre polynomials are defined for $x \in [-1, 1]$ the Laguarre polynomials are defined for $x \in [0, \infty)$. We rewrite the integral and change to spherical coordinates.
 
-\begin{flalign*}
+\begin{falign*}
   d\textbf{r}_1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\theta_2)d\phi_1d\phi_2
-\end{flalign*}
+\end{falign*}
 
 So the integral becomes:\\
 
@@ -97,13 +97,7 @@ with
 We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and $r \in [0, \infty)$. To calculate the mesh points and weight for the angles we use the same function as for the Gauss-Legendre quadrature. To calculate the mesh points and weights corresponding to $r_1$ and $r_2$ we use Morten's function \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/gauss-laguerre.cpp}{gauss$\_$laguerre.cpp}.
 
 \subsection*{Monte Carlo integration}
-We'll firstly perform a brute force Monte Carlo integration of our system. We use the same function as in a) and b), but in the Monte Carlo method, we "guess" at the values for r1 and r2 using a simple uniform distribution function. 
-To approximate the infinite limits of our integral, we again choose the limits to be $$[-3, 3]$$ because we know our function flattens out when the variables approach these limits. This lets us approximate the integral as:
-
-\begin{flalign*}
-  I \approx (3 - (-3))^{6} \frac{1}{N} \sum_{i=1}^{N} f(x_{1,(i)}, y_{1, (i)}, z_{1, (i)}, x_{2,(i)}, y_{2, (i)}, z_{2, (i)})
-\end{flalign*}
-
+Monte Carlo integration allows us to make a good approximation to
 
 \section*{Results}
 
