@@ -1,25 +1,22 @@
 /*
 Solving the integral in project 3 using Monte Carlo (MC) random method
+See https://github.com/krikarls/FYS4150/blob/master/Project3/Programs/monte_carlo_parallell.cpp
+Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3
 */
 #include <cmath>
 #include <iostream>
 #include <fstream>
 #include <iomanip>
 #include <random>
-//#include "matplotlibcpp.h"
-//namespace plt = matplotlibcpp;
-
 
 // Constants
 #define _USE_MATH_DEFINES // Pi
 double alpha = 2.0;
 double exact = 5*M_PI*M_PI / (16*16);
-// Approximate ∞ (lambda)
-double lim = 0.345; // 0.445
-// Number of MC samples
-int N = 1e7;
+// Number of points
+int N = 1e8; 
 // Tolerance to avoid r1-r2=0 (division by zero)
-double tol = 1e-9;
+double tol = 1e-8;
 
 using namespace std;
 
@@ -27,27 +24,22 @@ void MonteCarlo(double lim);
 double integration_func(double r1[], double r2[]);
 
 int main(){
-	/*MonteCarlo(lim);
-	MonteCarlo(1);
-	MonteCarlo(2);
-	MonteCarlo(3);*/
 	MonteCarlo(3);
 	return 1;
-}
-// Calculate length of r-vector
-double abs_r(double r[]){
-	return sqrt(r[0]*r[0] + r[1]*r[1] + r[2]*r[2]);
 }
 
 void MonteCarlo(double lim){
 	// Random number generator from C++11
 	random_device seeder;
 	mt19937 engine(seeder());
-	uniform_real_distribution<double> dist(0, lim);
+	uniform_real_distribution<double> dist(-lim, lim);
+
+	// Prepare Jacobi-determinant
+	double jacobi = pow(lim + lim, 6);
 
 	// Set up integral vars
-	double MC_integral = 0;
-	double MC_integral_squared = 0;
+	double integral_sum = 0;
+	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
 	for (int i = 0; i < N; i++){
@@ -55,22 +47,27 @@ void MonteCarlo(double lim){
 		double r1[] = {dist(engine), dist(engine), dist(engine)};
 		double r2[] = {dist(engine), dist(engine), dist(engine)};
 
-		// Calculate the function value
+		// Calculate the function value for the given points
 		double f = integration_func(r1, r2);
 
 		// Add to the integral sum
-		MC_integral += f;
-		MC_integral_squared += f*f;
+		integral_sum += f;
+		sigma_sum += f*f;
 	}
 
 	// Calculate the final integral by dividing by the number of MC samples
-	MC_integral = MC_integral / ((double) N);
-	MC_integral_squared = MC_integral_squared / ((double) N);
+	double integral = jacobi * integral_sum / ((double) N);
+	sigma_sum = sigma_sum / ((double) N);
 
 	// Calculate variance
-	double variance = MC_integral_squared - MC_integral*MC_integral;
+	double variance = sigma_sum - pow(integral_sum / ((double) N), 2);
+	double standard_deviation = jacobi * sqrt(variance / ((double) N));
 
-	cout << "Lim: " << lim << ", Variance: " << variance << ", integral: " << MC_integral << ", exact: " << exact << endl;
+	cout << "Lim: " << lim << ", N: " << N << endl;
+	cout << "Variance: " << variance << endl;
+	cout << "Integral: " << integral << endl;
+	cout << "Exact: " << exact << endl;
+	cout << "Standard deviation: " << standard_deviation << endl;
 }
 
 // Calculate distance between r-vectors
@@ -78,13 +75,16 @@ double dist_r(double r1[], double r2[]){
 	return sqrt( pow(r1[0]-r2[0], 2) + pow(r1[1]-r2[1], 2) + pow(r1[2]-r2[2], 2) );
 }
 
+// Calculate length of r-vector
+double abs_r(double r[]){
+	return sqrt(r[0]*r[0] + r[1]*r[1] + r[2]*r[2]);
+}
+
 // The function to be integrated
 double integration_func(double r1[], double r2[]){
-	double num = exp (-2 * alpha * (sqrt(pow(r1[0], 2) + pow(r1[1], 2) + pow(r1[2], 2) + sqrt(pow(r2[0], 2) + pow(r2[1], 2) + pow(r2[2], 2)))));
-
-	double dist = abs(sqrt(pow(r1[0]-r2[0], 2) + pow(r1[0])) // dist_r(r1, r2);
-	return num / dist;
-
+	double dist = dist_r(r1, r2);
 	if (dist < tol) return 0; 
-	return exp(- (abs_r(r1) )); //+ abs_r(r2))); // / dist;
+	double num = exp(-2*alpha*(abs_r(r1) + abs_r(r2)));
+
+	return num / dist;
 }
