@@ -14,11 +14,7 @@ using namespace std;
 
 int main()
 {
-<<<<<<< HEAD
-  int N = 27; //number of integration points
-=======
-  int N = 32; //number of integration points
->>>>>>> 161819073cbae121f2a935ec2fb3b89175e77f10
+  int N = 10; //number of integration points
   double a = -3;
   double b = 3; //intergration limits
 
