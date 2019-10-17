@@ -26,9 +26,10 @@ void MonteCarlo(double lim);
 void MonteCarloImproved(double lim);
 double integration_func(double r1[], double r2[]);
 double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2);
+clock_t start, finish;
 
 int main(){
-	//MonteCarlo(3);
+	MonteCarlo(3);
 	MonteCarloImproved(3);
 	return 1;
 }
@@ -47,6 +48,7 @@ void MonteCarlo(double lim){
 	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
+	start = clock();
 	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
@@ -60,6 +62,8 @@ void MonteCarlo(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
+	finish = clock();
+	double t1 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Calculate the final integral by dividing by the number of MC samples
 	double integral = jacobi * integral_sum / ((double) N);
@@ -69,7 +73,7 @@ void MonteCarlo(double lim){
 	double variance = sigma_sum - pow(integral_sum / ((double) N), 2);
 	double standard_deviation = jacobi * sqrt(variance / ((double) N));
 
-	cout << "Lim: " << lim << ", N: " << N << endl;
+	cout << "Lim: " << lim << ", N: " << N << ", Time: " << t1 << endl;
 	cout << "Variance: " << variance << endl;
 	cout << "Integral: " << integral << endl;
 	cout << "Exact: " << exact << endl;
@@ -91,6 +95,7 @@ void MonteCarloImproved(double lim){
 	int i;
 
 	// Loop through the desired number of MC samples
+	start = clock();
 	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
@@ -104,6 +109,8 @@ void MonteCarloImproved(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
+	finish = clock();
+	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Calculate the final integral by dividing by the number of MC samples
 	double integral = jacobi * integral_sum / ((double) N);
@@ -113,7 +120,7 @@ void MonteCarloImproved(double lim){
 	double variance = sigma_sum - pow(integral_sum / ((double) N), 2);
 	double standard_deviation = jacobi * sqrt(variance / ((double) N));
 
-	cout << "Lim: " << lim << ", N: " << N << endl;
+	cout << "Lim: " << lim << ", N: " << N << ", Time: " << t2 << endl;
 	cout << "Variance: " << variance << endl;
 	cout << "Integral: " << integral << endl;
 	cout << "Exact: " << exact << endl;
