@@ -66,7 +66,33 @@ To compute the integral numerically we approximate the integral:
 
 Unlike other more basic methods for numerical integrations where the mesh points $x_i$ are equidistantly spaced, the mesh points in the gaussian quadrature are not equidistantly spaced. In the sum above $w_i$ correpsonds to the weights. Gaussian quadrature uses som orthonogonal polynomials, Legendre and Laguerre, to obtain the mesh points and weights.\\
 
-To obtain the value of the integral by using Gauss-Legendre quadrature, we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}.
+To obtain the value of the integral by using Gauss-Legendre quadrature, we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}.\\
+
+While the Legendre polynomials are defined for $x \in [-1, 1]$ the Laguarre polynomials are defined for $x \in [0, \infty)$. We rewrite the integral and change to spherical coordinates.
+
+\begin{falign*}
+  d\textbf{r}_1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\theta_2)d\phi_1d\phi_2
+\end{falign*}
+
+So the integral becomes:\\
+
+\begin{flalign*}
+  I = \int_0^\infty r_1^2dr_1 \int_0^\infty r_2^2dr_2 \int_0^\pi dcos(\theta_1) \int_0^\pi dcos(\theta_2) \int_0^{2\pi} d\phi_1 \int_0^{2\pi} d\phi_2 \frac{e^{-2\alpha(r_1+r_2)}}{r_{12}}
+\end{flalign*}
+
+where
+
+\begin{flalign*}
+  \frac{1}{r_{12}} = \frac{}{\sqrt{r_1^2 + r_2^2 - 2r_1r_2cos(\beta)}}
+\end{flalign*}
+
+with
+
+\begin{flalign*}
+  cos(\beta) = cos(\theta_1)cos(\theta_2) + sin(\theta_1)sin(\theta_2)cos(\phi_1 - \phi_2)
+\end{flalign*}
+
+We can then extract the weight function from the integral so 
 
 
 

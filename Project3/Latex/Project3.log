@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  15 OCT 2019 14:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2018.10.29)  17 OCT 2019 10:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -347,110 +347,171 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--68
 
  []
 
-./Project3.tex:86: Missing $ inserted.
+
+Underfull \hbox (badness 10000) in paragraph at lines 69--70
+
+ []
+
+
+./Project3.tex:73: LaTeX Error: Environment falign* undefined.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.73 \begin{falign*}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./Project3.tex:74: Missing $ inserted.
 <inserted text> 
                 $
-l.86 N=15, $\lambda = 2$ gauss_
-                               legendre= 0.19947
+l.74   d\textbf{r}_
+                   1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\th...
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:87: Missing $ inserted.
+
+./Project3.tex:75: LaTeX Error: \begin{document} ended by \end{falign*}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.75 \end{falign*}
+                  
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+./Project3.tex:75: Missing $ inserted.
 <inserted text> 
                 $
-l.87 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+l.75 \end{falign*}
+                  
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
 
-./Project3.tex:88: Missing $ inserted.
-<inserted text> 
-                $
-l.88 N=31, $\lambda = 3.5$ gauss_
-                                 legendre = 0.19397
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:89: Missing $ inserted.
-<inserted text> 
-                $
-l.89 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Underfull \hbox (badness 10000) in paragraph at lines 77--78
 
-./Project3.tex:90: Missing $ inserted.
-<inserted text> 
-                $
-l.90 N=35, $\lambda = 3.5$ gauss_
-                                 legendre = 0.1914
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+ []
 
-./Project3.tex:91: Missing $ inserted.
-<inserted text> 
-                $
-l.91 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
 
-./Project3.tex:92: Missing $ inserted.
-<inserted text> 
-                $
-l.92 N=27, $\lambda = 2.91$ gauss_
-                                  legendre = 0.192801
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
+Overfull \hbox (24.39104pt too wide) detected at line 81
+[]
+ []
 
-./Project3.tex:93: Missing $ inserted.
-<inserted text> 
-                $
-l.93 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./Project3.tex:94: Missing $ inserted.
-<inserted text> 
-                $
-l.94 N=27 $\lambda = 2.90$ gauss_
-                                 legendre = 0.192725
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-./Project3.tex:95: Missing $ inserted.
-<inserted text> 
-                $
-l.95 
-     
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 105.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 105.
+./Project3.tex:112: Missing $ inserted.
+<inserted text> 
+                $
+l.112 N=15, $\lambda = 2$ gauss_
+                                legendre= 0.19947
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:113: Missing $ inserted.
+<inserted text> 
+                $
+l.113 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:114: Missing $ inserted.
+<inserted text> 
+                $
+l.114 N=31, $\lambda = 3.5$ gauss_
+                                  legendre = 0.19397
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:115: Missing $ inserted.
+<inserted text> 
+                $
+l.115 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:116: Missing $ inserted.
+<inserted text> 
+                $
+l.116 N=35, $\lambda = 3.5$ gauss_
+                                  legendre = 0.1914
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:117: Missing $ inserted.
+<inserted text> 
+                $
+l.117 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:118: Missing $ inserted.
+<inserted text> 
+                $
+l.118 N=27, $\lambda = 2.91$ gauss_
+                                   legendre = 0.192801
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:119: Missing $ inserted.
+<inserted text> 
+                $
+l.119 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:120: Missing $ inserted.
+<inserted text> 
+                $
+l.120 N=27 $\lambda = 2.90$ gauss_
+                                  legendre = 0.192725
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+./Project3.tex:121: Missing $ inserted.
+<inserted text> 
+                $
+l.121 
+      
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 131.
+[3]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 131.
  (./Project3.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 105.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 105.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 131.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 131.
 Package rerunfilecheck Info: File `Project3.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 131.
  ) 
 Here is how much of TeX's memory you used:
- 8552 strings out of 492649
- 126365 string characters out of 6129621
+ 8554 strings out of 492649
+ 126381 string characters out of 6129621
  319556 words of memory out of 5000000
- 12343 multiletter control sequences out of 15000+600000
+ 12344 multiletter control sequences out of 15000+600000
  12122 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,12n,38p,561b,332s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy
 7.pfb>
-Output written on Project3.pdf (2 pages, 133787 bytes).
+Output written on Project3.pdf (3 pages, 137122 bytes).
 PDF statistics:
- 81 PDF objects out of 1000 (max. 8388607)
- 63 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
+ 86 PDF objects out of 1000 (max. 8388607)
+ 67 compressed objects within 1 object stream
+ 13 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

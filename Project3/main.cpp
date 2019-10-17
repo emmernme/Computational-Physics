@@ -11,18 +11,11 @@
 
 using namespace std;
 
-double int_function(double x1, double x2, double y1, double y2, double z1, double z2);
-double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2);
-void gauss_legendre(double a, double b, double x[], double w[], int N);
-void gauss_laguerre(double *x, double *w, int N, double alf);
 
 int main()
 {
-<<<<<<< HEAD
-  int N = 15; //number of integration points
-=======
-  int N = 31; //number of integration points
->>>>>>> 81d58da9c462ae8a0ab74687360eec84c9c08b2c
+  int N = 17; //number of integration points
+
   double a = -2.89;
   double b = 2.89; //intergration limits
 
@@ -42,13 +35,12 @@ int main()
   double *w_p = new double [N]; //corresponding weights
 
   // gauss_laguerre; set up the mesh points and weights and the power of x^alf
-  double alf = 2.0;
+  double alf = 0;
   gauss_laguerre(r, w_r, N, alf);
 
   // Gauss Legendre; set up the mesh points and weights
   gauss_legendre(a, b, x, w, N);
 
-  cout << *w_t << endl;
 
   gauss_legendre(0, pi, theta, w_t, N);
   gauss_legendre(0, 2*pi, phi, w_p, N);
@@ -72,13 +64,11 @@ int main()
   // we initialize the sum
   double int_gausslag = 0.;
   for (int i=1; i < N; i++){
-        cout << r[i] << endl;
         for (int j = 1; j<N; j++){
         for (int k = 0; k<N; k++){
         for (int l = 0; l<N; l++){
         for (int m = 0; m<N; m++){
         for (int n = 0; n<N; n++){
-
     int_gausslag += w_r[i]*w_r[j]*w_t[k]*w_t[l]*w_p[m]*w_p[n]*int_function_polar(r[i], r[j], theta[k], theta[l], phi[m], phi[n]);
     }}}}}
 }

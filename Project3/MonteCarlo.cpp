@@ -48,7 +48,7 @@ void MonteCarlo(double lim){
 	// Set up integral vars
 	double MC_integral = 0;
 	double MC_integral_squared = 0;
-	
+
 	// Loop through the desired number of MC samples
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
