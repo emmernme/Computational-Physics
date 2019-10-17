@@ -14,16 +14,10 @@ using namespace std;
 
 int main()
 {
-<<<<<<< HEAD
   int N = 17; //number of integration points
 
   double a = -2.89;
   double b = 2.89; //intergration limits
-=======
-  int N = 15; //number of integration points
-  double a = -5;
-  double b = 5; //intergration limits
->>>>>>> 7323d89c869820559cf1a9d9b544f4bfd17ca7c8
 
   int alpha = 2;
   double      const  pi = 3.14159265359;
