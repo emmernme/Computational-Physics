@@ -64,7 +64,7 @@ To compute the integral numerically we approximate the integral:
   I = \int_{a}^{b} f(x) dx = \int_{a}^{b} W(x)g(x) dx \approx \sum_{i=1}^{N} \omega_i f(x_i)
 \end{flalign*}
 
-Unlike other more basic methods for numerical integrations where the mesh points $x_i$ are equidistantly spaced, the mesh points in the gaussian quadrature are not equidistantly spaced. In the sum above $w_i$ correpsonds to the weights. Gaussian quadrature uses som orthonogonal polynomials, Legendre and Laguerre, to obtain the mesh points and weights.\\
+Unlike other more basic methods for numerical integrations where the mesh points $x_i$ are equidistantly spaced, the mesh points in the gaussian quadrature are not equidistantly spaced. In the sum above $w_i$ correpsonds to the weights. Gaussian quadrature uses some orthonogonal Legendre- and Laguerre-polynomials, to obtain the mesh points and weights.\\
 
 To obtain the value of the integral by using Gauss-Legendre quadrature, we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}.\\
 
@@ -92,15 +92,42 @@ with
   cos(\beta) = cos(\theta_1)cos(\theta_2) + sin(\theta_1)sin(\theta_2)cos(\phi_1 - \phi_2)
 \end{flalign*}
 
-We can then extract the weight function from the integral so 
-
-
-
+We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and $r \in [0, \infty)$. To calculate the mesh points and weight for the angles we use the same function as for the Gauss-Legendre quadrature. To calculate the mesh points and weights corresponding to $r_1$ and $r_2$ we use Morten's function \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/gauss-laguerre.cpp}{gauss_laguerre.cpp}.
 
 \subsection*{Monte Carlo integration}
+Monte Carlo integration allows us to make a good approximation to
 
 \section*{Results}
 
+Table
+
+\begin{table}[h!]
+  \caption{: Integration using Gauss-Laguerre, variying N}
+  \begin{tabular}{c c c}
+    N & Laguerre & Diff. from exact \\
+    \hline
+    10 & 0.177081 & 0.0156840 \\
+    15 & 0.193285 & 0.000520  \\
+    20 & 0.194786 & 0.002021  \\
+    25 & 0.194804 & 0.002039  \\
+    30 &  &  \\
+  \end{tabular}
+  \label{Tab:Laguerre}
+\end{table}
+
+\begin{table}[h!]
+  \label{Legendre}
+  \caption{: Integration using Gauss-Legendre, variying N}
+  \begin{tabular}{c c c}
+    N & Legendre & Diff. from exact \\
+    \hline
+    10 & 0.071980 & 0.120785 \\
+    15 & 0.239088 & 0.046323 \\
+    20 & 0.156139 & 0.036626 \\
+    25 & 0.196817 & 0.003052 \\
+    27 & &  \\
+  \end{tabular}
+\end{table}
 
 \section*{Discussion}
 
@@ -109,19 +136,12 @@ We can then extract the weight function from the integral so
 
 3a)
 
-N=15, $\lambda = 2$ gauss_legendre= 0.19947
-
-N=31, $\lambda = 3.5$ gauss_legendre = 0.19397
-
-N=35, $\lambda = 3.5$ gauss_legendre = 0.1914
-
-N=27, $\lambda = 2.91$ gauss_legendre = 0.192801
-
-N=27 $\lambda = 2.90$ gauss_legendre = 0.192725
 
 ---> dritbra
 
 minker lambda så blir tilnermingen bedre
+
+
 
 
 \section*{Appendix}
