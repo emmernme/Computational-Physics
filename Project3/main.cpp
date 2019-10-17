@@ -14,8 +14,8 @@ using namespace std;
 
 int main()
 {
-  int N = 10; //number of integration points
-  double a = 3;
+  int N = 15; //number of integration points
+  double a = -3;
   double b = 3; //intergration limits
 
   clock_t start, finish;

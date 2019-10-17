@@ -137,8 +137,7 @@ double integration_func(double r1[], double r2[]){
 
 	return num / dist;
 }
-<<<<<<< HEAD
-=======
+
 
 // Polar integration function
 double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){
@@ -151,4 +150,3 @@ double int_function_polar(double r1, double r2, double theta_1, double theta_2, 
 		return 0;
 	}
 }
->>>>>>> fe37bf31662fe2a8f28eb66659b3c16019827516
