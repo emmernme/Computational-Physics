@@ -82,7 +82,7 @@ void MonteCarloImproved(double lim){
 	uniform_real_distribution<double> phi_dist(0, 2*M_PI);
 	uniform_real_distribution<double> theta_dist(0, M_PI);
 	exponential_distribution<double> r_dist(4);
-
+ 
 	// Prepare Jacobi-determinant
 	double jacobi = 2*M_PI*2*M_PI * M_PI*M_PI / 16;
 	// Set up integral vars
