@@ -1,5 +1,5 @@
 # Fdb version 3
-["pdflatex"] 1571143832 "Project3.tex" "Project3.pdf" "Project3" 1571222560
+["pdflatex"] 1571301083 "Project3.tex" "Project3.pdf" "Project3" 1571301085
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -84,13 +84,13 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1540818003 4220281 e3bcf09e03893b8a619ec9f7e4caf8ca ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
-  "Project3.aux" 1571143834 662 b2b94621371df8d9296b8bf5bec1b851 ""
-  "Project3.out" 1571143833 0 d41d8cd98f00b204e9800998ecf8427e ""
-  "Project3.tex" 1571222560 3945 52e72c8f2a63b05bb659c9788fdc980f ""
+  "Project3.aux" 1571301085 662 b2b94621371df8d9296b8bf5bec1b851 ""
+  "Project3.out" 1571301084 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Project3.tex" 1571301083 4809 9540283a8d4fb8c1d8b1fcb423ac244d ""
   (generated)
-  "Project3.out"
-  "Project3.log"
   "/Users/emil/Compfys/Project3/Latex/Project3.pdf"
-  "Project3.aux"
+  "Project3.log"
   "/Users/emil/Compfys/Project3/Latex/Project3.log"
+  "Project3.out"
   "Project3.pdf"
+  "Project3.aux"

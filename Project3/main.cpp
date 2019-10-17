@@ -18,10 +18,10 @@ void gauss_laguerre(double *x, double *w, int N, double alf);
 
 int main()
 {
-  int N = 15; //number of integration points
+  int N = 17; //number of integration points
 
-  double a = -5;
-  double b = 5; //intergration limits
+  double a = -2.89;
+  double b = 2.89; //intergration limits
 
   int alpha = 2;
   double      const  pi = 3.14159265359;
