@@ -92,15 +92,12 @@ with
   cos(\beta) = cos(\theta_1)cos(\theta_2) + sin(\theta_1)sin(\theta_2)cos(\phi_1 - \phi_2)
 \end{flalign*}
 
-We can then extract the weight function from the integral so 
-
-
-
+We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and $r \in [0, \infty)$. To calculate the mesh points and weight for the angles we use the same function as for the Gauss-Legendre quadrature. To calculate the mesh points and weights corresponding to r we use Morten's function \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/gauss-laguerre.cpp}{gauss_laguerre.cpp}.
 
 \subsection*{Monte Carlo integration}
+Monte Carlo integration allows us to make a good approximation to
 
 \section*{Results}
-
 
 \section*{Discussion}
 
@@ -122,6 +119,33 @@ N=27 $\lambda = 2.90$ gauss_legendre = 0.192725
 ---> dritbra
 
 minker lambda så blir tilnermingen bedre
+
+\begin{table}[h!]
+  \caption{: Integration variying N Laguarre}
+  \begin{tabular}{c c c}
+    N & Laguerre & diff \\
+    \hline
+    10 & 0.177081 & 0.0156840 \\
+    15 & 0.193285 & 0.000520  \\
+    20 & 0.194786 & 0.002021  \\
+    25 & 0.194804 & 0.002039  \\
+    30 &  &  \\
+  \end{tabular}
+\end{table}
+
+
+\begin{table}[h!]
+  \caption{: Integration variying N Legendre}
+  \begin{tabular}{c c c}
+    N & Laguerre & diff \\
+    \hline
+    10 & 0.071980 & 0.120785 \\
+    15 & 0.239088 & 0.046323 \\
+    20 & 0.156139 & 0.036626 \\
+    25 & 0.196817 & 0.003052 \\
+    27 & &  \\
+  \end{tabular}
+\end{table}
 
 
 \section*{Appendix}
