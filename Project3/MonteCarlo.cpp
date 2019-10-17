@@ -1,6 +1,7 @@
 /*
 Solving the integral in project 3 using Monte Carlo (MC) random method
-Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
+Compile using:
+g++-9 -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 */
 #include <cmath>
 #include <iostream>
