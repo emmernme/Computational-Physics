@@ -1,9 +1,12 @@
+"""
+Program to make plot for the report
+"""
 
 import matplotlib.pyplot as plt
 import numpy as np
 from math import sqrt, exp
 
-
+#Initializing constants and linspace for distance between the electrons
 n = 100
 alpha = 2
 
@@ -11,6 +14,7 @@ alpha = 2
 r1 = np.linspace(0,3,n)
 r2 = np.linspace(-3,0,n)
 
+#Finds positive
 def wave_p(r):
     return exp(-2*alpha*(r))
 
