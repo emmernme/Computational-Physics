@@ -7,7 +7,6 @@ Compile using: g++ -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3
 #include <fstream>
 #include <iomanip>
 #include <random>
-#include "int_function_polar.cpp"
 
 // Constants
 #define _USE_MATH_DEFINES // Pi
@@ -16,16 +15,17 @@ double exact = 5*M_PI*M_PI / (16*16);
 // Number of points
 int N = 1e7; 
 // Tolerance to avoid r1-r2=0 (division by zero)
-double tol = 1e-8;
+double tol = 1e-10;
 
 using namespace std;
 
 void MonteCarlo(double lim);
 void MonteCarloImproved(double lim);
 double integration_func(double r1[], double r2[]);
+double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2);
 
 int main(){
-	MonteCarlo(3);
+	//MonteCarlo(3);
 	MonteCarloImproved(3);
 	return 1;
 }
@@ -37,7 +37,7 @@ void MonteCarlo(double lim){
 	uniform_real_distribution<double> dist(-lim, lim);
 
 	// Prepare Jacobi-determinant
-	double jacobi = pow(lim + lim, 6);
+	double jacobi = pow(2 * lim, 6);
 
 	// Set up integral vars
 	double integral_sum = 0;
@@ -80,7 +80,7 @@ void MonteCarloImproved(double lim){
 	exponential_distribution<double> r_dist(lim);
 
 	// Prepare Jacobi-determinant
-	double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
+	double jacobi = lim*lim * 2*M_PI*2*M_PI * M_PI*M_PI;
 
 	// Set up integral vars
 	double integral_sum = 0;
@@ -132,4 +132,16 @@ double integration_func(double r1[], double r2[]){
 	double num = exp(-2*alpha*(abs_r(r1) + abs_r(r2)));
 
 	return num / dist;
+}
+
+// Polar integration function
+double int_function_polar(double r1, double r2, double theta_1, double theta_2, double phi_1, double phi_2){
+	double cosb = cos(theta_1)*cos(theta_2) + sin(theta_1)*sin(theta_2)*cos(phi_1-phi_2);
+	double deno = fabs(r1*r1+r2*r2-2*r1*r2*cosb);
+	double f = exp(-2*alpha*(r1+r2))*r1*r1*r2*r2*sin(theta_1)*sin(theta_2)/sqrt(deno);
+    if (deno > tol){
+		return f;
+	} else {
+		return 0;
+	}
 }
