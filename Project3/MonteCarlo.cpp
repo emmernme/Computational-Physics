@@ -48,7 +48,7 @@ void MonteCarlo(double lim){
 	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
-	start = clock();
+	start = omp_get_wtime();
 	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
@@ -62,7 +62,7 @@ void MonteCarlo(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = clock();
+	finish = omp_get_wtime();
 	double t1 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Calculate the final integral by dividing by the number of MC samples
@@ -95,7 +95,7 @@ void MonteCarloImproved(double lim){
 	int i;
 
 	// Loop through the desired number of MC samples
-	start = clock();
+	start = omp_get_wtime();
 	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
@@ -109,7 +109,7 @@ void MonteCarloImproved(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = clock();
+	finish = omp_get_wtime();
 	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Calculate the final integral by dividing by the number of MC samples
@@ -120,6 +120,7 @@ void MonteCarloImproved(double lim){
 	double variance = sigma_sum - pow(integral_sum / ((double) N), 2);
 	double standard_deviation = jacobi * sqrt(variance / ((double) N));
 
+	cout << endl;
 	cout << "Lim: " << lim << ", N: " << N << ", Time: " << t2 << endl;
 	cout << "Variance: " << variance << endl;
 	cout << "Integral: " << integral << endl;
