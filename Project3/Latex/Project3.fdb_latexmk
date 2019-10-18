@@ -1,8 +1,8 @@
 # Fdb version 3
-["pdflatex"] 1571324955 "/Users/emil/Compfys/Project3/Latex/Project3.tex" "/Users/emil/Compfys/Project3/Latex/Project3.pdf" "Project3" 1571324956
-  "/Users/emil/Compfys/Project3/Latex/Project3.aux" 1571324955 2444 9c7ffb137588989e91a51efe7ea945fd ""
-  "/Users/emil/Compfys/Project3/Latex/Project3.tex" 1571324954 9385 f42c92cfe98c55f580a0a0a5fbbaba15 ""
-  "/dev/null" 1571324956 0 d41d8cd98f00b204e9800998ecf8427e ""
+["pdflatex"] 1571326412 "/Users/emil/Compfys/Project3/Latex/Project3.tex" "/Users/emil/Compfys/Project3/Latex/Project3.pdf" "Project3" 1571326413
+  "/Users/emil/Compfys/Project3/Latex/Project3.aux" 1571326412 2444 dc6e9a1ceeccb877302602435e3845ca ""
+  "/Users/emil/Compfys/Project3/Latex/Project3.tex" 1571326410 10412 87ad97911d84277968b8c0329f07a268 ""
+  "/dev/null" 1571326413 0 d41d8cd98f00b204e9800998ecf8427e ""
   "/usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "/usr/local/texlive/2019basic/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm" 1246382020 996 a18840b13b499c08ac2de96a99eda4bc ""
@@ -101,14 +101,14 @@
   "/usr/local/texlive/2019basic/texmf.cnf" 1554925189 628 6cfff46d1fd9ae1d47a88551035aa162 ""
   "Leg_lag_diff.png" 1571318261 27053 b13450dd0d47bcf642c83161b7ce7101 ""
   "Leg_lag_int.png" 1571318261 27959 0f8b0b508ac668863ac88f1d501e655b ""
-  "Project3.aux" 1571324955 2444 9c7ffb137588989e91a51efe7ea945fd "pdflatex"
-  "Project3.out" 1571324955 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "Project3.tex" 1571324954 9385 f42c92cfe98c55f580a0a0a5fbbaba15 ""
+  "Project3.aux" 1571326412 2444 dc6e9a1ceeccb877302602435e3845ca "pdflatex"
+  "Project3.out" 1571326412 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "Project3.tex" 1571326410 10412 87ad97911d84277968b8c0329f07a268 ""
   "Wave_func.png" 1571304010 16110 d2d60ab5704a3156ac464539ba8ad433 ""
   (generated)
-  "Project3.pdf"
   "/Users/emil/Compfys/Project3/Latex/Project3.pdf"
   "Project3.out"
   "Project3.log"
+  "Project3.pdf"
   "Project3.aux"
   "/Users/emil/Compfys/Project3/Latex/Project3.log"

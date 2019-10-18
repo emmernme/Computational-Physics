@@ -98,12 +98,26 @@ We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and 
 
 \subsection*{Monte Carlo integration}
 We'll firstly perform a brute force Monte Carlo integration of our system. We use the same function as in a) and b), but in the Monte Carlo method, we "guess" at the values for r1 and r2 using a simple uniform distribution function. 
-To approximate the infinite limits of our integral, we again choose the limits to be $$[-3, 3]$$ because we know our function flattens out when the variables approach these limits. This lets us approximate the integral as:
+To approximate the infinite limits of our integral, we again choose the limits to be $[-3, 3]$ because we know our function flattens out when the variables approach these limits. This lets us approximate the integral as:
 
 \begin{flalign*}
   I \approx (3 - (-3))^{6} \frac{1}{N} \sum_{i=1}^{N} f(x_{1,(i)}, y_{1, (i)}, z_{1, (i)}, x_{2,(i)}, y_{2, (i)}, z_{2, (i)})
 \end{flalign*}
 
+For the next part of the Monte Carlo strategy, we will try to adapt our method to the actual integrand and integration variables. Looking at our function, we can transform our integral into polar coordinates, as in b), and using an exponential distribution of the form $p(x)=\frac{1}{\lambda} e^{-x/\lambda}$. This results in the following new function to be integrated:
+
+\begin{flalign*}
+  f(r_1, r_2, \phi_1, \phi_2, \theta_1, \theta_2) = \frac{r_1^2 r_2^2 \sin{\theta_1}\sin{\theta_2}}{\sqrt{r_1^2 + r_2^2 - 2 r_1 r_2 \cos{b}}} \\
+  b = \cos{\theta_1}  \cos{\theta_2} + \sin{\theta_1} \sin{\theta_2} \cos (\phi_1 -\phi_2)
+\end{flalign*}
+
+The integral can then be approximated like this:
+
+\begin{flalign*}
+  I \approx \frac{(2\pi)^2 \pi^2}{16 N} \sum_{i=1}^{N} f(r_1, r_2, \phi_1, \phi_2, \theta_1, \theta_2)
+\end{flalign*}
+
+In order to be able to get the best possible results with the Monte Carlo method, we want $N$ to be as big as possible. To achieve this, we use various compiler flags, and parallelisation, with OpenMP.
 
 \section*{Results}
 
