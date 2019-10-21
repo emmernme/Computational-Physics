@@ -23,7 +23,7 @@
 \section*{Abstract}
 	We have computed the integral for the expectation value of the correlation energy between to electrons in a helium atom by using Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. We experienced that the brute force methods gave a less satisfactory resulst compared to the methods that required some more thinking and adaptation of the integrand and the approximated limits. The exact, analytical value of the integral should be $0.192765$. The best value we got from Gauss-Legendre was $0.192651$, while the best value from Gauss-Laguerre was $0.194779$. We also experienced that Gauss-Laguerre gave better results when we increased the number of integration points, while this was not the case for Gauss-Legendre.
 	The Monte Carlo brute force method improved the precision when increasing the number of integration points, and the improved Monte Carlo method followed the same general trend, but with some outliers.
-	The fastest, most precise method was the [...]
+	The fastest, most precise method was the improved Monte Carlo method, and overall, the brute force methods were slower and more imprecise.
 
 \section*{Introduction}
 	In this report we will give a brief rundown on different numerical integration methods. The methods we will go through are Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. We will also try to improve the different methods and find the strengths and weaknesses of the methods compared to each other.\\
@@ -218,7 +218,7 @@
 
 	Overall, comparing the results of the Gaussian quadrature using Laguerre-polynomials to the improved Monte Carlo method, we see that both give reasonably precise results, but the Gaussian method doesn't continue to improve by increasing the number of mesh points, while the improved Monte Carlo method seems to improve with an increasing number of integration points.
 
-	Time-wise, it would seem like the [] method is more efficient than the other methods, giving better precision faster. It is also easy to parallelize, improving both precision and speed.
+	Time-wise, the Monte Carlo method is more efficient than the other methods, giving better precision faster, and the improved method even more so. It is also easy to parallelize, improving both precision and speed.
 
 \section*{Bibliography}
 	\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project3}{Link to our GitHub repository.}
