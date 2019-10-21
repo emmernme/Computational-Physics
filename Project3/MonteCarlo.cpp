@@ -8,7 +8,7 @@ g++-9 -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 #include <fstream>
 #include <iomanip>
 #include <random>
-// Requirements: OpenMP (brew install clang-omp)
+// Requirements: OpenMP (brew install libomp clang-omp)
 #include <omp.h>
 
 // Constants
@@ -16,9 +16,11 @@ g++-9 -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 double alpha = 2.0;
 double exact = 5*M_PI*M_PI / (16*16);
 // Number of points
-int N = 1e8;
+int N = 1e5;
 // Tolerance to avoid r1-r2=0 (division by zero)
 double tol = 1e-10;
+
+bool use_OMP = false;
 
 using namespace std;
 
@@ -48,8 +50,8 @@ void MonteCarlo(double lim){
 	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
-	start = omp_get_wtime();
-	//#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
+	double start = omp_get_wtime();
+	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
 		double r1[] = {dist(engine), dist(engine), dist(engine)};
@@ -62,8 +64,9 @@ void MonteCarlo(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = omp_get_wtime();
-	double t1 = (double (finish - start))/CLOCKS_PER_SEC;
+	double finish = omp_get_wtime();
+	double t1 = finish - start;
+
 
 	// Calculate the final integral by dividing by the number of MC samples
 	double integral = jacobi * integral_sum / ((double) N);
@@ -96,8 +99,8 @@ void MonteCarloImproved(double lim){
 	int i;
 
 	// Loop through the desired number of MC samples
-	start = omp_get_wtime();
-	//pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
+	double start = omp_get_wtime();
+	//#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
 		double coord1[] = {phi_dist(engine), theta_dist(engine), r_dist(engine)};
@@ -110,9 +113,9 @@ void MonteCarloImproved(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = omp_get_wtime();
-	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 
+	double finish = omp_get_wtime();
+	double t2 = finish-start;
 	// Calculate the final integral by dividing by the number of MC samples
 	double integral = jacobi * integral_sum / ((double) N);
 	sigma_sum = sigma_sum / ((double) N);

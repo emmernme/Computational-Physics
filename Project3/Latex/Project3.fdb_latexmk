@@ -1,5 +1,9 @@
 # Fdb version 3
+<<<<<<< HEAD
 ["pdflatex"] 1571664698 "Project3.tex" "Project3.pdf" "Project3" 1571664701
+=======
+["pdflatex"] 1571676933 "Project3.tex" "Project3.pdf" "Project3" 1571676935
+>>>>>>> b37fbe06ce375480c2664b32941fa923290c83b1
   "/usr/local/texlive/2018/texmf-dist/fonts/map/fontname/texfonts.map" 1511824771 3332 103109f5612ad95229751940c61aada0 ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1480098698 1004 54797486969f23fa377b128694d548df ""
   "/usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1480098698 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -90,6 +94,7 @@
   "/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1523934492 2717033 f61a5287d9c22a39a74f1979fe3f905c ""
   "/usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt" 1540818003 4220281 e3bcf09e03893b8a619ec9f7e4caf8ca ""
   "/usr/local/texlive/2018/texmf.cnf" 1523934483 577 0b39adfd7c93507ff20c9c14c2f1a33f ""
+<<<<<<< HEAD
   "Leg_lag_diff.png" 1571316443 27053 b13450dd0d47bcf642c83161b7ce7101 ""
   "Leg_lag_int.png" 1571316443 27959 0f8b0b508ac668863ac88f1d501e655b ""
   "Project3.aux" 1571664700 2888 8dee1465596c139ef7b95906f47b0584 ""
@@ -103,3 +108,18 @@
   "Project3.aux"
   "Project3.pdf"
   "Project3.log"
+=======
+  "Leg_lag_diff.png" 1571315672 27053 b13450dd0d47bcf642c83161b7ce7101 ""
+  "Leg_lag_int.png" 1571315657 27959 0f8b0b508ac668863ac88f1d501e655b ""
+  "Project3.aux" 1571676934 2886 8075c23396853f8a43210d788c1b6d42 ""
+  "Project3.out" 1571676933 0 d41d8cd98f00b204e9800998ecf8427e ""
+  "Project3.tex" 1571676932 11985 73b736f226356191873d5bdfe14b60cd ""
+  "Wave_func.png" 1571303787 16110 d2d60ab5704a3156ac464539ba8ad433 ""
+  (generated)
+  "Project3.pdf"
+  "Project3.log"
+  "/Users/emil/Compfys/Project3/Latex/Project3.log"
+  "Project3.aux"
+  "Project3.out"
+  "/Users/emil/Compfys/Project3/Latex/Project3.pdf"
+>>>>>>> b37fbe06ce375480c2664b32941fa923290c83b1
