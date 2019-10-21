@@ -185,29 +185,29 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
 
 \begin{table}[h!]
   \caption{: Integration using Monte Carle integration, variying N}
-  \begin{tabular}{c c c}
-    N & Laguerre & Diff. from exact & Time used \\
+  \begin{tabular}{c c c c}
+    N & Laguerre & Diff. from exact & Time used (s) \\
     \hline
-    $10^5$ & 0.244992 & 0.052227 & 0 \\
-    $10^6$ & 0.183088 & 0.009676  & 0\\
-    $10^7$ & 0.193923 & 0.001159  & $1 \cdot 10^{-6}$\\
-    $10^8$ & 0.192657 & 0.000108  & $8 \cdot 10^{-6}$\\
+    $10^5$ & 0.244992 & 0.052227  & 0.00665 \\
+    $10^6$ & 0.183088 & 0.009676  & 0.06485 \\
+    $10^7$ & 0.193923 & 0.001159  & 0.66153 \\
+    $10^8$ & 0.192657 & 0.000108  & 6.49192 \\
   \end{tabular}
-  \label{Tab: Laguerre}
+  \label{Tab: MC}
 \end{table}
 
 
 \begin{table}[h!]
   \caption{: Integration using imporoved Monte Carle integration, variying N}
-  \begin{tabular}{c c c}
-    N & Laguerre & Diff. from exact & Time used (without parallization) & Time used (with parallization) \\
+  \begin{tabular}{c c c c c}
+    N & Laguerre & Diff. from exact & Time used(s) & Time used(s) (parallization) \\
     \hline
-    $10^5$ & 0.192894 & 0.000129  & 0                    & 0   \\
-    $10^6$ & 0.193056 & 0.000291  & 0                   & \\
-    $10^7$ & 0.193333 & 0.000568  & $1 \cdot 10^{-6}$   & \\
-    $10^8$ & 0.193324 & 0.000049  & $9 \cdot 10^{-6}$   & \\
+    $10^5$ & 0.192894 & 0.000129  & 0.0139   & 0.0093 \\
+    $10^6$ & 0.193056 & 0.000291  & 0.1406   & 0.0939 \\
+    $10^7$ & 0.193333 & 0.000568  & 1.3990   & 0.9992 \\
+    $10^8$ & 0.193324 & 0.000049  & 13.993   & 9.9839 \\
   \end{tabular}
-  \label{Tab: Laguerre}
+  \label{Tab: improvedMC}
 \end{table}
 
 

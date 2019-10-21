@@ -16,7 +16,7 @@ g++-9 -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 double alpha = 2.0;
 double exact = 5*M_PI*M_PI / (16*16);
 // Number of points
-int N = 1e8;
+int N = 1e5;
 // Tolerance to avoid r1-r2=0 (division by zero)
 double tol = 1e-10;
 
@@ -100,7 +100,7 @@ void MonteCarloImproved(double lim){
 
 	// Loop through the desired number of MC samples
 	double start = omp_get_wtime();
-	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
+	//#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
 		double coord1[] = {phi_dist(engine), theta_dist(engine), r_dist(engine)};
