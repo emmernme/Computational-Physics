@@ -16,7 +16,7 @@ g++-9 -std=c++11 MonteCarlo.cpp -o MonteCarlo.o -O3 -lpthread -fopenmp
 double alpha = 2.0;
 double exact = 5*M_PI*M_PI / (16*16);
 // Number of points
-int N = 1e7;
+int N = 1e8;
 // Tolerance to avoid r1-r2=0 (division by zero)
 double tol = 1e-10;
 
@@ -49,7 +49,7 @@ void MonteCarlo(double lim){
 
 	// Loop through the desired number of MC samples
 	start = omp_get_wtime();
-	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
+	//#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
 		double r1[] = {dist(engine), dist(engine), dist(engine)};
@@ -88,12 +88,8 @@ void MonteCarloImproved(double lim){
 	exponential_distribution<double> r_dist(4);
 
 	// Prepare Jacobi-determinant
-<<<<<<< HEAD
-
-	double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
-=======
+	//double jacobi = 2*2*(2*M_PI)*(2*M_PI)*lim*lim;
 	double jacobi = 2*M_PI*2*M_PI * M_PI*M_PI / 16;
->>>>>>> c77511096c649d0e812894e58fd019ae7fadc21d
 	// Set up integral vars
 	double integral_sum = 0;
 	double sigma_sum = 0;
@@ -101,7 +97,7 @@ void MonteCarloImproved(double lim){
 
 	// Loop through the desired number of MC samples
 	start = omp_get_wtime();
-	#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
+	//pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
 		double coord1[] = {phi_dist(engine), theta_dist(engine), r_dist(engine)};

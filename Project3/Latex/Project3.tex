@@ -24,7 +24,7 @@
 We have computed the integral for the expectation value of the correlation energy between to electrons in a helium atom by using Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. We experienced that the methods that were brute force gave a less satisfactory resulst compared to the methods that required some more thinking. The exact value of the integral should be 0.192765. The best value we got from Gauss-Legendre was 0.192651, while the best value from Gauss-Laguerre was 0.194779. We also experienced that Gauss-Laguerre gave better results when we increased the number of integration points, while this was not the case for Gauss-Legendre.
 
 \section*{Introduction}
-In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this paragraph you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion.\\
+In this report there were given a brief rundown on different numerical integration methods. The methods that have been used is Gauss-Legendre and Gauss-Laguerre quadrature as well as Monte Carlo integration. There will be adjustments to these to show the different strengths of the methods. Under this section you can find the method on how the program works, results from the program, discussion where we analyze the results and ending with a conclusion.\\
 
 The integral we have worked with is a six-dimensional integral which determines the ground state correlation energy between two electrons in a helium atom.\\
 
@@ -60,7 +60,7 @@ The exact value of this integral is $
 In this problem there have been used c++ as programming language and mainly a variety of functions to solve the integral.
 
 \subsection*{Gaussian Quadrature}
-To compute the integral numerically we do the approximation:
+The first method to be used is Gaussian Quadrature. To compute the integral numerically we do the approximation:
 
 \begin{flalign*}
   I = \int_{a}^{b} f(x) dx = \int_{a}^{b} W(x)g(x) dx \approx \sum_{i=1}^{N} \omega_i f(x_i)
@@ -70,13 +70,13 @@ Unlike other more basic methods for numerical integrations where the mesh points
 
 Gauss-Legendre is a brute-force method and to obtain the value of the integral using this method we have to set up the mesh points and weights that corresponds to some finite integrations limits [a, b]. To set up the mesh points and weights we haved used the function $gauleg$ from Morten's \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/exampleprogram.cpp}{exampleprogram.cpp}. We can replace the intigration limits $-\infty$ and $\infty$ with $-\lambda$ and $+\lambda$.\\
 
-While the Legendre polynomials are defined for $x \in [-1, 1]$ the Laguarre polynomials are defined for $x \in [0, \infty)$. We rewrite the integral and change to spherical coordinates.
+While the Legendre polynomials are defined for $x \in [-1, 1]$ the Laguarre polynomials are defined for $x \in [0, \infty)$. To improve our result, we rewrite the integral by changeing to spherical coordinates.
 
 \begin{falign*}
   d\textbf{r}_1d\textbf{r}_2 = r_1^2dr_1r_2^2dr_2dcos(\theta_1)dcos(\theta_2)d\phi_1d\phi_2
 \end{falign*}
 
-So the integral becomes:\\
+Thus the integral becomes:\\
 
 \begin{flalign*}
   I = \int_0^\infty r_1^2dr_1 \int_0^\infty r_2^2dr_2 \int_0^\pi dcos(\theta_1) \int_0^\pi dcos(\theta_2) \int_0^{2\pi} d\phi_1 \int_0^{2\pi} d\phi_2 \frac{e^{-2\alpha(r_1+r_2)}}{r_{12}}
@@ -97,7 +97,7 @@ with
 We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and $r \in [0, \infty)$. To calculate the mesh points and weight for the angles we use the same function as for the Gauss-Legendre quadrature. To calculate the mesh points and weights corresponding to $r_1$ and $r_2$ we use Morten's function \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/gauss-laguerre.cpp}{gauss$\_$laguerre.cpp}.
 
 \subsection*{Monte Carlo integration}
-We'll firstly perform a brute force Monte Carlo integration of our system. We use the same function as in a) and b), but in the Monte Carlo method, we "guess" at the values for r1 and r2 using a simple uniform distribution function. 
+We'll firstly perform a brute force Monte Carlo integration of our system. We use the same function as in a) and b), but in the Monte Carlo method, we "guess" at the values for r1 and r2 using a simple uniform distribution function.
 To approximate the infinite limits of our integral, we again choose the limits to be $[-3, 3]$ because we know our function flattens out when the variables approach these limits. This lets us approximate the integral as:
 
 \begin{flalign*}
@@ -180,6 +180,34 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
     \label{fig:diff}
 \end{center}
 \end{figure}
+
+
+\begin{table}[h!]
+  \caption{: Integration using Monte Carle integration, variying N}
+  \begin{tabular}{c c c}
+    N & Laguerre & Diff. from exact & Time used \\
+    \hline
+    $10^5$ & 0.244992 & 0.052227 & 0 \\
+    $10^6$ & 0.183088 & 0.009676  & 0\\
+    $10^7$ & 0.193923 & 0.001159  & $1 \cdot 10^{-6}$\\
+    $10^8$ & 0.192657 & 0.000108  & $8 \cdot 10^{-6}$\\
+  \end{tabular}
+  \label{Tab: Laguerre}
+\end{table}
+
+
+\begin{table}[h!]
+  \caption{: Integration using imporoved Monte Carle integration, variying N}
+  \begin{tabular}{c c c}
+    N & Laguerre & Diff. from exact & Time used (without parallization) & Time used (with parallization) \\
+    \hline
+    $10^5$ & 0.192894 & 0.000129  & 0                    & 0   \\
+    $10^6$ & 0.193056 & 0.000291  & 0                   & \\
+    $10^7$ & 0.193333 & 0.000568  & $1 \cdot 10^{-6}$   & \\
+    $10^8$ & 0.193324 & 0.000049  & $9 \cdot 10^{-6}$   & \\
+  \end{tabular}
+  \label{Tab: Laguerre}
+\end{table}
 
 
 \section*{Discussion}
