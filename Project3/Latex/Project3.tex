@@ -139,29 +139,29 @@
 	\begin{table}[h!]
 		\caption{: Integration using Gauss-Legendre, varying N, with $\lambda=3$ }
 			\label{Tab: Legendre}
-		\begin{tabular}{c c c}
-			N & Result & Diff. from exact \\
+		\begin{tabular}{c c c c}
+			N & Result & Diff. from exact & Time used (s)\\
 			\hline
-			10 & 0.071980 & 0.120785 \\
-			15 & 0.239088 & 0.046323 \\
-			20 & 0.156139 & 0.036626 \\
-			25 & 0.196817 & 0.003052 \\
-			27 & 0.193524 & 0.000759 \\
-			30 & 0.177283 & 0.015482 \\
+			10 & 0.071980 & 0.120785  & 0.113204\\
+			15 & 0.239088 & 0.046323  & 1.299465\\
+			20 & 0.156139 & 0.036626  & 7.389662\\
+			25 & 0.196817 & 0.003052  & 28.340030\\
+			27 & 0.193524 & 0.000759  & 44.707851\\
+			30 & 0.177283 & 0.015482  & 87.724024\\
 		\end{tabular}
 	\end{table}
 
 	\begin{table}[h!]
 		\caption{: Integration using Gauss-Laguerre, variying N}
-		\begin{tabular}{c c c}
-			N & Result & Diff. from exact \\
+		\begin{tabular}{c c c c}
+			N & Result & Diff. from exact & Time used (s)\\
 			\hline
-			10 & 0.177081 & 0.0156840 \\
-			15 & 0.193285 & 0.000520 \\
-			20 & 0.194786 & 0.002021 \\
-			25 & 0.194804 & 0.002039 \\
-			27 & 0.193524 & 0.002030 \\
-			30 & 0.194779 & 0.002014 \\
+			10 & 0.177081 & 0.015684 & 0.072103\\
+			15 & 0.193285 & 0.000520 & 0.871607\\
+			20 & 0.194786 & 0.002021 & 4.997395\\
+			25 & 0.194804 & 0.002039 & 20.496292\\
+			27 & 0.193524 & 0.002030 & 31.343583\\
+			30 & 0.194779 & 0.002014 & 60.214597\\
 		\end{tabular}
 		\label{Tab: Laguerre}
 	\end{table}
@@ -211,13 +211,13 @@
 	The results for the Monte Carlo integration is found in \ref{Tab: MC} and \ref{Tab: improvedMC}. When the results were analyzed, we observed that the integral was different every time the program was run. This was expected, because we are generating random numbers with a new seed every time we ran the program. Beause of this, we ran the program several times and found the average of those integrals. This gave us reliable results to analyze.
 	The results show that the standard, brute force, Monte Carlo method is a relatively poor method, not presenting a satisfying result even with $10^8$ random points. Our improved Monte Carlo integration, however, gave precise, satisfying results with only $10^5$ integration points. Strangely, though, $10^6$ and $10^7$ gave increasingly imprecise results, while $10^8$ yielded a more precise result than all the above, although taking 100 times longer than $10^5$.
 
-	Additionally, we can see that parallelization slightly improves the running time of the improved Monte Carlo method, but not by a factor 4, which is the number of cores in the computer that ran the program, which is what we would expect. 
+	Additionally, we can see that parallelization slightly improves the running time of the improved Monte Carlo method, but not by a factor 4, which is the number of cores in the computer that ran the program, which is what we would expect.
 
 \section*{Conclusion}
 	Our results show that the brute force ways of numerically approximating our integral are unsatisfactory and not precise enough. When we account for and specialize our methods to our integrand and the integral limits, allowing us to use Laguerre polynomials or an exponential distribution, and spherical coordinates, we get much more precise results with fewer mesh points for the Gaussian quadrature and fewer random points in the Monte Carlo method.
 
 	Overall, comparing the results of the Gaussian quadrature using Laguerre-polynomials to the improved Monte Carlo method, we see that both give reasonably precise results, but the Gaussian method doesn't continue to improve by increasing the number of mesh points, while the improved Monte Carlo method seems to improve with an increasing number of integration points.
-	
+
 	Time-wise, it would seem like the [] method is more efficient than the other methods, giving better precision faster. It is also easy to parallelize, improving both precision and speed.
 
 \section*{Bibliography}
