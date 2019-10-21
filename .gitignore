@@ -77,3 +77,9 @@ Thumbs.db
 *.fls
 *.log
 *.synctex.gz
+Project3/Latex/Project3.fls
+*.fls
+*.log
+*.gz
+*.fdb_latexmk
+*.aux
