@@ -121,9 +121,8 @@ In order to be able to get the best possible results with the Monte Carlo method
 
 \section*{Results}
 
+
 \subsection*{Gaussian Quadrature}
-
-
 We have plotted the wave function for the electrons in the Helium atom in figure \ref{fig:wavefunc}. From this plot we can tell that the integral converges to zero for $x < -2$ and $ x > 2$. Therefore the integral would not need to be evaluated for those values of x.
 
 \begin{figure}[hbt]
@@ -187,41 +186,32 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
 
 \subsection*{Monte Carlo Integration}
 
-
 The results for the brute force Monte Carlo integration are showed in Table \ref{Tab: MC}, and the integration values for the improved Monte Carlo method are showed inn Table \ref{Tab: improvedMC}. In Table \ref{Tab: MC} and \ref{Tab: improvedMC} also lists the time used for calculating the integral. When we parallelised our code we experienced a quicker calculation of the integral. \\
 
 
 \begin{table}[h!]
   \caption{: Integration using Monte Carle integration, variying N}
   \begin{tabular}{c c c c}
-<<<<<<< HEAD
     N & Laguerre & Diff. from exact & Time used \\
-=======
-    N & Laguerre & Diff. from exact & Time used (s) \\
->>>>>>> b37fbe06ce375480c2664b32941fa923290c83b1
     \hline
-    $10^5$ & 0.244992 & 0.052227  & 0.00665 \\
-    $10^6$ & 0.183088 & 0.009676  & 0.06485 \\
-    $10^7$ & 0.193923 & 0.001159  & 0.66153 \\
-    $10^8$ & 0.192657 & 0.000108  & 6.49192 \\
+    $10^5$ & 0.244992 & 0.052227 & 0 \\
+    $10^6$ & 0.183088 & 0.009676  & 0\\
+    $10^7$ & 0.193923 & 0.001159  & $1 \cdot 10^{-6}$\\
+    $10^8$ & 0.192657 & 0.000108  & $8 \cdot 10^{-6}$\\
   \end{tabular}
   \label{Tab: MC}
 \end{table}
 
 
 \begin{table}[h!]
-  \caption{: Integration using imporoved Monte Carle integration, variying N}
+  \caption{: Integration using improved Monte Carle integration, variying N}
   \begin{tabular}{c c c c c}
-<<<<<<< HEAD
     N & Laguerre & Diff. from exact & Time used (without parallization) & Time used (with parallization) \\
-=======
-    N & Laguerre & Diff. from exact & Time used(s) & Time used(s) (parallization) \\
->>>>>>> b37fbe06ce375480c2664b32941fa923290c83b1
     \hline
-    $10^5$ & 0.192894 & 0.000129  & 0.0139   & 0.0093 \\
-    $10^6$ & 0.193056 & 0.000291  & 0.1406   & 0.0939 \\
-    $10^7$ & 0.193333 & 0.000568  & 1.3990   & 0.9992 \\
-    $10^8$ & 0.193324 & 0.000049  & 13.993   & 9.9839 \\
+    $10^5$ & 0.192894 & 0.000129  & 0                    & 0   \\
+    $10^6$ & 0.193056 & 0.000291  & 0                   & \\
+    $10^7$ & 0.193333 & 0.000568  & $1 \cdot 10^{-6}$   & \\
+    $10^8$ & 0.193324 & 0.000049  & $9 \cdot 10^{-6}$   & \\
   \end{tabular}
   \label{Tab: improvedMC}
 \end{table}
@@ -230,12 +220,6 @@ The results for the brute force Monte Carlo integration are showed in Table \ref
 \section*{Discussion}
 The Gauss-Legendre quadrature is a brute force method and we can see from our results that is is not a very good method. We had to try with different integration values and test which values that gave the best result. With increasing values of N the integrand got less exact insted of more close to the correct value.\\
 When we use the Gauss-Laguerre quadrature we have to do some more thinking by changing to spherical coordinates. The results got better and our we got the best result for N=15, with difference 0.0005020 from the exact value.
-
-
-\subsection*{Monte Carlo}
-The results for the Monte Carlo integration is found in \ref{Tab: MC} and \ref{Tab: improvedMC}. When the results was analyzed we observed that the integral was different every time the program was run. Therefore we ran the program several times and found the average of those integrals. In that way the results became more reliable and easier to analyze.
-
-
 
 \section*{Conclution}
 
