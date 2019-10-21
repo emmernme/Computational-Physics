@@ -48,7 +48,7 @@ void MonteCarlo(double lim){
 	double sigma_sum = 0;
 
 	// Loop through the desired number of MC samples
-	start = omp_get_wtime();
+	double start = omp_get_wtime();
 	//#pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum)
 	for (int i = 0; i < N; i++){
 		// Set up the random position vectors
@@ -62,7 +62,7 @@ void MonteCarlo(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = omp_get_wtime();
+	double finish = omp_get_wtime();
 	double t1 = (double (finish - start))/CLOCKS_PER_SEC;
 
 	// Calculate the final integral by dividing by the number of MC samples
@@ -96,7 +96,7 @@ void MonteCarloImproved(double lim){
 	int i;
 
 	// Loop through the desired number of MC samples
-	start = omp_get_wtime();
+	double start = omp_get_wtime();
 	//pragma omp parallel for reduction(+:integral_sum) reduction(+:sigma_sum) private(i)
 	for (i = 0; i < N; i++){
 		// Set up the random polar coordinates
@@ -110,9 +110,9 @@ void MonteCarloImproved(double lim){
 		integral_sum += f;
 		sigma_sum += f*f;
 	}
-	finish = omp_get_wtime();
-	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 
+	double finish = omp_get_wtime();
+	double t2 = (double (finish - start))/CLOCKS_PER_SEC;
 	// Calculate the final integral by dividing by the number of MC samples
 	double integral = jacobi * integral_sum / ((double) N);
 	sigma_sum = sigma_sum / ((double) N);
