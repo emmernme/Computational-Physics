@@ -1,4 +1,4 @@
-PWD /Users/fredrikforr/Documents/GitHub/Computational-Physics/Project3/Latex
+PWD /Users/benedicte/Documents/MENA-Compfys/Project3/Latex
 INPUT /usr/local/texlive/2018/texmf.cnf
 INPUT /usr/local/texlive/2018/texmf-dist/web2c/texmf.cnf
 INPUT /usr/local/texlive/2018/texmf-var/web2c/pdftex/pdflatex.fmt
@@ -141,14 +141,14 @@ INPUT Wave_func.png
 INPUT ./Wave_func.png
 INPUT ./Wave_func.png
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
-INPUT Leg_lag_int.png
-INPUT ./Leg_lag_int.png
-INPUT ./Leg_lag_int.png
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex9.tfm
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
 INPUT /usr/local/texlive/2018/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT Leg_lag_int.png
+INPUT ./Leg_lag_int.png
+INPUT ./Leg_lag_int.png
 INPUT Leg_lag_diff.png
 INPUT ./Leg_lag_diff.png
 INPUT ./Leg_lag_diff.png

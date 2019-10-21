@@ -96,7 +96,7 @@ with
 
 We perform the integration over $\theta \in [0, \pi]$, $\phi \in [0, 2\pi]$ and $r \in [0, \infty)$. To calculate the mesh points and weight for the angles we use the same function as for the Gauss-Legendre quadrature. To calculate the mesh points and weights corresponding to $r_1$ and $r_2$ we use Morten's function \href{https://github.com/CompPhysics/ComputationalPhysics/blob/master/doc/Projects/2019/Project3/CodeExamples/gauss-laguerre.cpp}{gauss$\_$laguerre.cpp}.
 
-\subsection*{Monte Carlo integration}
+\subsection*{Monte Carlo Integration}
 We'll firstly perform a brute force Monte Carlo integration of our system. We use the same function as in a) and b), but in the Monte Carlo method, we "guess" at the values for r1 and r2 using a simple uniform distribution function.
 To approximate the infinite limits of our integral, we again choose the limits to be $[-3, 3]$ because we know our function flattens out when the variables approach these limits. This lets us approximate the integral as:
 
@@ -121,6 +121,9 @@ In order to be able to get the best possible results with the Monte Carlo method
 
 \section*{Results}
 
+\subsection*{Gaussian Quadrature}
+
+
 We have plotted the wave function for the electrons in the Helium atom in figure \ref{fig:wavefunc}. From this plot we can tell that the integral converges to zero for $x < -2$ and $ x > 2$. Therefore the integral would not need to be evaluated for those values of x.
 
 \begin{figure}[hbt]
@@ -133,15 +136,7 @@ We have plotted the wave function for the electrons in the Helium atom in figure
 
 Table \ref{Tab: Legendre} and table \ref{Tab: Laguerre} shows the results for the two Gaussian quadratures with different values of N. The tables also shows the difference from the exact value of the integral, namely 0.192765. The integral values for both of the Gaussian quadratures are plotted against different number of integration points in figure \ref{fig:int} You can also see a plot of the difference from the exact value for Gauss-Legendre and Gauss-Laguerre in figure \ref{fig:diff}.\\
 
-The Gauss-Legendre quadrature gave different results when we changed the limits of the integral, $-\lambda$ and $+\lambda$. We found that we got the best result for Gauss-Legendre using $\lambda = 2.89$ and $N=27$. The value of the integral then where 0.192651 with a difference 0.000114 from the exact value.
-
-\begin{figure}[hbt]
-\begin{center}
-    \includegraphics[width=200px]{Leg_lag_int.png}
-    \caption{: Calculated values for the integral against number of iterations using Gauss-Legendre and Gauss-Laguerre.}
-    \label{fig:int}
-\end{center}
-\end{figure}
+The Gauss-Legendre quadrature gave different results when we changed the limits of the integral, $-\lambda$ and $+\lambda$. We found that we got the best result for Gauss-Legendre using $\lambda = 2.89$ and $N=27$. The value of the integral then where 0.192651 with a difference 0.000114 from the exact value.\\
 
 \begin{table}[h!]
   \caption{: Integration using Gauss-Legendre, variying N, with $\lambda=3$ }
@@ -174,7 +169,15 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
   \label{Tab: Laguerre}
 \end{table}
 
-\begin{figure}[hbt]
+\begin{figure}[h!]
+\begin{center}
+    \includegraphics[width=200px]{Leg_lag_int.png}
+    \caption{: Calculated values for the integral against number of iterations using Gauss-Legendre and Gauss-Laguerre.}
+    \label{fig:int}
+\end{center}
+\end{figure}
+
+\begin{figure}[h!]
 \begin{center}
     \includegraphics[width=200px]{Leg_lag_diff.png}
     \caption{: Difference from the exact value of the integral for Gauss-Legendre and Gauss-Laguerre against number of iterations.}
@@ -182,10 +185,15 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
 \end{center}
 \end{figure}
 
+\subsection*{Monte Carlo Integration}
+
+
+The results for the brute force Monte Carlo integration are showed in Table \ref{Tab: MC}, and the integration values for the improved Monte Carlo method are showed inn Table \ref{Tab: improvedMC}. In Table \ref{Tab: MC} and \ref{Tab: improvedMC} also lists the time used for calculating the integral. When we parallelised our code we experienced a quicker calculation of the integral. \\
+
 
 \begin{table}[h!]
   \caption{: Integration using Monte Carle integration, variying N}
-  \begin{tabular}{c c c}
+  \begin{tabular}{c c c c}
     N & Laguerre & Diff. from exact & Time used \\
     \hline
     $10^5$ & 0.244992 & 0.052227 & 0 \\
@@ -193,13 +201,13 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
     $10^7$ & 0.193923 & 0.001159  & $1 \cdot 10^{-6}$\\
     $10^8$ & 0.192657 & 0.000108  & $8 \cdot 10^{-6}$\\
   \end{tabular}
-  \label{Tab: Laguerre}
+  \label{Tab: MC}
 \end{table}
 
 
 \begin{table}[h!]
   \caption{: Integration using imporoved Monte Carle integration, variying N}
-  \begin{tabular}{c c c}
+  \begin{tabular}{c c c c c}
     N & Laguerre & Diff. from exact & Time used (without parallization) & Time used (with parallization) \\
     \hline
     $10^5$ & 0.192894 & 0.000129  & 0                    & 0   \\
@@ -207,7 +215,7 @@ The Gauss-Legendre quadrature gave different results when we changed the limits 
     $10^7$ & 0.193333 & 0.000568  & $1 \cdot 10^{-6}$   & \\
     $10^8$ & 0.193324 & 0.000049  & $9 \cdot 10^{-6}$   & \\
   \end{tabular}
-  \label{Tab: Laguerre}
+  \label{Tab: improvedMC}
 \end{table}
 
 
