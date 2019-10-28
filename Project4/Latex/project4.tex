@@ -4,39 +4,20 @@
 \usepackage[fleqn]{amsmath}
 \usepackage{titling}
 \usepackage{graphicx,wrapfig,lipsum}
-\usepackage[english]{babel}
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage[font=small,labelsep=none]{caption}
 
 \setlength{\droptitle}{-10em}
-\setlength\parindent{0pt}
 
 \title{Prosjekt 4}\vspace{-3ex}
-\author{Benedicte Allum Pedersen, Emil Helland Broll & Fredrik Oftedal Forr}
+\author{Benedicte Allum Pedersen, Emil Heland Broll & Fredrik Oftedal Forr}
 \date{\vspace{-5ex}}
 
 \begin{document}
 \maketitle
 
-\tableofcontents{}
-\newpage{}
-
-\section{Abstract}
-
-\section{Introduction}
-In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
-
-The energy we get from the Ising model without an externally applied magnetic field is given by:
-
-\begin{flalign*}
-  E = -J \sum_{<kl>}^N S_kS_l
-\end{flalign*}
-
-where $s_k, s_l = \pm 1$ and represents classical spin values. N is the total number of spins and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors. We apply periodic boundry conditions as well as the Metropolis algorithm. We also assume that we have a ferromagnetic ordering, so $J > 0$.
-
-
-\section{Oppgave a)}
+\section*{Abstract}
 Si meg, hva betyr adjø?\\
 Er det bare trist?\\
 Noe som sårer deg?\\
@@ -88,6 +69,7 @@ Adjø…\\
   $\uparrow$ & $\downarrow$
 \end{tabular}\\
 
+\section*{Introduction}
 Jeg står i mørke og skimter lyset i det fjerne\\
 Det er så kaldt jeg søker varme fra en stjerne\\
 Jeg tenker opp når jeg er nede for jeg er en optimist\\
@@ -117,10 +99,7 @@ Det skal gåååååååååå\\
 Optimist, jeg vet det går bra til sist\\
 Så lenge jeg lever her er jeg en optimist\\
 
-\section{Method}
-
-\subsection{Analytical expressions}
-
+\section*{Method}
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
 The case for all spin up looks like this
 \begin{tabular}{c c}
@@ -158,19 +137,10 @@ This gives us the ability to calculate the expectationvalue of the energy $\left
   &= 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}\\
 \end{flalign*}
 
-\section{Results}
+When this is known we can also calculate the heat capasitace.
+\begin{flalign*}
+  
+\end{flalign*}
 
-\section{Discussion}
-
-\section{Conclusion}
-
-\section{Bibliography}
-
-
-
-
-
-\listoftables{}
-\listoffigures{}
 
 \end{document}
