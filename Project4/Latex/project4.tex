@@ -26,78 +26,17 @@ Ikke sånn som sist\\
 Da jeg gikk fra deg\\
 
 
-\noindent Jeg vil alltid huske deg som en venn\\
-Om vi aldri mer sees igjen\\
-Vi har våre minner\\
-De vil aldri dø\\
-Nå er tiden inne\\
-Til å si adjø\\
-
-
-\noindent Si meg, hva betyr adjø\\
-Kan det ha verdi, om alt er forbi\\
-Tro meg vi skal ta adjø\\
-Vise vår kjærlighet om vi skilles helt\\
-Jeg vil alltid huske deg som en venn,\\
-Om vi aldri mer sees igjen.\\
-
-
-\noindent Vi har våre minner\\
-De vil aldri dø\\
-Nå er tiden inne\\
-Til å si adjø\\
-Adjø…\\
-
-
-\begin{tabular}{c c}
-  $\downarrow$ & $\uparrow$\\
-  $\uparrow$ & $\uparrow$
-\end{tabular}\\
-
-\begin{tabular}{c c}
-  $\uparrow$ & $\downarrow$\\
-  $\uparrow$ & $\uparrow$
-\end{tabular}\\
-
-\begin{tabular}{c c}
-  $\uparrow$ & $\uparrow$\\
-  $\downarrow$ & $\uparrow$
-\end{tabular}\\
-
-\begin{tabular}{c c}
-  $\uparrow$ & $\uparrow$\\
-  $\uparrow$ & $\downarrow$
-\end{tabular}\\
 
 \section*{Introduction}
-Jeg står i mørke og skimter lyset i det fjerne\\
-Det er så kaldt jeg søker varme fra en stjerne\\
-Jeg tenker opp når jeg er nede for jeg er en optimist\\
+In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
 
+The energy we get from the Ising model without an externally applied magnetic field is given by:
 
-Jeg har et håp hver gang jeg går omkring i blinde\\
-Det finnes en sol i oss som snart skal begynne å skinne\\
-Som får meg opp når jeg er nede om og om og om igjen\\
+\begin{flalign*}
+  E = -J \sum_{<kl>}^N S_kS_l
+\end{flalign*}
 
-Jeg har en drøm at vi tar vare på hverandre\\
-Og gir det beste i oss selv til alle andre\\
-Jeg tenker opp når jeg er nede om å om å om igjen\\
-
-Optimist, jeg vet det går bra til sist\\
-Så lenge jeg lever her er jeg en optimist\\
-Jeg er en optimist\\
-
-Jeg har en tro jeg har ett mål som jeg skal finne\\
-Jeg har en kraft og det er viljen til å vinne\\
-Det får meg opp når jeg er nede om og om og om igjen\\
-
-Vil at livet blir en dans i lyset\\
-En dans for håpet og en dans for gleden\\
-En dans i frihet og en dans for freden\\
-Det skal gåååååååååå\\
-
-Optimist, jeg vet det går bra til sist\\
-Så lenge jeg lever her er jeg en optimist\\
+where $s_k, s_l = \pm 1$ and represents classical spin values. N is the total number of spins and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors. We apply periodic boundry conditions as well as the Metropolis algorithm. We also assume that we have a ferromagnetic ordering, so $J > 0$.
 
 \section*{Method}
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
@@ -139,7 +78,7 @@ This gives us the ability to calculate the expectationvalue of the energy $\left
 
 When this is known we can also calculate the heat capasitace.
 \begin{flalign*}
-  
+
 \end{flalign*}
 
 
