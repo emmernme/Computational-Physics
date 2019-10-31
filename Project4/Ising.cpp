@@ -12,7 +12,7 @@ double beta = 1; //  / (k_b * T);
 double J = 1; // Energy scale ?
 double k_b = 1; // Boltzmann scale ?
 
-int L = 2; // Dimension
+int L = 5; // Dimension
 double T = 1.0; // [kT/J]
 
 // Initialise random
@@ -22,15 +22,13 @@ uniform_real_distribution<double> dist(0, 1);
 uniform_real_distribution<double> pos(0, L-1);
 
 void IsingSetup();
-void printMat();
+void printMat(mat a);
 int randomSpin();
 int randomPos();
 double E(mat spins, int x, int y);
 double E_tot(mat spins);
 
-
-
-
+// Calculate the total energy of the system
 double E_tot(mat spins){
 	double E_count = 0;
 	for (int i = 0; i < L; i++){
@@ -40,25 +38,35 @@ double E_tot(mat spins){
 	}
 	return -E_count;
 }
+
+// Calculate the contribution of a single spin and its surroundings to the total energy
 double E(mat spins, int x, int y){
 	double E_count = 0;
-	if (x != 0){
+	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
 		E_count += spins(x, y) * spins(x-1, y);
+	} else {
+		E_count += spins(x, y) * spins(L-1, y);
 	}
-	if (y != 0){
+	if (y != 0){ // If not on top edge, add energy contribution from spin above
 		E_count += spins(x, y) * spins(x, y-1);
+	} else {
+		E_count += spins(x, y) * spins(x, L-1);
 	}
-	if (x != L-1){
+	if (x != L-1){ // If not on rightmost edge, add energy contribution from spin on the right
 		E_count += spins(x+1, y) * spins(x, y);
+	} else {
+		E_count += spins(0, y) * spins(x, y);
 	}
-	if (y != L-1){
+	if (y != L-1){ // If not on bottom edge, add energy contribution from spin below
 		E_count += spins(x, y) * spins(x, y+1);
+	} else {
+		E_count += spins(x, y) * spins(x, 0);
 	}
 	return -E_count;
 }
 
 void IsingSetup(){
-	int N = 1000; // Number of MC cycles
+	int N = 50; // Number of MC cycles
 
 	// Initialise system
 	double E_i = 0;
@@ -87,7 +95,6 @@ void IsingSetup(){
 	for (int i = 0; i < N; i++){
 		int x = randomPos();
 		int y = randomPos();
-
 		double r = dist(engine); // Random probability of flipping
 
 		// Metropolis algo
@@ -95,6 +102,7 @@ void IsingSetup(){
 		new_spins(x,y) *= -1;
 		double E_new = E(new_spins, x, y);
 		double E_old = E(spins, x, y);
+		cout << "E_new: " << E_new << ", E_old: " << E_old << endl;
 
 		double P_ratio = exp(-beta * (E_new - E_old));
 		if (r <= P_ratio){
@@ -103,34 +111,6 @@ void IsingSetup(){
 		}
 	}
 	printMat(spins);
-
-
-/*
-
-	// Calculate the partition function, z
-	double z = 2*exp(-8 * beta) + 2*exp(8 * beta) + 16;
-
-	// Calculate mean energy, <E>
-	double E_mean = 8 * J * ((exp(8*beta) + exp(-8*beta)) / (exp(8*beta) + exp(-8*beta) + 8));
-	// Caclulate mean squared energy, <E^2>
-	double E_mean_sqrd = 64*J * (exp(8*beta) + exp(-8*beta)) / (exp(8*beta) + exp(-8*beta) + 8);
-
-	// Calcularte mean magnetization, |M|
-	double M_mean = 8*exp(8 * beta) + 8;
-	double M_mean_sqrd = 32*exp(8 * beta) + 32;
-
-	// Calculate specific heat, Cv
-	double c_v = (E_mean*E_mean - E_mean_sqrd) / (T*T * J*J / (k_b));
-
-	// Calculate susceptibility, χ
-	double suceptibility = (M_mean_sqrd - M_mean*M_mean) / (T * J)
-
-*/
-}
-
-int main(){
-	IsingSetup();
-	return 0;
 }
 
 // Print matrix + the energy
@@ -152,4 +132,11 @@ int randomSpin(){
 // Return a random position in the grid
 int randomPos(){
 	return (int) (pos(engine) + 0.5);
+}
+
+
+// Run, boy, run!
+int main(){
+	IsingSetup();
+	return 0;
 }
