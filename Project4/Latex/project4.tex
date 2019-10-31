@@ -79,21 +79,30 @@ This gives us the ability to calculate the expectationvalue of the energy $\left
 Thus
 \begin{flalign*}
   \left<E\right>^2 &= \left( 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} \right)^2\\
-  &=
+  &= 64J^2 \frac{\left(e^{-8\beta J} - e^{8\beta J} \right)^2 }{\left(e^{8\beta J} + e^{-8 \beta J} + 8 \right)^2 }\\
+  &= 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
 \end{flalign*}
 
 At the same time we calculate $\left<E^2\right>$
 
 \begin{flalign*}
   \left<E^2\right> &= \sum\limits_{i}^{2^n}\frac{E_i^2 e^{-\beta E_i}}{z}\\
-  &= \frac{64Je^{8\beta J} + 2\left(64e^{-8\beta J}\right) + 64Je^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-  &= \frac{128Je^{8\beta J} + 128e^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-  &= \frac{64Je^{8\beta J} + 64e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+  &= \frac{64Je^{8\beta J} + 2\left(64Je^{-8\beta J}\right) + 64Je^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
+  &= \frac{128Je^{8\beta J} + 128Je^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
+  &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+\end{flalign*}
+
+We use this to calculate the standard deviation
+\begin{flalign*}
+  \sigma^2_E &= \left<E^2\right> - \left<E\right>^2\\
+  &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
 \end{flalign*}
 
 
-
 When this is known we can also calculate the heat capasitace.
-
+\begin{flalign*}
+  C_v &= \frac{\sigma^2_E}{k_bT}\\
+  &= \frac{\frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }}{k_bT}
+\end{flalign*}
 
 \end{document}
