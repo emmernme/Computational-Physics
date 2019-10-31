@@ -81,7 +81,7 @@ void IsingSetup(){
 	// Set up an array of possible \Delta E-values
 	int delta_E[] = {-8, -4, 0, 4, 8};
 
-	double E_trans[] = {exp(-beta * -8), exp(-beta * 8), 1.0, exp(-beta * -4), exp(-beta * 4)};
+	double E_trans[] = {exp(-beta * 8), exp(-beta * -8), 1.0, exp(-beta * 4), exp(-beta * -4)};
 
 	double E_sum = 0.0;
 	double E_sqrd_sum = 0.0;
@@ -100,31 +100,27 @@ void IsingSetup(){
 		new_spins(x,y) *= -1;
 		//double E_new = E(new_spins, x, y);
 		double E_old = E(spins, x, y);
+		double E_new = -E_old;
+		double P_ratio;
+
 		//cout << "E_new: " << E_new << ", E_old: " << E_old << endl;
 
-		double E_new;
-		double P_ratio;
 
 		//double P_ratio = exp(-beta * (E_new - E_old));
 
 		if (E_old == -4){
-			E_new = 4;
 			P_ratio = E_trans[0];
 		}
-		else if (E_old == 4){
-			E_new = -4;
+		else if (E_old == 4){;
 			P_ratio = E_trans[1];
 		}
 		else if (E_old == 0){
-			E_new = 0;
 			P_ratio = E_trans[2];
 		}
 		else if (E_old == -2){
-			E_new = 2;
 			P_ratio = E_trans[3];
 		}
-		else if (E_old == 2){
-			E_new = -2;
+		else if (E_old == 2){;
 			P_ratio = E_trans[4];
 		}
 
