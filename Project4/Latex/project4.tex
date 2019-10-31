@@ -10,7 +10,7 @@
 
 \setlength{\droptitle}{-10em}
 
-\title{Prosjekt 4}\vspace{-3ex}
+\title{Project 4}\vspace{-3ex}
 \author{Benedicte Allum Pedersen, Emil Heland Broll & Fredrik Oftedal Forr}
 \date{\vspace{-5ex}}
 
@@ -28,7 +28,7 @@ Da jeg gikk fra deg\\
 
 
 \section*{Introduction}
-In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
+In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. The temperature where this phase transition occurs is called the critical temperature, $T_C$. Above this temperature the average magnetization is zero. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
 
 The energy we get from the Ising model without an externally applied magnetic field is given by:
 
@@ -36,7 +36,38 @@ The energy we get from the Ising model without an externally applied magnetic fi
   E = -J \sum_{<kl>}^N S_kS_l
 \end{flalign*}
 
-where $s_k, s_l = \pm 1$ and represents classical spin values. N is the total number of spins and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors. We apply periodic boundry conditions as well as the Metropolis algorithm. We also assume that we have a ferromagnetic ordering, so $J > 0$.
+where $s_k, s_l = \pm 1$ and represents classical spin values. N is the total number of spins and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors. We apply periodic boundry conditions as well as the Metropolis algorithm. We also assume that we have a ferromagnetic ordering, so $J > 0$.\\
+
+The behavior og physical quantities like the mean magnetization, the heat capacity and the susceptibility can be characterized by a power law behavior when the temperature is near $T_C$. This gives:
+
+\begin{flalign*}
+  <M(T)> &\sim (T-T_C)^{\beta},\\
+  C_v(T) &\sim |T_C-T|^{\alpha},\\
+  \chi(T) &\sim |T_C-T|^{\gamma},
+\end{flalign*}
+
+where $\beta = 1/8, \alpha = 0$ and $\gamma = 7/4$. \\
+
+The correlation length is another important physical quantity which can descriped like the ones above. The correlation length, $\varepsilon$, defines the length scale at which the overall properties of a material start to differ from its bulk properties(Jensen, M.). We expect $\varepsilon$ to be of the order of the lattice spacing for $T>>T_C$. As a result of more interactions between the spins as T approaches $T_C$ the correlation length increases as we get closer to $T_C$. Then the divergent behavior of $\varepsilon$ near $T_C$ is
+
+\begin{flalign*}
+  \varepsilon(T) \sim |T_C-T|^{-\nu}.
+\end{flalign*}
+
+We will always be limited to a finite lattice and $\varepsilon$ will be proportional with the size of the lattice. The behavior of a finite lattice can then be related to the behavior of a infinitely large lattice, so the critical temperature will scale as
+
+\begin{flalign*}
+  T_C(L) - T_C(L=\infty) = aL^{-1/\nu}.
+\end{flalign*}
+
+If we set $T=T_C$ the mean magnetization, the heat capacity and the susceptibility will be
+
+\begin{flalign*}
+  <M(T)> &\sim (T-T_C)^{\beta} \rightarrow L^{-\beta/\nu},\\
+  C_v(T) &\sim |T_C-T|^{\alpha} \rightarrow L^{-\alpha/\nu},\\
+  \chi(T) &\sim |T_C-T|^{\gamma} \rightarrow L^{-\gamma/\nu}.
+\end{flalign*}
+
 
 \section*{Method}
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
