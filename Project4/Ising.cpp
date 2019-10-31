@@ -68,10 +68,6 @@ double E(mat spins, int x, int y){
 void IsingSetup(){
 	int N = 50; // Number of MC cycles
 
-	// Initialise system
-	double E_i = 0;
-	double M_i = 0;
-
 	mat spins = mat(L,L);
 	// Set up initial spins randomly
 	for (int i = 0; i < L; i++){
@@ -84,6 +80,8 @@ void IsingSetup(){
 
 	// Set up an array of possible \Delta E-values
 	int delta_E[] = {-8, -4, 0, 4, 8};
+
+	double E_trans[] = {exp(-beta * -8), exp(-beta * 8), 1.0, exp(-beta * -4), exp(-beta * 4)};
 
 	double E_sum = 0.0;
 	double E_sqrd_sum = 0.0;
@@ -100,11 +98,37 @@ void IsingSetup(){
 		// Metropolis algo
 		mat new_spins = spins;
 		new_spins(x,y) *= -1;
-		double E_new = E(new_spins, x, y);
+		//double E_new = E(new_spins, x, y);
 		double E_old = E(spins, x, y);
-		cout << "E_new: " << E_new << ", E_old: " << E_old << endl;
+		//cout << "E_new: " << E_new << ", E_old: " << E_old << endl;
 
-		double P_ratio = exp(-beta * (E_new - E_old));
+		double E_new;
+		double P_ratio;
+
+		//double P_ratio = exp(-beta * (E_new - E_old));
+
+		if (E_old == -4){
+			E_new = 4;
+			P_ratio = E_trans[0];
+		}
+		else if (E_old == 4){
+			E_new = -4;
+			P_ratio = E_trans[1];
+		}
+		else if (E_old == 0){
+			E_new = 0;
+			P_ratio = E_trans[2];
+		}
+		else if (E_old == -2){
+			E_new = 2;
+			P_ratio = E_trans[3];
+		}
+		else if (E_old == 2){
+			E_new = -2;
+			P_ratio = E_trans[4];
+		}
+
+
 		if (r <= P_ratio){
 			spins = new_spins;
 			E_old = E_new;
