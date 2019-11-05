@@ -7,27 +7,27 @@
 \usepackage{amssymb}
 \usepackage{listings}
 \usepackage[font=small,labelsep=none]{caption}
+\usepackage{array}% http://ctan.org/pkg/array
 
 \setlength{\droptitle}{-10em}
 
 \title{Project 4}\vspace{-3ex}
-\author{Benedicte Allum Pedersen, Emil Heland Broll & Fredrik Oftedal Forr}
+\author{Benedicte Allum Pedersen, Emil Helland Broll & Fredrik Oftedal Forr}
 \date{\vspace{-5ex}}
 
 \begin{document}
 \maketitle
 
-\section*{Abstract}
-Si meg, hva betyr adjø?\\
-Er det bare trist?\\
-Noe som sårer deg?\\
-Tro meg, vi skal ta adjø\\
-Ikke sånn som sist\\
-Da jeg gikk fra deg\\
 
+\section{Abstract}
 
+\newpage
 
-\section*{Introduction}
+\tableofcontents{}
+
+\newpage
+
+\section{Introduction}
 In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. The temperature where this phase transition occurs is called the critical temperature, $T_C$. Above this temperature the average magnetization is zero. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
 
 The energy we get from the Ising model without an externally applied magnetic field is given by:
@@ -69,7 +69,60 @@ If we set $T=T_C$ the mean magnetization, the heat capacity and the susceptibili
 \end{flalign*}
 
 
-\section*{Method}
+\section{Method}
+
+The calculations for the degenerated energies and for the magnetization for 16 different spin configurations is located in the appendix and theese calculations gives us the Table \ref{Tab: EogM} below.
+
+	\begin{table}[h!]
+		\caption{: Spinconfigurations grouped by their total energy and magnetization}
+			\label{Tab: EogM}
+      \centering
+		\begin{tabular}{c c c c}
+			$\#$ spins up & $\#$ configurations & $E^2$ & M \\
+			\hline
+			4 & 1 & -8J & 4 \\
+			3 & 4 & 0 & 2 \\
+			2 & 4 & 0 & 0 \\
+			2 & 2 & +8J & 0\\
+			1 & 4 & 0 & -2 \\
+			0 & 1 & -8J & -4 \\
+		\end{tabular}
+	\end{table}
+
+We have used the values in Table \ref{Tab: EogM} to calculate, the expectationvalues for the energy and the mean magnetization as well. These values have then been used to calculate the variance for the two physical quantities. The variance for the energi and the mean mean magnetization have respectively been used to calculate the heat capacity $C_v &= \sigma^2_E/k_BT$ and the susceptibility $ \chi = \sigma_M^2/k_BT$
+
+In Table \ref{Tab: values} the values for the properties above are shown if we set $J/k_BT = 1$.
+
+{\renewcommand{\arraystretch}{1.5}
+\begin{table}[h!]
+  \caption{: Spinconfigurations grouped by their total energy and magnetization}
+    \label{Tab: values}
+    \centering
+  \begin{tabular}{c c }
+    Property & Analytical value \\
+    \hline
+    $\left<E\right>$ &   \\
+    $\left<E^2\right>$ &   \\
+    $\sigma_E^2$ &  \\
+    $C_v$ & \\
+    $\left<|M(T)|\right>$  & 3.991970 \\
+    $\left<|M(T)|^2\right> $ & 15.962527 \\
+    $\sigma_M^2$ & \\
+    $\chi$ &  \\
+  \end{tabular}
+\end{table}
+
+
+\section{Results}
+
+\section{Discussion}
+
+\section{Conclusion}
+
+
+\section{Appendix}
+\subsection{Degenerated energies and magnetization}
+
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
 The case for all spin up looks like this
 \begin{tabular}{c c}
@@ -84,9 +137,19 @@ And the equation will be.
   &= -J((1+1) + (1+1) + (1+1) + (1+1))\\
   E_1 &= -8J
 \end{flalign*}
-The reason why the same interaction is included several times is because of the unit cell repeating itself to inflinity in both x and y derection. Therefore the $s_1$ will interact with $s_2$ and $s_3$ inside the unit cell, and $s_2$ and $s_3$ "outside" the unit cell.
+The reason why the same interaction is included several times is because of the unit cell repeating itself to infinity in both x and y derection. Therefore the $s_1$ will interact with $s_2$ and $s_3$ inside the unit cell, and $s_2$ and $s_3$ "outside" the unit cell.
 
-When this is known for all the degenerate energies we can calculate the walue of the partian function.
+The magnetization is defined as
+\begin{flalign*}
+  M_i=\sum_{j=1}^{N} s_j
+\end{flalign*}
+which sums over all spins for a given configuration $i$. For the same spinconfiguration as above this gives:
+\begin{flalign*}
+  M_i=\sum_{j=1}^{4} (1 + 1 + 1 +1) = 4
+\end{flalign*}
+
+\subsection{The partition function}
+When we known the values for all the degenerate energies we can calculate the value of the partian function.
 \begin{flalign*}
   &z = \sum\limits_{i=1}^{2^n}e^{-\beta E_i}\\
   &\text{In out case we have $n=4$ since we have a 2x2 lattice.}\\
@@ -96,7 +159,7 @@ When this is known for all the degenerate energies we can calculate the walue of
   &z = 2e^{8 \beta J} + 2e^{-8 \beta J} + 16
 \end{flalign*}
 
-
+\subsection{Expectationvalues for the energy}
 This gives us the ability to calculate the expectationvalue of the energy $\left<E\right>$
 
 \begin{flalign*}
@@ -123,17 +186,52 @@ At the same time we calculate $\left<E^2\right>$
   &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
 \end{flalign*}
 
-We use this to calculate the standard deviation
+\subsection{Expectationvalues for the magnetization}
+The absolute value of the mean magnetization is given by
+\begin{flalign*}
+  \left<|M(T)|\right> = \frac{\sum \limits{_i^{2^4}} |M_i| e^{-\beta E_i}}{z}
+\end{flalign*}
+and can be calculated by using the values for the energy and the magnetization from Table \ref{Tab: EogM}:
+
+\begin{flalign*}
+  \left<|M(T)|\right> &= \frac{4e^{8\beta J} + 2\cdot4 + 0\cdot4 + 0\cdot2 + |-2|\cdot4 + |-4|e^{8\beta J}}{z}\\
+  \left<|M(T)|\right> &= \frac{8e^{8\beta J} + 16}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16} = \frac{4e^{8\beta J} + 8}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+\end{flalign*}
+
+We also have that
+\begin{flalign*}
+  \left<|M(T)|^2\right> &=  \frac{\sum \limits{_i^{2^4}} |M_i^2| e^{-\beta E_i}}{z}\\
+  \left<|M(T)|^2\right> &= \frac{32e^{8\beta J} + 32}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16} = 16\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+\end{flalign*}
+
+\subsection{Heat Capacity}
+We the expectationvalues to calculate the variance for the energy
 \begin{flalign*}
   \sigma^2_E &= \left<E^2\right> - \left<E\right>^2\\
   &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
 \end{flalign*}
 
-
 When this is known we can also calculate the heat capasitace.
 \begin{flalign*}
   C_v &= \frac{\sigma^2_E}{k_bT}\\
-  &= \frac{\frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }}{k_bT}
+  &= \frac{64J}{k_BT}\left[\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} -  J \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }\right]
 \end{flalign*}
+
+
+\subsection{Susceptibility}
+The variance for the absolute value of the mean magnetization is given by:
+\begin{flalign*}
+  \sigma_{M}^2 &= \left<|M(T)^2|\right> - \left<|M(T)|\right>^2\\
+  \sigma^2_M &= 16 \frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 16\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66}
+\end{flalign*}
+
+We then calculate the susceptibility $\chi$ which is given by $\chi = \sigma_M^2/k_BT$, so
+
+\begin{flalign*}
+  \chi = \frac{16}{k_BT} \left[{\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8} -\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66}}\right]
+\end{flalign*}
+
+\section{Bibliography}
+
 
 \end{document}
