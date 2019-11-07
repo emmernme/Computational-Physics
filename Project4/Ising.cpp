@@ -14,7 +14,8 @@ using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
 
 // Constants
-double beta = 1; //  / (k_b * T);
+double T = 1.0; // [kT/J]
+double beta = 1 * T; //  / (k_b * T);
 double J = 1; // Energy scale ?
 double k_b = 1; // Boltzmann scale ?
 
@@ -22,7 +23,6 @@ double k_b = 1; // Boltzmann scale ?
 double E_trans[] = {exp(-beta * 8), exp(-beta * -8), 1.0, exp(-beta * 4), exp(-beta * -4)};
 
 int L = 2; // Lattice dimension (L x L)
-double T = 1.0; // [kT/J]
 
 // Initialise random
 random_device seeder;
@@ -34,7 +34,7 @@ double MonteCarloIsing(int N, bool random);
 void printMat(mat a);
 int randomSpin();
 int randomPos();
-double E_i(mat spins, int x, int y);
+double E_i(mat spins, int x, int y, bool sum);
 double E_tot(mat spins);
 
 // Calculate the total energy of the system
@@ -43,14 +43,14 @@ double E_tot(mat spins){
 	// Loop over all the individual spins' energy contributions
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
-			E_count -= E_i(spins, i, j);
+			E_count -= E_i(spins, i, j, true);
 		}
 	}
 	return -E_count;
 }
 
 // Calculate the contribution of a single spin and its surroundings to the total energy
-double E_i(mat spins, int x, int y){
+double E_i(mat spins, int x, int y, bool sum = false){
 	double E_count = 0;
 	/* Only count spins to the left and above, to avoid counting spin interactions twice
 	(saves some computing power compared to dividing total energy by two) */
@@ -64,6 +64,19 @@ double E_i(mat spins, int x, int y){
 	} else {
 		E_count += spins(x, y) * spins(x, L-1);
 	}
+	if (!sum){
+		if (x != L-1){ // If not on rightmost edge, add energy contribution from spin on the right
+			E_count += spins(x+1, y) * spins(x, y);
+		} else {
+			E_count += spins(0, y) * spins(x, y);
+		}
+		if (y != L-1){ // If not on bottom edge, add energy contribution from spin below
+			E_count += spins(x, y) * spins(x, y+1);
+		} else {
+			E_count += spins(x, y) * spins(x, 0);
+		}
+	}
+
 	return -E_count;
 }
 double M(mat spins){
@@ -99,13 +112,14 @@ double MonteCarloIsing(int N, bool random){
 	double M_abs_sum = 0.0;
 
 	int M_current = M(spins);
+	double E_current = E_tot(spins);
 
 	// Monte Carlo-loop
 	for (int i = 0; i < N; i++){
 		int x = randomPos(), y = randomPos(); // Random position in the lattice
 		double r = dist(engine); // Random probability of flipping
 
-		double E_xy = E_i(spins, x, y);
+		double E_xy = E_i(spins, x, y, false);
 
 		// double P_ratio = exp(-beta * (E_new - E_xy));
 		double P_ratio;
@@ -127,19 +141,19 @@ double MonteCarloIsing(int N, bool random){
 			spins(x,y) *= -1;
 			E_xy *= -1; // Flipping centre spin inverses the energy
 			M_current += spins(x,y);
+			E_current += 2*E_xy;
 		}
 
 		// Update expectation values
-		E_sum += E_xy;
+		E_sum += E_current;
 		E_sqrd_sum += E_xy*E_xy;
 		M_sum += M_current;
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
-
 	}
 
 	double norm = 1/(double) N; // 1 / #MC cycles
-	double E_mean = L * E_sum * norm;
+	double E_mean = E_sum * norm;
 	double E_sqrd_mean = E_sqrd_sum * norm;
 	double M_mean = M_sum * norm;
 	double M_sqrd_mean = M_sqrd_sum * norm;
@@ -176,7 +190,7 @@ int main(){
 	int n;
 	//cout << "How many MC cycles?" << endl;
 	//cin >> n;
-	for (int n = 1; n < 50; n += 1){
+	for (int n = 1; n < 10000; n += 100){
 		cout << MonteCarloIsing(n, true) << " with n=" << n << endl;
 	}
 	return 0;
