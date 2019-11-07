@@ -89,9 +89,9 @@ The calculations for the degenerated energies and for the magnetization for 16 d
 		\end{tabular}
 	\end{table}
 
-We have used the values in Table \ref{Tab: EogM} to calculate, the expectationvalues for the energy and the mean magnetization as well. These values have then been used to calculate the variance for the two physical quantities. The variance for the energi and the mean mean magnetization have respectively been used to calculate the heat capacity $C_v &= \sigma^2_E/k_BT$ and the susceptibility $ \chi = \sigma_M^2/k_BT$
+We have used the values in Table \ref{Tab: EogM} to calculate, the expectationvalues for the energy and the mean magnetization as well. These values have then been used to calculate the variance for the two physical quantities. The variance for the energi and the mean mean magnetization have respectively been used to calculate the heat capacity $C_v &= \sigma^2_E/k_BT^2$ and the susceptibility $ \chi = \sigma_M^2/k_BT$
 
-In Table \ref{Tab: values} the values for the properties above are shown if we set $J/k_BT = 1$.
+In Table \ref{Tab: values} the values for the properties above are shown if we set $J/k_BT =\beta J = 1$.
 
 {\renewcommand{\arraystretch}{1.5}
 \begin{table}[h!]
@@ -101,19 +101,18 @@ In Table \ref{Tab: values} the values for the properties above are shown if we s
   \begin{tabular}{c c }
     Property & Analytical value \\
     \hline
-    $\left<E\right>$ &   \\
-    $\left<E^2\right>$ &   \\
-    $\sigma_E^2$ &  \\
-    $C_v$ & \\
+    $\left<E\right>$ & -7.978586 J \\
+    $\left<E^2\right>$ & 63.65786 $J^2$  \\
+    $C_v$ & 0.170865 J/T \\
     $\left<|M(T)|\right>$  & 3.991970 \\
     $\left<|M(T)|^2\right> $ & 15.962527 \\
-    $\sigma_M^2$ & \\
-    $\chi$ &  \\
+    $\chi$ & 0.026703 \\
   \end{tabular}
 \end{table}
 
 
 \section{Results}
+For L = 2 we need 10 000 Monte Carlo cycles in order to achieve a good agreement, then the mean value of the energy is -7.9864, which is a differnce of 0.007814 from the analytical value. 
 
 \section{Discussion}
 
@@ -174,16 +173,16 @@ Thus
 \begin{flalign*}
   \left<E\right>^2 &= \left( 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} \right)^2\\
   &= 64J^2 \frac{\left(e^{-8\beta J} - e^{8\beta J} \right)^2 }{\left(e^{8\beta J} + e^{-8 \beta J} + 8 \right)^2 }\\
-  &= 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
+  &= 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
 \end{flalign*}
 
 At the same time we calculate $\left<E^2\right>$
 
 \begin{flalign*}
   \left<E^2\right> &= \sum\limits_{i}^{2^n}\frac{E_i^2 e^{-\beta E_i}}{z}\\
-  &= \frac{64Je^{8\beta J} + 2\left(64Je^{-8\beta J}\right) + 64Je^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-  &= \frac{128Je^{8\beta J} + 128Je^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-  &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+  &= \frac{64J^2e^{8\beta J} + 2\left(64J^2e^{-8\beta J}\right) + 64J^2e^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
+  &= \frac{128J^2e^{8\beta J} + 128J^2e^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
+  &= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
 \end{flalign*}
 
 \subsection{Expectationvalues for the magnetization}
@@ -208,13 +207,13 @@ We also have that
 We the expectationvalues to calculate the variance for the energy
 \begin{flalign*}
   \sigma^2_E &= \left<E^2\right> - \left<E\right>^2\\
-  &= \frac{64Je^{8\beta J} + 64Je^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
+  &= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
 \end{flalign*}
 
 When this is known we can also calculate the heat capasitace.
 \begin{flalign*}
-  C_v &= \frac{\sigma^2_E}{k_bT}\\
-  &= \frac{64J}{k_BT}\left[\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} -  J \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }\right]
+  C_v &= \frac{\sigma^2_E}{k_BT^2}\\
+  &= \frac{64J^2}{k_BT^2}\left[\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} -  \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }\right]
 \end{flalign*}
 
 
