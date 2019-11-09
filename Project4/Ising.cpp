@@ -8,7 +8,7 @@
 #include <random>
 #include <armadillo>
 // Requirements: OpenMP (brew install libomp clang-omp)
-#include <omp.h>
+//#include <omp.h>
 
 using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
@@ -24,8 +24,7 @@ double MonteCarloIsing(int N, bool random, double T, int L){
 	// Constants
 	//double T = 1.0; // [kT/J]
 	//int L = 2; // Lattice dimension (L x L)
-	double beta = 1 * T; //  / (k_b * T);
-
+	double beta = 1 / T; //  / (k_b * T);
 	// Set up an array of possible \Delta E transition values, delta_E = {-8, -4, 0, 4, 8};
 	map<int, double> E_trans = {
 	// 	{energy, transition probability}
@@ -182,7 +181,7 @@ int randomSpin(uniform_real_distribution<double> dist, mt19937 engine){
 int randomPos(uniform_real_distribution<double> pos, mt19937 engine){
 	return (int) (pos(engine) + 0.5);
 }
-
+/*
 int main(){
 	int n;
 	//cout << "How many MC cycles?" << endl;
@@ -192,7 +191,8 @@ int main(){
 	}
 	return 0;
 }
-/* 
+*/
+/*
 Run boy run!
 This world is not made for you
 Run boy run!
