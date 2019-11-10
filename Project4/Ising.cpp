@@ -20,7 +20,7 @@ double E_i(mat spins, int x, int y, bool sum, int L);
 double E_tot(mat spins, int L);
 double M(mat spins, int L);
 
-double MonteCarloIsing(int N, bool random, double T, int L){
+tuple<double,double,double,double,double,double,double,double,double> MonteCarloIsing(int N, bool random, double T, int L){
 	// Constants
 	//double T = 1.0; // [kT/J]
 	//int L = 2; // Lattice dimension (L x L)
@@ -82,7 +82,6 @@ double MonteCarloIsing(int N, bool random, double T, int L){
 			M_current += spins(x,y);
 			E_current += 2*E_xy;
 		}
-
 		// Update expectation values
 		E_sum += E_current;
 		E_sqrd_sum += E_xy*E_xy;
@@ -104,7 +103,7 @@ double MonteCarloIsing(int N, bool random, double T, int L){
 	double specific_heat = E_variance / (T*T);
 	double suceptibility = M_variance / T;
 
-	return E_mean;
+	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility);
 }
 
 // Calculate the total energy of the system

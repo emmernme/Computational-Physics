@@ -7,8 +7,10 @@
 #include <random>
 #include <armadillo>
 #include "Ising.cpp"
+#include <tuple>
 
 using namespace std;
+using namespace arma;
 
 int main(){
   //setting up initial values and linear spacing of T
@@ -21,22 +23,58 @@ int main(){
   int N = 100000;
 
   double *T = new double[n];
-  //int L = 2;
   int L[4] = {40, 60, 80, 100};
+
+
+  mat E_mean       (4, n-1, fill::zeros);
+  mat E_sqrd_mean  (4, n-1, fill::zeros);
+  mat M_mean       (4, n-1, fill::zeros);
+  mat M_sqrd_mean  (4, n-1, fill::zeros);
+  mat M_abs_sum    (4, n-1, fill::zeros);
+  mat E_variance   (4, n-1, fill::zeros);
+  mat M_variance   (4, n-1, fill::zeros);
+  mat specific_heat(4, n-1, fill::zeros);
+  mat suceptibility(4, n-1, fill::zeros);
+
 
   for(int i = 0; i < n; i++){
     T[i] = T0+i*dT;
   }
 
   for(int i = 0; i < 4; i++){
-    for(int k = 0; k < n; k++){
-      double E_mean = MonteCarloIsing(N, true, T[k], L[i]);
-      cout << setprecision(8) << E_mean << endl;
+    for(int k = 0; k < n-1; k++){
+      E_mean       (i,k) = get<0>(MonteCarloIsing(N, true, T[k], L[i]));
+      E_sqrd_mean  (i,k) = get<1>(MonteCarloIsing(N, true, T[k], L[i]));
+      M_mean       (i,k) = get<2>(MonteCarloIsing(N, true, T[k], L[i]));
+      M_sqrd_mean  (i,k) = get<3>(MonteCarloIsing(N, true, T[k], L[i]));
+      M_abs_sum    (i,k) = get<4>(MonteCarloIsing(N, true, T[k], L[i]));
+      E_variance   (i,k) = get<5>(MonteCarloIsing(N, true, T[k], L[i]));
+      M_variance   (i,k) = get<6>(MonteCarloIsing(N, true, T[k], L[i]));
+      specific_heat(i,k) = get<7>(MonteCarloIsing(N, true, T[k], L[i]));
+      suceptibility(i,k) = get<8>(MonteCarloIsing(N, true, T[k], L[i]));
     }
-    cout << endl;
   }
 
+  cout << E_mean << endl;
 
+  cout << setw(20) << "E_mean" << setw(15) << "     E_sqrd_mean" << setw(15);
+  cout << "M_mean" << setw(15) << "M_sqrd_mean" << setw(15) << "M_abs_sum";
+  cout << setw(15) << "E_variance" << setw(15) << "M_variance" << setw(15);
+  cout << "specific_heat" << setw(15) << "suceptibility" << endl;
+  for(int i = 0; i < 4; i++){
+    for(int k = 0; k < n-1; k++){
+      cout << "T: " <<  T[i] << setprecision(4) << setw(15) << E_mean(i,k) << setw(15);
+      cout << setprecision(4) << E_sqrd_mean(i,k) << setw(15);
+      cout << setprecision(4) << M_mean(i,k) << setw(15) << M_sqrd_mean(i,k) << setw(15);
+      cout << setprecision(4) << M_abs_sum(i,k) << setw(15);
+      cout << setprecision(4) << E_variance(i,k) << setw(15);
+      cout << setprecision(4) << M_variance(i,k) << setw(15);
+      cout << setprecision(4) << specific_heat(i,k);
+      cout << setw(15) << setprecision(4) << suceptibility(i,k) << endl;
+    }
+  }
 
-  return 0;
+  cout << "T: " << T0 << setw(5) << E_mean(0,0) << setw(3);
+
+return 0;
 }
