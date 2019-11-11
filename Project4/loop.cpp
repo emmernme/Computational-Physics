@@ -55,7 +55,9 @@ int main(){
     }
   }
 
-  cout << E_mean << endl;
+  """
+  Printing
+  """
 
   cout << setw(20) << "E_mean" << setw(15) << "     E_sqrd_mean" << setw(15);
   cout << "M_mean" << setw(15) << "M_sqrd_mean" << setw(15) << "M_abs_sum";
