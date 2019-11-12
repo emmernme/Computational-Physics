@@ -14,7 +14,7 @@ using namespace arma;
 
 int main(){
   //setting up initial values and linear spacing of T
-  double T0 = 2;
+  double T0 = 1;
   double Tmax = 2.3;
   int n = 10;
   double dT = (Tmax-T0)/(double) n;
@@ -22,10 +22,11 @@ int main(){
   double k_b = 1; // Boltzmann scale ?
   int N = 100000;
 
+
   double *T = new double[n];
-  int L[4] = {40, 60, 80, 100};
-
-
+  //int L[4] = {40, 60, 80, 100};
+  int L = 20;
+  /*
   mat E_mean       (4, n-1, fill::zeros);
   mat E_sqrd_mean  (4, n-1, fill::zeros);
   mat M_mean       (4, n-1, fill::zeros);
@@ -35,12 +36,12 @@ int main(){
   mat M_variance   (4, n-1, fill::zeros);
   mat specific_heat(4, n-1, fill::zeros);
   mat suceptibility(4, n-1, fill::zeros);
-
+  */
 
   for(int i = 0; i < n; i++){
     T[i] = T0+i*dT;
   }
-
+  /*
   for(int i = 0; i < 4; i++){
     for(int k = 0; k < n-1; k++){
       E_mean       (i,k) = get<0>(MonteCarloIsing(N, true, T[k], L[i]));
@@ -54,11 +55,27 @@ int main(){
       suceptibility(i,k) = get<8>(MonteCarloIsing(N, true, T[k], L[i]));
     }
   }
+  */
+  double *E_mean       = new double [8];
+  double *E_sqrd_mean  = new double [8];
+  double *M_mean       = new double [8];
+  double *M_sqrd_mean  = new double [8];
+  double *M_abs_sum    = new double [8];
+  double *E_variance   = new double [8];
+  double *M_variance   = new double [8];
+  double *specific_heat= new double [8];
+  double *suceptibility= new double [8];
 
-  """
-  Printing
-  """
+  MonteCarloIsing(N, true, T[0], L);
+  MonteCarloIsing(N, true, T[0], L);
+  /*cout << "E_mean: " << E_mean[i] << endl;
+  cout << "M_mean: " << M_mean[i] << endl;
+  cout << endl;*/
 
+
+
+
+  /*
   cout << setw(20) << "E_mean" << setw(15) << "     E_sqrd_mean" << setw(15);
   cout << "M_mean" << setw(15) << "M_sqrd_mean" << setw(15) << "M_abs_sum";
   cout << setw(15) << "E_variance" << setw(15) << "M_variance" << setw(15);
@@ -75,8 +92,7 @@ int main(){
       cout << setw(15) << setprecision(4) << suceptibility(i,k) << endl;
     }
   }
-
-  cout << "T: " << T0 << setw(5) << E_mean(0,0) << setw(3);
+  */
 
 return 0;
 }

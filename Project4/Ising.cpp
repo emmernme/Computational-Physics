@@ -65,6 +65,12 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	int M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
 
+	double E_mean_i[N];
+	double M_mean_i[N];
+
+	ofstream output;
+	output.open("E_mean-M_mean.dat");
+
 	// Monte Carlo-loop
 	for (int i = 0; i < N; i++){
 		int x = randomPos(pos, engine), y = randomPos(pos, engine); // Random position in the lattice
@@ -88,8 +94,12 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		M_sum += M_current;
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
-	}
 
+		E_mean_i[i] = E_sum * 1/(double)i;
+		M_mean_i[i] = M_sum * 1/(double)i;
+		output << E_mean_i[i] << "," << M_mean_i[i] << endl;
+	}
+	output.close();
 	double norm = 1/(double) N; // 1 / #MC cycles
 	double E_mean = E_sum * norm;
 	double E_sqrd_mean = E_sqrd_sum * norm;
