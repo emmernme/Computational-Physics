@@ -2,9 +2,8 @@
 // c++ phase_transitions.cpp -o phase_transitions.cpp -larmadillo -O3 -lomp -std=c++11
 #include "Ising.cpp"
 
-// Requirements: OpenMP (brew install libomp clang-omp)
-//#include <omp.h>
-
+// Requirements: OpenMP ("brew install libomp clang-omp" + "lomp" compiler flag)
+#include <omp.h>
 
 using namespace std;
 using namespace arma;
@@ -15,8 +14,6 @@ int main(){
 	double Tmax = 3;
 	int n = 10;
 	double dT = (Tmax-T0)/(double) n;
-	double J = 1; // Energy scale ?
-	double k_b = 1; // Boltzmann scale ?
 	int N = 5e6;
 
 
