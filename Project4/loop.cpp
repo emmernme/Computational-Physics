@@ -20,7 +20,7 @@ int main(){
   double dT = (Tmax-T0)/(double) n;
   double J = 1; // Energy scale ?
   double k_b = 1; // Boltzmann scale ?
-  int N = 5e7;
+  int N = 1e6;
 
 
   double *T = new double[n];
@@ -35,7 +35,7 @@ int main(){
   mat E_variance   (4, n-1, fill::zeros);
   mat M_variance   (4, n-1, fill::zeros);
   mat specific_heat(4, n-1, fill::zeros);
-  mat suceptibility(4, n-1, fill::zeros);
+  mat susceptibility(4, n-1, fill::zeros);
   */
 
   for(int i = 0; i < n; i++){
@@ -55,7 +55,7 @@ int main(){
       suceptibility(i,k) = get<8>(MonteCarloIsing(N, true, T[k], L[i]));
     }
   }
-  */
+
   double *E_mean       = new double [8];
   double *E_sqrd_mean  = new double [8];
   double *M_mean       = new double [8];
@@ -64,9 +64,31 @@ int main(){
   double *E_variance   = new double [8];
   double *M_variance   = new double [8];
   double *specific_heat= new double [8];
-  double *suceptibility= new double [8];
+  double *susceptibility= new double [8]; */
 
-  MonteCarloIsing(N, true, T[0], L);
+  tuple<double,double,double,double,double,double,double,double,double> data = MonteCarloIsing(N, false, 1.0, 2);
+  double E_mean        = get<0>(data)/ 4;
+  double E_sqrd_mean   = get<1>(data)/ 4;
+  double M_mean        = get<2>(data)/ 4;
+  double M_sqrd_mean   = get<3>(data)/ 4;
+  double M_abs_sum     = get<4>(data)/ 4;
+  double E_variance    = get<5>(data)/ 4;
+  double M_variance    = get<6>(data)/ 4;
+  double specific_heat = get<7>(data)/ 4;
+  double susceptibility = get<8>(data)/4;
+
+cout << "E_mean:" << E_mean<< endl;
+cout << "E_sqrd_mean:" << E_sqrd_mean<< endl;
+cout << "M_mean:" << M_mean<< endl;
+cout << "M_sqrd_mean:" << M_sqrd_mean<< endl;
+cout << "M_abs_sum:" << M_abs_sum << endl;
+
+cout << "Specific heat:" << specific_heat << endl;
+cout << "Susceptibility:" << susceptibility << endl;
+
+
+
+
   /*cout << "E_mean: " << E_mean[i] << endl;
   cout << "M_mean: " << M_mean[i] << endl;
   cout << endl;*/
@@ -88,7 +110,7 @@ int main(){
       cout << setprecision(4) << E_variance(i,k) << setw(15);
       cout << setprecision(4) << M_variance(i,k) << setw(15);
       cout << setprecision(4) << specific_heat(i,k);
-      cout << setw(15) << setprecision(4) << suceptibility(i,k) << endl;
+      cout << setw(15) << setprecision(4) << susceptibility(i,k) << endl;
     }
   }
   */

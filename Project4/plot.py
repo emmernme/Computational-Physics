@@ -11,7 +11,7 @@ first.readline()
 E = []
 M = []
 
-for i in range(5*10**7 - 1):
+for i in range(1*10**6 - 1):
     line = first.readline()
     element = line.split(',')
     E.append(abs(float(element[0])))

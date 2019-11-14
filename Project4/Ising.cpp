@@ -101,7 +101,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	}
 
 	output.close();
-	
+
 	// Calculate the mean values
 	double norm = 1/(double) N; // 1 / #MC cycles
 	double E_mean = E_sum * norm;
@@ -114,9 +114,9 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	double M_variance = (M_sqrd_mean - M_abs_mean*M_abs_mean);
 
 	double specific_heat = E_variance / (T*T);
-	double suceptibility = M_variance / T;
+	double susceptibility = M_variance / T;
 
-	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility);
+	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, susceptibility);
 }
 
 // Calculate the total energy of the system
@@ -135,7 +135,7 @@ double E_tot(mat spins, int L){
 // Calculate the contribution of a single spin and its surroundings to the total energy
 double E_i(mat spins, int x, int y, bool sum, int L){
 	double E_count = 0;
-	
+
 	// Only count spins to the left and above, to avoid counting spin interactions twice
 	// (saves some computing power compared to dividing total energy by two)
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
