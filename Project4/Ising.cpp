@@ -19,7 +19,7 @@ double E_i(mat spins, int x, int y, bool sum, int L);
 double E_tot(mat spins, int L);
 double M(mat spins, int L);
 
-vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> &E_count){
+vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> &E_count, vector<int> &flip_N){
 	// Constants
 	double beta = 1 / T; //  / (k_b * T);
 
@@ -62,17 +62,16 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 
 	int M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
+	int flip_count; // Number of accepted flips
 
 	cout << E_current << endl;
 
 	ofstream output;
 	output.open("E_mean-M_mean.dat");
 
-	//vector<int> E_count;
-	double flip_count; // Number of accepted flips
 
 	// Monte Carlo-loop
-	for (int i = 0; i < N; i++){
+	for (int i = 1; i <= N; i++){
 		int x = (int) (pos(engine) + 0.5); // Random position in the lattice
 		int y = (int) (pos(engine) + 0.5); // Random position in the lattice
 
@@ -90,6 +89,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 			M_current += -spin;
 			E_current += 2*E_xy;
 		}
+		flip_N.push_back(flip_count);
 
 		// Update expectation values
 		E_sum += E_current;
@@ -124,6 +124,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 	double specific_heat = E_variance / (T*T);
 	double suceptibility = M_variance / T;
 
+	vector<double>results;
 	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility});
 
 	return results;
@@ -199,11 +200,16 @@ void printMat(mat a, int L){
 
 /*
 int main(){
-	int n;
 	//cout << "How many MC cycles?" << endl;
 	//cin >> n;
-	for (int n = 1000; n <= 100000; n += 1000){
-		cout << MonteCarloIsing(n, true, 1.0, 2) << " with n=" << n << endl;
+	int N = 50;
+	vector<int> E_count;
+	vector<int> flip_N;
+	MonteCarloIsing(N, true, 1.0, 20, E_count, flip_N);
+	
+	for (int i = 0; i < E_count.size(); i++){
+		cout << "E_count: " << E_count[i] << ", MC cycles: " << i << ", Num. of flips: " << flip_N[i] << endl;
+
 	}
 	return 0;
 }
