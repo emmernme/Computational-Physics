@@ -11,7 +11,7 @@ first.readline()
 E = []
 M = []
 
-for i in range(100000-1):
+for i in range(5*10**7 - 1):
     line = first.readline()
     element = line.split(',')
     E.append(abs(float(element[0])))
@@ -26,17 +26,8 @@ print(E[0], '  ', E[-1])
 print(M[0], '  ', M[-1])
 
 
-"""
-Plot
-plt.stem(x1, E, use_line_collection=True)
-plt.xaxis('E')
-plt.yaxis('# hits')
-"""
-
 plt.plot(x1, E, label='Energy')
-plt.plot(x1, M, label='Magnetization')
+# plt.plot(x1, M, label='Magnetization')
 plt.legend()
 plt.xlabel('# MC cycles')
-plt.show()
-
 plt.show()

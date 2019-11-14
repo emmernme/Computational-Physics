@@ -20,7 +20,7 @@ int main(){
   double dT = (Tmax-T0)/(double) n;
   double J = 1; // Energy scale ?
   double k_b = 1; // Boltzmann scale ?
-  int N = 100000;
+  int N = 5e7;
 
 
   double *T = new double[n];
@@ -66,7 +66,6 @@ int main(){
   double *specific_heat= new double [8];
   double *suceptibility= new double [8];
 
-  MonteCarloIsing(N, true, T[0], L);
   MonteCarloIsing(N, true, T[0], L);
   /*cout << "E_mean: " << E_mean[i] << endl;
   cout << "M_mean: " << M_mean[i] << endl;

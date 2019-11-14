@@ -47,7 +47,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		// Set up initial spins randomly
 		for (int i = 0; i < L; i++){
 			for (int j = 0; j < L; j++){
-				int spin = randomSpin(dist, engine);
+				int spin = (dist(engine) < 0.5) ? -1 : 1;
 				spins(i,j) = spin;
 			}
 		}
@@ -65,28 +65,26 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	int M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
 
-	double E_mean_i[N];
-	double M_mean_i[N];
+	cout << E_current << endl;
 
 	ofstream output;
 	output.open("E_mean-M_mean.dat");
 
 	// Monte Carlo-loop
 	for (int i = 0; i < N; i++){
-		int x = randomPos(pos, engine), y = randomPos(pos, engine); // Random position in the lattice
+		int x = (int) (pos(engine) + 0.5), y = (int) (pos(engine) + 0.5); // Random position in the lattice
+
 		double r = dist(engine); // Random probability of flipping
 
 		// Calculate the surrounding energy contributions
 		double E_xy = E_i(spins, x, y, false, L);
 
-		// double P_ratio = exp(-beta * (E_new - E_xy));
-		double P_ratio = E_trans[E_xy];
-
 		// Metropolis algo
-		if (r <= P_ratio){
-			spins(x,y) *= -1;
-			E_xy *= -1; // Flipping centre spin inverses the energy
-			M_current += spins(x,y);
+		if (r <= E_trans[E_xy]){
+			int spin = spins(x,y);
+			spins(x,y) = -spin;
+			E_xy = -E_xy; // Flipping centre spin inverses the energy
+			M_current += -spin;
 			E_current += 2*E_xy;
 		}
 
@@ -98,9 +96,8 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		M_abs_sum += abs(M_current);
 
 		// Calculate the running mean values (for task c)
-		E_mean_i[i] = E_sum * 1/(double)i;
-		M_mean_i[i] = M_sum * 1/(double)i;
-		output << E_mean_i[i] << "," << M_mean_i[i] << endl;
+		double norm = 1 / (double)i;
+		output << E_sum * norm << "," << M_sum * norm << endl;
 	}
 
 	output.close();
