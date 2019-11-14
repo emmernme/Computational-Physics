@@ -5,28 +5,24 @@ import numpy as np
 """
 For
 """
-first = open('E_mean-M_mean.dat', 'r')
-first.readline()
+first = open('E_count.dat', 'r')
 
-E = []
-M = []
+count = []
+energy = []
 
-for i in first.readlines():
-    line = i.split(',')
-    E.append(abs(float(line[0])))
-    M.append(float(line[1]))
+data = first.readlines()
 
-E = np.array(E)
-M = np.array(M)
+for i in range(len(data)):
+    line = data[i]
+    energy.append(float(line))
 
-x1 = np.linspace(0,len(E), len(E))
-
-print(E[0], '  ', E[-1])
-print(M[0], '  ', M[-1])
+#M = np.array(M)
 
 
-plt.plot(x1, E, label='Energy')
-plt.plot(x1, M, label='Magnetization')
-plt.legend()
-plt.xlabel('# MC cycles')
+
+plt.hist(energy,8, density = True)
+#plt.plot(x1, M, label='Magnetization')
+plt.title('Hits for random initial spin and T=2.4')
+plt.xlabel('Energy')
+plt.ylabel('Counts')
 plt.show()

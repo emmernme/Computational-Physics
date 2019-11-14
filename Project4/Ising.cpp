@@ -109,7 +109,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 	}
 
 	output.close();
-	
+
 	// Calculate the mean values
 	double norm = 1/(double) N; // 1 / #MC cycles
 	double E_mean = E_sum * norm;
@@ -146,7 +146,7 @@ double E_tot(mat spins, int L){
 // Calculate the contribution of a single spin and its surroundings to the total energy
 double E_i(mat spins, int x, int y, bool sum, int L){
 	double E_count = 0;
-	
+
 	// Only count spins to the left and above, to avoid counting spin interactions twice
 	// (saves some computing power compared to dividing total energy by two)
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
@@ -206,7 +206,7 @@ int main(){
 	vector<int> E_count;
 	vector<int> flip_N;
 	MonteCarloIsing(N, true, 1.0, 20, E_count, flip_N);
-	
+
 	for (int i = 0; i < E_count.size(); i++){
 		cout << "E_count: " << E_count[i] << ", MC cycles: " << i << ", Num. of flips: " << flip_N[i] << endl;
 

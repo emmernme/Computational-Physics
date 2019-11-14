@@ -14,13 +14,13 @@ using namespace arma;
 
 int main(){
 	//setting up initial values and linear spacing of T
-	double T0 = 2.4;
-	double Tmax = 2.6;
+	double T0 = 1;
+	double Tmax = 3;
 	int n = 10;
 	double dT = (Tmax-T0)/(double) n;
 	double J = 1; // Energy scale ?
 	double k_b = 1; // Boltzmann scale ?
-	int N = 1e6;
+	int N = 5e6;
 
 
 	double *T = new double[n];
@@ -55,7 +55,7 @@ int main(){
 		suceptibility(i,k) = get<8>(MonteCarloIsing(N, true, T[k], L[i]));
 	}
 	}
-	
+
 	double *E_mean       = new double [8];
 	double *E_sqrd_mean  = new double [8];
 	double *M_mean       = new double [8];
@@ -69,7 +69,7 @@ int main(){
 
 	vector<int> E_count;
 	vector<int> flip_N;
-	vector<double> results = MonteCarloIsing(N, true, 1.0, 20, E_count, flip_N);
+	vector<double> results = MonteCarloIsing(N, true, T0, 20, E_count, flip_N);
 
 	double E_mean        = results[0];
 	double E_sqrd_mean   = results[1];
@@ -89,7 +89,7 @@ int main(){
 		cout << "Energy " << energy.first() << "repeats " << energy.second() << " times." << endl;
 
 	}*/
-
+/*
 	std::map<int, int> energies;
 
     for (auto const &energy : E_count){
@@ -101,12 +101,21 @@ int main(){
     for (auto const &b : energies){
 		E_count_output << b.first << "," << b.second << endl;
 	}
+  E_count_output.close();
+*/
+  ofstream E_count_output;
+  E_count_output.open("E_count.dat");
+  for(int i = 0; i < E_count.size(); i++){
+    E_count_output << E_count[i] << endl;
+  }
+  E_count_output.close();
 
 	ofstream flip_output;
 	flip_output.open("Flips_N.dat");
 	for (int i = 0; i < flip_N.size(); i++){
 		flip_output << flip_N[i] << endl;
 	}
+  flip_output.close();
 
 	for (int i = 0; i < results.size(); i++){
 		cout << results[i] << endl;
