@@ -34,6 +34,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	// Set up system
 	mat spins = mat(L,L);
 	if (random){
+		cout << "Random spins, ";
 		// Set up initial spins randomly
 		for (int i = 0; i < L; i++){
 			for (int j = 0; j < L; j++){
@@ -42,6 +43,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 			}
 		}
 	} else {
+		cout << "All spins +1, ";
 		// Set all spins to +1
 		spins.fill(1);
 	}
@@ -126,10 +128,11 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	E_sqrd_mean *= s_norm;
 	M_sqrd_mean *= s_norm;
 	M_abs_mean 	*= s_norm;
+	double flip_factor = (double) flip_count / (double) N;
 
 	// Prepare results
 	vector<double>results;
-	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility});
+	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility, flip_factor});
 	return results;
 }
 

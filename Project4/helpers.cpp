@@ -7,7 +7,7 @@ double E_i_minimal(mat spins, int x, int y, int L){
 	// Only count spins to the left and above, to avoid counting spin interactions twice
 	// (saves some computing power compared to dividing total energy by two)
 
-	double E_count;
+	double E_count = 0;
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
 		E_count += spins(x, y) * spins(x-1, y);
 	} else {
@@ -36,7 +36,6 @@ double E_i(mat spins, int x, int y, int L){
 	} else {
 		E_count += spins(x, y) * spins(x, 0);
 	}
-
 	return -E_count;
 }
 // Calculate the total energy of the system
@@ -46,10 +45,10 @@ double E_tot(mat spins, int L){
 	// Loop over all the individual spins' energy contributions
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
-			E_count -= E_i_minimal(spins, i, j, L);
+			E_count += E_i_minimal(spins, i, j, L);
 		}
 	}
-	return -E_count;
+	return E_count;
 }
 
 
@@ -76,7 +75,7 @@ void printMat(mat a, int L){
 
 // Print the result-vector with descriptive prefixes
 void printResults(vector<double> results){
-	string desc_map[] = { "<E>", "<E^2>", "<M>", "<M^2>", "<|M|>", "E-var", "M-var", "Spec. heat", "Sucept." };
+	string desc_map[] = { "<E>", "<E^2>", "<M>", "<M^2>", "<|M|>", "E-variance", "M-variance", "Specific heat", "Suceptibility", "Flip factor" };
 
 	for (int i = 0; i < results.size(); i++){
 		cout << desc_map[i] << ": " << results[i] << endl;
