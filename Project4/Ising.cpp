@@ -86,14 +86,14 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 			int spin = spins(x,y);
 			spins(x,y) = -spin;
 			E_xy = -E_xy; // Flipping centre spin inverses the energy
-			M_current += -spin;
+			M_current += 2*(-spin);
 			E_current += 2*E_xy;
 		}
 		flip_N.push_back(flip_count);
 
 		// Update expectation values
 		E_sum += E_current;
-		E_sqrd_sum += E_xy*E_xy;
+		E_sqrd_sum += E_current*E_current;
 		M_sum += M_current;
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
@@ -110,28 +110,35 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 
 	output.close();
 
-	// Calculate the mean values
-	double norm = 1/(double) N; // 1 / #MC cycles
-	double E_mean = E_sum * norm;
-	double E_sqrd_mean = E_sqrd_sum * norm;
-	double M_mean = M_sum * norm;
-	double M_sqrd_mean = M_sqrd_sum * norm;
-	double M_abs_mean = M_abs_sum * norm;
+	// Normalization factors
+	double norm 	= 1/(double) N;
+	double s_norm = 1/(double) (L*L);
 
-	double E_variance = (E_sqrd_mean - E_mean*E_mean);
-	double M_variance = (M_sqrd_mean - M_abs_mean*M_abs_mean);
+	// Calculate the mean values
+	double E_mean 			= E_sum * norm;
+	double E_sqrd_mean 	= E_sqrd_sum * norm;
+	double M_mean		= M_sum * norm;
+	double M_sqrd_mean 	= M_sqrd_sum * norm;
+	double M_abs_mean 	= M_abs_sum * norm;
+
+	double E_variance 	= (E_sqrd_mean - E_mean*E_mean) * s_norm;
+	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean) * s_norm;
 
 	double specific_heat = E_variance / (T*T);
 	double susceptibility = M_variance / T;
 
-<<<<<<< HEAD
-	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, susceptibility);
-=======
+	// Normalize
+	E_mean 		*= s_norm;
+	M_mean 		*= s_norm;
+	E_sqrd_mean *= s_norm;
+	M_sqrd_mean *= s_norm;
+	M_abs_mean 	*= s_norm;
+
+	// Prepare results
 	vector<double>results;
-	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility});
+	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility});
 
 	return results;
->>>>>>> 4a67580669de241548cb98c3a69f1375ea5417a0
 }
 
 // Calculate the total energy of the system
