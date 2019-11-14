@@ -1,18 +1,13 @@
 // Compile using:
-// c++ loop.cpp -o loop.o -larmadillo -O3 -lomp -std=c++11
+// c++ phase_transitions.cpp -o phase_transitions.cpp -larmadillo -O3 -lomp -std=c++11
 #include "Ising.cpp"
+
+// Requirements: OpenMP (brew install libomp clang-omp)
+//#include <omp.h>
 
 
 using namespace std;
 using namespace arma;
-
-void printResults(vector<double> results){
-	string desc_map[] = { "<E>", "<E^2>", "<M>", "<M^2>", "<|M|>", "E-var", "M-var", "Spec. heat", "Sucept." };
-
-	for (int i = 0; i < results.size(); i++){
-		cout << desc_map[i] << ": " << results[i] << endl;
-	}
-}
 
 int main(){
 	//setting up initial values and linear spacing of T
