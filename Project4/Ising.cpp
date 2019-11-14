@@ -13,6 +13,7 @@
 using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
 
+// Function declarations
 void printMat(mat a);
 int randomSpin(uniform_real_distribution<double> dist, mt19937 engine);
 int randomPos(uniform_real_distribution<double> pos, mt19937 engine);
@@ -22,9 +23,8 @@ double M(mat spins, int L);
 
 tuple<double,double,double,double,double,double,double,double,double> MonteCarloIsing(int N, bool random, double T, int L){
 	// Constants
-	//double T = 1.0; // [kT/J]
-	//int L = 2; // Lattice dimension (L x L)
 	double beta = 1 / T; //  / (k_b * T);
+
 	// Set up an array of possible \Delta E transition values, delta_E = {-8, -4, 0, 4, 8};
 	map<int, double> E_trans = {
 	// 	{energy, transition probability}
@@ -76,6 +76,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		int x = randomPos(pos, engine), y = randomPos(pos, engine); // Random position in the lattice
 		double r = dist(engine); // Random probability of flipping
 
+		// Calculate the surrounding energy contributions
 		double E_xy = E_i(spins, x, y, false, L);
 
 		// double P_ratio = exp(-beta * (E_new - E_xy));
@@ -88,6 +89,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 			M_current += spins(x,y);
 			E_current += 2*E_xy;
 		}
+
 		// Update expectation values
 		E_sum += E_current;
 		E_sqrd_sum += E_xy*E_xy;
@@ -95,11 +97,15 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
 
+		// Calculate the running mean values (for task c)
 		E_mean_i[i] = E_sum * 1/(double)i;
 		M_mean_i[i] = M_sum * 1/(double)i;
 		output << E_mean_i[i] << "," << M_mean_i[i] << endl;
 	}
+
 	output.close();
+	
+	// Calculate the mean values
 	double norm = 1/(double) N; // 1 / #MC cycles
 	double E_mean = E_sum * norm;
 	double E_sqrd_mean = E_sqrd_sum * norm;
@@ -119,6 +125,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 // Calculate the total energy of the system
 double E_tot(mat spins, int L){
 	double E_count = 0;
+
 	// Loop over all the individual spins' energy contributions
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
@@ -131,8 +138,9 @@ double E_tot(mat spins, int L){
 // Calculate the contribution of a single spin and its surroundings to the total energy
 double E_i(mat spins, int x, int y, bool sum, int L){
 	double E_count = 0;
-	/* Only count spins to the left and above, to avoid counting spin interactions twice
-	(saves some computing power compared to dividing total energy by two) */
+	
+	// Only count spins to the left and above, to avoid counting spin interactions twice
+	// (saves some computing power compared to dividing total energy by two)
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
 		E_count += spins(x, y) * spins(x-1, y);
 	} else {
@@ -143,6 +151,8 @@ double E_i(mat spins, int x, int y, bool sum, int L){
 	} else {
 		E_count += spins(x, y) * spins(x, L-1);
 	}
+
+	// When calculating the local sum of surrounding energies, we count in all four directions
 	if (!sum){
 		if (x != L-1){ // If not on rightmost edge, add energy contribution from spin on the right
 			E_count += spins(x+1, y) * spins(x, y);
@@ -159,7 +169,7 @@ double E_i(mat spins, int x, int y, bool sum, int L){
 	return -E_count;
 }
 
-// Calculate the total magnetization
+// Calculate the total magnetization (sums all spins in the system)
 double M(mat spins, int L){
 	double M_count = 0;
 	for (int i = 0; i < L; i++){
@@ -170,7 +180,7 @@ double M(mat spins, int L){
 	return M_count;
 }
 
-// Print matrix + the energy
+// Print the matrix
 void printMat(mat a, int L){
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
@@ -178,7 +188,6 @@ void printMat(mat a, int L){
 		}
 		cout << endl;
 	}
-	cout << "E: " << E_tot(a, L) << endl;
 }
 
 // Return -1 or +1 randomly
@@ -190,6 +199,7 @@ int randomSpin(uniform_real_distribution<double> dist, mt19937 engine){
 int randomPos(uniform_real_distribution<double> pos, mt19937 engine){
 	return (int) (pos(engine) + 0.5);
 }
+
 /*
 int main(){
 	int n;
@@ -200,42 +210,4 @@ int main(){
 	}
 	return 0;
 }
-*/
-/*
-Run boy run!
-This world is not made for you
-Run boy run!
-They're trying to catch you
-Run boy run!
-Running is a victory
-Run boy run!
-Beauty lies behind the hillsRun boy run!
-The sun will be guiding you
-Run boy run!
-They're dying to stop you
-Run boy run!
-This race is a prophecy
-Run boy run!
-Break out from society
-Tomorrow is another day
-And you won't have to hide away
-You'll be a man, boy!
-But for now it's time to run
-It's time to run!Run boy run!
-This ride is a journey to
-Run boy run!
-The secret inside of you
-Run boy run!
-This race is a prophecy
-Run boy run!
-And disappear in the treesTomorrow is another day
-And you won't have to hide away
-You'll be a man, boy!
-But for now it's time to run
-It's time to run!
-Tomorrow is another day
-And when the night fades away
-You'll be a man, boy!
-But for now it's time to run
-It's time to run!
 */
