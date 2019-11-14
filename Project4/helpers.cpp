@@ -23,8 +23,10 @@ double E_i_minimal(mat spins, int x, int y, int L){
 
 // Calculate the contribution of a single spin and all of its surroundings to the total energy
 double E_i(mat spins, int x, int y, int L){
+	double E_count = 0;
+	
 	// When calculating the local sum of surrounding energies, we count in all four directions
-	double E_count = -E_i_minimal(spins, x, y, L);
+	E_count -= E_i_minimal(spins, x, y, L);
 
 	if (x != L-1){ // If not on rightmost edge, add energy contribution from spin on the right
 		E_count += spins(x+1, y) * spins(x, y);
@@ -50,7 +52,6 @@ double E_tot(mat spins, int L){
 	}
 	return E_count;
 }
-
 
 // Calculate the total magnetization (sums all spins in the system)
 double M(mat spins, int L){

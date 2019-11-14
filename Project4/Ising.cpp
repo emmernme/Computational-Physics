@@ -7,6 +7,9 @@
 #include <tuple>
 #include <string>
 
+// Requirements: OpenMP ("brew install libomp clang-omp" + "lomp" compiler flag)
+//#include <omp.h>
+
 using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
 #include "helpers.cpp"
@@ -34,7 +37,6 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	// Set up system
 	mat spins = mat(L,L);
 	if (random){
-		cout << "Random spins, ";
 		// Set up initial spins randomly
 		for (int i = 0; i < L; i++){
 			for (int j = 0; j < L; j++){
@@ -43,25 +45,30 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 			}
 		}
 	} else {
-		cout << "All spins +1, ";
 		// Set all spins to +1
 		spins.fill(1);
 	}
 
-	double E_sum, E_sqrd_sum, M_sum, M_sqrd_sum, M_abs_sum;
+	double E_sum = 0.0;
+	double E_sqrd_sum = 0.0;
+	double M_sum = 0.0;
+	double M_sqrd_sum = 0.0;
+	double M_abs_sum = 0.0;
 
 	// Set up the initial magnetisation and energy 
 	int M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
 
-	int flip_count; // Number of accepted flips
+	int flip_count = 0; // Number of accepted flips
+	int counter = 0;
 
 	vector<int> E_counter;
 
-	cout << "E_0: " << E_current << endl;
+
 
 	// Monte Carlo-loop
 	for (int i = 1; i <= N; i++){
+		counter++;
 		int x = (int) (pos(engine) + 0.5); // Random position in the lattice
 		int y = (int) (pos(engine) + 0.5); // Random position in the lattice
 
@@ -96,6 +103,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		}
 	}
 
+	// If we're counting E's, save to file
 	if (count_E){
 		ofstream E_count_output;
 		E_count_output.open("E_count.dat");

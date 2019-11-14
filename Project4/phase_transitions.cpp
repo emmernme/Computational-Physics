@@ -2,7 +2,7 @@
 // c++ phase_transitions.cpp -o phase_transitions.o -larmadillo -O3 -lomp -std=c++11
 #include "Ising.cpp"
 
-// Requirements: OpenMP ("brew install libomp clang-omp" + "lomp" compiler flag)
+// Requirements: OpenMP ("brew install libomp" + "lomp" compiler flag)
 #include <omp.h>
 
 using namespace std;
@@ -15,7 +15,6 @@ int main(){
 	int n = 10;
 	double dT = (Tmax-T0)/(double) n;
 	int N = 5e6;
-
 
 	double *T = new double[n];
 	int L[4] = {40, 60, 80, 100};
