@@ -14,13 +14,13 @@ using namespace arma;
 
 int main(){
   //setting up initial values and linear spacing of T
-  double T0 = 1;
-  double Tmax = 2.3;
+  double T0 = 2.4;
+  double Tmax = 2.6;
   int n = 10;
   double dT = (Tmax-T0)/(double) n;
   double J = 1; // Energy scale ?
   double k_b = 1; // Boltzmann scale ?
-  int N = 5e7;
+  int N = 1e6;
 
 
   double *T = new double[n];
