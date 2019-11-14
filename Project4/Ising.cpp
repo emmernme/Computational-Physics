@@ -6,12 +6,12 @@
 #include <armadillo>
 #include <tuple>
 #include <string>
-#include "helpers.cpp"
 
 using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
+#include "helpers.cpp"
 
-vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> &E_count, vector<int> &flip_N){
+vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E = false){
 	// Constants
 	double beta = 1 / T; //  / (k_b * T);
 
@@ -46,42 +46,40 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 		spins.fill(1);
 	}
 
-	double E_sum = 0.0;
-	double E_sqrd_sum = 0.0;
-	double M_sum = 0.0;
-	double M_sqrd_sum = 0.0;
-	double M_abs_sum = 0.0;
+	double E_sum, E_sqrd_sum, M_sum, M_sqrd_sum, M_abs_sum;
 
+	// Set up the initial magnetisation and energy 
 	int M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
+
 	int flip_count; // Number of accepted flips
 
-	cout << E_current << endl;
+	vector<int> E_counter;
 
-	ofstream output;
-	output.open("E_mean-M_mean.dat");
-
+	cout << "E_0: " << E_current << endl;
 
 	// Monte Carlo-loop
 	for (int i = 1; i <= N; i++){
 		int x = (int) (pos(engine) + 0.5); // Random position in the lattice
 		int y = (int) (pos(engine) + 0.5); // Random position in the lattice
 
-		double r = dist(engine); // Random probability of flipping
-
 		// Calculate the surrounding energy contributions
-		double E_xy = E_i(spins, x, y, false, L);
+		double E_xy = E_i(spins, x, y, L);
 
 		// Metropolis algo
-		if (r <= E_trans[E_xy]){
-			flip_count++;
-			int spin = spins(x,y);
-			spins(x,y) = -spin;
+		// Flip spin if random number [0,1] is <= transition probability
+		if (dist(engine) <= E_trans[E_xy]){
+			flip_count++; // Count each flip
+
+			// Flip the spin
+			int spin = -spins(x,y);
+			spins(x,y) = spin;
+
+			// Calc new local energy and total energy
 			E_xy = -E_xy; // Flipping centre spin inverses the energy
-			M_current += 2*(-spin);
+			M_current += 2*(spin);
 			E_current += 2*E_xy;
 		}
-		flip_N.push_back(flip_count);
 
 		// Update expectation values
 		E_sum += E_current;
@@ -90,24 +88,27 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
 
-		// Count energies to make probability
-		if (i > 0.1 * N){
-			E_count.push_back(E_current);
+		// Count energies to make probability - after 10 % of cycles have completed
+		if (count_E && (i > 0.1 * N)){
+			E_counter.push_back(E_current);
 		}
-
-		// Calculate the running mean values (for task c)
-		double norm = 1 / (double)i;
-		output << E_sum * norm << "," << M_sum * norm << endl;
 	}
 
-	output.close();
+	if (count_E){
+		ofstream E_count_output;
+		E_count_output.open("E_count.dat");
+		for (int i = 0; i < E_counter.size(); i++){
+			E_count_output << E_counter[i] << endl;
+		}
+		E_count_output.close();
+	}
 
 	// Normalization factors
 	double norm 	= 1/(double) N;
-	double s_norm = 1/(double) (L*L);
+	double s_norm 	= 1/(double) (L*L);
 
 	// Calculate the mean values
-	double E_mean 			= E_sum * norm;
+	double E_mean 		= E_sum * norm;
 	double E_sqrd_mean 	= E_sqrd_sum * norm;
 	double M_mean		= M_sum * norm;
 	double M_sqrd_mean 	= M_sqrd_sum * norm;
@@ -129,7 +130,6 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 	// Prepare results
 	vector<double>results;
 	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility});
-
 	return results;
 }
 
