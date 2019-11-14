@@ -122,12 +122,16 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> 
 	double M_variance = (M_sqrd_mean - M_abs_mean*M_abs_mean);
 
 	double specific_heat = E_variance / (T*T);
-	double suceptibility = M_variance / T;
+	double susceptibility = M_variance / T;
 
+<<<<<<< HEAD
+	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, susceptibility);
+=======
 	vector<double>results;
 	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility});
 
 	return results;
+>>>>>>> 4a67580669de241548cb98c3a69f1375ea5417a0
 }
 
 // Calculate the total energy of the system
