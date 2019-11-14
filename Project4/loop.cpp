@@ -66,7 +66,9 @@ int main(){
   double *specific_heat= new double [8];
   double *suceptibility= new double [8];
 
-  MonteCarloIsing(N, true, T[0], L);
+
+  vector<int> E_count;
+  MonteCarloIsing(N, true, T[0], L, E_count);
   /*cout << "E_mean: " << E_mean[i] << endl;
   cout << "M_mean: " << M_mean[i] << endl;
   cout << endl;*/

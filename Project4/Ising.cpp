@@ -15,13 +15,11 @@ using namespace arma; // Unwraps Armadillo-functions
 
 // Function declarations
 void printMat(mat a);
-int randomSpin(uniform_real_distribution<double> dist, mt19937 engine);
-int randomPos(uniform_real_distribution<double> pos, mt19937 engine);
 double E_i(mat spins, int x, int y, bool sum, int L);
 double E_tot(mat spins, int L);
 double M(mat spins, int L);
 
-tuple<double,double,double,double,double,double,double,double,double> MonteCarloIsing(int N, bool random, double T, int L){
+vector<double> MonteCarloIsing(int N, bool random, double T, int L, vector<int> &E_count){
 	// Constants
 	double beta = 1 / T; //  / (k_b * T);
 
@@ -70,9 +68,13 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	ofstream output;
 	output.open("E_mean-M_mean.dat");
 
+	//vector<int> E_count;
+	double flip_count; // Number of accepted flips
+
 	// Monte Carlo-loop
 	for (int i = 0; i < N; i++){
-		int x = (int) (pos(engine) + 0.5), y = (int) (pos(engine) + 0.5); // Random position in the lattice
+		int x = (int) (pos(engine) + 0.5); // Random position in the lattice
+		int y = (int) (pos(engine) + 0.5); // Random position in the lattice
 
 		double r = dist(engine); // Random probability of flipping
 
@@ -81,6 +83,7 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 
 		// Metropolis algo
 		if (r <= E_trans[E_xy]){
+			flip_count++;
 			int spin = spins(x,y);
 			spins(x,y) = -spin;
 			E_xy = -E_xy; // Flipping centre spin inverses the energy
@@ -94,6 +97,11 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 		M_sum += M_current;
 		M_sqrd_sum += M_current*M_current;
 		M_abs_sum += abs(M_current);
+
+		// Count energies to make probability
+		if (i > 0.1 * N){
+			E_count.push_back(E_current);
+		}
 
 		// Calculate the running mean values (for task c)
 		double norm = 1 / (double)i;
@@ -116,7 +124,9 @@ tuple<double,double,double,double,double,double,double,double,double> MonteCarlo
 	double specific_heat = E_variance / (T*T);
 	double suceptibility = M_variance / T;
 
-	return make_tuple(E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility);
+	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_sum, E_variance, M_variance, specific_heat, suceptibility});
+
+	return results;
 }
 
 // Calculate the total energy of the system
@@ -185,16 +195,6 @@ void printMat(mat a, int L){
 		}
 		cout << endl;
 	}
-}
-
-// Return -1 or +1 randomly
-int randomSpin(uniform_real_distribution<double> dist, mt19937 engine){
-	return (dist(engine) < 0.5) ? -1 : 1;
-}
-
-// Return a random position in the grid
-int randomPos(uniform_real_distribution<double> pos, mt19937 engine){
-	return (int) (pos(engine) + 0.5);
 }
 
 /*
