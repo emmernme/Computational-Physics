@@ -43,27 +43,6 @@ int main(){
 		}
 	}
 
-
-/*
-	vector<int> E_count;
-	vector<int> flip_N;
-	cout << "Grid dim (L) = ";
-	cin >> L;
-	cout << "Cycles (N) = ";
-	cin >> N;
-	cout << "Temp (T) = ";
-	cin >> T0;
-
-
-	double E_mean        = results[0];
-	double M_mean        = results[2];
-	double M_sqrd_mean   = results[3];
-	double M_abs_mean    = results[4];
-	double E_variance    = results[5];
-	double M_variance    = results[6];
-	double specific_heat = results[7];
-	double suceptibility = results[8];
-*/
 	//printResults(results);
 
 
