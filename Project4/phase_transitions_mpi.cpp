@@ -17,9 +17,9 @@ int main(int argc, char * argv[]){
 	// Setting up initial values and linear spacing of T
 	double T0 = 2;
 	double Tmax = 2.3;
-	int n = 10;
+	int n = 40;
 	double dT = (Tmax-T0)/(double) n;
-	int N = 3e5;
+	int N = 1e9;
 
 	vector<double> T;
 	int L[4] = {40, 60, 80, 100};
@@ -47,35 +47,8 @@ int main(int argc, char * argv[]){
 	if ((rank == numprocs-1) && (rank_end < n)) rank_end = n;
 
 	double wtime = MPI_Wtime();
-	cout << "Process " << rank << endl;
 	for (int i = 0; i < 4; i++){
 		for (int k = rank_begin; k <= rank_end; k++){
-			double progress = i * k / ((rank_end - rank_begin) * 4);
-			for (int p = 0; p < 100; p++){
-				if (p < progress) cout << "=";
-				else if (i == progress) cout << ">";
-				else cout << " ";
-			}
-
-	for(int progress=0;progress!=100;progress+=std::rand()%20){ //increment progress randomly
-		//Delete the line below and change for loop condition to 'progress<=100' and put something meaningful in for loop progress increment in implementation.
-		if(progress>100) progress=100;
-		std::cout<<"[";
-		for(int i=0;i<100;i++)
-			if(i<progress)
-				std::cout<<'=';
-			else if(i==progress)
-				std::cout<<'>';
-			else
-				std::cout<<' ';
-		std::cout<<"] "<<progress<<" %"<<'\r';
-		std::cout.flush();
-		std::this_thread::sleep_for(std::chrono::milliseconds(500)); //sleep
-		//Delete this line as well in implementation
-		if(progress==100) break;
-	}
-
-
 			vector<double> results = MonteCarloIsing(N, true, T[k], L[i]);
 			E_mean(i,k)        = results[0];
 			M_abs_mean(i,k)    = results[4];
