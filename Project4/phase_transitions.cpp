@@ -3,7 +3,7 @@
 #include "Ising.cpp"
 #include <iostream>
 
-// Requirements: OpenMP ("brew install libomp clang-omp" + "lomp" compiler flag)
+// Requirements: OpenMP ("brew install libomp" + "lomp" compiler flag)
 #include <omp.h>
 
 using namespace std;
