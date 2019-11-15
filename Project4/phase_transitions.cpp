@@ -10,7 +10,7 @@ using namespace std;
 using namespace arma;
 
 int main(){
-	//setting up initial values and linear spacing of T
+	// Setting up initial values and linear spacing of T
 	double T0 = 2;
 	double Tmax = 2.3;
 	int n = 10;
@@ -32,6 +32,8 @@ int main(){
 	for(int i = 0; i <= n; i++){
 		T.push_back(T0+i*dT);
 	}
+
+// PARRRAALLLLELLLLIIIIIIIIZE plz
 
 	for (int i = 0; i < 4; i++){
 		for (int k = 0; k <= n; k++){
