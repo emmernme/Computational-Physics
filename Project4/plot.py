@@ -20,9 +20,10 @@ for i in range(len(data)):
 
 
 
-plt.hist(energy, 8, density = 1)
+plt.hist(energy, 116, density = 1)
 #plt.plot(x1, M, label='Magnetization')
-#plt.axvline(x=-1.23874*400+7.64854, linestyle= 'dashed', color = 'r')
+plt.axvline(-1.23328*400, linestyle= 'dashed', color = 'r', label = 'Mean energy')
+plt.legend()
 #plt.axvline(x=-1.23874*400-7.64854, linestyle= 'dashed', color = 'r')
 plt.title('Hits for random initial spin and T=1')
 plt.xlabel('Energy')
