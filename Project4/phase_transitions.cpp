@@ -33,7 +33,7 @@ int main(){
 		T.push_back(T0+i*dT);
 	}
 
-// PARRRAALLLLELLLLIIIIIIIIZE
+// PARRRAALLLLELLLLIIIIIIIIZE plz
 
 	for (int i = 0; i < 4; i++){
 		for (int k = 0; k <= n; k++){
