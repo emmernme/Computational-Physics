@@ -31,18 +31,16 @@ int main(){
 	double M[N];
 
 	int i;
-	#pragma omp parallel for shared(cycles, E, M) num_threads(8)
-	for (i = 10; i <= 5e4; i += 10){
-		vector<double> results = MonteCarloIsing(i, false, T, L, false);
-		cycles[i/step] = i;
+	#pragma omp parallel for
+	for (i = 1; i <= 5e3; i++){
+		vector<double> results = MonteCarloIsing(i*10, false, T, L, false);
+		cycles[i/step] = i*10;
 		E[i/step] = results[0];
 		M[i/step] = results[2];
 	}
-
 	wtime = omp_get_wtime() - wtime;
   	cout << "Elapsed time in seconds = " << wtime << endl;
 
 	output.close();
-
 	return 0;
 }
