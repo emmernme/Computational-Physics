@@ -11,10 +11,6 @@ int main(){
 	double T = 1.0;
 	int L = 2;
 
-	ofstream output;
-	output.open("MC_cycles_mean_E+M_T=1.dat");
-	output << "N,<E>,<M>" << endl;
-
 	int thread_num = omp_get_max_threads();
 	omp_set_num_threads(thread_num);
 	cout << "The number of processors available = " << omp_get_num_procs() << endl;
@@ -22,8 +18,8 @@ int main(){
 	// defining time and various variables needed for the integration
 	double wtime = omp_get_wtime();
 
-	int max = 5e4;
-	int step = max / 10;
+	int max = 1e5;
+	int step = 1;
 	int N = max / step;
 
 	int cycles[N];
@@ -31,18 +27,22 @@ int main(){
 	double M[N];
 
 	int i;
-	#pragma omp parallel for shared(cycles, E, M) num_threads(8)
-	for (i = 10; i <= 5e4; i += 10){
-		vector<double> results = MonteCarloIsing(i, false, T, L, false);
-		cycles[i/step] = i;
-		E[i/step] = results[0];
-		M[i/step] = results[2];
+	#pragma omp parallel for
+	for (i = 0; i < N; i++){
+		vector<double> results = MonteCarloIsing((i+1)*step, false, T, L, false);
+		cycles[i] = (i+1)*step;
+		E[i] = results[0];
+		M[i] = results[2];
 	}
-
 	wtime = omp_get_wtime() - wtime;
   	cout << "Elapsed time in seconds = " << wtime << endl;
 
+	ofstream output;
+	output.open("MC_cycles_mean_E+M_T=1.dat");
+	output << "N,<E>,<M>" << endl;
+	for (int i = 0; i < N; i++){
+		output << cycles[i] << "," << E[i] << "," << M[i] << endl;
+	}
 	output.close();
-
 	return 0;
 }
