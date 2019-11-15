@@ -8,6 +8,9 @@
 \usepackage{listings}
 \usepackage[font=small,labelsep=none]{caption}
 \usepackage{array}% http://ctan.org/pkg/array
+\usepackage{lipsum}
+\usepackage{subcaption}
+
 
 \setlength{\droptitle}{-10em}
 
@@ -112,43 +115,112 @@ For a 2 dimensional lattice we need 10 000 Monte Carlo cycles in order to achiev
   \end{tabular}
 \end{table}
 
-We have further studied more carefull how many Monte Carlo cycles we need in order to achieve the most likley state for the mean energy and the mean magnetization in a 20 x 20 lattice. Figure \ref{fig:steady_E} shows the results for a lattice where all the spins are up, while in Figure \ref{fig:steady_E_random} the spin matrix is a random matrix. For the random spin configuration the steady state achives around 200 000 Monte Carlo cycles while for the matrix with all spins up we only need a few cycles.
+We have further studied more carefull how many Monte Carlo cycles we need in order to achieve the most likley state for the mean energy and the mean magnetization in a 20 x 20 lattice. Figure \ref{fig:steady_E} shows the results for two different spin matrices, one with all spins up and one random matrix. For the random spin configuration the steady state achives around 200 000 Monte Carlo cycles while for the matrix with all spins up we only need a few cycles.
 
-\begin{figure}[hbt]
-\begin{center}
-    \includegraphics[width=250px]{./plot/L20_1mill.png}
-    \caption{: Energy and magnetization plotted against number of Monte Carlo cycles for a spin matrix with all spins up.}
-    \label{fig:steady_E}
-\end{center}
+\begin{figure}
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/L20_1mill.png}
+    \caption{Start matrix with all spins up. }
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/random_L20_1mill.png}
+    \caption{Start matrix with random spins.}
+\end{subfigure}\hfill}}
+\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when T = 1.0.}
+\label{fig:steady_E}
 \end{figure}
 
-\begin{figure}[hbt]
-\begin{center}
-    \includegraphics[width=250px]{./plot/random_L20_1mill.png}
-    \caption{: Energy and magnetization plotted against number of Monte Carlo cycles for a random spin matrix and T = 1.0.}
-    \label{fig:steady_E_random}
-\end{center}
+If we increase the temperature we excperience that we need several more Monte Carlo cycles to achive the steady state for the energy and the magnetization. Figure \ref{fig:steady_E_highT} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}
+
+\begin{figure}
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/L20_5mill_highT.png}
+    \caption{Start matrix with all spins up. }
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/random_L20_5mill_highT.png}
+    \caption{Start matrix with random spins.}
+\end{subfigure}\hfill}}
+\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when T = 2.4. }
+\label{fig:steady_E_highT}
 \end{figure}
 
-If we increase the temperature we excperience that we need several more Monte Carlo cycles to achive the steady state for the energy and the magnetization. Figure \ref{fig:steady_E_highT} and \ref{fig:steady_E_hihT_random} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up.
+{\renewcommand{\arraystretch}{1.5}
+\begin{table}[h!]
+  \caption{: Estimated equilibration times.}
+    \label{Tab:equilibration_times}
+    \centering
+  \begin{tabular}{c c}
+      Matrix & Equilibration time (sec)\\
+      \hline
+      T = 1.0 in a random spin matrix & 200 000  \\
+      T = 1.0 in a matrix with all spins up & $\approx$ 0 \\
+      T = 2.4 in a random spin matrix & 1 000 000\\
+      T = 2.4 in a matrix with all spins up & 1 000 000\\
+    \hline
+  \end{tabular}
+\end{table}
 
-\begin{figure}[hbt]
-\begin{center}
-    \includegraphics[width=250px]{./plot/L20_5mill_highT.png}
-    \caption{: Energy and magnetization plotted against number of Monte Carlo cycles for a spin matrix with all spins up and T = 2.4. }
-    \label{fig:steady_E_highT}
-\end{center}
+Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively a start matrix with all spins up and a start matrix with random spins.
+
+\begin{figure}
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/number_of_flips.png}
+    \caption{T = 1.0}
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/number_of_flips_highT.png}
+    \caption{T = 2.4}
+\end{subfigure}\hfill}}
+\caption{: Total number of accepted spinconfiguration as a function of Monte Carlo cycles, for a start matrix with all spins up. }
+\label{fig:flips}
 \end{figure}
 
-\begin{figure}[hbt]
-\begin{center}
-    \includegraphics[width=250px]{./plot/random_L20_5mill_highT.png}
-    \caption{: Energy and magnetization plotted against number of Monte Carlo cycles for a random spin matrix and T = 2.4.}
-    \label{fig:steady_E_hihT_random}
-\end{center}
+\begin{figure}
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/random_number_of_flips.png}
+    \caption{T = 1.0}
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/random_number_of_flips_highT.png}
+    \caption{T = 2.4}
+\end{subfigure}\hfill}}
+\caption{: Total number of accepted spinconfiguration as a function of Monte Carlo cycles, for a start matrix with all spins up. }
+\label{fig:flips_random}
 \end{figure}
 
+
+% d)
 The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in figure
+
+\begin{figure}
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=280px]{./plot/histogram_random_lowT.png}
+    \caption{T = 1.0}
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+    \centering
+    \includegraphics[width=300px]{./plot/histogram_random_highT.png}
+    \caption{T = 2.4}
+\end{subfigure}\hfill}}
+\caption{: Propability distribution for counted energies.}
+\label{fig:propability}
+\end{figure}
+
 
 \section{Discussion}
 
@@ -156,11 +228,13 @@ The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in 
 %How many Monte Carlo cycles do you need in order to achieve a good
 %agreeement?
 
-The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice gives a godd compliance to the analytical values. However the numerical values for the magnetization and the susceptibility does not compliance well with the analytical values. The mean magnetization does vary alot more in different calculations because it depends more of how the spins flip. While the energy depends on the square of neighboring spins, the magnetization depends on the sum over all spins, this may be the why we excperience different values for the mean magnetization in different calculations.
+The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice gives a godd compliance to the analytical values. However the numerical values for the magnetization and the susceptibility does not compliance well with the analytical values. The mean magnetization does vary alot more in different calculations because it depends more of how the spins flip. While the energy depends on the square of neighboring spins, the magnetization depends on the sum over all spins, this may be why we excperience different values for the mean magnetization in different calculations.
 
 % c)
-From Figure \ref{steady_E} and \ref{steady_E_random} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase.  
+From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
 
+
+%Vi må kommentere Figure \ref{fig:flips} and Figure %\ref{flips_random}
 
 We can see that the variance is incresing with temperature, that is why we get a propability distribution which is more spread out in energies when the temperature is increasing.
 

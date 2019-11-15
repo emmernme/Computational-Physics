@@ -19,7 +19,7 @@ int main(){
 	cin >> T;
 
 	// Run the MC Ising model and fetch the resulting values
-	vector<double> results = MonteCarloIsing(N, true, T, L, false);
+	vector<double> results = MonteCarloIsing(N, true, T, L, true);
 	printResults(results);
 
 /*
