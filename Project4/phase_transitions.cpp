@@ -15,7 +15,7 @@ int main(){
 	double Tmax = 2.3;
 	int n = 10;
 	double dT = (Tmax-T0)/(double) n;
-	int N = 20;
+	int N = 5e6;
 
 
 	vector<double> T;
