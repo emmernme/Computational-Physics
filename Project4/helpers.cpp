@@ -3,11 +3,11 @@
 */
 
 // Calculate the contribution of the spins above and left of a given position
-double E_i_minimal(mat spins, int x, int y, int L){
+int E_i_minimal(mat spins, int x, int y, int L){
 	// Only count spins to the left and above, to avoid counting spin interactions twice
 	// (saves some computing power compared to dividing total energy by two)
 
-	double E_count = 0;
+	int E_count = 0;
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
 		E_count += spins(x, y) * spins(x-1, y);
 	} else {
@@ -22,8 +22,8 @@ double E_i_minimal(mat spins, int x, int y, int L){
 }
 
 // Calculate the contribution of a single spin and all of its surroundings to the total energy
-double E_i(mat spins, int x, int y, int L){
-	double E_count = 0;
+int E_i(mat spins, int x, int y, int L){
+	int E_count = 0;
 	
 	// When calculating the local sum of surrounding energies, we count in all four directions
 	E_count -= E_i_minimal(spins, x, y, L);
@@ -41,8 +41,8 @@ double E_i(mat spins, int x, int y, int L){
 	return -E_count;
 }
 // Calculate the total energy of the system
-double E_tot(mat spins, int L){
-	double E_count = 0;
+int E_tot(mat spins, int L){
+	int E_count = 0;
 
 	// Loop over all the individual spins' energy contributions
 	for (int i = 0; i < L; i++){
@@ -54,8 +54,8 @@ double E_tot(mat spins, int L){
 }
 
 // Calculate the total magnetization (sums all spins in the system)
-double M(mat spins, int L){
-	double M_count = 0;
+int M(mat spins, int L){
+	int M_count = 0;
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
 			M_count += spins(i, j);

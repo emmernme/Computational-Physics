@@ -49,31 +49,27 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		spins.fill(1);
 	}
 
-	double E_sum = 0.0;
-	double E_sqrd_sum = 0.0;
-	double M_sum = 0.0;
-	double M_sqrd_sum = 0.0;
-	double M_abs_sum = 0.0;
+	int E_sum = 0;
+	int E_sqrd_sum = 0;
+	int M_sum = 0;
+	int M_sqrd_sum = 0;
+	int M_abs_sum = 0;
 
 	// Set up the initial magnetisation and energy 
 	int M_current = M(spins, L);
-	double E_current = E_tot(spins, L);
+	int E_current = E_tot(spins, L);
 
 	int flip_count = 0; // Number of accepted flips
-	int counter = 0;
 
-	vector<int> E_counter;
-
-
+	// vector<int> E_counter;
 
 	// Monte Carlo-loop
 	for (int i = 1; i <= N; i++){
-		counter++;
 		int x = (int) (pos(engine) + 0.5); // Random position in the lattice
 		int y = (int) (pos(engine) + 0.5); // Random position in the lattice
 
 		// Calculate the surrounding energy contributions
-		double E_xy = E_i(spins, x, y, L);
+		int E_xy = E_i(spins, x, y, L);
 
 		// Metropolis algo
 		// Flip spin if random number [0,1] is <= transition probability
@@ -98,20 +94,20 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		M_abs_sum += abs(M_current);
 
 		// Count energies to make probability - after 10 % of cycles have completed
-		if (count_E && (i > 0.1 * N)){
+		/* if (count_E && (i > 0.1 * N)){
 			E_counter.push_back(E_current);
-		}
+		} */
 	}
 
 	// If we're counting E's, save to file
-	if (count_E){
+	/* if (count_E){
 		ofstream E_count_output;
 		E_count_output.open("E_count.dat");
 		for (int i = 0; i < E_counter.size(); i++){
 			E_count_output << E_counter[i] << endl;
 		}
 		E_count_output.close();
-	}
+	} */
 
 	// Normalization factors
 	double norm 	= 1/(double) N;

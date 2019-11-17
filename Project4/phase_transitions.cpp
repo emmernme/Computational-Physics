@@ -34,6 +34,8 @@ int main(){
 	}
 
 // PARRRAALLLLELLLLIIIIIIIIZE plz
+	// defining time and various variables needed for the integration
+	double wtime = omp_get_wtime();
 
 	for (int i = 0; i < 4; i++){
 		for (int k = 0; k <= n; k++){
@@ -44,6 +46,8 @@ int main(){
 			suceptibility(i,k) = results[8];
 		}
 	}
+	wtime = omp_get_wtime() - wtime;
+  	cout << "Elapsed time in seconds = " << wtime << endl;
 
 	//printResults(results);
 
