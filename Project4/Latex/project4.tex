@@ -13,14 +13,6 @@
 \usepackage{float}
 
 
-% Ignorer teite advarsler i LaTeX
-\pretolerance=10000
-\tolerance=10000
-\overfullrule=1mm
-\sloppy
-\hbadness=10000
-
-
 \setlength{\droptitle}{-10em}
 
 \title{Project 4}\vspace{-3ex}
@@ -122,7 +114,7 @@
         \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
         If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
 
-	\subsection*{Programming}
+	\subsection{Programming}
 		In order to calculate the spin energies for different systems, we implement the Ising model using the Monte Carlo method. This is a mostly random method, where we perform a loop over random positions in the system grid of spins and decide whether or not we should flip spins using the Metropolis algorithm. \\
 
 		The most effective way to run this simulation is to loop over one random position at a time and decide if we should flip that one spin or not. Because we can easily calculate the local energy contribution of that one spin, if we keep track of the current enery of the system before flipping, it is easy to calculate the new total energy, so we don't need to loop over the full grid each time we want to find the total energy. \\
@@ -229,7 +221,7 @@
 		\end{tabular}
 	\end{table}
 
-	Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
+	Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
 
 	\begin{figure}[H]
 	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -284,6 +276,38 @@
 	\end{figure}
 
 \subsection{Phase Transitions}
+
+\begin{figure}[H]
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=280px]{./plot/Mean_energy.png}
+        \caption{Mean Energy }
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=280px]{./plot/Mean_magnetization.png}
+        \caption{Mean Magnetization}
+\end{subfigure}\hfill}}
+\caption{:}
+\label{fig:mean}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+\begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=280px]{./plot/specific_heat.png}
+        \caption{Specific Heat}
+\end{subfigure} \hfill %
+\begin{subfigure}{.5\textwidth}
+        \centering
+        \includegraphics[width=280px]{./plot/susceptibility.png}
+        \caption{Susceptibility}
+\end{subfigure}\hfill}}
+\caption{:}
+\label{fig:susc_cap}
+\end{figure}
 
 
 \section{Discussion}
