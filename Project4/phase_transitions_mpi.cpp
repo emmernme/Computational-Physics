@@ -14,7 +14,7 @@ using namespace arma;
 int main(int argc, char * argv[]){
 	// Initial values
 	const int n = 19; // Number of temperature steps -1
-	int N = 1e7; // Number of MC cycles
+	int N = 1e6; // Number of MC cycles
 	const int L[4] = {40, 60, 80, 100}; // Dimensions
 	const int l = 4; // Number of different sizes
 
