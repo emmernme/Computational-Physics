@@ -42,6 +42,8 @@
 \section{Introduction}
 	In this project we will study the Ising model in two dimensions. This model is used to simulate phase transitions in materials. A magnetic material will exhibit a phase transition from a magnetic phase to a phase with zero magnetization when the temperature of the system increases. The temperature where this phase transition occurs is called the critical temperature, $T_C$, where at temperatures above $T_C$, the average magnetization is zero. We will be studying the spins of electrons in a lattice, which is a binary system because each electron only can take two values, spin up or spin down, which we represent by +1 and -1. \\
 
+    \subcaption{Energy of the System}
+
 	The energy we get from the Ising model without an externally applied magnetic field is given by:
 
 	\begin{flalign*}
@@ -49,9 +51,11 @@
 	\end{flalign*}
 
 	where $s_k, s_l = \pm 1$ and represents classical spin values of electrons at position $k$ and position $l$ in a grid. N is the total number of spins (electrons) and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors.
-	
+
 	In the model, we apply periodic boundary conditions, meaning that for electrons on the edge of the 2D grid, their nearest neighbors on the edge side is the electron by the opposite edge. In addition, we assume that we have a ferromagnetic ordering, meaning that $J > 0$.
-	
+
+    \subsection{Phase Transitions}
+
 	The behavior of physical quantities like the mean magnetization, the heat capacity and the susceptibility can be characterized by a power law behavior when the temperature is near $T_C$:
 
 	\begin{flalign*}
@@ -108,10 +112,19 @@
 	\subsection{The Metropolis Algorithm}
 		The Metropolis algorithm uses a propability distribution to obtain a sequence of random samples. In our case it is used to decide if the spins should flip or not. If we have a uniform propability distribution function(PDF), $\omega \in [0,1]$ this is given by:
 
+        \begin{flalign*}
+            \omega &= \frac{P_i}{P_j} = \frac{P_{new\:state}}{P_{previous\: state}}
+             = \frac{e^{-\beta E_i/z}}{e^{-\beta E_j /z}}\\
+             \qquad\\
+            \omega &= e^{-\beta(E_i-E_j)} = e^{-\beta \Delta E}\\
+        \end{flalign*}
+
+        \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
+        If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
 
 	\subsection*{Programming}
 		In order to calculate the spin energies for different systems, we implement the Ising model using the Monte Carlo method. This is a mostly random method, where we perform a loop over random positions in the system grid of spins and decide whether or not we should flip spins using the Metropolis algorithm. \\
-		
+
 		The most effective way to run this simulation is to loop over one random position at a time and decide if we should flip that one spin or not. Because we can easily calculate the local energy contribution of that one spin, if we keep track of the current enery of the system before flipping, it is easy to calculate the new total energy, so we don't need to loop over the full grid each time we want to find the total energy. \\
 
 		In the Ising model, we know that when $N \rightarrow \infty$, the system should reach equilibrium. For our model, N is the number of Monte Carlo cycles, so we want to keep N as large as possible while still being able to run the calculations in a reasonable amount of time. This means we need to optimize our Monte Carlo loop as much as possible.\\
@@ -132,15 +145,15 @@
 		\begin{equation}
 			r \leq e^{-\beta \Delta E}
 		\end{equation}
-		
-		This, again, can be simplified to say that as long as $\Delta E \leq 0$, accept the flip, to avoid having to deal with the random number at all, saving some time. 
+
+		This, again, can be simplified to say that as long as $\Delta E \leq 0$, accept the flip, to avoid having to deal with the random number at all, saving some time.
 
 		These simplifications should make our code run quite fast, in theory, fast enough that we don't need to parallelize the Monte Carlo loop itself. However, if we want to run multiple Monte Carlo loops of millions or billions of cycles, we should definitely parallelize in order to utilze our full computing power.
 
 		In this project, we parallelize using Open MPI, dividing the different Monte Carlo loops among the processors we have available, and feed the results back to the main process for analysis.
-		
+
 \section{Results}
-	In order to test our algorithm and its precision, we compare the analytical values of the expectation values of the energy and magnetization to our program's equivalent values. We ran the test by starting with a low number of MC cycles and increasing the number gradually until we got a good agreement. 
+	In order to test our algorithm and its precision, we compare the analytical values of the expectation values of the energy and magnetization to our program's equivalent values. We ran the test by starting with a low number of MC cycles and increasing the number gradually until we got a good agreement.
 	For a 2x2 lattice, we approximately need 10 000 Monte Carlo cycles in order to achieve a good agreement with the analytical values of the system. Using 10 000 MC cycles, we get $\left<E\right> = -7.9864 J$, which is only $0.007814 J$ from the analytical value. The values described in the sections above are represented in Table \ref{Tab: values}, where we have set $J/k_BT =\beta J = 1$. The calculations for the analytical values can be found in the Appendix.
 
 	{\renewcommand{\arraystretch}{1.5}
@@ -161,8 +174,9 @@
 		\end{tabular}
 	\end{table}
 
+\subsection{Number of Monte Carlo Cycles and Equilibration Times}
 	In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix.
-	
+
 	For a matrix with a random spin configuration at $T=1.0$, we reach steady state at around 200 000 Monte Carlo cycles, while for the matrix with all spins up we seemingly only need a few cycles.
 
 	\begin{figure}[H]
@@ -249,7 +263,7 @@
 	\label{fig:flips_random}
 	\end{figure}
 
-
+\subsection{Propability Distribution}
 	% d)
 	The probability distribution of the energy for $T = 1.0$ and $T = 2.4$ is shown in figure \ref{fig:probability}
 
@@ -269,6 +283,8 @@
 	\label{fig:probability}
 	\end{figure}
 
+\subsection{Phase Transitions}
+
 
 \section{Discussion}
 
@@ -277,7 +293,7 @@
 	%agreeement?
 
 	The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice is in good agreement with the analytical values. However, the numerical values for the magnetization and the susceptibility does not.
-	
+
 	The mean magnetization varies a lot in different calculations, because the magnetization is heavily dependent on each single spin flip. While the energy dependence on each flip is the square value of the product of the neighboring spins, the magnetization depends on the sum of all spins. This might be why we experience different values for the mean magnetization in different calculations.
 
 	% c)
@@ -291,7 +307,7 @@
 
 
 \section{Appendix}
-	\subsection{Degenerated energies and magnetization}
+	\subsection{Degenerated Energies and Magnetization}
 
 		When calculating the degenerate energies for a 2x2 lattice, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
 		The case for all spins up looks like this:
@@ -318,7 +334,7 @@
 			M_i=\sum_{j=1}^{4} (1 + 1 + 1 +1) = 4
 		\end{flalign*}
 
-	\subsection{The partition function}
+	\subsection{The Partition Function}
 		When we known the values for all the degenerate energies we can calculate the value of the partition function.
 		\begin{flalign*}
 			&z = \sum\limits_{i=1}^{2^n}e^{-\beta E_i}\\
@@ -329,7 +345,7 @@
 			&z = 2e^{8 \beta J} + 2e^{-8 \beta J} + 16
 		\end{flalign*}
 
-	\subsection{Expectation values for the energy}
+	\subsection{Expectation Values for the Energy}
 		The partition function is used to calculate the expectation value of the energy, $\left<E\right>$.
 
 		\begin{flalign*}
@@ -356,7 +372,7 @@
 			&= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
 		\end{flalign*}
 
-	\subsection{Expectation values for the magnetization}
+	\subsection{Expectation Values for the Magnetization}
 		The absolute value of the mean magnetization is given by
 		\begin{flalign*}
 			\left<|M(T)|\right> = \frac{\sum \limits{_i^{2^4}} |M_i| e^{-\beta E_i}}{z}
@@ -374,7 +390,7 @@
 			\left<|M(T)|^2\right> &= \frac{32e^{8\beta J} + 32}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16} = 16\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8}
 		\end{flalign*}
 
-	\subsection{Heat capacity}
+	\subsection{Heat Capacity}
 		We use the expectation values of the energy to calculate the variance:
 		\begin{flalign*}
 			\sigma^2_E &= \left<E^2\right> - \left<E\right>^2\\
