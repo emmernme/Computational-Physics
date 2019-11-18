@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 
 """
 For
 """
-
-file = open('stabilisation.dat', 'r')
+filename = sys.argv[1]
+file = open(filename, 'r')
 
 labels = file.readline()
 labels = labels.split(",")
@@ -27,10 +28,10 @@ plt.plot(N, E, label=labels[1])
 plt.title('Stabilisation of energy')
 plt.xlabel('MC cycles')
 plt.legend()
-plt.savefig("E_stabilisation.png", dpi=300)
+plt.savefig("E_"+ filename +".png", dpi=300)
 plt.show()
 
 plt.plot(N, M, label=labels[2])
 plt.title('Stabilisation of magnetisation')
-plt.savefig("M_stabilisation.png", dpi=300)
+plt.savefig("M_"+ filename +".png", dpi=300)
 plt.show()
