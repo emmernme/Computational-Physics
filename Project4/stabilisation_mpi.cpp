@@ -13,14 +13,14 @@ using namespace arma;
 
 int main(int argc, char * argv[]){
 	// Initial values
-	const int n = 100; // Number of cycle steps -1
+	const int n = 1000; // Number of cycle steps -1
 	const int L = 20; // Dimension
-	const int T = 1.0; // Temp
+	double T = 2.4; // Temp
 
 	// Setting up initial values and linear spacing of T
 	vector<double> MC;
-	double MC0 = 1e2;
-	double MCmax = 1e6;
+	double MC0 = 0;
+	double MCmax = 1e5;
 	double dMC = (MCmax-MC0)/(double) n;
 	for (int i = 0; i <= n; i++){
 		MC.push_back(MC0+i*dMC);
@@ -76,11 +76,9 @@ int main(int argc, char * argv[]){
 		ofstream output;
 		output.open("stabilisation.dat");
 
-		for (int k = 0; k <= n; k++){
-			output << "N,<E>,<M>" << endl;
-			for (int i = 0; i <= n; i++){
-				output << MC[i] << "," << E_mean[i] << "," << M_abs_mean[i] << endl;
-			}
+		output << "N,<E>,<M>" << endl;
+		for (int i = 0; i <= n; i++){
+			output << MC[i] << "," << E_mean[i] << "," << M_abs_mean[i] << endl;
 		}
 		output.close();
 	}
