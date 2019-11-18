@@ -1,6 +1,6 @@
 #!/bin/bash
 # Job name
-#SBATCH --job-name=RunZr94
+#SBATCH --job-name=Phase_transitions_FYS3150
 
 # Project
 #SBATCH  --account=nn2977k
@@ -37,7 +37,7 @@ cp $SUBMITDIR/veff-sr88pn.dat $SCRATCH
 # Ensure the checkpoint file is copied back, no matter how
 # we terminate (unless the node crashes).
 
-chkfile NEWJUNE24-Zr94RANK0-result.dat
+chkfile phase_transitions.dat
 
 ##     chkfile  -n 4 Zr94RANK0-eigen-vectors.dat1
 

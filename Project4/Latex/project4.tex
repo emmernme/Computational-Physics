@@ -10,6 +10,7 @@
 \usepackage{array}% http://ctan.org/pkg/array
 \usepackage{lipsum}
 \usepackage{subcaption}
+\usepackage{float}
 
 
 \setlength{\droptitle}{-10em}
@@ -21,8 +22,11 @@
 \begin{document}
 \maketitle
 
+\qquad\\\qquad\\\qquad\\\qquad\\\qquad\\\qquad\\\qquad\\
+
 
 \section{Abstract}
+The Ising model in two dimensions has been used to simulate phase transitions in a magnetic system. We have used Monte Carlo and the Metropolis algorithm and our results showes that the number of Monte Carlo cycles wee need to reach equilibrium depends on the spin configuration in the start matrix and also on the temperature. We have estimated the
 
 \newpage
 
@@ -33,6 +37,8 @@
 \section{Introduction}
 In this project we will study the Ising model in two dimensions. This is a model which is used to simulate phase transitions. The model exhibits a phase transition from a magnetic phase to a phase with zero magnetization. The temperature where this phase transition occurs is called the critical temperature, $T_C$. Above this temperature the average magnetization is zero. We study electrons in a lattice which is a binary system because each electron only can take two values, spin up or spin down. \\
 
+\subsection{Energy of the System}
+
 The energy we get from the Ising model without an externally applied magnetic field is given by:
 
 \begin{flalign*}
@@ -41,6 +47,7 @@ The energy we get from the Ising model without an externally applied magnetic fi
 
 where $s_k, s_l = \pm 1$ and represents classical spin values. N is the total number of spins and J is a coupling constant expressing the strenght of the interactions between neighboring spins. $<kl>$ indicates that we sum over the spins of the nearest neighbors. We apply periodic boundry conditions as well as the Metropolis algorithm. We also assume that we have a ferromagnetic ordering, so $J > 0$.\\
 
+\subsection{Phase Transitions}
 The behavior og physical quantities like the mean magnetization, the heat capacity and the susceptibility can be characterized by a power law behavior when the temperature is near $T_C$. This gives:
 
 \begin{flalign*}
@@ -94,6 +101,19 @@ The calculations for the degenerated energies and for the magnetization for 16 d
 
 We have used the values in Table \ref{Tab: EogM} to calculate, the expectationvalues for the energy and the mean magnetization as well. These values have then been used to calculate the variance for the two physical quantities. The variance for the energi and the mean mean magnetization have respectively been used to calculate the heat capacity $C_v &= \sigma^2_E/k_BT^2$ and the susceptibility $ \chi = \sigma_M^2/k_BT$
 
+\subsection{The Metropolis Algorithm}
+The Metropolis algorithm uses a propability distribution to obtain a sequence of random samples. In our case it is used to decide if the spins should flip or not. If we have a uniform propability distribution function(PDF), $\omega \in [0,1]$ this is given by:
+
+\begin{flalign*}
+    \omega &= \frac{P_i}{P_j} = \frac{P_{new\:state}}{P_{previous\: state}}
+     = \frac{e^{-\beta E_i/z}}{e^{-\beta E_j /z}}\\
+     \qquad\\
+    \omega &= e^{-\beta(E_i-E_j)} = e^{-\beta \Delta E}\\
+\end{flalign*}
+
+\noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
+If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
+
 \section{Results}
 For a 2 dimensional lattice we need 10 000 Monte Carlo cycles in order to achieve a good agreement, then the mean value of the energy is -7.9864, which is a differnce of 0.007814 from the analytical value. The values described in the sections above are represented in Table \ref{Tab: values} we have set $J/k_BT =\beta J = 1$. The calculations for the analytical values can be found in the Appendix.
 
@@ -115,9 +135,11 @@ For a 2 dimensional lattice we need 10 000 Monte Carlo cycles in order to achiev
   \end{tabular}
 \end{table}
 
+\subsection{Number of Monte Carlo Cycles and Equilibration Times}
+
 We have further studied more carefull how many Monte Carlo cycles we need in order to achieve the most likley state for the mean energy and the mean magnetization in a 20 x 20 lattice. Figure \ref{fig:steady_E} shows the results for two different spin matrices, one with all spins up and one random matrix. For the random spin configuration the steady state achives around 200 000 Monte Carlo cycles while for the matrix with all spins up we only need a few cycles.
 
-\begin{figure}
+\begin{figure}[H]
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -135,7 +157,7 @@ We have further studied more carefull how many Monte Carlo cycles we need in ord
 
 If we increase the temperature we excperience that we need several more Monte Carlo cycles to achive the steady state for the energy and the magnetization. Figure \ref{fig:steady_E_highT} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}
 
-\begin{figure}
+\begin{figure}[H]
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -152,7 +174,7 @@ If we increase the temperature we excperience that we need several more Monte Ca
 \end{figure}
 
 {\renewcommand{\arraystretch}{1.5}
-\begin{table}[h!]
+\begin{table}[H]
   \caption{: Estimated equilibration times.}
     \label{Tab:equilibration_times}
     \centering
@@ -167,9 +189,9 @@ If we increase the temperature we excperience that we need several more Monte Ca
   \end{tabular}
 \end{table}
 
-Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively a start matrix with all spins up and a start matrix with random spins.
+Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively a start matrix with all spins up and a start matrix with random spins.
 
-\begin{figure}
+\begin{figure}[H]
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -185,7 +207,7 @@ Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total num
 \label{fig:flips}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[H]
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -202,10 +224,11 @@ Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total num
 \end{figure}
 
 
+\subsection{Propability Distribution}
 % d)
-The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in figure
+The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in figure \ref{fig:propability}.
 
-\begin{figure}
+\begin{figure}[H]
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
 \begin{subfigure}{.5\textwidth}
     \centering
@@ -221,6 +244,9 @@ The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in 
 \label{fig:propability}
 \end{figure}
 
+\subsection{Phase Transitions}
+
+
 
 \section{Discussion}
 
@@ -231,7 +257,7 @@ The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in 
 The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice gives a godd compliance to the analytical values. However the numerical values for the magnetization and the susceptibility does not compliance well with the analytical values. The mean magnetization does vary alot more in different calculations because it depends more of how the spins flip. While the energy depends on the square of neighboring spins, the magnetization depends on the sum over all spins, this may be why we excperience different values for the mean magnetization in different calculations.
 
 % c)
-From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
+From Figure \ref{fig:steady_E} and \ref{fig:steady_E_highT} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
 
 
 %Vi må kommentere Figure \ref{fig:flips} and Figure %\ref{flips_random}
@@ -239,10 +265,11 @@ From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the ene
 We can see that the variance is incresing with temperature, that is why we get a propability distribution which is more spread out in energies when the temperature is increasing.
 
 \section{Conclusion}
-
+We have
 
 \section{Appendix}
-\subsection{Degenerated energies and magnetization}
+
+\subsection{Degenerated Energies and Magnetization}
 
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
 The case for all spin up looks like this
@@ -269,7 +296,7 @@ which sums over all spins for a given configuration $i$. For the same spinconfig
   M_i=\sum_{j=1}^{4} (1 + 1 + 1 +1) = 4
 \end{flalign*}
 
-\subsection{The partition function}
+\subsection{The Partition Function}
 When we known the values for all the degenerate energies we can calculate the value of the partian function.
 \begin{flalign*}
   &z = \sum\limits_{i=1}^{2^n}e^{-\beta E_i}\\
@@ -280,7 +307,7 @@ When we known the values for all the degenerate energies we can calculate the va
   &z = 2e^{8 \beta J} + 2e^{-8 \beta J} + 16
 \end{flalign*}
 
-\subsection{Expectationvalues for the energy}
+\subsection{Expectationvalues for the Energy}
 This gives us the ability to calculate the expectationvalue of the energy $\left<E\right>$
 
 \begin{flalign*}
@@ -307,7 +334,7 @@ At the same time we calculate $\left<E^2\right>$
   &= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
 \end{flalign*}
 
-\subsection{Expectationvalues for the magnetization}
+\subsection{Expectationvalues for the Magnetization}
 The absolute value of the mean magnetization is given by
 \begin{flalign*}
   \left<|M(T)|\right> = \frac{\sum \limits{_i^{2^4}} |M_i| e^{-\beta E_i}}{z}
