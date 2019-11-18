@@ -1,12 +1,13 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 
 
 """
 For
 """
-
-file = open('MC_cycles_mean_E+M_T=1.dat', 'r')
+filename = sys.argv[1]
+file = open(filename, 'r')
 
 labels = file.readline()
 labels = labels.split(",")
@@ -24,8 +25,13 @@ for i in range(len(data)):
 
 
 plt.plot(N, E, label=labels[1])
-#plt.plot(N, M, label=labels[2])
-plt.title('Stabilisation of energy and magnetisation')
+plt.title('Stabilisation of energy')
 plt.xlabel('MC cycles')
 plt.legend()
+plt.savefig("E_"+ filename +".png", dpi=300)
+plt.show()
+
+plt.plot(N, M, label=labels[2])
+plt.title('Stabilisation of magnetisation')
+plt.savefig("M_"+ filename +".png", dpi=300)
 plt.show()

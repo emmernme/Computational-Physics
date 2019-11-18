@@ -13,15 +13,15 @@ using namespace arma;
 
 int main(int argc, char * argv[]){
 	// Initial values
-	const int n = 40; // Number of temperature steps -1
-	int N = 1e6; // Number of MC cycles
-	int L[4] = {40, 60, 80, 100}; // Dimensions
+	const int n = 19; // Number of temperature steps -1
+	int N = 1e7; // Number of MC cycles
+	const int L[4] = {40, 60, 80, 100}; // Dimensions
 	const int l = 4; // Number of different sizes
 
 	// Setting up initial values and linear spacing of T
 	vector<double> T;
-	double T0 = 2;
-	double Tmax = 2.6;
+	double T0 = 2.0;
+	double Tmax = 2.8;
 	double dT = (Tmax-T0)/(double) n;
 	for (int i = 0; i <= n; i++){
 		T.push_back(T0+i*dT);
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]){
 	if ((rank == numprocs-1) && (rank_end < n)) rank_end = n;
 
 	// Set up a progress bar
-	ProgressBar progressBar((l*(n+1))/3, 80);
+	ProgressBar progressBar((4*l*(n+1))/6, 80);
 
 	double wtime = MPI_Wtime();
 	for (int i = 0; i < l; i++){ // Loop over the dimensions

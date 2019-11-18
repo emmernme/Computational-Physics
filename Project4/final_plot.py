@@ -9,14 +9,15 @@ infile = open('phase_transitions.dat', 'r')
 infile.readline()
 infile.readline()
 infile.readline()
+T_steps = 20
 
-E_mean = np.zeros((4,40))
-M_mean = np.zeros((4,40))
-specific_heat = np.zeros((4,40))
-suceptibility = np.zeros((4,40))
+E_mean = np.zeros((4,T_steps))
+M_mean = np.zeros((4,T_steps))
+specific_heat = np.zeros((4,T_steps))
+suceptibility = np.zeros((4,T_steps))
 
 
-for k in range(40):
+for k in range(T_steps):
     for i in range(4):
         data = infile.readline()
         line = data.split()
@@ -27,7 +28,7 @@ for k in range(40):
     infile.readline()
     infile.readline()
 
-T = np.linspace(2, 2.6, 40)
+T = np.linspace(2.0, 3.5, T_steps)
 
 
 plt.plot(T, E_mean[0], label='L=40')
@@ -38,6 +39,7 @@ plt.title('Mean energy')
 plt.legend()
 plt.xlabel('Temperature')
 plt.ylabel('Energy')
+plt.savefig("Mean_E.png", dpi=300)
 plt.show()
 
 plt.plot(T, M_mean[0],label='L=40')
@@ -48,6 +50,7 @@ plt.title('Mean magnetization')
 plt.legend()
 plt.xlabel('Temperature')
 plt.ylabel('magnetization')
+plt.savefig("Mean_M.png", dpi=300)
 plt.show()
 
 plt.plot(T, specific_heat[0], label='L=40')
@@ -58,6 +61,7 @@ plt.title(r'Specific Heat ($C_v$)')
 plt.legend()
 plt.xlabel('Temperature')
 plt.ylabel('Specific heat')
+plt.savefig("Specific_heat.png", dpi=300)
 plt.show()
 
 plt.plot(T, suceptibility[0], label='L=40')
@@ -68,4 +72,5 @@ plt.title('Susceptibility')
 plt.legend()
 plt.xlabel('Temperature')
 plt.ylabel('Susceptibility')
+plt.savefig("Susceptibility.png", dpi=300)
 plt.show()
