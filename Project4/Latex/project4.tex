@@ -94,6 +94,19 @@ The calculations for the degenerated energies and for the magnetization for 16 d
 
 We have used the values in Table \ref{Tab: EogM} to calculate, the expectationvalues for the energy and the mean magnetization as well. These values have then been used to calculate the variance for the two physical quantities. The variance for the energi and the mean mean magnetization have respectively been used to calculate the heat capacity $C_v &= \sigma^2_E/k_BT^2$ and the susceptibility $ \chi = \sigma_M^2/k_BT$
 
+\subsection{The Metropolis algorithm}
+The Metropolis algorithm uses a propability distribution to obtain a sequence of random samples. In our case it is used to decide if the spins should flip or not. If we have a uniform propability distribution function(PDF), $\omega \in [0,1]$ this is given by:
+
+\begin{flalign*}
+    \omega &= \frac{P_i}{P_j} = \frac{P_{new\:state}}{P_{previous\: state}}
+     = \frac{e^{-\beta E_i/z}}{e^{-\beta E_j /z}}\\
+     \qquad\\
+    \omega &= e^{-\beta(E_i-E_j)} = e^{-\beta \Delta E}\\
+\end{flalign*}
+
+\noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
+If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
+
 \section{Results}
 For a 2 dimensional lattice we need 10 000 Monte Carlo cycles in order to achieve a good agreement, then the mean value of the energy is -7.9864, which is a differnce of 0.007814 from the analytical value. The values described in the sections above are represented in Table \ref{Tab: values} we have set $J/k_BT =\beta J = 1$. The calculations for the analytical values can be found in the Appendix.
 
@@ -203,7 +216,7 @@ Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total num
 
 
 % d)
-The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in figure
+The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in figure \ref{fig:propability}.
 
 \begin{figure}
 \makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -231,7 +244,7 @@ The propability distribution for the energy for T = 1.0 and T = 2.4 is shown in 
 The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice gives a godd compliance to the analytical values. However the numerical values for the magnetization and the susceptibility does not compliance well with the analytical values. The mean magnetization does vary alot more in different calculations because it depends more of how the spins flip. While the energy depends on the square of neighboring spins, the magnetization depends on the sum over all spins, this may be why we excperience different values for the mean magnetization in different calculations.
 
 % c)
-From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
+From Figure \ref{fig:steady_E} and \ref{fig:steady_E_highT} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration and T = 1.0. When we increase the temperature the number of Monte Carlo cycles we need to get a good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
 
 
 %Vi må kommentere Figure \ref{fig:flips} and Figure %\ref{flips_random}
@@ -239,9 +252,10 @@ From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the ene
 We can see that the variance is incresing with temperature, that is why we get a propability distribution which is more spread out in energies when the temperature is increasing.
 
 \section{Conclusion}
-
+We have
 
 \section{Appendix}
+
 \subsection{Degenerated energies and magnetization}
 
 When calculating the degenerate energies for the case of 2x2, we start with the equation $E_i=-J\sum\limits_{\left<kl\right>}^{2}s_ks_l$\\
