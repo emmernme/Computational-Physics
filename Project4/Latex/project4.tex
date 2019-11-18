@@ -254,7 +254,7 @@
 		\label{fig:steady_M_highT}
 		\end{figure}
 
-
+		The estimation of when the system reaches equilibrium for the different initial conditions is found in the following table, \ref{Tab:equilibration_times}.
 
 
 		{\renewcommand{\arraystretch}{1.5}
@@ -262,7 +262,7 @@
 			\caption{: Estimated equilibration times.}
 				\label{Tab:equilibration_times}
 				\centering
-			\begin{tabular}{c c}
+			\begin{tabular}{c c c}
 					Temperature & Matrix & Equilibration time (sec)\\
 					\hline
 					$1.0$ & Random spins & 200 000  \\
@@ -273,7 +273,7 @@
 			\end{tabular}
 		\end{table}
 
-		Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
+		Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins. It is worth mentioning that these plots represent how many flips that are done on the whole lattice per monte carlo cycle. Therefore the values are sub zero.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -306,7 +306,7 @@
 		\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
 		\label{fig:flips_random}
 		\end{figure}
-
+\newpage
 	\subsection{Probability Distribution}
 		% d)
 		The probability distribution of the energy for $T = 1.0$ and $T = 2.4$ is shown in figure \ref{fig:probability}
@@ -332,24 +332,27 @@
 
 		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete. For
 
-
+\newpage
 \section{Discussion}
 
 	%b) Compare your results with the expressions from a) for a temperature T = 1.0 (in units of kT /J).
 	%How many Monte Carlo cycles do you need in order to achieve a good
 	%agreeement?
 
-	The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice is in good agreement with the analytical values. However, the numerical values for the magnetization and the susceptibility does not.
+	The numerical value for $<E>, <E^2>$ and $C_v$ for a 2x2 lattice is in good agreement with the analytical values. However, the numerical values for the magnetization and the susceptibility does not. Our theory why this is not correct values is because of som error in the normalization and calculation of these values.
 
-	The mean magnetization varies a lot in different calculations, because the magnetization is heavily dependent on each single spin flip. While the energy dependence on each flip is the square value of the product of the neighboring spins, the magnetization depends on the sum of all spins. This might be why we experience different values for the mean magnetization in different calculations.
+	The mean magnetization varies a lot in different calculations, because the magnetization is heavily dependent on each single spin flip. While the energy dependence on each flip is the square value of the product of the neighboring spins, the magnetization depends on the sum of all spins. This might be why we experience different values for the mean magnetization in different calculations.\\
 
 	% c)
-	From Figure \ref{fig:steady_E} and \ref{fig:steady_E_random} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration, when $T = 1.0$. When we increase the temperature, the number of Monte Carlo cycles we need to get good results also increase. For a higher temperature we can also see that the energy in the system increases. As mentioned above, the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
+	From Figure \ref{fig:steady_E} and \ref{fig:steady_M} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration, when $T = 1.0$. When we increase the temperature, the number of Monte Carlo cycles we need to get good results also increases. For a higher temperature we can also see that the energy in the system increases. Although the magnetization never seems to stabelize for the initial random matix. As mentioned above, the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
 
 
-	%Vi må kommentere Figure \ref{fig:flips} and Figure %\ref{flips_random}
-	We can see that the variance increases with temperature, explaining why we get a more spread out probability distribution of the energy when the temperature increases.
+	 When looking at Figure \ref{fig:flips} and Figure \ref{fig:flips_random} we can easier see when the system stabelizes. In the beginning of the calculation we can se that there is some change in number of flips but it evens out fairly fast. When these plots even out we can consider that as a stable configuration since very few proposed flips is accepted. That means we have reached an equilibrium where the energy is as low as possible.\\
 
+
+	For the probability distribution we have highlighted the mean energy when T=2.4. We coose not to do this for T=1 since this is clearly around -800. This is as expected since for low temperature none of the atoms will be recieving thermal energy from its suroundings. Therfore the expected value for the system should be the lowest possible value (with some exeptions). For T=2.4 we can se that we have a nice gaussian distribution around the mean energy value. When the temperature increases some of the atoms will recieve energy from the surroundings and it will be more random how much energy each of the configurations will have. With this in mind it is likley that we will have a ditribution looking like this. Because of some trouble getting the right value for the variance for the energy this is not highlighted in the plot. If there was good numbers for the variation it should take up around 60\% of the total area of the distribution.
+
+\newpage
 \section{Conclusion}
 
 
