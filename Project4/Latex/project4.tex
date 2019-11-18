@@ -11,14 +11,7 @@
 \usepackage{lipsum}
 \usepackage{subcaption}
 \usepackage{float}
-
-
-% Ignorer teite advarsler i LaTeX
-\pretolerance=10000
-\tolerance=10000
-\overfullrule=1mm
-\sloppy
-\hbadness=10000
+\usepackage{hyperref}
 
 
 \setlength{\droptitle}{-10em}
@@ -122,7 +115,7 @@
         \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
         If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
 
-	\subsection*{Optimization}
+	\subsection{Optimization}
 		In order to calculate the spin energies for different systems, we implement a discretised Ising model using the Monte Carlo method. This is a mostly random method, where we perform a loop over random positions in the system grid of spins and decide whether or not we should flip spins using the Metropolis algorithm. \\
 
 		The most effective way to run this simulation is to loop over one random position at a time and decide if we should flip that single spin or not. Because we can easily calculate the local energy contribution of that one spin, if we keep track of the current enery of the system before flipping, it is easy to calculate the new total energy, so we don't need to loop over the full grid each time we want to find the total energy. \\
@@ -152,7 +145,7 @@
 
 		In this project, we parallelize using Open MPI, dividing the different Monte Carlo loops among the processors we have available, and feed the results back to the main process for analysis.
 
-	\subsection*{Phase Transitions}
+	\subsection{Phase Transitions}
 		We want to study phase transitions in lattices of different sizes, and in order to do so, we need to run simulations for the different lattice sizes with multiple temperatures, and compare these to extrapolate the critical temperatures of the systems.
 
 		In order to run effective calculations in this system, we do several tests before beginning to vary the temperatures and gather statistical data. One such test is to determine how many Monte Carlo cycles are needed to reach a good agreement with analytical values, in order to determine when the system has reached the most likely state, equilibrium.
@@ -166,16 +159,16 @@
 		\caption{: Analytical and numerical values for T = 1.0, L = 2 and $10^7$ Monte Carlo cycles }
 			\label{Tab: values}
 			\centering
-		\begin{tabular}{c c c c}
-			Property & Analytical & Analytical per spin & Numerical per spin \\
+		\begin{tabular}{c c c}
+			Property & Analytical per spin & Numerical per spin \\
 			\hline
-			$\left<E\right>$ & -7.978586  & -1.994647 & -1.99594\\
-			$\left<E^2\right>$ & 63.65786 & 15.91447 &15.9675 \\
-			$C_v$ & 0.170865 & 0.042716 & 0.0324227 \\
-			$\left<M(T)\right>$  & 0 & 0 & -0.0025167\\
-			$\left<|M(T)|\right>$ & 3.991970 & 0.997993 & 0.998647 \\
-			$\left<|M(T)|^2\right> $ & 15.962527 & 3.990631 & 3.99323\\
-			$\chi$ & 0.026703 & 0.006676 & 0.00202647\\
+			$\left<E\right>$  & -1.9960 & -1.99594\\
+			$\left<E^2\right>$  &15.968  &15.9675 \\
+			$C_v$ & 0.0321 & 0.0324227 \\
+			$\left<M(T)\right>$ & 0 & -0.0025167\\
+			$\left<|M(T)|\right>$ & 0.9987 & 0.998647 \\
+			$\left<|M(T)|^2\right>$  & 3.9933 & 3.99323\\
+			$\chi$  & 3.9933 & 0.00202647\\
 		\end{tabular}
 	\end{table}
 
@@ -391,35 +384,34 @@
 			&\text{For a 2x2-lattice, $n=4$.}\\
 			&z = \sum\limits_{i=1}^{2^4}e^{-\beta E_i}\\
 			&z = e^{-\beta E_1}+e^{-\beta E_2}+\hdots+e^{-\beta E_16}\\
-			&z = e^{8 \beta J}+4e^{- \beta \cdot 0} + 2e^{-8 \beta J} + 4e^{-\beta \cdot 0} + 4e^{-\beta \cdot 0} + 4e^{-\beta \cdot 0} + e^{8 \beta J}\\
-			&z = 2e^{8 \beta J} + 2e^{-8 \beta J} + 16
+			&z = e^{8 \beta J}+4e^{- \beta \cdot 0} + 2e^{-8 \beta J} + 4e^{-\beta \cdot 0} + 4e^{-\beta \cdot 0} + e^{8 \beta J}\\
+			&z = 2e^{8 \beta J} + 2e^{-8 \beta J} + 12
 		\end{flalign*}
 
 	\subsection{Expectation Values for the Energy}
-		The partition function is used to calculate the expectation value of the energy, $\left<E\right>$.
+		The partition function is used to calculate the expectation value of the energy, $\left<E\right>$, and the terms involving energies that are 0 are omitted.
 
 		\begin{flalign*}
 			\left<E\right> &= \sum\limits_{i}^{2^n}\frac{E_i e^{-\beta E_i}}{z}\\
-			\textit{Terms involving energies that are 0 are omitted below.}\\
-			&= \frac{-8Je^{8\beta J} +2\left(8Je^{-8 \beta J} \right) + \left(-8J\right)e^{8\beta J}} {2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-			&= \frac{16J\left(e^{-8\beta J}- e^{8 \beta J} \right) }{2 {\left(e^{8 \beta J} + e^{-8 \beta J} + 8 \right)} }\\
-			&= 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+			&= \frac{-8Je^{8\beta J} +2\left(8Je^{-8 \beta J} \right) + \left(-8J\right)e^{8\beta J}} {2e^{8 \beta J} + 2e^{-8 \beta J} + 12}\\
+			&= \frac{16J\left(e^{-8\beta J}- e^{8 \beta J} \right) }{2 {\left(e^{8 \beta J} + e^{-8 \beta J} + 6 \right)} }\\
+			&= 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 6}
 		\end{flalign*}
 
 		Thus:
 		\begin{flalign*}
-			\left<E\right>^2 &= \left( 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} \right)^2\\
+			\left<E\right>^2 &= \left( 8J \frac{e^{-8\beta J}- e^{8 \beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 6} \right)^2\\
 			&= 64J^2 \frac{\left(e^{-8\beta J} - e^{8\beta J} \right)^2 }{\left(e^{8\beta J} + e^{-8 \beta J} + 8 \right)^2 }\\
-			&= 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
+			&= 64 J^2 \frac{e^{-16\beta J} + e^{16\beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 12e^{-8\beta J} + 12e^{8 \beta J} + 38 }
 		\end{flalign*}
 
 		In order to calculate the variance, we need the expectation value of $E^2$.
 
 		\begin{flalign*}
 			\left<E^2\right> &= \sum\limits_{i}^{2^n}\frac{E_i^2 e^{-\beta E_i}}{z}\\
-			&= \frac{64J^2e^{8\beta J} + 2\left(64J^2e^{-8\beta J}\right) + 64J^2e^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-			&= \frac{128J^2e^{8\beta J} + 128J^2e^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16}\\
-			&= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+			&= \frac{64J^2e^{8\beta J} + 2\left(64J^2e^{-8\beta J}\right) + 64J^2e^{8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 12}\\
+			&= \frac{128J^2e^{8\beta J} + 128J^2e^{-8\beta J}}{2e^{8 \beta J} + 2e^{-8 \beta J} + 12}\\
+			&= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 6}
 		\end{flalign*}
 
 	\subsection{Expectation Values for the Magnetization}
@@ -431,26 +423,26 @@
 
 		\begin{flalign*}
 			\left<|M(T)|\right> &= \frac{4e^{8\beta J} + 2\cdot4 + 0\cdot4 + 0\cdot2 + |-2|\cdot4 + |-4|e^{8\beta J}}{z}\\
-			\left<|M(T)|\right> &= \frac{8e^{8\beta J} + 16}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16} = \frac{4e^{8\beta J} + 8}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+			\left<|M(T)|\right> &= \frac{8e^{8\beta J} + 12}{2e^{8 \beta J} + 2e^{-8 \beta J} + 12} = \frac{4e^{8\beta J} + 8}{e^{8 \beta J} + e^{-8 \beta J} + 6}
 		\end{flalign*}
 
 		We also have that
 		\begin{flalign*}
 			\left<|M(T)|^2\right> &=  \frac{\sum \limits{_i^{2^4}} |M_i^2| e^{-\beta E_i}}{z}\\
-			\left<|M(T)|^2\right> &= \frac{32e^{8\beta J} + 32}{2e^{8 \beta J} + 2e^{-8 \beta J} + 16} = 16\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8}
+			\left<|M(T)|^2\right> &= \frac{32e^{8\beta J} + 32}{2e^{8 \beta J} + 2e^{-8 \beta J} + 12} = 16\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 6}
 		\end{flalign*}
 
 	\subsection{Heat Capacity}
 		We use the expectation values of the energy to calculate the variance:
 		\begin{flalign*}
 			\sigma^2_E &= \left<E^2\right> - \left<E\right>^2\\
-			&= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }
+			&= 64J^2\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 6} - 64 J^2 \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 12e^{-8\beta J} + 12e^{8 \beta J} + 38 }
 		\end{flalign*}
 
 		The heat capacity is defined as the variance divided by the energy and temperature squared.
 		\begin{flalign*}
 			C_v &= \frac{\sigma^2_E}{k_BT^2}\\
-			&= \frac{64J^2}{k_BT^2}\left[\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 8} -  \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66 }\right]
+			&= \frac{64J^2}{k_BT^2}\left[\frac{e^{8\beta J} + e^{-8\beta J}}{e^{8 \beta J} + e^{-8 \beta J} + 6} -  \frac{e^{-16\beta J} + e^{16 \beta J} + 2}{e^{16\beta J} + e^{-16\beta J} + 12e^{-8\beta J} + 12e^{8 \beta J} + 38 }\right]
 		\end{flalign*}
 
 
@@ -458,18 +450,18 @@
 		The variance of the absolute value of the mean magnetization is given by:
 		\begin{flalign*}
 			\sigma_{M}^2 &= \left<|M(T)^2|\right> - \left<|M(T)|\right>^2\\
-			\sigma^2_M &= 16 \frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8} - 16\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66}
+			\sigma^2_M &= 16 \frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 6} - 16\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 12e^{-8\beta J} + 12e^{8 \beta J} + 38}
 		\end{flalign*}
 
 		We then calculate the susceptibility $\chi$, which is given by $\chi = \sigma_M^2/k_BT$.
 
 		\begin{flalign*}
-			\chi = \frac{16}{k_BT} \left[{\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8} -\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 16e^{-8\beta J} + 16e^{8 \beta J} + 66}}\right]
+			\chi = \frac{16}{k_BT} \left[{\frac{e^{8\beta J} + 1}{e^{8 \beta J} + e^{-8 \beta J} + 8} -\frac{e^{16\beta J} + 4e^{8\beta J} + 4}{e^{-16\beta J} + e^{-16\beta J} + 12e^{-8\beta J} + 12e^{8 \beta J} + 38}}\right]
 		\end{flalign*}
 
 \section{Bibliography}
 
-	\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
+\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
 
 
 
