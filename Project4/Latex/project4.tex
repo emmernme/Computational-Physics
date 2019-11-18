@@ -180,7 +180,7 @@
 	\end{table}
 
 	\subsection{Number of Monte Carlo Cycles and Equilibration Times}
-		In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix.
+		In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix for T=1.
 
 		For a matrix with a random spin configuration at $T=1.0$, we reach steady state at around 200 000 Monte Carlo cycles, while for the matrix with all spins up we seemingly only need a few cycles.
 
@@ -196,7 +196,7 @@
 				\includegraphics[width=280px]{./plot/random_L20_1mill.png}
 				\caption{Initial matrix with random spins.}
 		\end{subfigure}\hfill}}
-		\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 1.0$.}
+		\caption{: Energy plotted against number of Monte Carlo cycles when $T = 1.0$.}
 		\label{fig:steady_E}
 		\end{figure}
 
@@ -206,17 +206,57 @@
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
 		\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[width=280px]{./plot/L20_5mill_highT.png}
+				\includegraphics[width=280px]{./plot/L20_1mill_highT.png}
 				\caption{Initial matrix with all spins up. }
 		\end{subfigure} \hfill %
 		\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[width=280px]{./plot/random_L20_5mill_highT.png}
+				\includegraphics[width=280px]{./plot/random_L20_1mill_highT.png}
 				\caption{Initial matrix with random spins.}
 		\end{subfigure}\hfill}}
-		\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
+		\caption{: Energy plotted against number of Monte Carlo cycles when $T = 2.4$. }
 		\label{fig:steady_E_highT}
 		\end{figure}
+
+		However when we do the same experimen for the magnetization for the system we get a different result. In Figure \ref{fig:steady_M} we can see the way the magnetization varies over MC cycles for T=1. But there is not so easy to find a sertain location where the system reaches an equilibrium.
+
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/M_stabilisation_T=1.png}
+				\caption{Initial matrix with all spins up. }
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/M_stabilisation_T=1_rand.png}
+				\caption{Initial matrix with random spins.}
+		\end{subfigure}\hfill}}
+		\caption{: Magnetization plotted against number of Monte Carlo cycles when $T = 1$. }
+		\label{fig:steady_M}
+		\end{figure}
+
+		When the temperature increases it does not get easier to judge whether we get to an equilibrium state or not. This is shown in Figure \ref{fig:steady_M_highT}
+
+\newpage
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/M_stabilisation_T=high.png}
+				\caption{Initial matrix with all spins up. }
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/M_stabilisation_T=high_rand.png}
+				\caption{Initial matrix with random spins.}
+		\end{subfigure}\hfill}}
+		\caption{: Magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
+		\label{fig:steady_M_highT}
+		\end{figure}
+
+
+
 
 		{\renewcommand{\arraystretch}{1.5}
 		\begin{table}[h!]
@@ -234,7 +274,7 @@
 			\end{tabular}
 		\end{table}
 
-		Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
+		Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -291,7 +331,7 @@
 	\subsection{Phase Transitions}
 		During our tests runs with the Ising model with various lattice sizes and MC cycles, we gathered information about the time it takes to perform our calculations, which we used to estimate how many cycles we can perform for each of our required temperature steps within a reasonable computation duration. We landed on having 12 temperature steps in the range $T = [2.0, 2.3]$, because we had four cores available for computations, and the way we parallelizes meant each core then had 3 temperature steps to compute, with a total of $10^8$ Monte Carlo cycles each.
 
-		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete. For 
+		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete. For
 
 
 \section{Discussion}
@@ -426,7 +466,7 @@
 		\end{flalign*}
 
 \section{Bibliography}
-	
+
 	\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
 
 
