@@ -21,7 +21,7 @@ int main(int argc, char * argv[]){
 	// Setting up initial values and linear spacing of T
 	vector<double> T;
 	double T0 = 2;
-	double Tmax = 2.6;
+	double Tmax = 10;
 	double dT = (Tmax-T0)/(double) n;
 	for (int i = 0; i <= n; i++){
 		T.push_back(T0+i*dT);
@@ -46,7 +46,7 @@ int main(int argc, char * argv[]){
 	if ((rank == numprocs-1) && (rank_end < n)) rank_end = n;
 
 	// Set up a progress bar
-	ProgressBar progressBar((l*(n+1))/3, 80);
+	ProgressBar progressBar((4*l*(n+1))/6, 80);
 
 	double wtime = MPI_Wtime();
 	for (int i = 0; i < l; i++){ // Loop over the dimensions

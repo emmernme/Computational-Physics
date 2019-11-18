@@ -27,7 +27,7 @@ for k in range(40):
     infile.readline()
     infile.readline()
 
-T = np.linspace(2, 2.6, 40)
+T = np.linspace(2, 10, 40)
 
 
 plt.plot(T, E_mean[0], label='L=40')
