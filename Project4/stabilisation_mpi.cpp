@@ -15,7 +15,7 @@ int main(int argc, char * argv[]){
 	// Initial values
 	const int n = 1000; // Number of cycle steps -1
 	const int L = 20; // Dimension
-	double T = 2.4; // Temp
+	double T = 1.0; // Temp
 
 	// Setting up initial values and linear spacing of T
 	vector<double> MC;
@@ -36,7 +36,7 @@ int main(int argc, char * argv[]){
 	double local_E_mean[n+1] = {0};
 	double local_M_abs_mean[n+1] = {0};  
 
-	// Divide up the temperatures intervals between the processors
+	// Divide up the MC cycle intervals between the processors
 	int no_intervals = (n+1)/numprocs;
 	int rank_begin = rank*no_intervals;
 	int rank_end = ((rank + 1) * no_intervals) - 1;
@@ -46,12 +46,12 @@ int main(int argc, char * argv[]){
 	ProgressBar progressBar((n+1), 80);
 
 	double wtime = MPI_Wtime();
-	for (int k = rank_begin; k <= rank_end; k++){ // Loop over the temperatures
-		vector<double> results = MonteCarloIsing(MC[k], false, T, L);
+	for (int k = rank_begin; k <= rank_end; k++){ // Loop over the MC cycles
+		vector<double> results = MonteCarloIsing(MC[k], true, T, L);
 
 		// Populate our local results
 		local_E_mean[k]        = results[0];
-		local_M_abs_mean[k]    = results[2];
+		local_M_abs_mean[k]    = results[4];
 
 		++progressBar;
 		progressBar.display();
