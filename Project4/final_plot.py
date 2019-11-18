@@ -9,7 +9,7 @@ infile = open('phase_transitions.dat', 'r')
 infile.readline()
 infile.readline()
 infile.readline()
-T_steps = 20
+T_steps = 19
 
 E_mean = np.zeros((4,T_steps))
 M_mean = np.zeros((4,T_steps))

@@ -52,7 +52,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	double M_sqrd_sum = 0;
 	double M_abs_sum = 0;
 
-	// Set up the initial magnetisation and energy 
+	// Set up the initial magnetisation and energy
 	double M_current = M(spins, L);
 	double E_current = E_tot(spins, L);
 
@@ -118,8 +118,10 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	double M_sqrd_mean 	= M_sqrd_sum * norm;
 	double M_abs_mean 	= M_abs_sum * norm;
 
+
 	double E_variance 	= (E_sqrd_mean - E_mean*E_mean) * s_norm;
-	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean) * s_norm;
+	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean * s_norm) * s_norm;
+
 
 	double specific_heat = E_variance / (T*T);
 	double susceptibility = M_variance / T;
