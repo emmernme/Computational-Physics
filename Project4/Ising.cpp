@@ -21,8 +21,8 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		{-4, exp(-beta * 8)},
 		{-2, exp(-beta * 4)},
 		{0, 1.0},
-		{2, exp(-beta * -4)},
-		{4, exp(-beta * -8)},
+		{2, 1.0}, //exp(-beta * -4)},
+		{4, 1.0}, //exp(-beta * -8)},
 	}; // C++11-specific functionality
 
 	// Initialise random
@@ -69,8 +69,9 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		int E_xy = E_i(spins, x, y, L);
 
 		// Metropolis algo
-		// Flip spin if random number [0,1] is <= transition probability
-		if (dist(engine) <= E_trans[E_xy]){
+		// Flip spin if (transition probability = 1) or random number [0,1] is <= transition probability
+		double P = E_trans[E_xy];
+		if (P == 1 || dist(engine) <= P){
 			flip_count++; // Count each flip
 
 			// Flip the spin
