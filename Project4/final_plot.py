@@ -5,18 +5,18 @@ import numpy as np
 """
 For
 """
-infile = open('phase_transitions_FINAL.data', 'r')
+infile = open('phase_transitions.dat', 'r')
 infile.readline()
 infile.readline()
 infile.readline()
 
-E_mean = np.zeros((4,12))
-M_mean = np.zeros((4,12))
-specific_heat = np.zeros((4,12))
-suceptibility = np.zeros((4,12))
+E_mean = np.zeros((4,40))
+M_mean = np.zeros((4,40))
+specific_heat = np.zeros((4,40))
+suceptibility = np.zeros((4,40))
 
 
-for k in range(12):
+for k in range(40):
     for i in range(4):
         data = infile.readline()
         line = data.split()
@@ -27,7 +27,7 @@ for k in range(12):
     infile.readline()
     infile.readline()
 
-T = np.linspace(2, 2.3, 12)
+T = np.linspace(2, 2.6, 40)
 
 
 plt.plot(T, E_mean[0], label='L=40')
