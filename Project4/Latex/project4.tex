@@ -179,94 +179,94 @@
 		\end{tabular}
 	\end{table}
 
-\subsection{Number of Monte Carlo Cycles and Equilibration Times}
-	In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix.
+	\subsection{Number of Monte Carlo Cycles and Equilibration Times}
+		In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix.
 
-	For a matrix with a random spin configuration at $T=1.0$, we reach steady state at around 200 000 Monte Carlo cycles, while for the matrix with all spins up we seemingly only need a few cycles.
+		For a matrix with a random spin configuration at $T=1.0$, we reach steady state at around 200 000 Monte Carlo cycles, while for the matrix with all spins up we seemingly only need a few cycles.
 
-	\begin{figure}[H]
-	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/L20_1mill.png}
-			\caption{Initial matrix with all spins up. }
-	\end{subfigure} \hfill %
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/random_L20_1mill.png}
-			\caption{Initial matrix with random spins.}
-	\end{subfigure}\hfill}}
-	\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 1.0$.}
-	\label{fig:steady_E}
-	\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/L20_1mill.png}
+				\caption{Initial matrix with all spins up. }
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/random_L20_1mill.png}
+				\caption{Initial matrix with random spins.}
+		\end{subfigure}\hfill}}
+		\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 1.0$.}
+		\label{fig:steady_E}
+		\end{figure}
 
-	When we increase the temperature, we see that we need substantially more Monte Carlo cycles to achive a steady state. Figure \ref{fig:steady_E_highT} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}.
+		When we increase the temperature, we see that we need substantially more Monte Carlo cycles to achive a steady state. Figure \ref{fig:steady_E_highT} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}.
 
-	\begin{figure}[H]
-	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/L20_5mill_highT.png}
-			\caption{Initial matrix with all spins up. }
-	\end{subfigure} \hfill %
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/random_L20_5mill_highT.png}
-			\caption{Initial matrix with random spins.}
-	\end{subfigure}\hfill}}
-	\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
-	\label{fig:steady_E_highT}
-	\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/L20_5mill_highT.png}
+				\caption{Initial matrix with all spins up. }
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/random_L20_5mill_highT.png}
+				\caption{Initial matrix with random spins.}
+		\end{subfigure}\hfill}}
+		\caption{: Energy and magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
+		\label{fig:steady_E_highT}
+		\end{figure}
 
-	{\renewcommand{\arraystretch}{1.5}
-	\begin{table}[h!]
-		\caption{: Estimated equilibration times.}
-			\label{Tab:equilibration_times}
-			\centering
-		\begin{tabular}{c c}
-				Temperature & Matrix & Equilibration time (sec)\\
+		{\renewcommand{\arraystretch}{1.5}
+		\begin{table}[h!]
+			\caption{: Estimated equilibration times.}
+				\label{Tab:equilibration_times}
+				\centering
+			\begin{tabular}{c c}
+					Temperature & Matrix & Equilibration time (sec)\\
+					\hline
+					$1.0$ & Random spins & 200 000  \\
+					$1.0$ & All spins up & $\approx$ 0 \\
+					$2.4$ & Random spins & 1 000 000\\
+					$2.4$ & All spins up & 1 000 000\\
 				\hline
-				$1.0$ & Random spins & 200 000  \\
-				$1.0$ & All spins up & $\approx$ 0 \\
-				$2.4$ & Random spins & 1 000 000\\
-				$2.4$ & All spins up & 1 000 000\\
-			\hline
-		\end{tabular}
-	\end{table}
+			\end{tabular}
+		\end{table}
 
-	Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
+		Figure \ref{fig:flips} and Figure \ref{flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins.
 
-	\begin{figure}[H]
-	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/number_of_flips.png}
-			\caption{T = 1.0}
-	\end{subfigure} \hfill %
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/number_of_flips_highT.png}
-			\caption{T = 2.4}
-	\end{subfigure}\hfill}}
-	\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
-	\label{fig:flips}
-	\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/number_of_flips.png}
+				\caption{T = 1.0}
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/number_of_flips_highT.png}
+				\caption{T = 2.4}
+		\end{subfigure}\hfill}}
+		\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
+		\label{fig:flips}
+		\end{figure}
 
-	\begin{figure}[H]
-	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/random_number_of_flips.png}
-			\caption{T = 1.0}
-	\end{subfigure} \hfill %
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/random_number_of_flips_highT.png}
-			\caption{T = 2.4}
-	\end{subfigure}\hfill}}
-	\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
-	\label{fig:flips_random}
-	\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/random_number_of_flips.png}
+				\caption{T = 1.0}
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/random_number_of_flips_highT.png}
+				\caption{T = 2.4}
+		\end{subfigure}\hfill}}
+		\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
+		\label{fig:flips_random}
+		\end{figure}
 
 	\subsection{Probability Distribution}
 		% d)
