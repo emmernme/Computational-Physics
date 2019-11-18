@@ -12,64 +12,78 @@ using namespace std;
 using namespace arma;
 
 int main(int argc, char * argv[]){
+	// Initial values
+	const int n = 11; // Number of temperature steps -1
+	int N = 1e8; // Number of MC cycles
+	int L[4] = {40, 60, 80, 100}; // Dimensions
+	const int l = 4; // Number of different sizes
+
 	// Setting up initial values and linear spacing of T
+	vector<double> T;
 	double T0 = 2;
 	double Tmax = 2.3;
-	int n = 11;
 	double dT = (Tmax-T0)/(double) n;
-	int N = 1e5;
-
-	vector<double> T;
-	int L[4] = {40, 60, 80, 100};
-
-	vector<int> E_count;
-	vector<int> flip_N;
-
-	for(int i = 0; i <= n; i++){
+	for (int i = 0; i <= n; i++){
 		T.push_back(T0+i*dT);
 	}
-	mat E_mean       (4, n+1, fill::zeros);
-	mat M_abs_mean   (4, n+1, fill::zeros);
-	mat specific_heat(4, n+1, fill::zeros);
-	mat suceptibility(4, n+1, fill::zeros);
 
+	// Set up MPI for parallelization
 	int numprocs, rank;
 	MPI_Init(&argc, &argv);
 	MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+	// Set up local matrices for current process
+	double local_E_mean[l][n+1] = {0};
+	double local_M_abs_mean[l][n+1] = {0};  
+	double local_specific_heat[l][n+1] = {0};
+	double local_suceptibility[l][n+1] = {0};
 
+	// Divide up the temperatures intervals between the processors
 	int no_intervals = (n+1)/numprocs;
 	int rank_begin = rank*no_intervals;
 	int rank_end = ((rank + 1) * no_intervals) - 1;
 	if ((rank == numprocs-1) && (rank_end < n)) rank_end = n;
 
-	cout << rank_begin << ", " << rank_end << endl;
-
-	ProgressBar progressBar(4*(n+1), 80);
-
+	// Set up a progress bar
+	ProgressBar progressBar(l*(n+1), 80);
 
 	double wtime = MPI_Wtime();
-	for (int i = 0; i < 4; i++){
-		for (int k = rank_begin; k <= rank_end; k++){
+	for (int i = 0; i < l; i++){ // Loop over the dimensions
+		for (int k = rank_begin; k <= rank_end; k++){ // Loop over the temperatures
 			vector<double> results = MonteCarloIsing(N, true, T[k], L[i]);
-			E_mean(i,k)        = results[0];
-			M_abs_mean(i,k)    = results[4];
-			specific_heat(i,k) = results[7];
-			suceptibility(i,k) = results[8];
+
+			// Populate our local results
+			local_E_mean[i][k]        = results[0];
+			local_M_abs_mean[i][k]    = results[l];
+			local_specific_heat[i][k] = results[7];
+			local_suceptibility[i][k] = results[8];
+
 			++progressBar;
 			progressBar.display();
 		}
 	}
 	progressBar.done();
+	
+	// Set up the global results matrices
+	double E_mean[l][n+1] = {0};
+	double M_abs_mean[l][n+1] = {0};  
+	double specific_heat[l][n+1] = {0};
+	double suceptibility[l][n+1] = {0};
 
+	// "Merge" the local results into the global matrices
+	for (int i = 0; i < l; i++){
+		MPI_Reduce(&local_E_mean[i], &E_mean[i], n+1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+		MPI_Reduce(&local_M_abs_mean[i], &M_abs_mean[i], n+1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+		MPI_Reduce(&local_specific_heat[i], &specific_heat[i], n+1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+		MPI_Reduce(&local_suceptibility[i], &suceptibility[i], n+1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+	}
+
+	// Make sure all processes are finished before moving on
 	MPI_Barrier(MPI_COMM_WORLD);
 	if (rank == 0){
 		wtime = MPI_Wtime() - wtime;
   		cout << "Elapsed time = " << wtime/60 << " min" << endl;
-
-		MPI_Gather(E_mean.memptr(), 1, MPI_DOUBLE, E_mean.memptr(), 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
-
 
 		// Write results to file
 		ofstream values_output;
@@ -78,18 +92,18 @@ int main(int argc, char * argv[]){
 		values_output << setw(15) <<  "specific_heat" << setw(15) << "suceptibility" << endl;
 		for (int k = 0; k <= n; k++){
 			values_output << "T: " <<  T[k] << endl;;
-			for (int i = 0; i < 4; i++){
-				values_output << "L: " << L[i] << setw(3) << setprecision(4) << setw(15) << E_mean(i,k) << setw(15);
-				values_output << setprecision(4) << M_abs_mean(i,k) << setw(15);
-				values_output << setprecision(4) << specific_heat(i,k);
-				values_output << setw(15) << setprecision(4) << suceptibility(i,k) << endl;
+			for (int i = 0; i < l; i++){
+				values_output << "L: " << L[i] << setw(3) << setprecision(4) << setw(15) << E_mean[i][k] << setw(15);
+				values_output << setprecision(4) << M_abs_mean[i][k] << setw(15);
+				values_output << setprecision(4) << specific_heat[i][k];
+				values_output << setw(15) << setprecision(4) << suceptibility[i][k] << endl;
 			}
 			values_output << endl;
 		}
 		values_output.close();
 	}
 
-	MPI_Finalize();
+	MPI_Finalize(); // Parallelization over
 
 	return 0;
 }

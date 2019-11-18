@@ -7,9 +7,6 @@
 #include <tuple>
 #include <string>
 
-// Requirements: OpenMP ("brew install libomp clang-omp" + "lomp" compiler flag)
-//#include <omp.h>
-
 using namespace std;
 using namespace arma; // Unwraps Armadillo-functions
 #include "helpers.cpp"
@@ -49,15 +46,15 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		spins.fill(1);
 	}
 
-	int E_sum = 0;
-	int E_sqrd_sum = 0;
-	int M_sum = 0;
-	int M_sqrd_sum = 0;
-	int M_abs_sum = 0;
+	double E_sum = 0;
+	double E_sqrd_sum = 0;
+	double M_sum = 0;
+	double M_sqrd_sum = 0;
+	double M_abs_sum = 0;
 
 	// Set up the initial magnetisation and energy 
-	int M_current = M(spins, L);
-	int E_current = E_tot(spins, L);
+	double M_current = M(spins, L);
+	double E_current = E_tot(spins, L);
 
 	int flip_count = 0; // Number of accepted flips
 
