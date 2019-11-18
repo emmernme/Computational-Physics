@@ -13,15 +13,15 @@ using namespace arma;
 
 int main(int argc, char * argv[]){
 	// Initial values
-	const int n = 11; // Number of temperature steps -1
-	int N = 1e8; // Number of MC cycles
+	const int n = 40; // Number of temperature steps -1
+	int N = 1e6; // Number of MC cycles
 	int L[4] = {40, 60, 80, 100}; // Dimensions
 	const int l = 4; // Number of different sizes
 
 	// Setting up initial values and linear spacing of T
 	vector<double> T;
 	double T0 = 2;
-	double Tmax = 2.3;
+	double Tmax = 2.6;
 	double dT = (Tmax-T0)/(double) n;
 	for (int i = 0; i <= n; i++){
 		T.push_back(T0+i*dT);
@@ -35,7 +35,7 @@ int main(int argc, char * argv[]){
 
 	// Set up local matrices for current process
 	double local_E_mean[l][n+1] = {0};
-	double local_M_abs_mean[l][n+1] = {0};  
+	double local_M_abs_mean[l][n+1] = {0};
 	double local_specific_heat[l][n+1] = {0};
 	double local_suceptibility[l][n+1] = {0};
 
@@ -46,12 +46,12 @@ int main(int argc, char * argv[]){
 	if ((rank == numprocs-1) && (rank_end < n)) rank_end = n;
 
 	// Set up a progress bar
-	ProgressBar progressBar(l*(n+1), 80);
+	ProgressBar progressBar((l*(n+1))/3, 80);
 
 	double wtime = MPI_Wtime();
 	for (int i = 0; i < l; i++){ // Loop over the dimensions
 		for (int k = rank_begin; k <= rank_end; k++){ // Loop over the temperatures
-			vector<double> results = MonteCarloIsing(N, true, T[k], L[i]);
+			vector<double> results = MonteCarloIsing(N, false, T[k], L[i]);
 
 			// Populate our local results
 			local_E_mean[i][k]        = results[0];
@@ -64,10 +64,10 @@ int main(int argc, char * argv[]){
 		}
 	}
 	progressBar.done();
-	
+
 	// Set up the global results matrices
 	double E_mean[l][n+1] = {0};
-	double M_abs_mean[l][n+1] = {0};  
+	double M_abs_mean[l][n+1] = {0};
 	double specific_heat[l][n+1] = {0};
 	double suceptibility[l][n+1] = {0};
 
