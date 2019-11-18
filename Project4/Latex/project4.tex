@@ -122,10 +122,10 @@
         \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
         If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
 
-	\subsection*{Programming}
-		In order to calculate the spin energies for different systems, we implement the Ising model using the Monte Carlo method. This is a mostly random method, where we perform a loop over random positions in the system grid of spins and decide whether or not we should flip spins using the Metropolis algorithm. \\
+	\subsection*{Optimization}
+		In order to calculate the spin energies for different systems, we implement a discretised Ising model using the Monte Carlo method. This is a mostly random method, where we perform a loop over random positions in the system grid of spins and decide whether or not we should flip spins using the Metropolis algorithm. \\
 
-		The most effective way to run this simulation is to loop over one random position at a time and decide if we should flip that one spin or not. Because we can easily calculate the local energy contribution of that one spin, if we keep track of the current enery of the system before flipping, it is easy to calculate the new total energy, so we don't need to loop over the full grid each time we want to find the total energy. \\
+		The most effective way to run this simulation is to loop over one random position at a time and decide if we should flip that single spin or not. Because we can easily calculate the local energy contribution of that one spin, if we keep track of the current enery of the system before flipping, it is easy to calculate the new total energy, so we don't need to loop over the full grid each time we want to find the total energy. \\
 
 		In the Ising model, we know that when $N \rightarrow \infty$, the system should reach equilibrium. For our model, N is the number of Monte Carlo cycles, so we want to keep N as large as possible while still being able to run the calculations in a reasonable amount of time. This means we need to optimize our Monte Carlo loop as much as possible.\\
 
@@ -151,6 +151,11 @@
 		These simplifications should make our code run quite fast, in theory, fast enough that we don't need to parallelize the Monte Carlo loop itself. However, if we want to run multiple Monte Carlo loops of millions or billions of cycles, we should definitely parallelize in order to utilze our full computing power.
 
 		In this project, we parallelize using Open MPI, dividing the different Monte Carlo loops among the processors we have available, and feed the results back to the main process for analysis.
+
+	\subsection*{Phase Transitions}
+		We want to study phase transitions in lattices of different sizes, and in order to do so, we need to run simulations for the different lattice sizes with multiple temperatures, and compare these to extrapolate the critical temperatures of the systems.
+
+		In order to run effective calculations in this system, we do several tests before beginning to vary the temperatures and gather statistical data. One such test is to determine how many Monte Carlo cycles are needed to reach a good agreement with analytical values, in order to determine when the system has reached the most likely state, equilibrium.
 
 \section{Results}
 	In order to test our algorithm and its precision, we compare the analytical values of the expectation values of the energy and magnetization to our program's equivalent values. We ran the test by starting with a low number of MC cycles and increasing the number gradually until we got a good agreement.
@@ -263,27 +268,30 @@
 	\label{fig:flips_random}
 	\end{figure}
 
-\subsection{Propability Distribution}
-	% d)
-	The probability distribution of the energy for $T = 1.0$ and $T = 2.4$ is shown in figure \ref{fig:probability}
+	\subsection{Probability Distribution}
+		% d)
+		The probability distribution of the energy for $T = 1.0$ and $T = 2.4$ is shown in figure \ref{fig:probability}
 
-	\begin{figure}[H]
-	\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=280px]{./plot/histogram_random_lowT.png}
-			\caption{$T = 1.0$}
-	\end{subfigure} \hfill %
-	\begin{subfigure}{.5\textwidth}
-			\centering
-			\includegraphics[width=300px]{./plot/histogram_random_highT.png}
-			\caption{$T = 2.4$}
-	\end{subfigure}\hfill}}
-	\caption{: Probability distribution for counted energies.}
-	\label{fig:probability}
-	\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=280px]{./plot/histogram_random_lowT.png}
+				\caption{$T = 1.0$}
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=300px]{./plot/histogram_random_highT.png}
+				\caption{$T = 2.4$}
+		\end{subfigure}\hfill}}
+		\caption{: Probability distribution for counted energies.}
+		\label{fig:probability}
+		\end{figure}
 
-\subsection{Phase Transitions}
+	\subsection{Phase Transitions}
+		During our tests runs with the Ising model with various lattice sizes and MC cycles, we gathered information about the time it takes to perform our calculations, which we used to estimate how many cycles we can perform for each of our required temperature steps within a reasonable computation duration. We landed on having 12 temperature steps in the range $T = [2.0, 2.3]$, because we had four cores available for computations, and the way we parallelizes meant each core then had 3 temperature steps to compute, with a total of $10^8$ Monte Carlo cycles each.
+
+		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete. For 
 
 
 \section{Discussion}
@@ -418,7 +426,9 @@
 		\end{flalign*}
 
 \section{Bibliography}
+	
 	\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
+
 
 
 \end{document}
