@@ -34,17 +34,38 @@ for k in range(T_steps):
 
 T = np.linspace(2.0, 3.5, T_steps)
 
-specific_heat_40  = interpolate.interp1d(T, M_mean[0])
-specific_heat_60  = interpolate.interp1d(T, M_mean[1])
-specific_heat_80  = interpolate.interp1d(T, M_mean[2])
-specific_heat_100 = interpolate.interp1d(T, M_mean[3])
 
-susceptibility_40  = interpolate.interp1d(T, susceptibility[0])
-susceptibility_60  = interpolate.interp1d(T, susceptibility[1])
-susceptibility_80  = interpolate.interp1d(T, susceptibility[2])
-susceptibility_100 = interpolate.interp1d(T, susceptibility[3])
+"""
+Interpolation for specific heat and susceptibility
+"""
+s_1  = interpolate.interp1d(T, specific_heat[0])
+s_2  = interpolate.interp1d(T, specific_heat[1])
+s_3  = interpolate.interp1d(T, specific_heat[2])
+s_4  = interpolate.interp1d(T, specific_heat[3])
+
+xi_1 = interpolate.interp1d(T, susceptibility[0])
+xi_2 = interpolate.interp1d(T, susceptibility[1])
+xi_3 = interpolate.interp1d(T, susceptibility[2])
+xi_4 = interpolate.interp1d(T, susceptibility[3])
 
 
+T_new = np.linspace(2.0, 3.5, T_steps-1)
+
+specific_heat_40  = s_1(T_new)
+specific_heat_60  = s_2(T_new)
+specific_heat_80  = s_3(T_new)
+specific_heat_100 = s_4(T_new)
+
+
+susceptibility_40  = xi_1(T_new)
+susceptibility_60  = xi_2(T_new)
+susceptibility_80  = xi_3(T_new)
+susceptibility_100 = xi_4(T_new)
+
+
+"""
+Plotting
+"""
 
 plt.plot(T, E_mean[0], label='L=40')
 plt.plot(T, E_mean[1], label='L=60')
@@ -68,10 +89,10 @@ plt.ylabel('magnetization')
 plt.savefig("Mean_M.png", dpi=300)
 plt.show()
 
-plt.plot(T, specific_heat[0], label='L=40')
-plt.plot(T, specific_heat[1], label='L=60')
-plt.plot(T, specific_heat[2], label='L=80')
-plt.plot(T, specific_heat[3], label='L=100')
+plt.plot(T_new, specific_heat_40, label='L=40')
+plt.plot(T_new, specific_heat_60, label='L=60')
+plt.plot(T_new, specific_heat_80, label='L=80')
+plt.plot(T_new, specific_heat_100, label='L=100')
 plt.title(r'Specific Heat ($C_v$)')
 plt.legend()
 plt.xlabel('Temperature')
@@ -79,10 +100,10 @@ plt.ylabel('Specific heat')
 plt.savefig("Specific_heat.png", dpi=300)
 plt.show()
 
-plt.plot(T, susceptibility[0], label='L=40')
-plt.plot(T, susceptibility[1], label='L=60')
-plt.plot(T, susceptibility[2], label='L=80')
-plt.plot(T, susceptibility[3], label='L=100')
+plt.plot(T_new, susceptibility_40, label='L=40')
+plt.plot(T_new, susceptibility_60, label='L=60')
+plt.plot(T_new, susceptibility_80, label='L=80')
+plt.plot(T_new, susceptibility_100, label='L=100')
 plt.title('Susceptibility')
 plt.legend()
 plt.xlabel('Temperature')
