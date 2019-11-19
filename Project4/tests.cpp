@@ -39,18 +39,21 @@ TEST_CASE("Testing the local energies in a random matrix"){
 	}
 }
 
-TEST_CASE("Testing the Ising model results"){
+TEST_CASE("Testing the Ising model results for <E>, <E^2>, <M>, <M^2>, <|M|>, <|M|^2>"){
 	// Setting up initial values
 	double T = 1.0;
-	int N = 5e7;
+	int N = 2e8;
 	int L = 2;
 
 	// Run the MC Ising model and fetch the resulting values
-	vector<double> results = MonteCarloIsing(N, true, T, L, true);
-
+	vector<double> results = MonteCarloIsing(N, false, T, L);
 	// {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility, flip_factor}
-	vector<double> exactResults =
-		{-1.9960, 15.968, 0, 0.9987, 3.9933, 3.9933 };
 	
-	REQUIRE(calculated == Approx(exact).epsilon(0.0001));
+	vector<double> exactResults = { -1.9960, 15.968, 0, 3.9933, 0.9987 };
+	
+	REQUIRE(results[0] == Approx(exactResults[0]).epsilon(0.0001));
+	REQUIRE(results[1] == Approx(exactResults[1]).epsilon(0.0001));
+	REQUIRE(results[2] == Approx(exactResults[2]).epsilon(0.005)); // Lower precision because of highly fluctuating magnetization
+	REQUIRE(results[3] == Approx(exactResults[3]).epsilon(0.0001));
+	REQUIRE(results[4] == Approx(exactResults[4]).epsilon(0.0001));
 }
