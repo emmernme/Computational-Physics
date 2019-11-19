@@ -321,9 +321,15 @@
 		\end{figure}
 
 	\subsection{Phase Transitions}
-		During our tests runs with the Ising model with various lattice sizes and MC cycles, we gathered information about the time it takes to perform our calculations, which we used to estimate how many cycles we can perform for each of our required temperature steps within a reasonable computation duration. We landed on having 12 temperature steps in the range $T = [2.0, 2.3]$, because we had four cores available for computations, and the way we parallelizes meant each core then had 3 temperature steps to compute, with a total of $10^8$ Monte Carlo cycles each.
+		During our tests runs with the Ising model with various lattice sizes and MC cycles, we gathered information about the time it takes to perform our calculations, which we used to estimate how many cycles we can perform for each of our required temperature steps within a reasonable computation duration.
 
-		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete. For
+		Running our model for one million Monte Carlo cycles and 20 temperature steps on the same computer using one core takes 4.93 minutes, while using four cores takes 1.59 minutes. This shows that parallelization gives us a significant speed-up for our calculations. 
+
+		We landed on having 12 temperature steps in the range $T = [2.0, 2.3]$, because we had four cores available for computations, and the way we parallelizes meant each core then had 3 temperature steps to compute, with a total of $10^8$ Monte Carlo cycles each.
+
+
+
+		Running this calculation on a four core 2,5 GHz computer took $131.7 min$ to complete.
 
 \newpage
 \section{Discussion}
@@ -340,7 +346,7 @@
 	From Figure \ref{fig:steady_E} and \ref{fig:steady_M} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration, when $T = 1.0$. When we increase the temperature, the number of Monte Carlo cycles we need to get good results also increases. For a higher temperature we can also see that the energy in the system increases. Although the magnetization never seems to stabelize for the initial random matix. As mentioned above, the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.
 
 
-	 When looking at Figure \ref{fig:flips} and Figure \ref{fig:flips_random} we can easier see when the system stabelizes. In the beginning of the calculation we can se that there is some change in number of flips but it evens out fairly fast. When these plots even out we can consider that as a stable configuration since very few proposed flips is accepted. That means we have reached an equilibrium where the energy is as low as possible.\\
+	 When looking at Figure \ref{fig:flips} and Figure \ref{fig:flips_random} we can easier see when the system stabelizes. In the beginning of the calculation we can se that there is some change in number of flips but it evens out fairly fast. When these plots even out we can consider that as a stable configuration since very few proposed flips is accepted. That means we have reached an equilibrium where the energy is as low as possible. For this calculations we calculated the spins inside a single loop, a result of this is that the flip factor will not vary as much since the total number og flipped spins at the end of the loop does not differ that much. The flip facor could have been a lot more variating if we had calculated the flipping of spins in a different Monte Carlo loop.
 
 
 	For the probability distribution we have highlighted the mean energy when T=2.4. We coose not to do this for T=1 since this is clearly around -800. This is as expected since for low temperature none of the atoms will be recieving thermal energy from its suroundings. Therfore the expected value for the system should be the lowest possible value (with some exeptions). For T=2.4 we can se that we have a nice gaussian distribution around the mean energy value. When the temperature increases some of the atoms will recieve energy from the surroundings and it will be more random how much energy each of the configurations will have. With this in mind it is likley that we will have a ditribution looking like this. Because of some trouble getting the right value for the variance for the energy this is not highlighted in the plot. If there was good numbers for the variation it should take up around 60\% of the total area of the distribution.
