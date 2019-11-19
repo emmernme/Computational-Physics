@@ -1,3 +1,7 @@
+"""
+Plotting the results from the phase transition run (phase_transitions_mpi.cpp)
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 

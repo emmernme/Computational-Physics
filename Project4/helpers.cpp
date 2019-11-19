@@ -1,12 +1,13 @@
 /*
 *	Helper functions
+* 	Calculating energies, magnetization
+*	Printing a matrix, and printing results
 */
 
 // Calculate the contribution of the spins above and left of a given position
 int E_i_minimal(mat spins, int x, int y, int L){
 	// Only count spins to the left and above, to avoid counting spin interactions twice
 	// (saves some computing power compared to dividing total energy by two)
-
 	int E_count = 0;
 	if (x != 0){ // If not on leftmost edge, add energy contribution from spin on the left
 		E_count += spins(x, y) * spins(x-1, y);
@@ -24,7 +25,6 @@ int E_i_minimal(mat spins, int x, int y, int L){
 // Calculate the contribution of a single spin and all of its surroundings to the total energy
 int E_i(mat spins, int x, int y, int L){
 	int E_count = 0;
-	
 	// When calculating the local sum of surrounding energies, we count in all four directions
 	E_count -= E_i_minimal(spins, x, y, L);
 
@@ -43,7 +43,6 @@ int E_i(mat spins, int x, int y, int L){
 // Calculate the total energy of the system
 int E_tot(mat spins, int L){
 	int E_count = 0;
-
 	// Loop over all the individual spins' energy contributions
 	for (int i = 0; i < L; i++){
 		for (int j = 0; j < L; j++){
@@ -77,7 +76,6 @@ void printMat(mat a, int L){
 // Print the result-vector with descriptive prefixes
 void printResults(vector<double> results){
 	string desc_map[] = { "<E>", "<E^2>", "<M>", "<M^2>", "<|M|>", "E-variance", "M-variance", "Specific heat", "Suceptibility", "Flip factor" };
-
 	for (int i = 0; i < results.size(); i++){
 		cout << desc_map[i] << ": " << results[i] << endl;
 	}

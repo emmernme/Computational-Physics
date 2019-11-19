@@ -1,3 +1,14 @@
+/*
+*	Main Ising Model Monte Carlo file
+*	Function MonteCarloIsing takes the input:
+*		N: number of MC cycles to run
+*		random: whether to initialize the spins randomly or not
+*		T: the temperature of the lattice
+*		L: the dimension of the lattice
+*		count_E: whether to count each E [currently disabled for speed]
+*	Results in a vector with the following elements:
+*		{E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility, flip_factor}
+*/
 #include <cmath>
 #include <iostream>
 #include <fstream>
@@ -46,6 +57,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		spins.fill(1);
 	}
 
+	// Prepare summation variables (PS: double because of integer overflow!)
 	double E_sum = 0;
 	double E_sqrd_sum = 0;
 	double M_sum = 0;
@@ -92,6 +104,7 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 		M_abs_sum += abs(M_current);
 
 		// Count energies to make probability - after 10 % of cycles have completed
+		// COMMENTED FOR PERFORMANCE WHEN RUNNING LARGE SAMPLES
 		/* if (count_E && (i > 0.1 * N)){
 			E_counter.push_back(E_current);
 		} */
@@ -108,8 +121,8 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	} */
 
 	// Normalization factors
-	double norm 	= 1/(double) N;
-	double s_norm 	= 1/(double) (L*L);
+	double norm 	= 1/(double) N; // Per cycle
+	double s_norm 	= 1/(double) (L*L); // Per spin
 
 	// Calculate the mean values
 	double E_mean 		= E_sum * norm;
@@ -118,9 +131,9 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	double M_sqrd_mean 	= M_sqrd_sum * norm;
 	double M_abs_mean 	= M_abs_sum * norm;
 
-
+	// Calculate other interesting quantities
 	double E_variance 	= (E_sqrd_mean - E_mean*E_mean) * s_norm;
-	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean * s_norm) * s_norm;
+	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean) * s_norm;
 
 
 	double specific_heat = E_variance / (T*T);
@@ -132,6 +145,8 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	E_sqrd_mean *= s_norm;
 	M_sqrd_mean *= s_norm;
 	M_abs_mean 	*= s_norm;
+
+	// Flips per MC cycle
 	double flip_factor = (double) flip_count / (double) N;
 
 	// Prepare results
@@ -139,20 +154,3 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	results.insert(results.end(), {E_mean, E_sqrd_mean, M_mean, M_sqrd_mean, M_abs_mean, E_variance, M_variance, specific_heat, susceptibility, flip_factor});
 	return results;
 }
-
-/*
-int main(){
-	//cout << "How many MC cycles?" << endl;
-	//cin >> n;
-	int N = 50;
-	vector<int> E_count;
-	vector<int> flip_N;
-	MonteCarloIsing(N, true, 1.0, 20, E_count, flip_N);
-
-	for (int i = 0; i < E_count.size(); i++){
-		cout << "E_count: " << E_count[i] << ", MC cycles: " << i << ", Num. of flips: " << flip_N[i] << endl;
-
-	}
-	return 0;
-}
-*/

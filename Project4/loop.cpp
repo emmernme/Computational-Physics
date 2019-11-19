@@ -1,5 +1,9 @@
-// Compile using:
-// c++ loop.cpp -o loop.o -larmadillo -O3 -lomp -std=c++11
+/*
+*	Run the MC Ising model once with desired L, N, T
+*	Compile using:
+*	c++ loop.cpp -o loop.o -larmadillo -O3 -std=c++11
+*/
+
 #include "Ising.cpp"
 
 using namespace std;
@@ -11,6 +15,7 @@ int main(){
 	int N = 5e6;
 	int L = 20;
 
+	// Read in alternative values
 	cout << "Grid dim (L) = ";
 	cin >> L;
 	cout << "Cycles (N) = ";
@@ -22,14 +27,5 @@ int main(){
 	vector<double> results = MonteCarloIsing(N, true, T, L, true);
 	printResults(results);
 
-/*
-	// Write flip-count to file for plotting
-	ofstream flip_output;
-	flip_output.open("Flips_N.dat");
-	for (int i = 0; i < flip_N.size(); i++){
-		flip_output << flip_N[i] << endl;
-	}
-	flip_output.close();
-*/
 	return 0;
 }

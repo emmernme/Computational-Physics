@@ -1,10 +1,13 @@
-// Compile using:
-// mpicxx stabilisation.cpp -o stabilisation.o -larmadillo -O3  -std=c++11
-// Run using:
-// mpirun -np 4 ./stabilisation.o out
+/*
+*	Calculate <E>, <|M|> for various MC cycle sizes
+*	Compile using:
+*		mpicxx stabilisation_mpi.cpp -o stabilisation_mpi.o -larmadillo -O3  -std=c++11
+*	Run using:
+*		mpirun -np NUM_CORES ./stabilisation_mpi.o out
+*/
 
 #include "Ising.cpp"
-#include "ProgressBar.hpp"
+#include "External/ProgressBar.hpp"
 #include <iostream>
 #include <mpi.h>
 

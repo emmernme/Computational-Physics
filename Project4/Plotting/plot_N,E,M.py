@@ -1,3 +1,7 @@
+"""
+Plotting the stabilisation results from stabilisation_mpi.cpp
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 import sys

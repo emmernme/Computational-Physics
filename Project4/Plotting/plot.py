@@ -1,3 +1,7 @@
+"""
+Plotting a histogram of the energies calculated in the MC loop
+"""
+
 import matplotlib.pyplot as plt
 import numpy as np
 
