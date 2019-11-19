@@ -24,7 +24,8 @@
 \maketitle
 
 \section*{Abstract}
-	The Ising model in two dimensions has been used to simulate phase transitions in a magnetic system. We have used Monte Carlo and the Metropolis algorithm and our results showes that the number of Monte Carlo cycles wee need to reach equilibrium depends on the spin configuration in the start matrix and also on the temperature. We have estimated the critical temperature for the phase transitions to be 2.78 for a infinitely large lattice.
+	We have, using the Ising model, simulated the phase transitions in a magnetic system. The Ising model was simulated using the Monte Carlo method and the Metropolis algorithm, for various temperatures, visualising a maximum in the system's susceptibility and speficic heat, indicating a critical temperature. Our tests in the project gave us a minimum number of Monte Carlo cycles to run through in order to reach equilibrium, which we used to perform the final simulations over a range of temperatures to get reliable values for the systems' energy, magnetisation, magnetic susceptibility and specific heat.
+	Through our model, we finally estimated the critical temperature of the phase transition to be $T=2.78$ (scaled) for an infinitely large lattice.
 
 \newpage
 
@@ -33,7 +34,7 @@
 \newpage
 
 \section{Introduction}
-	In this project we will study the Ising model in two dimensions. This model is used to simulate phase transitions in materials. A magnetic material will exhibit a phase transition from a magnetic phase to a phase with zero magnetization when the temperature of the system increases. The temperature where this phase transition occurs is called the critical temperature, $T_C$, where at temperatures above $T_C$, the average magnetization is zero. We will be studying the spins of electrons in a lattice, which is a binary system because each electron only can take two values, spin up or spin down, which we represent by +1 and -1. \\
+	In this project we will study the Ising model in two dimensions. This model is used to simulate phase transitions in materials. A magnetic material will exhibit a phase transition from a magnetic phase to a phase with zero magnetisation when the temperature of the system increases. The temperature where this phase transition occurs is called the critical temperature, $T_C$, where at temperatures above $T_C$, the average magnetisation is zero. We will be studying the spins of electrons in a lattice, which is a binary system because each electron only can take two values, spin up or spin down, which we represent by +1 and -1. \\
 
     \subcaption{Energy of the System}
 
@@ -49,7 +50,7 @@
 
     \subsection{Phase Transitions}
 
-	The behavior of physical quantities like the mean magnetization, the heat capacity and the susceptibility can be characterized by a power law behavior when the temperature is near $T_C$:
+	The behavior of physical quantities like the mean magnetisation, the heat capacity and the susceptibility can be characterized by a power law behavior when the temperature is near $T_C$:
 
 	\begin{flalign*}
 		\langleM(T)\rangle &\sim (T-T_C)^{\beta},\\
@@ -72,7 +73,7 @@
 		\label{eq:TC}
 	\end{flalign}
 
-	where $a$ is a constant. If we set $T=T_C$, the mean magnetization, the heat capacity and the susceptibility will be
+	where $a$ is a constant. If we set $T=T_C$, the mean magnetisation, the heat capacity and the susceptibility will be
 
 	\begin{flalign*}
 		\left< M(T)\right> &\sim (T-T_C)^{\beta} \rightarrow L^{-\beta/\nu},\\
@@ -83,10 +84,10 @@
 	In this project, we will use a discretised model of the system and run numerical processes to calculate the physical quantities of the system in order to study the phase transitions in the material.
 
 \section{Method}
-	In the Appendix, we have described how we calcuate the degenerated energies and magnetization of a 2x2-grid of spins. Table \ref{Tab: EogM} shows the number of possible configurations that result in the same energy and magnetization, for a given number of spins pointing up. In total, 16 different spin configurations are possible for a 2x2 grid but only 3 different energies and 3 different magnetizations.
+	In the Appendix, we have described how we calcuate the degenerated energies and magnetisation of a 2x2-grid of spins. Table \ref{Tab: EogM} shows the number of possible configurations that result in the same energy and magnetisation, for a given number of spins pointing up. In total, 16 different spin configurations are possible for a 2x2 grid but only 3 different energies and 3 different magnetisations.
 
 	\begin{table}[h!]
-		\caption{: Spinconfigurations grouped by their total energy and magnetization}
+		\caption{: Spin configurations grouped by their total energy and magnetisation}
 			\label{Tab: EogM}
 			\centering
 		\begin{tabular}{c c c c}
@@ -101,7 +102,7 @@
 		\end{tabular}
 	\end{table}
 
-	We have used the values in Table \ref{Tab: EogM} to calculate the expectation values for the energy and the mean magnetization. These values have then been used to calculate the variance for the two physical quantities. The variance of the energy and the mean magnetization have respectively been used to calculate the heat capacity $c_v &= \sigma^2_E/k_BT^2$ and the susceptibility $\chi = \sigma_M^2/k_BT$.
+	We have used the values in Table \ref{Tab: EogM} to calculate the expectation values for the energy and the mean magnetisation. These values have then been used to calculate the variance for the two physical quantities. The variance of the energy and the mean magnetisation have respectively been used to calculate the heat capacity $c_v &= \sigma^2_E/k_BT^2$ and the susceptibility $\chi = \sigma_M^2/k_BT$.
 
 	\subsection{The Metropolis Algorithm}
 		The Metropolis algorithm uses a propability distribution to obtain a sequence of random samples. In our case it is used to decide if the spins should flip or not. If we have a uniform propability distribution function(PDF), $\omega \in [0,1]$ this is given by:
@@ -113,7 +114,7 @@
             \omega &= e^{-\beta(E_i-E_j)} = e^{-\beta \Delta E}\\
         \end{flalign*}
 
-        \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix(Section 7.2).
+        \noindent where $\Delta E $ is the energy difference between the new and the previous state, $E_i$ and $E_j$. $\beta = 1/k_BT$ and Z is the partition function described in the Appendix (Section 7.2).
         If $\omega = 1$ the system will stay at the same place, there will be no change in the spin configuration. If $\omega > 1$ the system will move to a larger propability of spin configurations and if $\omega < 1$ the system move to a smaller propability.
 
 	\subsection{Optimization}
@@ -129,8 +130,8 @@
 			\item Calculate the current local energy contribution of that spin
 			\item Calculate the new total energy of the system if the spin is flipped
 			\item Use the Metropolis algorithm to decide if we should flip or not
-			\item If we flip: calculate the new total energy and new total magnetization
-			\item Update the expectation values with the (new) energy and total magnetization
+			\item If we flip: calculate the new total energy and new total magnetisation
+			\item Update the expectation values with the (new) energy and total magnetisation
 		\end{itemize}
 
 		Because we are looking at a 2D system, the energies actually get surprisingly easy to calculate. Because we know we only flip one spin at a time, the surrounding four spins (above, below, left and right) stay the same. The consequence of this is that the local energy contribution can only ever "flip" – if you flip the centre spin, the local energy will be $E_{new}(x,y) = -E_{old}(x,y))$. Since the local energy only ever depends on five spins, the possible local energies are also easily calculated. The only possible energies of a local part of the system are: $E(x,y) = {-4J, -2J, 0, 2J, 4J}$, making the only possible transition energies: $\Delta E(x,y) = {8J, 4J, 0, -4J, -8J}$
@@ -142,16 +143,16 @@
 
 		This, again, can be simplified to say that as long as $\Delta E \leq 0$, accept the flip, to avoid having to deal with the random number at all, saving some time.
 
-		These simplifications should make our code run quite fast, in theory, fast enough that we don't need to parallelize the Monte Carlo loop itself. However, if we want to run multiple Monte Carlo loops of millions or billions of cycles, we should definitely parallelize in order to utilze our full computing power.
+		These simplifications should make our code run quite fast, in theory, fast enough that we don't need to parallelize the Monte Carlo loop itself. However, if we want to run multiple Monte Carlo loops of millions or billions of cycles, we should definitely parallelize in order to utilize our full computing power.
 
 		In this project, we parallelize using Open MPI, dividing the different Monte Carlo loops among the processors we have available, and feed the results back to the main process for analysis.
 
 	\subsection{Phase Transitions}
 		We want to study phase transitions in lattices of different sizes, and in order to do so, we need to run simulations for the different lattice sizes with multiple temperatures, and compare these to extrapolate the critical temperatures of the systems.
 
-		In order to run effective calculations in this system, we do several tests before beginning to vary the temperatures and gather statistical data. One such test is to determine how many Monte Carlo cycles are needed to reach a good agreement with analytical values, in order to determine when the system has reached the most likely state, equilibrium.
+		In order to run effective calculations in this system, we do several tests before beginning to vary the temperatures and gather statistical data. One such test is to determine how many Monte Carlo cycles are needed to reach a good agreement with analytical values, in order to determine when the system has reached the most likely state, equilibrium.\\
 
-		From Equation \ref{eq:TC} it is possible to esitmate the critical temperature, $T_C$ for a infinitely large lattice. For this we need to know the value of the constant $a$, we find this by using $T_C$ for some known lattice sizes, $L_1$ and $L_2$
+		From Equation \ref{eq:TC} it is possible to esitmate the critical temperature, $T_C$ for a infinitely large lattice. For this we need to know the value of the constant $a$. We find this by using $T_C$ for some known lattice sizes, $L_1$ and $L_2$
 
 		\begin{flalign*}
 			T_C(L_1) - T_C(L=\infty) = aL_1^{-1/\nu}\\
@@ -166,8 +167,8 @@
 		\end{flalign}
 
 \section{Results}
-	In order to test our algorithm and its precision, we compare the analytical values of the expectation values of the energy and magnetization to our program's equivalent values. We ran the test by starting with a low number of MC cycles and increasing the number gradually until we got a good agreement.
-	For a 2x2 lattice, we approximately need 10 000 Monte Carlo cycles in order to achieve a good agreement with the analytical values of the system. Using 10 000 MC cycles, we get $\left<E\right> = -7.9864 J$, which only differ $0.00247 J$ from the analytical value. The values described in the sections above are represented in Table \ref{Tab: values}, where we have set $J/k_BT =\beta J = 1$. The calculations for the analytical values can be found in the Appendix.
+	In order to test our algorithm and its precision, we compare the analytical values of the expectation values of the energy and magnetisation to our program's equivalent values. We ran the test by starting with a low number of MC cycles and increasing the number gradually until we got a good agreement.
+	For a 2x2 lattice, we approximately need 10 000 Monte Carlo cycles in order to achieve a good agreement with the analytical values of the system. Using 10 000 MC cycles, we get $\left<E\right> = -7.9864 J$, which only differs $0.00247 J$ from the analytical value. The values described in the sections above are represented in Table \ref{Tab: values}, where we have set $J/k_BT =\beta J = 1$. The calculations for the analytical values can be found in the Appendix.
 
 	{\renewcommand{\arraystretch}{1.5}
 	\begin{table}[h!]
@@ -188,9 +189,9 @@
 	\end{table}
 
 	\subsection{Number of Monte Carlo Cycles and Equilibration Times}
-		In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetization for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix for T=1.0.
+		In order to find a more precise measurement of the number of MC cycles needed to reach equilibrium, we run a test with a 20x20 lattice. The test involves logging the mean energy and mean magnetisation for each Monte Carlo cycle, for both $T=1.0$ and $T=2.3$. Figure \ref{fig:steady_E} shows the results for two different initial spin matrices, one with all spins up and one random matrix for T=1.0.
 
-		For a matrix with a random spin configuration at $T=1.0$, we reach steady state at around 200 000 Monte Carlo cycles, while for the matrix with all spins up we seemingly only need a few cycles.
+		For a matrix with either a random spin configuration, or all spins up configuration, at $T=1.0$, we reach steady state at around 40 000 Monte Carlo cycles, as shown in \ref{fig:steady_E}
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -204,11 +205,11 @@
 				\includegraphics[width=250px]{./plot/random_L20_1mill.png}
 				\caption{Initial matrix with random spins.}
 		\end{subfigure}\hfill}}
-		\caption{: Energy plotted against number of Monte Carlo cycles when $T = 1.0$.}
+		\caption{: Mean energy plotted against number of Monte Carlo cycles when $T = 1.0$.}
 		\label{fig:steady_E}
 		\end{figure}
 
-		When we increase the temperature, we see that we need substantially more Monte Carlo cycles to achive a steady state. Figure \ref{fig:steady_E_highT} shows that we would need around 1 million Monte Carlo cycles for both the random matrix and the matrix with all spins up. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}.
+		When we increase the temperature, we see that we need approximately the same number of Monte Carlo cycles, around 50 000, as seen in figure \ref{fig:steady_E_highT}. An estimate for the actual time it takes to reach equilibrium based on the number of Monte Carlo cycles can be made if we assume that one Monte Carlo cycle equals 1 second. The estimated equilibration times can be found in Table \ref{Tab:equilibration_times}.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -222,29 +223,29 @@
 				\includegraphics[width=250px]{./plot/random_L20_1mill_highT.png}
 				\caption{Initial matrix with random spins.}
 		\end{subfigure}\hfill}}
-		\caption{: Energy plotted against number of Monte Carlo cycles when $T = 2.4$. }
+		\caption{: Mean energy plotted against number of Monte Carlo cycles when $T = 2.4$. }
 		\label{fig:steady_E_highT}
 		\end{figure}
 
-		However when we do the same experimen for the magnetization for the system we get a different result. In Figure \ref{fig:steady_M} we can see the way the magnetization varies over MC cycles for T=1. But there is not so easy to find a sertain location where the system reaches an equilibrium.
+		However, when we perform the same simulation for the magnetisation of the system, we get a different result. In Figure \ref{fig:steady_M} we can see the way the magnetisation varies over MC cycles for $T=1.0$. The magnetisation seems to vary too much to be able to define a reasonable stabilisation point.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-		\begin{subfigure}{.5\textwidth}
-				\centering
-				\includegraphics[width=250px]{./plot/M_stabilisation_T=1.png}
-				\caption{Initial matrix with all spins up. }
-		\end{subfigure} \hfill %
-		\begin{subfigure}{.5\textwidth}
-				\centering
-				\includegraphics[width=250px]{./plot/M_stabilisation_T=1_rand.png}
-				\caption{Initial matrix with random spins.}
-		\end{subfigure}\hfill}}
-		\caption{: Magnetization plotted against number of Monte Carlo cycles when $T = 1$. }
+			\begin{subfigure}{.5\textwidth}
+					\centering
+					\includegraphics[width=250px]{./plot/M_stabilisation_T=1.png}
+					\caption{Initial matrix with all spins up. }
+			\end{subfigure} \hfill %
+			\begin{subfigure}{.5\textwidth}
+					\centering
+					\includegraphics[width=250px]{./plot/M_stabilisation_T=1_rand.png}
+					\caption{Initial matrix with random spins.}
+			\end{subfigure}\hfill}}
+		\caption{: Mean absolute magnetization plotted against number of Monte Carlo cycles when $T = 1$. }
 		\label{fig:steady_M}
 		\end{figure}
 
-		When the temperature increases it does not get easier to judge whether we get to an equilibrium state or not. This is shown in Figure \ref{fig:steady_M_highT}
+		When the temperature increases it does not get easier to judge whether we get to an equilibrium state or not. This is shown in Figure \ref{fig:steady_M_highT}.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -258,10 +259,11 @@
 				\includegraphics[width=250px]{./plot/M_stabilisation_T=high_rand.png}
 				\caption{Initial matrix with random spins.}
 		\end{subfigure}\hfill}}
-		\caption{: Magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
+		\caption{: Mean magnetization plotted against number of Monte Carlo cycles when $T = 2.4$. }
 		\label{fig:steady_M_highT}
 		\end{figure}
 
+		Because it is impossible to decide when the magnetisation stabilizes, we define the point where the system reaches equilibrium to be when the energy stabilizes.
 		The estimation of when the system reaches equilibrium for the different initial conditions is found in the following table, \ref{Tab:equilibration_times}.
 
 		{\renewcommand{\arraystretch}{1.5}
@@ -270,17 +272,17 @@
 				\label{Tab:equilibration_times}
 				\centering
 			\begin{tabular}{c c c}
-					Temperature & Matrix & Equilibration time (sec)\\
+					Temperature & Matrix & Equilibration time (minutes)\\
 					\hline
-					$1.0$ & Random spins & 200 000  \\
-					$1.0$ & All spins up & $\approx$ 0 \\
-					$2.4$ & Random spins & 1 000 000\\
-					$2.4$ & All spins up & 1 000 000\\
+					$1.0$ & Random spins & 667 \\
+					$1.0$ & All spins up & 667 \\
+					$2.4$ & Random spins & 883 \\
+					$2.4$ & All spins up & 883 \\
 				\hline
 			\end{tabular}
 		\end{table}
 
-		Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins. It is worth mentioning that these plots represent how many flips that are done on the whole lattice per monte carlo cycle. Therefore the values are sub zero.
+		Figure \ref{fig:flips} and Figure \ref{fig:flips_random} show plots of the total number of accepted configurations as function of the total number of Monte Carlo cycles for respectively an initial matrix with all spins up and an initial matrix with random spins. It is worth mentioning that these plots represent how many flips that have been accepted in the entire lattice per Monte Carlo cycle. Therefore the values are sub zero.
 
 		\begin{figure}[H]
 		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -310,7 +312,7 @@
 				\includegraphics[width=250px]{./plot/random_number_of_flips_highT.png}
 				\caption{T = 2.4}
 		\end{subfigure}\hfill}}
-		\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with all spins up. }
+		\caption{: Total number of accepted spin configuration as a function of Monte Carlo cycles, for an initial matrix with random spins. }
 		\label{fig:flips_random}
 		\end{figure}
 \newpage
@@ -341,7 +343,7 @@
 
 		We landed on having 12 temperature steps in the range $T = [2.0, 2.3]$, because we had four cores available for computations, and the way we parallelizes meant each core then had 3 temperature steps to compute, with a total of $10^8$ Monte Carlo cycles each. Running this calculation on a four core 2,5 GHz computer took $131.7$ minutes to complete.
 
-		In Figure \ref{fig:mean_E_M} and \ref{fig:heat_susc} we have plotted the mean energy, the mean magnetization, the heat capacity and the susceptibility as a function of T for different lattice sizes, L = 40, L = 60, L = 80 and L = 100. From the simulations and by using Equation \ref{eq:TC} we have estimated the critical temperature, $T_C$ for the system. The critical temperature for the different lattice sizes are shown in Table \ref{Tab:TC}
+		In Figure \ref{fig:mean_E_M} and \ref{fig:heat_susc} we have plotted the mean energy, the mean magnetisation, the heat capacity and the susceptibility as a function of T for different lattice sizes, L = 40, L = 60, L = 80 and L = 100. From these simulations and by using Equation \ref{eq:TC} we have estimated the critical temperature, $T_C$ for the system. The critical temperature for the different lattice sizes are shown in Table \ref{Tab:TC}
 
 		{\renewcommand{\arraystretch}{1.5}
 		\begin{table}[h!]
@@ -359,7 +361,7 @@
 			\end{tabular}
 		\end{table}
 
-		We then use Equation \ref{eq:a} to find $T_C(L=\infty)$ from \ref{eq:TC}. We use the critical temperature for L = 80 and L = 100 this gives $a = -36$  and $T_C(L=\infty) = 2.8$
+		We then use Equation \ref{eq:a} to find $T_C(L=\infty)$ from \ref{eq:TC}. We use the critical temperature for L = 80 and L = 100, which determines that $a = -36$, resulting in $T_C(L=\infty) = 2.78$.
 
 
 		\begin{figure}[H]
@@ -374,53 +376,57 @@
 				\includegraphics[width=250px]{./Plotting/Mean_M.png}
 				\caption{Mean Magnetization.}
 		\end{subfigure}\hfill}}
-		\caption{: Energy and Magnetization as a function of temperature for different lattice sizes, L.}
+		\caption{: Energy and Magnetization as functions of temperature for different lattice sizes, L.}
 		\label{fig:mean_E_M}
 		\end{figure}
 
 
-				\begin{figure}[H]
-				\makebox[\textwidth]{\makebox[1.5\textwidth]{%
-				\begin{subfigure}{.5\textwidth}
-						\centering
-						\includegraphics[width=250px]{./Plotting/Specific_heat.png}
-						\caption{Specific Heat }
-				\end{subfigure} \hfill %
-				\begin{subfigure}{.5\textwidth}
-						\centering
-						\includegraphics[width=250px]{./Plotting/Susceptibility.png}
-						\caption{Susceptibility}
-				\end{subfigure}\hfill}}
-				\caption{: Specific heat and susceptibility as a function of temperature for different lattice sizes, L.}
-				\label{fig:heat_susc}
-				\end{figure}
+		\begin{figure}[H]
+		\makebox[\textwidth]{\makebox[1.5\textwidth]{%
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=250px]{./Plotting/Specific_heat.png}
+				\caption{Specific Heat }
+		\end{subfigure} \hfill %
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[width=250px]{./Plotting/Susceptibility.png}
+				\caption{Susceptibility}
+		\end{subfigure}\hfill}}
+		\caption{: Specific heat and susceptibility as a function of temperature for different lattice sizes, L.}
+		\label{fig:heat_susc}
+		\end{figure}
 
 
 
 \newpage
 \section{Discussion}
 
-	The numerical values for a 2x2 lattice is in good agreement with the analytical values. The mean magnetization varies a lot in different calculations, because the magnetization is heavily dependent on each single spin flip. While the energy dependence on each flip is the square value of the product of the neighboring spins, the magnetization depends on the sum of all spins. This might be why we experience different values for the mean magnetization in different calculations.\\
+	The numerical values for a 2x2 lattice is in good agreement with the analytical values. The mean magnetisation varies a lot in different calculations, because the magnetisation is heavily dependent on each single spin flip. While the energy dependence on each flip is the square value of the product of the neighboring spins, the magnetisation depends on the sum of all spins. This might be why we experience different values for the mean magnetisation in different calculations.\\
 
 	% c)
-	From Figure \ref{fig:steady_E} and \ref{fig:steady_M} we see that the energy and magnetization needs a lot less time to stabelize when all of the spins in the lattice have the same configuration, when $T = 1.0$. When we increase the temperature, the number of Monte Carlo cycles we need to get good results also increases. For a higher temperature we can also see that the energy in the system increases.
+	From Figure \ref{fig:steady_E} and \ref{fig:steady_M} we see that the energy stabilizes quite fast, at a low number of Monte Carlo cycles, at different energies, while the magnetization doesn't seem to stabilize at all.
 
- 	Although the magnetization never seems to stabelize for the initial random matix. As mentioned above, the magnetization is more dependent on the spin configuration in the entire matrix and therefore it will not be as stable as the energy.\\
+ 	Although the magnetisation never seems to stabilize for the initial random matix, as mentioned above, the magnetisation is more dependent on the spin configuration in the entire matrix, and will therefore not be as stable as the energy. Additionally, we have plotted the mean magnetisation for the highter temperature, while it might have been a better idea to plot the mean absolute magnetisation, like we did for the lower temperature.\\
 
-	 When looking at Figure \ref{fig:flips} and Figure \ref{fig:flips_random} we can easier see when the system stabelizes. In the beginning of the calculation we can se that there is some change in number of flips but it evens out fairly fast. When these plots even out we can consider that as a stable configuration since very few proposed flips is accepted. That means we have reached an equilibrium where the energy is as low as possible.
+	 When looking at Figure \ref{fig:flips} and Figure \ref{fig:flips_random} we can more easily see when the system stabilizes. In the beginning of the calculation, we can se that there is some change in number of flips which evens out fairly fast. When these plots even out we can consider that as a stable configuration since the number of accepted flips stays approximately the same. That means we have reached an equilibrium where the energy is as low as possible.
 
-	 For this calculations we calculated the spins inside a single loop, a result of this is that the flip factor will not vary as much since the total number og flipped spins at the end of the loop does not differ that much. The flip facor could have been a lot more variating if we had calculated the flipping of spins in a different Monte Carlo loop.
+	 For this calculations, we calculated the spins inside a single Monte Carlo cycle, as opposed to for the stabilisation of the energy and magnetization, where we performed several different Monte Carlo cycles and compared those. A result of this is that the flip factor will not vary as much since the total number of flipped spins at the end of the loop does not differ that much. The flip facor could have varied more if we had calculated the flip factor of spins in different Monte Carlo loops.
 
-	 From Figure \ref{fig:flips_random} we can see that for a random inital spin matrix the flipfactor increases as the temperature increases. This indicates that the spins flip more often inside a single loop for higher temperatures.\\
+	 From Figure \ref{fig:flips_random} we can see that for a random inital spin matrix the flip factor increases as the temperature increases. This indicates that the spins flip more often inside a single loop for higher temperatures.\\
 
-	For the probability distribution we have highlighted the mean energy when T=2.4. We coose not to do this for T=1 since this is clearly around -800. This is as expected since for low temperature none of the atoms will be recieving thermal energy from its suroundings. Therfore the expected value for the system should be the lowest possible value (with some exeptions). For T=2.4 we can se that we have a nice gaussian distribution around the mean energy value. When the temperature increases some of the atoms will recieve energy from the surroundings and it will be more random how much energy each of the configurations will have. With this in mind it is likley that we will have a ditribution looking like this. Because of some trouble getting the right value for the variance for the energy this is not highlighted in the plot. If there was good numbers for the variation it should take up around 60\% of the total area of the distribution.
+	For the probability distribution, we have highlighted the mean energy when $T=2.4$. We chose not to do this for $T=1.0$, since this is clearly around $-800$. This is as expected, because for low temperatures none of the atoms will be recieving thermal energy from their suroundings. Therfore, the expected value for the system should be the lowest possible value (with some exceptions). For $T=2.4$, we can se that we have a nice Gaussian distribution around the mean energy value. When the temperature increases, some of the atoms will recieve energy from the surroundings and it will be more random how much energy each of the configurations will have. With this in mind, it is likley that we will have a distribution looking like this. We had some trouble calculating the variance of the energy, so this is not highlighted in the plot. Our expected values for the variance would mean that plotting the variance would take up around 60\% of the total area of the distribution.
 
-	The analytical value for the critical temperature is 2.269, we dont get the expected value and assume that this has somthing to do with the variance that mentioned above does not correspond good to our assumptions. 
+	We used the function $interpolate.interp1d$ from SciPy in the plotting program $final_plot.py$ to find the temperature for the maximum value from the plots in Figure \ref{mean_E_M} and \ref{heat_susc}.
+
+	The analytical value for the critical temperature is $2.269$. This is different from our simulated and extrapolated critical temperature for an infinite lattice, $2.78$. We can only assume that this is a consequence of a programming error, that could possibly also have caused our trouble with the variance above.
 
 \section{Conclusion}
-Our results shows that the inital matrix as well as temperature plays a role in the physical values for a magnetic system. We have experienced that a random spin matrix needs more time to reach the equilibrium state for the energy than a initial matrix where all the spins are aligned. From Table \ref{tab:equilibration_times} we can tell that the estimated equilibration times is strongly dependent on both the temperature and the initial spin matrix. When the temperature increases the spins flip more often.
+	Our results show that the temperature of the system has an effect on the physical values of the system, like the mean energy. Whether we start with random flips or not doesn't affect the values at all, which is as expected, because our measurements mostly happen after the system has reached equilibrium. We have also seen that the time it takes for the systems with different energies and spin starting points doesn't really vary a lot, and seem to stabilize at around $50 000$ Monte Carlo cycles. We do however see that when the temperature increases, the spins flip more often, resulting in higher energies, but similar magnetisation, up to the critical temperature.
 
-For a low temperature our expectations for the mean energy corresponds good with our results because the system will lay in the lowest and most stable energy state.
+	Studying the system further, we discover some discrepancies with expected results, such as the variance of the energy and magnetisation, following through to the magnetic susceptibility and the specific heat, meaning that we get an unexpectedly high extrapolated critical temperature for the phase change. This leads us to believe that our findings in this project are not precise enough to be comparable to other sources of information at the current time.
+
+	Unfortunately, this project took a lot more work and therefore time to complete, meaning we did not have time to go further in depth in our methods to discover the error source.
 
 
 \section{Appendix}
@@ -442,7 +448,7 @@ For a low temperature our expectations for the mean energy corresponds good with
 		\end{flalign*}
 		In this calculation, we can see that the same interactions are counted twice. The reason for this is that the unit cell repeats itself to infinity in both x and y direction, which is our periodic boundary condition. Therefore the spin $s_1$ will interact with $s_2$ and $s_3$ inside of our unit cell, while $s_2$ and $s_3$ interact "outside" of the unit cell.
 
-		The magnetization is defined as:
+		The magnetisation is defined as:
 		\begin{flalign*}
 			M_i=\sum_{j=1}^{N} s_j
 		\end{flalign*}
@@ -484,11 +490,11 @@ For a low temperature our expectations for the mean energy corresponds good with
 		\end{flalign*}
 
 	\subsection{Expectation Values for the Magnetization}
-		The absolute value of the mean magnetization is given by
+		The absolute value of the mean magnetisation is given by
 		\begin{flalign*}
 			\left<|M(T)|\right> = \frac{\sum \limits{_i^{2^4}} |M_i| e^{-\beta E_i}}{z}
 		\end{flalign*}
-		and can be calculated by using the values for the energy and the magnetization from Table \ref{Tab: EogM}:
+		and can be calculated by using the values for the energy and the magnetisation from Table \ref{Tab: EogM}:
 
 		\begin{flalign*}
 			\left<|M(T)|\right> &= \frac{4e^{8\beta J} + 2\cdot4 + 0\cdot4 + 0\cdot2 + |-2|\cdot4 + |-4|e^{8\beta J}}{z}\\
@@ -517,7 +523,7 @@ For a low temperature our expectations for the mean energy corresponds good with
 
 
 	\subsection{Susceptibility}
-		The variance of the absolute value of the mean magnetization is given by:
+		The variance of the absolute value of the mean magnetisation is given by:
 		\begin{flalign*}
 			\sigma_{M}^2 &= \left<|M(T)^2|\right> - \left<|M(T)|\right>^2\\
 		\end{flalign*}
@@ -530,8 +536,8 @@ For a low temperature our expectations for the mean energy corresponds good with
 
 \section{Bibliography}
 
-\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
+	\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project4}{Link to our GitHub repository.}
 
-
+	Morten Hjorth-Jensen, Lecture Notes FYS3150, chapter 12 and 13.
 
 \end{document}
