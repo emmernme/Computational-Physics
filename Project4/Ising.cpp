@@ -132,8 +132,8 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	double M_abs_mean 	= M_abs_sum * norm;
 
 	// Calculate other interesting quantities
-	double E_variance 	= (E_sqrd_mean - E_mean*E_mean) * s_norm;
-	double M_variance 	= (M_sqrd_mean - M_abs_mean*M_abs_mean) * s_norm;
+	double E_variance 	= (E_sqrd_mean*s_norm - E_mean*E_mean*s_norm*s_norm);
+	double M_variance 	= (M_sqrd_mean*s_norm - M_abs_mean*M_abs_mean*s_norm*s_norm);
 
 
 	double specific_heat = E_variance / (T*T);

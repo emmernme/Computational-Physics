@@ -1,21 +1,20 @@
-\BOOKMARK [1][-]{section.1}{Abstract}{}% 1
-\BOOKMARK [1][-]{section.2}{Introduction}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Phase Transitions}{section.2}% 3
-\BOOKMARK [1][-]{section.3}{Method}{}% 4
-\BOOKMARK [2][-]{subsection.3.1}{The Metropolis Algorithm}{section.3}% 5
-\BOOKMARK [2][-]{subsection.3.2}{Optimization}{section.3}% 6
-\BOOKMARK [2][-]{subsection.3.3}{Phase Transitions}{section.3}% 7
-\BOOKMARK [1][-]{section.4}{Results}{}% 8
-\BOOKMARK [2][-]{subsection.4.1}{Number of Monte Carlo Cycles and Equilibration Times}{section.4}% 9
-\BOOKMARK [2][-]{subsection.4.2}{Probability Distribution}{section.4}% 10
-\BOOKMARK [2][-]{subsection.4.3}{Phase Transitions}{section.4}% 11
-\BOOKMARK [1][-]{section.5}{Discussion}{}% 12
-\BOOKMARK [1][-]{section.6}{Conclusion}{}% 13
-\BOOKMARK [1][-]{section.7}{Appendix}{}% 14
-\BOOKMARK [2][-]{subsection.7.1}{Degenerated Energies and Magnetization}{section.7}% 15
-\BOOKMARK [2][-]{subsection.7.2}{The Partition Function}{section.7}% 16
-\BOOKMARK [2][-]{subsection.7.3}{Expectation Values for the Energy}{section.7}% 17
-\BOOKMARK [2][-]{subsection.7.4}{Expectation Values for the Magnetization}{section.7}% 18
-\BOOKMARK [2][-]{subsection.7.5}{Heat Capacity}{section.7}% 19
-\BOOKMARK [2][-]{subsection.7.6}{Susceptibility}{section.7}% 20
-\BOOKMARK [1][-]{section.8}{Bibliography}{}% 21
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Phase Transitions}{section.1}% 2
+\BOOKMARK [1][-]{section.2}{Method}{}% 3
+\BOOKMARK [2][-]{subsection.2.1}{The Metropolis Algorithm}{section.2}% 4
+\BOOKMARK [2][-]{subsection.2.2}{Optimization}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.3}{Phase Transitions}{section.2}% 6
+\BOOKMARK [1][-]{section.3}{Results}{}% 7
+\BOOKMARK [2][-]{subsection.3.1}{Number of Monte Carlo Cycles and Equilibration Times}{section.3}% 8
+\BOOKMARK [2][-]{subsection.3.2}{Probability Distribution}{section.3}% 9
+\BOOKMARK [2][-]{subsection.3.3}{Phase Transitions}{section.3}% 10
+\BOOKMARK [1][-]{section.4}{Discussion}{}% 11
+\BOOKMARK [1][-]{section.5}{Conclusion}{}% 12
+\BOOKMARK [1][-]{section.6}{Appendix}{}% 13
+\BOOKMARK [2][-]{subsection.6.1}{Degenerated Energies and Magnetization}{section.6}% 14
+\BOOKMARK [2][-]{subsection.6.2}{The Partition Function}{section.6}% 15
+\BOOKMARK [2][-]{subsection.6.3}{Expectation Values for the Energy}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.4}{Expectation Values for the Magnetization}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.5}{Heat Capacity}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.6}{Susceptibility}{section.6}% 19
+\BOOKMARK [1][-]{section.7}{Bibliography}{}% 20
