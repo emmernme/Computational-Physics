@@ -4,7 +4,7 @@ Plotting the results from the phase transition run (phase_transitions_mpi.cpp)
 import sys
 import matplotlib.pyplot as plt
 import numpy as np
-
+from scipy import interpolate
 
 """
 For
@@ -32,7 +32,19 @@ for k in range(T_steps):
     infile.readline()
     infile.readline()
 
-T = np.linspace(2, 2.8, T_steps)
+T = np.linspace(2.0, 3.5, T_steps)
+
+specific_heat_40  = interpolate.interp1d(T, M_mean[0])
+specific_heat_60  = interpolate.interp1d(T, M_mean[1])
+specific_heat_80  = interpolate.interp1d(T, M_mean[2])
+specific_heat_100 = interpolate.interp1d(T, M_mean[3])
+
+susceptibility_40  = interpolate.interp1d(T, susceptibility[0])
+susceptibility_60  = interpolate.interp1d(T, susceptibility[1])
+susceptibility_80  = interpolate.interp1d(T, susceptibility[2])
+susceptibility_100 = interpolate.interp1d(T, susceptibility[3])
+
+
 
 plt.plot(T, E_mean[0], label='L=40')
 plt.plot(T, E_mean[1], label='L=60')
