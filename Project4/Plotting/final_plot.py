@@ -1,7 +1,7 @@
 """
 Plotting the results from the phase transition run (phase_transitions_mpi.cpp)
 """
-
+import sys
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -9,16 +9,16 @@ import numpy as np
 """
 For
 """
-infile = open('phase_transitions.dat', 'r')
+infile = open(sys.argv[1], 'r')
 infile.readline()
 infile.readline()
 infile.readline()
-T_steps = 19
+T_steps = 20
 
 E_mean = np.zeros((4,T_steps))
 M_mean = np.zeros((4,T_steps))
 specific_heat = np.zeros((4,T_steps))
-suceptibility = np.zeros((4,T_steps))
+susceptibility = np.zeros((4,T_steps))
 
 
 for k in range(T_steps):
@@ -28,12 +28,11 @@ for k in range(T_steps):
         E_mean[i,k] = line[2]
         M_mean[i,k] = line[3]
         specific_heat[i,k] = line[4]
-        suceptibility[i,k] = line[5]
+        susceptibility[i,k] = line[5]
     infile.readline()
     infile.readline()
 
-T = np.linspace(2.0, 3.5, T_steps)
-
+T = np.linspace(2, 2.8, T_steps)
 
 plt.plot(T, E_mean[0], label='L=40')
 plt.plot(T, E_mean[1], label='L=60')
@@ -68,10 +67,10 @@ plt.ylabel('Specific heat')
 plt.savefig("Specific_heat.png", dpi=300)
 plt.show()
 
-plt.plot(T, suceptibility[0], label='L=40')
-plt.plot(T, suceptibility[1], label='L=60')
-plt.plot(T, suceptibility[2], label='L=80')
-plt.plot(T, suceptibility[3], label='L=100')
+plt.plot(T, susceptibility[0], label='L=40')
+plt.plot(T, susceptibility[1], label='L=60')
+plt.plot(T, susceptibility[2], label='L=80')
+plt.plot(T, susceptibility[3], label='L=100')
 plt.title('Susceptibility')
 plt.legend()
 plt.xlabel('Temperature')

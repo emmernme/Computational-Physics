@@ -43,19 +43,8 @@ vector<double> MonteCarloIsing(int N, bool random, double T, int L, bool count_E
 	uniform_real_distribution<double> pos(0, L-1);
 
 	// Set up system
-	mat spins = mat(L,L);
-	if (random){
-		// Set up initial spins randomly
-		for (int i = 0; i < L; i++){
-			for (int j = 0; j < L; j++){
-				int spin = (dist(engine) < 0.5) ? -1 : 1;
-				spins(i,j) = spin;
-			}
-		}
-	} else {
-		// Set all spins to +1
-		spins.fill(1);
-	}
+	mat spins;
+	fill_spins(spins, L, false);
 
 	// Prepare summation variables (PS: double because of integer overflow!)
 	double E_sum = 0;
