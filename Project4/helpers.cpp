@@ -4,6 +4,27 @@
 *	Printing a matrix, and printing results
 */
 
+// Fill a spin matrix
+void fill_spins(mat &spins, int L, bool random){
+	spins = mat(L,L);
+	if (random){
+		random_device seeder;
+		mt19937 engine(seeder());
+		uniform_real_distribution<double> dist(0, 1);
+
+		// Set up initial spins randomly
+		for (int i = 0; i < L; i++){
+			for (int j = 0; j < L; j++){
+				int spin = (dist(engine) < 0.5) ? -1 : 1;
+				spins(i,j) = spin;
+			}
+		}
+	} else {
+		// Set all spins to +1
+		spins.fill(1);
+	}
+}
+
 // Calculate the contribution of the spins above and left of a given position
 int E_i_minimal(mat spins, int x, int y, int L){
 	// Only count spins to the left and above, to avoid counting spin interactions twice
