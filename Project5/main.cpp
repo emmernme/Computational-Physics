@@ -9,8 +9,9 @@ using namespace arma;
 
 int main(){
 
-    int n = 1000;
-
+    int n = 1e4;
+    int yr = 1e3;
+    double dt = yr/n;
 
     Planet earth;
     mat v(n,n, fill::zeros);
@@ -22,7 +23,7 @@ int main(){
     earth.initialize("Earth", 6e24, v[0], r[0]);
 
     for(int i=0; i<n; i++){
-        earth.euler(i)
+        earth.euler(i, dt );
     }
 
 

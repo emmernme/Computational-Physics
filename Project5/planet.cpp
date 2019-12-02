@@ -11,11 +11,17 @@ void initialize(string new_name, double m, mat v, mat r){
 }
 
 
-double euler(int iterations){
-    double M_sun = 2e30;
-    double G = 4 * pow(M_PI,2);
+void euler(int i, mat acceleration, mat velocity, mat radi){
+    double GM = 4 * pow(M_PI,2);
 
-    acceleration[i] = (G * M_sun)/(mass * radi[i])
-    velocity[i+1] =
-    radi[i+1] =
+    acceleration(i,0) = (GM)/pow(radi(i,0),2);
+    acceleration(i,1) = (GM)/pow(radi(i,1),2);
+
+
+    velocity(i+1,0)= velocity(i,0) + acceleration(i,0)*dt;
+    velocity(i+1,1)= velocity(i,1) + acceleration(i,1)*dt;
+
+    radi(i+1,0) = radi(i,0) + velocity(i,0)*dt;
+    radi(i+1,1) = radi(i,1) + velocity(i,1)*dt;
+
 }

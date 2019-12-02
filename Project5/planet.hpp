@@ -4,12 +4,14 @@
 class Planet{
     string name;
     double mass;
+
+
+public:
     mat velocity;
     mat acceleration;
     mat radi;
 
-public:
     void initialize(std::string name,double m, double r, double v);
-    double euler(int interations);
+    void euler(int i, double dt, mat acceleration, mat velocity, mat radi);
 
 };
