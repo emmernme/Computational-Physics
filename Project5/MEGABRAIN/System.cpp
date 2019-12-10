@@ -71,7 +71,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 			for (int d = 0; i < dim; d++){
 				acc_next[p][d] = F_next[d] * planet.mass;
 
-				// Calculate the new position with VV
+				// Calculate the new velocity with VV
 				planet.velocity[d] += 0.5 * dt*(acc[p][d] + acc_next[p][d]);
 			}
 		}

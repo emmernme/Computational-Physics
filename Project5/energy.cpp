@@ -45,23 +45,21 @@ int main(){
     double GM = 4 * pow(M_PI,2);
 
 
-    double E0 = 0.5*m*v0y*v0y - GM *m/r0x;
+    double E0 = 0.5*m*v0y*v0y + GM *m/r0x;
+    cout << GM *m/r0x << endl;
 
     for(int i=0; i<n; i++){
         Ekx = 0.5 * m * v(i,0) * v(i,0);
         Eky = 0.5 * m * v(i,1) * v(i,1);
-        Epx = -m * GM * r(i,0);
-        Epy = -m * GM * r(i,1);
+        Epx = -m * GM / r(i,0);
+        Epy = -m * GM / r(i,1);
 
-        Ek = (sqrt(Ekx*Ekx + Eky*Eky));
-        Ep = Epx + Epy;
+        Ek = sqrt(Ekx*Ekx + Eky*Eky);
+        Ep = sqrt(Epx*Epx + Epy*Epy);
 
         E(i) = Ek + Ep;
         E_diff(i) = E0 - E(i);
     }
-
-
-    cout << E;
 
     ofstream outfile;
     outfile.open("energy.dat");
