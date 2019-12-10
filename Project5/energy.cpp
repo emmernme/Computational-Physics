@@ -60,6 +60,7 @@ int main(){
         E_diff(i) = E0 - E(i);
     }
 
+
     cout << E;
 
     ofstream outfile;

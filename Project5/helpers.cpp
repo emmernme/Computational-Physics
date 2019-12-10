@@ -30,7 +30,7 @@ void euler(mat a, mat v, mat r, int n){
 
 
 
-void verlet(mat a, mat v, mat r, int n){
+void verlet(mat a, mat &v, mat &r, int n){
     int yr = 5;
     double dt = (double) yr/ (double) n;
 
