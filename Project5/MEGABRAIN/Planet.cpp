@@ -4,8 +4,36 @@
 */
 #include "Planet.h"
 
-Planet::Planet(int dim, double mass, double* p, double*v){
+Planet::Planet(int dim, double mass, double* p, double* v){
 	this->dim = dim;
+	this->mass = mass;
+	this->position = p;
+	this->velocity = v;
+	
+	E_potential = 0.0;
+	E_kinetic = 0.0;
+}
+Planet::Planet(double mass, double x, double y, double z, double vx, double vy, double vz){
+	double *p = new double(3);
+	p[0] = x, p[1] = y, p[2] = z;
+	double *v = new double(3);
+	v[0] = vx, v[1] = vy, v[2] = vz;
+	
+	this->dim = 3;
+	this->mass = mass;
+	this->position = p;
+	this->velocity = v;
+	
+	E_potential = 0.0;
+	E_kinetic = 0.0;
+}
+Planet::Planet(double mass, double x, double y, double vx, double vy){
+	double *p = new double(2);
+	p[0] = x, p[1] = y;
+	double *v = new double(2);
+	v[0] = vx, v[1] = vy;
+	
+	this->dim = 2;
 	this->mass = mass;
 	this->position = p;
 	this->velocity = v;

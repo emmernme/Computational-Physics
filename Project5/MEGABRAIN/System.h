@@ -3,6 +3,7 @@
 #include "Planet.h"
 using namespace std;
 
+#pragma once
 class System {
 	public: 
 		// Associate with the planet class
@@ -23,8 +24,8 @@ class System {
 		// Various functions
 		void add_planet(Planet planet);
 		void calc_G();
-		void VelocityVerlet(int dim, int N, double end_year, double epsilon);
+		void VelocityVerlet(int dim, int N, double end_year);
 		void GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F);
 		double ** setup_matrix(int cols, int rows);
 		void delete_matrix(double ** matrix);
-}
+};

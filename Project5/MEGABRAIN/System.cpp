@@ -23,9 +23,9 @@ void System::calc_G(){
 	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
-void System::VelocityVerlet(int dim, int N, double end_year, double epsilon){
+void System::VelocityVerlet(int dim, int N, double end_year){
 	// Calculate the time step
-    double dt = (double) end_year / (double) N;
+    double dt = end_year / (double) N;
 
 	// Set up position and velocity matrices
 	double ** acc = setup_matrix(planet_count, dim);
@@ -74,11 +74,10 @@ void System::VelocityVerlet(int dim, int N, double end_year, double epsilon){
 				planet.velocity[d] += 0.5 * dt*(acc[p][d] + acc_next[p][d]);
 			}
 		}
-		
-		delete_matrix(acc);
-		delete_matrix(acc_next);
-		delete [] F;
-		delete [] F_next;
+		// TODO: Fix this... "Pointer being freed was not allocated"
+		//delete_matrix(acc);
+		//delete_matrix(acc_next);
+		//delete F; delete F_next;
     }
 
 }
