@@ -1,6 +1,7 @@
 /*
 *	The System class provides a wrapper for making an entire Solar System and calculating the positions and velocities for the system
-*
+*	Compile using
+	g++ simulator.cpp Planet.cpp System.cpp -o simulator.o -O3 -std=c++11
 */
 #include "System.h"
 
