@@ -31,7 +31,7 @@ int main(){
     euler(a, v, r, n);
     verlet(a, v, r, n);
 
-  
+  /*
     vec E(n);
     vec E_diff(n);
 
@@ -64,6 +64,19 @@ int main(){
     ofstream outfile;
     outfile.open("energy.dat");
     outfile << E_diff;
- 
+ */
+
+    double omega;
+    double I;
+    vec L(n);
+
+    for(int i = 0; i<n; i++){
+        L(i) = m*(sqrt(v(i,0)*v(i,0)+v(i,1)*v(i,1))* (r(i,0)*r(i,0)*r(i,1)-1/(r(i,1)*r(i,1))*r(i,0)));
+    }
+
+    ofstream rotate;
+    rotate.open("rotate.dat");
+    rotate << L;
+
     return 0;
 }
