@@ -1,5 +1,7 @@
 #include <cmath>
 #include <vector>
+#include <string>
+
 using namespace std;
 
 #pragma once
@@ -8,6 +10,7 @@ class Planet {
 		double dim; // 2D or 3D?
 
 		// Planet properties
+		string name;
 		double mass;
 		double *position;
 		double *velocity;
@@ -15,9 +18,7 @@ class Planet {
 		double E_kinetic;
 
 		// Methods to initialize Planet
-		Planet(int dim, double mass, double* position, double* velocity);
-		Planet(double mass, double x, double y, double z, double vx, double vy, double vz);
-		Planet(double mass, double x, double y, double vx, double vy);
+		Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz);
 
 		// Various Planet-functions
 		double planetary_distance(Planet secondPlanet);
@@ -25,4 +26,8 @@ class Planet {
 		double acceleration(Planet secondPlanet, double G_const);
 		double kinetic_energy();
 		double potential_energy(Planet secondPlanet, double G_const);
+
+		// Helpers
+		void print_position();
+		void print_velocity();
 };

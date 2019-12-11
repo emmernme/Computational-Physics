@@ -18,14 +18,17 @@ class System {
 		int planet_count;
 		vector<Planet> planets;
 
-		// Methods to create a system
+		// Initialising methods, to create a system
 		System(double radius);
 
-		// Various functions
+		// Main functions
 		void add_planet(Planet planet);
-		void calc_G();
 		void VelocityVerlet(int dim, int N, double end_year);
 		void GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F);
+
+		// Helper functions
+		void calc_G();
+		void output(ofstream &out, int dim);
 		double ** setup_matrix(int cols, int rows);
-		void delete_matrix(double ** matrix);
+		void delete_matrix(double ** matrix, int cols, int rows);
 };
