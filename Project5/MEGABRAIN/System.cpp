@@ -49,6 +49,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 		out << i << "," << planets[i].name << endl;
 	}
 	out << "# Next lines: [planet ID]=[x],[y]" << ((dim == 3)?",[z]":"") << endl;
+	
 	// Print the initial positions
 	output(out, dim);
 
@@ -61,8 +62,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 			// cout << "Planet: " << planet.name << ", mass: " << planet.mass << endl;
 
 			for (int d = 0; d < dim; d++){
-				F[d] = 0.0; // Reset forces
-				F_next[d] = 0.0;
+				F[d] = F_next[d] = 0.0; // Reset forces
 			}
 
 			// Calculate the force contribution from all other planets
@@ -87,7 +87,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 			}
 			// Use the new acceleration to calculate the velocity of our planet
 			for (int d = 0; d < dim; d++){
-				acc_next[p][d] = F_next[d] * planet.mass;
+				acc_next[p][d] = F_next[d] / planet.mass;
 
 				// Calculate the new velocity with VV
 				planet.velocity[d] += 0.5 * dt*(acc[p][d] + acc_next[p][d]);
@@ -105,7 +105,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 // Calculate the gravitational attraction between two planets
 void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	double r = p1.planetary_distance(p2);
-	double r3 = (dim == 3)? r*r*r : r*r;
+	double r3 = (dim == 3) ? r*r*r : r*r;
 
 	// Calculate the relative distances and the force contributions in each direction
 	for (int i = 0; i < dim; i++){
