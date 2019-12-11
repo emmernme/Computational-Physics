@@ -18,9 +18,7 @@ class Planet {
 		double E_kinetic;
 
 		// Methods to initialize Planet
-		Planet(string name, int dim, double mass, double* position, double* velocity);
-		Planet(string name, double mass, double x, double y, double z, double vx, double vy, double vz);
-		Planet(string name, double mass, double x, double y, double vx, double vy);
+		Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz);
 
 		// Various Planet-functions
 		double planetary_distance(Planet secondPlanet);

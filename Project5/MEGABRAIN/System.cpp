@@ -21,6 +21,7 @@ void System::add_planet(Planet planet){
 	system_mass += planet.mass;
 }
 void System::calc_G(){
+	G = 4 * M_PI*M_PI; return;
 	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
@@ -42,13 +43,15 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 	// Prepare the out-file
 	ofstream out;
 	out.open("system.dat");
-	out << "# Next line: [dim], [# integration points], [years], [dt], [system radius], [planet count]" << endl;
-	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << ", " << planet_count << endl;
-	out << "# Next lines: [planet ID], [planet name]" << endl;
+	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count]" << endl;
+	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << planet_count << endl;
+	out << "# Next lines: [planet ID],[planet name]" << endl;
 	for (int i = 0; i < planet_count; i++){
 		out << i << "," << planets[i].name << endl;
 	}
-	out << "# Next lines: [planet ID] = [x], [y], [x]" << endl;
+	out << "# Next lines: [planet ID]=[x],[y]" << ((dim == 3)?",[z]":"") << endl;
+	// Print the initial positions
+	output(out, dim);
 
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
@@ -64,14 +67,14 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 			}
 
 			// Calculate the force contribution from all other planets
-			for (int p2 = p+1; p2 < planet_count; p2++){
+			for (int p2 = 0; p2 < planet_count; p2++){ if (p == p2) continue;
 				Planet &planet2 = planets[p2];
 				GravitationalForce(dim, planet, planet2, F);
 			}
 
 			// Calculate the acceleration for each dimension for the current planet, then the new position
 			for (int d = 0; d < dim; d++){
-				acc[p][d] = F[d] * planet.mass;
+				acc[p][d] = F[d] / planet.mass;
 
 				// Calculate the new position with VV
 				planet.position[d] += planet.velocity[d] * dt + 0.5 * dt*dt*acc[p][d];
@@ -79,7 +82,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 
 			// When the new position is set, calculate the next velocity by calculating the next force contribution
 			// from the other planets for our planet's new position
-			for (int p2 = p+1; p2 < planet_count; p2++){
+			for (int p2 = 0; p2 < planet_count; p2++){ if (p == p2) continue;
 				Planet &planet2 = planets[p2];
 				GravitationalForce(dim, planet, planet2, F_next);
 			}
@@ -103,19 +106,19 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 // Calculate the gravitational attraction between two planets
 void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	double r = p1.planetary_distance(p2);
-	double r3 = r*r*r;
+	double r3 = (dim == 3)? r*r*r : r*r;
 
 	// Calculate the relative distances and the force contributions in each direction
 	for (int i = 0; i < dim; i++){
 		double rel_dist = p1.position[i] - p2.position[i];
-		F[i] -= G * p1.mass * p2.mass * rel_dist / r3;
+		F[i] = -G * p1.mass * p2.mass * rel_dist / r3;
 	}
 }
 
 // Write the positions to file
 void System::output(ofstream &out, int dim){
 	for (int i = 0; i < planets.size(); i++){
-		Planet planet = planets[i];
+		Planet &planet = planets[i];
 		out << i << "=";
 		for (int d = 0; d < dim; d++){
 			out << planet.position[d] << ((d == dim-1)? "\n" : ",");
