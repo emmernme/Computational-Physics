@@ -4,7 +4,8 @@
 */
 #include "Planet.h"
 
-Planet::Planet(int dim, double mass, double* p, double* v){
+Planet::Planet(string name, int dim, double mass, double* p, double* v){
+	this->name = name;
 	this->dim = dim;
 	this->mass = mass;
 	this->position = p;
@@ -13,12 +14,13 @@ Planet::Planet(int dim, double mass, double* p, double* v){
 	E_potential = 0.0;
 	E_kinetic = 0.0;
 }
-Planet::Planet(double mass, double x, double y, double z, double vx, double vy, double vz){
+Planet::Planet(string name, double mass, double x, double y, double z, double vx, double vy, double vz){
 	double *p = new double(3);
 	p[0] = x, p[1] = y, p[2] = z;
 	double *v = new double(3);
 	v[0] = vx, v[1] = vy, v[2] = vz;
 	
+	this->name = name;
 	this->dim = 3;
 	this->mass = mass;
 	this->position = p;
@@ -27,12 +29,13 @@ Planet::Planet(double mass, double x, double y, double z, double vx, double vy, 
 	E_potential = 0.0;
 	E_kinetic = 0.0;
 }
-Planet::Planet(double mass, double x, double y, double vx, double vy){
+Planet::Planet(string name, double mass, double x, double y, double vx, double vy){
 	double *p = new double(2);
 	p[0] = x, p[1] = y;
 	double *v = new double(2);
 	v[0] = vx, v[1] = vy;
-	
+
+	this->name = name;
 	this->dim = 2;
 	this->mass = mass;
 	this->position = p;
