@@ -26,4 +26,8 @@ class Planet {
 		double acceleration(Planet secondPlanet, double G_const);
 		double kinetic_energy();
 		double potential_energy(Planet secondPlanet, double G_const);
+
+		// Helpers
+		void print_position();
+		void print_velocity();
 };

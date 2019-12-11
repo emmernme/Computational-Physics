@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
-infile = open("system.data", 'r')
+infile = open("system.dat", 'r')
 
 infile.readline()
 info = infile.readline()

@@ -5,19 +5,14 @@
 #include "Planet.h"
 
 Planet::Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz){
-	double *p, *v;
-	if (dim == 2){
-		p = new double(2);
-		p[0] = x, p[1] = y;
-		v = new double(2);
-		v[0] = vx, v[1] = vy;
-	} else {
-		p = new double(3);
-		p[0] = x, p[1] = y, p[2] = z;
-		v = new double(3);
-		v[0] = vx, v[1] = vy, v[2] = vz;
-
-	}
+	double *p = new double[3];
+	p[0] = x;
+	p[1] = y;
+	p[2] = z;
+	double *v = new double[3];
+	v[0] = vx;
+	v[1] = vy;
+	v[2] = vz;
 	
 	this->name = name;
 	this->dim = dim;
@@ -57,4 +52,16 @@ double Planet::kinetic_energy(){
 }
 double Planet::potential_energy(Planet planet, double G_const){
 	return -G_const * this->mass * planet.mass / this->planetary_distance(planet);
+}
+
+void Planet::print_position(){
+	for (int i = 0; i < dim; i++){
+		cout << position[i] << ",";
+	} cout << endl;
+}
+void Planet::print_velocity(){
+	for (int i = 0; i < dim; i++){
+		cout << velocity[i] << ",";
+	} cout << endl;
+
 }

@@ -21,7 +21,6 @@ void System::add_planet(Planet planet){
 	system_mass += planet.mass;
 }
 void System::calc_G(){
-	G = 4 * M_PI*M_PI; return;
 	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
@@ -55,11 +54,11 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
-		cout << "Planets: " << planet_count << endl;
+		// cout << "Planets: " << planet_count << endl;
     	// Perform Velocity Verlet for each planet
 		for (int p = 0; p < planet_count; p++){
 			Planet &planet = planets[p];
-			cout << "Planet: " << p << ", mass=" << planet.mass << endl;
+			// cout << "Planet: " << planet.name << ", mass: " << planet.mass << endl;
 
 			for (int d = 0; d < dim; d++){
 				F[d] = 0.0; // Reset forces
@@ -77,7 +76,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 				acc[p][d] = F[d] / planet.mass;
 
 				// Calculate the new position with VV
-				planet.position[d] += planet.velocity[d] * dt + 0.5 * dt*dt*acc[p][d];
+				planet.position[d] += planet.velocity[d] * dt + 0.5*dt*dt*acc[p][d];
 			}
 
 			// When the new position is set, calculate the next velocity by calculating the next force contribution
@@ -110,8 +109,8 @@ void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 
 	// Calculate the relative distances and the force contributions in each direction
 	for (int i = 0; i < dim; i++){
-		double rel_dist = p1.position[i] - p2.position[i];
-		F[i] = -G * p1.mass * p2.mass * rel_dist / r3;
+		double rel_dist = - p1.position[i] + p2.position[i];
+		F[i] = G * p1.mass * p2.mass * rel_dist / r3;
 	}
 }
 
@@ -138,7 +137,6 @@ double ** System::setup_matrix(int cols, int rows){
             matrix[i][j] = 0.0;
         }
 	}
-	cout << "[" << rows << "][" << cols << "]" << endl; 
 	return matrix;
 }
 void System::delete_matrix(double **matrix, int cols, int rows){
