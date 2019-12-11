@@ -21,6 +21,7 @@ void System::add_planet(Planet planet){
 	system_mass += planet.mass;
 }
 void System::calc_G(){
+	G = (4*M_PI*M_PI) / planets[0].mass; return;
 	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
