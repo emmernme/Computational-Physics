@@ -73,20 +73,35 @@ We then solve for $v^2r$, where $v$ is the velocity of Earth.
 
 \begin{flalign}
     v^2r = G M_{\odot} = 4\pi^2 \ \ AU^3/(yr)^2
+    \label{eq:v2r}
 \end{flalign}
 
-where yr is short for years, which we use instead of seconds to decribe the motions in the solar system.
-
+where yr is short for years, which we use instead of seconds to decribe the motions in the solar system. We then solve this equation using Euler´s forward algorithm and the velocity Verlet method. The description of the mathematics behind this algorithm can be found in the \href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture slides}.
 
 \section{Results}
+We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and the velocity Verlet method. We saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. We have therefor used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}.
 
-Euler kræver mang flær steps size enn værlet metoden for å bli nøyaktig
-
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{./Plot/xy_vs_time.png}
-        \caption{}
-        \label{}
+        \caption{: }
+        \label{fig:position}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{./Plot/energy.png}
+        \caption{: Energy}
+        \label{fig:energy}
+    \end{center}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=\textwidth]{./Plot/angular_momentum.png}
+        \caption{: Angular Momentum}
+        \label{fig:am}
     \end{center}
 \end{figure}
 
@@ -96,10 +111,10 @@ Euler kræver mang flær steps size enn værlet metoden for å bli nøyaktig
 
 \section{Bibliography}
 
-\begin{figure}
+\begin{figure}[H]
     \begin{center}
         \includegraphics[width=\textwidth]{./Plot/}
-        \caption{}
+        \caption{: }
         \label{}
     \end{center}
 \end{figure}
