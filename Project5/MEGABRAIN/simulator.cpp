@@ -17,9 +17,9 @@ e
 using namespace std;
 
 int main (int argv, char **argc){
-	int N = 1000;
+	int N = 10000;
 	int dim = 3;
-	double years = 5.0;
+	double years = 1.0;
 
 	//Planet Sun("Sun", dim, 1, 0, 0, 0, 0, 0, 0);
 	//Planet Earth("Earth", dim, 0.00003, 1, 0, 0, 0, 6.3, 0);
