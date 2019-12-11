@@ -4,7 +4,7 @@ from mpl_toolkits.mplot3d import Axes3D
 
 
 
-infile = open("system.dat", 'r')
+infile = open("system.data", 'r')
 
 infile.readline()
 info = infile.readline()
@@ -37,18 +37,31 @@ for i in range(n-1):
     earth[i,2] = float(element2[2])
 
 
+x_sun = np.zeros((n,1))
+y_sun = np.zeros((n,1))
+z_sun = np.zeros((n,1))
+
+x_earth = np.zeros((n,1))
+y_earth = np.zeros((n,1))
+z_earth = np.zeros((n,1))
+
+for i in range(len(earth)):
+    x_sun[i] = sun[i,0]
+    y_sun[i] = sun[i,1]
+    z_sun[i] = sun[i,2]
+
+    x_earth[i] = earth[i,0]
+    y_earth[i] = earth[i,1]
+    z_earth[i] = earth[i,2]
+
+"""
 fig = plt.figure()
-ax = fig.add_subplot(111, projection="3d")
-
-x1 = sun[0]
-y1 = sun[1]
-z1 = sun[2]
-
-x2 = earth[0]
-y2 = earth[1]
-z2 = earth[2]
-
-ax.plot(x1, y1, z1)
-ax.plot(x2, y2, z2)
-
+ax = plt.axes(projection='3d')
+"""
+plt.plot(x_earth, y_earth, label='Earth')
+plt.plot(x_sun, y_sun, label='Sun')
+plt.legend()
+plt.xlabel("Xpos")
+plt.ylabel("Ypos")
 plt.show()
+#plt.savefig('fig1.png')
