@@ -1,5 +1,5 @@
 # Next line: [dim], [# integration points], [years], [dt], [system radius], [planet count]
-3,1000,5,0.005,10, 2
+3,1000,5,0.005,10,2
 # Next lines: [planet ID], [planet name]
 0,Sun
 1,Earth
