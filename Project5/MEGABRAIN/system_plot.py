@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from mpl_toolkits.mplot3d import Axes3D
+
+# This import registers the 3D projection, but is otherwise unused.
+from mpl_toolkits.mplot3d import Axes3D  # noqa: F401 unused import
 
 
-
-infile = open("system.data", 'r')
+infile = open("system.dat", 'r')
 
 infile.readline()
 info = infile.readline()
@@ -37,15 +38,15 @@ for i in range(n-1):
     earth[i,2] = float(element2[2])
 
 
-x_sun = np.zeros((n,1))
-y_sun = np.zeros((n,1))
-z_sun = np.zeros((n,1))
+x_sun = np.zeros((n-1,1))
+y_sun = np.zeros((n-1,1))
+z_sun = np.zeros((n-1,1))
 
-x_earth = np.zeros((n,1))
-y_earth = np.zeros((n,1))
-z_earth = np.zeros((n,1))
+x_earth = np.zeros((n-1,1))
+y_earth = np.zeros((n-1,1))
+z_earth = np.zeros((n-1,1))
 
-for i in range(len(earth)):
+for i in range(len(earth)-1):
     x_sun[i] = sun[i,0]
     y_sun[i] = sun[i,1]
     z_sun[i] = sun[i,2]
@@ -54,14 +55,14 @@ for i in range(len(earth)):
     y_earth[i] = earth[i,1]
     z_earth[i] = earth[i,2]
 
-"""
 fig = plt.figure()
-ax = plt.axes(projection='3d')
-"""
-plt.plot(x_earth, y_earth, label='Earth')
-plt.plot(x_sun, y_sun, label='Sun')
-plt.legend()
-plt.xlabel("Xpos")
-plt.ylabel("Ypos")
+ax = fig.gca(projection='3d')
+
+
+ax.plot(x_earth.flatten(), y_earth.flatten(), z_earth.flatten(), label='Earth')
+ax.plot(x_sun.flatten(), y_sun.flatten(), z_sun.flatten(), label='Sun', color="#ccff00", linewidth=10)
+ax.legend()
+ax.set_xlabel("Xpos")
+ax.set_ylabel("Ypos")
 plt.show()
 #plt.savefig('fig1.png')
