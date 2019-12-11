@@ -55,14 +55,20 @@ for i in range(len(earth)-1):
     y_earth[i] = earth[i,1]
     z_earth[i] = earth[i,2]
 
+plt.style.use("dark_background")
 fig = plt.figure()
 ax = fig.gca(projection='3d')
+plt.gca().patch.set_facecolor('black')
+ax.w_xaxis.set_pane_color((0, 0, 0, 1.0))
+ax.w_yaxis.set_pane_color((0, 0, 0, 1.0))
+ax.w_zaxis.set_pane_color((0, 0, 0, 1.0))
 
 
-ax.plot(x_earth.flatten(), y_earth.flatten(), z_earth.flatten(), label='Earth')
-ax.plot(x_sun.flatten(), y_sun.flatten(), z_sun.flatten(), label='Sun', color="#ccff00", linewidth=10)
+ax.plot(x_earth.flatten(), y_earth.flatten(), z_earth.flatten(), label='Earth', color="#ffffff")
+ax.scatter(x_sun.flatten(), y_sun.flatten(), z_sun.flatten(), label='Sun', color="#ccff00", linewidth=10)
 ax.legend()
 ax.set_xlabel("Xpos")
 ax.set_ylabel("Ypos")
 plt.show()
 #plt.savefig('fig1.png')
+
