@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
-import sys
 from mpl_toolkits.mplot3d import Axes3D
 
 
-infile = open(sys.argv[1], 'r')
+infile = open("system.dat", 'r')
 infile.readline()
 info = infile.readline()
 
