@@ -15,15 +15,16 @@ class System {
 		double system_kinetic;
 		double system_potential;
 		double G;
+		double beta;
 		int planet_count;
 		vector<Planet> planets;
 
 		// Initialising methods, to create a system
-		System(double radius);
+		System(double radius, double beta);
 
 		// Main functions
 		void add_planet(Planet planet);
-		void VelocityVerlet(int dim, int N, double end_year);
+		void VelocityVerlet(int dim, int N, double end_year, string filename);
 		void GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F);
 		void NormaliseSpeeds();
 

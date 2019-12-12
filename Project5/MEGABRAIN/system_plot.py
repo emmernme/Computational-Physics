@@ -49,7 +49,8 @@ for i in range(planet_count):
     pos = planets[i]["position"]
     if (planets[i]["name"] == "Sun"):
         if (dim == 3):
-            ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
+            #ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
+            ax.scatter([0],[0],[0], label=planets[i]["name"], color="#ccff00", linewidth=10)
         else:
             ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
 
