@@ -19,18 +19,18 @@ using namespace std;
 int main (int argv, char **argc){
 	int N = 200000;
 	int dim = 3;
-	double years = 5.0;
+	double years = 50.0;
 
-	double E_vel[4] = {2.0, 2.5, 2.82, 2.83};
+	double betas[4] = {2.0, 2.5, 2.82, 2.83};
 
-	for (double E : E_vel){
+	for (double beta : betas){
 		Planet Sun("Sun", dim, 1.0,
 					0.0, 0.0, 0.0, 
 					0.0, 0.0, 0.0);
 		Planet Earth("Earth", dim, 0.00003,
 					1.0, 0.0, 0.0,
-					0.0, (E*M_PI) / 365, 0); // Velocities in AU/day
-		System Solar_system(10.0, 2);
+					0.0, (2*M_PI + 0.1) / 365, 0); // Velocities in AU/day
+		System Solar_system(10.0, beta);
 		Solar_system.add_planet(Sun);
 		Solar_system.add_planet(Earth);
 		//Solar_system.add_planet(Jupiter);
