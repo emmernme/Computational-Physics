@@ -5,7 +5,7 @@
 #include "System.h"
 using namespace std;
 
-System::System(double radius) {
+System::System(double radius, double beta) {
 	// Set the initial properties of the system
 	this->radius = radius;
 	system_mass = 0;
@@ -13,6 +13,7 @@ System::System(double radius) {
 	system_potential = 0;
 	G = 4*M_PI*M_PI;
 	planet_count = 0;
+	this->beta = beta;
 }
 
 void System::add_planet(Planet planet){
@@ -21,11 +22,11 @@ void System::add_planet(Planet planet){
 	system_mass += planet.mass;
 }
 void System::calc_G(){
-	G = (4*M_PI*M_PI) / planets[0].mass; return;
-	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
+	G = (4*M_PI*M_PI);
+	//G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
-void System::VelocityVerlet(int dim, int N, double end_year){
+void System::VelocityVerlet(int dim, int N, double end_year, string file){
 	// Calculate the time step
     double dt = end_year / (double) N;
 
@@ -38,13 +39,14 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 
 	// Prepare values used in calculations
 	calc_G();
+	NormaliseSpeeds();
 	double rad_sqrd = radius*radius;
 
 	// Prepare the out-file
 	ofstream out;
-	out.open("system.dat");
-	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count]" << endl;
-	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << planet_count << endl;
+	out.open(file);
+	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count],[beta]" << endl;
+	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << planet_count << "," << beta << endl;
 	out << "# Next lines: [planet ID],[planet name]" << endl;
 	for (int i = 0; i < planet_count; i++){
 		out << i << "," << planets[i].name << endl;
@@ -53,21 +55,20 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 	
 	// Print the initial positions
 	output(out, dim);
+	cout << "Starting VV. Planets: " << planet_count << ", G: " << G << ", beta: " << beta << endl; 
 
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
-		// cout << "Planets: " << planet_count << endl;
     	// Perform Velocity Verlet for each planet
 		for (int p = 0; p < planet_count; p++){
 			Planet &planet = planets[p];
-			// cout << "Planet: " << planet.name << ", mass: " << planet.mass << endl;
-
+			// Reset forces
 			for (int d = 0; d < dim; d++){
-				F[d] = F_next[d] = 0.0; // Reset forces
+				F[d] = F_next[d] = 0.0; 
 			}
 
 			// Calculate the force contribution from all other planets
-			for (int p2 = 0; p2 < planet_count; p2++){ if (p == p2) continue;
+			for (int p2 = 0; p2 < planet_count; p2++){
 				Planet &planet2 = planets[p2];
 				GravitationalForce(dim, planet, planet2, F);
 			}
@@ -82,7 +83,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 
 			// When the new position is set, calculate the next velocity by calculating the next force contribution
 			// from the other planets for our planet's new position
-			for (int p2 = 0; p2 < planet_count; p2++){ if (p == p2) continue;
+			for (int p2 = 0; p2 < planet_count; p2++){
 				Planet &planet2 = planets[p2];
 				GravitationalForce(dim, planet, planet2, F_next);
 			}
@@ -106,12 +107,24 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 // Calculate the gravitational attraction between two planets
 void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	double r = p1.planetary_distance(p2);
-	double r3 = (dim == 3) ? r*r*r : r*r;
+	if (r < 1e-8) return;
+
+	double r_factor = pow(r, beta + 1);
 
 	// Calculate the relative distances and the force contributions in each direction
 	for (int i = 0; i < dim; i++){
 		double rel_dist = p1.position[i] - p2.position[i];
-		F[i] = -G * p1.mass * p2.mass * rel_dist / r3;
+		F[i] = -G * p1.mass * p2.mass * rel_dist / r_factor;
+	}
+}
+
+// Normalise planet speeds according to the first planet
+void System::NormaliseSpeeds(){
+	double *vel = planets[0].velocity;
+	for (int i = 0; i < planet_count; i++){
+		for (int d = 0; d < planets[i].dim; d++){
+			planets[i].velocity[d] -= vel[d];
+		}
 	}
 }
 

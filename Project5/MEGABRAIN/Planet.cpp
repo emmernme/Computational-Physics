@@ -10,9 +10,9 @@ Planet::Planet(string name, int dim, double mass, double x, double y, double z, 
 	p[1] = y;
 	p[2] = z;
 	double *v = new double[3];
-	v[0] = vx;
-	v[1] = vy;
-	v[2] = vz;
+	v[0] = vx * 365;
+	v[1] = vy * 365;
+	v[2] = vz * 365;
 	
 	this->name = name;
 	this->dim = dim;
