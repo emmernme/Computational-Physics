@@ -183,10 +183,31 @@ with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These fig
     \label{fig:beta}
     \end{figure}
 
+We then add Jupiter to our system and we evaluate how it affects our system when we increase Jupiters mass. The result when Jupiter has it's own mass is shown in Figure \ref{fig:jupiter1}. When we increase the mass with a factor of 10 the result does not differ from what we see in Figure \ref{fig:jupiter1}. Figure \ref{fig:jupiter} shows what will happen when we increase the mass of Jupiter with a factor of respectively 950 and 1000. These figures shows that when the mass of Jupiter gets large it will attract the Earth away from its normal orbit around the Sun. When we increse the mass with a factor of 1000 the Earth will escape the sun because the repulsive force bewteen Jupiter and the Earth become really big. When Jupiter's mass is increased with a factor of 1000 we needed about 20 000 steps for the system to be stable, that is equivalent to approximately 20 years.
 
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{./Plot/Earth_Jupiter1.png}
+        \caption{: Solar system including Earth and Jupiter.}
+        \label{fig:jupiter1}
+    \end{center}
+\end{figure}
 
-
-
+\begin{figure}[H]
+    \makebox[\textwidth]{\makebox[1.5\textwidth]{%
+    \begin{subfigure}{.5\textwidth}
+            \centering
+            \includegraphics[width=250px]{./Plot/Earth_Jupiter950.png}
+            \caption{Mass of Jupiter increased with a factor of 950}
+    \end{subfigure} \hfill %
+    \begin{subfigure}{.5\textwidth}
+            \centering
+            \includegraphics[width=250px]{./Plot/Earth_Jupiter1000.png}
+            \caption{Mass off Jupiter increased with a factor of 1000}
+    \end{subfigure}\hfill}}
+    \caption{: Solar system including Earth and Jupiter, with the mass of Jupiter increased.}
+    \label{fig:jupiter}
+    \end{figure}
 
 \section{Discussion}
 
