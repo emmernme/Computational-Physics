@@ -42,7 +42,7 @@ plt.gca().patch.set_facecolor('black')
 ax.xaxis.set_pane_color((0, 0, 0, 1.0))
 ax.yaxis.set_pane_color((0, 0, 0, 1.0))
 ax.zaxis.set_pane_color((0, 0, 0, 1.0))
-ax.grid(b=False)
+#ax.grid(b=True)
 
 
 for i in range(planet_count):
@@ -65,8 +65,8 @@ ax.legend()
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
-ax.set_xticks([])
+"""ax.set_xticks([])
 ax.set_yticks([])
-ax.set_zticks([])
+ax.set_zticks([])"""
 #plt.savefig(sys.argv[1] + '.png', dpi=300)
 plt.show()

@@ -114,7 +114,7 @@ void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	// Calculate the relative distances and the force contributions in each direction
 	for (int i = 0; i < dim; i++){
 		double rel_dist = p1.position[i] - p2.position[i];
-		F[i] = -G * p1.mass * p2.mass * rel_dist / r_factor;
+		F[i] -= G * p1.mass * p2.mass * rel_dist / r_factor;
 	}
 }
 
