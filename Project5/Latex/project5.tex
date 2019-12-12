@@ -88,6 +88,18 @@ For a system with more than one planet we need to add the magnitude of the force
 
 where $M_Jupiter$ is the mass of Jupiter and $r_{Earth-Jupiter}$ is the distance between Earth and Jupiter. To extend the model for all the planets in the solar system we add the other planets in the same way and choose the initial positions and velocities for all the planets from \href{https://ssd.jpl.nasa.gov/horizons.cgi#top}{NASA}.
 
+The perihelion of a planet is the point where the planet in orbit around the Sun is closest to the Sun. The general theory of relativity explains the anomalous perihelion precession of the planet Mercury. The observed value for the perihelion precession when the classical effects are subtracted is 43''(43 arc seconds) per century. The behavior of the orbit around the sun will not be the same for each round, this means that the perihelion will slowly precess around the Sun and we would need to adda general relativistic correction to the Newton gravitaional force. The force then becomes:
+
+\begin{flalign}
+    F_G = \frac{GM_{Sun}M_{Mercury}}{r^2}\left[1 + \frac{3l^2}{r^2c^2} \right]
+\end{flalign}
+
+where $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun and Mercury. The magnitude of the angular momentum is given by $l=|\vec{r} X \vec{v}|$ and c is the speed of light in vacuum. We obtain the perihelion angle $\thetha_p$ from the positions when Mercury is at its closest to the Sun, i.e the perihelion positions, $x_p$ and $y_p$. $\thetha_p$ is then given by
+
+\begin{flalign}
+    tan \thetha_p = \frac{y_p}{x_p}
+\end{flalign}
+
 \subsection{Object orientation}
  We make a system which contains different classes, including the planet class which is a own class in it self $\smiley$
 
@@ -209,10 +221,18 @@ We then add Jupiter to our system and we evaluate how it affects our system when
     \label{fig:jupiter}
     \end{figure}
 
+perihelion:
+The speed of Mercury at perihelion is 12.44 AU/yr, and the distance to the sun at perihelion is 0.3075 AU.
+
+sjekke ar endringen i perihelion med en ren newton kraft (uten relativistiks) er minst et par ganger mindre enn den observerte Perihelion precession of mercury
+
+
 \section{Discussion}
 
 %Forskjeller mellom Verlet og Euler når vi tester algoritmene
 %Time de og
+
+%Can the obserevd perihelion precession of Mercury be explained by the general theory of relativity?
 
 \section{Appendix}
 
@@ -226,7 +246,7 @@ We then add Jupiter to our system and we evaluate how it affects our system when
     \end{center}
 \end{figure}
 
-https://en.wikipedia.org/wiki/Escape_velocity
+\href{https://en.wikipedia.org/wiki/Escape_velocity}{}
 
 
 
