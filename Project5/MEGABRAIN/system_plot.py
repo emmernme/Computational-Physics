@@ -3,7 +3,6 @@ import numpy as np
 import sys
 from mpl_toolkits.mplot3d import Axes3D
 
-
 infile = open(sys.argv[1], 'r')
 infile.readline()
 info = infile.readline()
@@ -69,5 +68,4 @@ ax.set_zlabel("z")
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
-plt.show()
-#plt.savefig('fig1.png')
+plt.savefig(sys.argv[1] + '.png', dpi=300)

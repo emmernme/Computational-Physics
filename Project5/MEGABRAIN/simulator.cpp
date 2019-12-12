@@ -19,7 +19,7 @@ using namespace std;
 int main (int argv, char **argc){
 	int N = 200000;
 	int dim = 3;
-	double years = 80.0;
+	double years = 5.0;
 
 	Planet Sun("Sun", dim, 1.0,
 				0.0, 0.0, 0.0, 
@@ -39,7 +39,7 @@ int main (int argv, char **argc){
 	//Solar_system.add_planet(Jupiter);
 
 	// Simulate the passing of time
-	Solar_system.VelocityVerlet(dim, N, years, "beta=2.data");
+	Solar_system.VelocityVerlet(dim, N, years, "Earth_orbit.data");/*
 	Solar_system.beta = 2.5;
 	Solar_system.VelocityVerlet(dim, N, years, "beta=2_5.data");
 	Solar_system.beta = 2.7;
@@ -50,7 +50,7 @@ int main (int argv, char **argc){
 	Solar_system.VelocityVerlet(dim, N, years, "beta=2_95.data");
 	Solar_system.beta = 3;
 	Solar_system.VelocityVerlet(dim, N, years, "beta=3.data");
-
+*/
 
 	// Plot
 	//system("python3 ./system_plot.py \"beta=2.data\"");
