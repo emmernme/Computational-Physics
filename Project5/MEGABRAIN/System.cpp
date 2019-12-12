@@ -21,8 +21,8 @@ void System::add_planet(Planet planet){
 	system_mass += planet.mass;
 }
 void System::calc_G(){
-	G = (4*M_PI*M_PI) / planets[0].mass; return;
-	G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
+	G = (4*M_PI*M_PI) / system_mass;
+	//G = (4*M_PI*M_PI/32)*radius*radius*radius / system_mass;
 }
 
 void System::VelocityVerlet(int dim, int N, double end_year){
@@ -38,6 +38,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 
 	// Prepare values used in calculations
 	calc_G();
+	NormaliseSpeeds();
 	double rad_sqrd = radius*radius;
 
 	// Prepare the out-file
@@ -53,6 +54,7 @@ void System::VelocityVerlet(int dim, int N, double end_year){
 	
 	// Print the initial positions
 	output(out, dim);
+	cout << "Starting VV. Planets: " << planet_count << ", G: " << G << endl; 
 
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
@@ -112,6 +114,16 @@ void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	for (int i = 0; i < dim; i++){
 		double rel_dist = p1.position[i] - p2.position[i];
 		F[i] = -G * p1.mass * p2.mass * rel_dist / r3;
+	}
+}
+
+// Normalise planet speeds according to the first planet
+void System::NormaliseSpeeds(){
+	double *vel = planets[0].velocity;
+	for (int i = 0; i < planet_count; i++){
+		for (int d = 0; d < planets[i].dim; d++){
+			planets[i].velocity[d] -= vel[d];
+		}
 	}
 }
 

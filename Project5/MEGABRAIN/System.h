@@ -25,6 +25,7 @@ class System {
 		void add_planet(Planet planet);
 		void VelocityVerlet(int dim, int N, double end_year);
 		void GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F);
+		void NormaliseSpeeds();
 
 		// Helper functions
 		void calc_G();
