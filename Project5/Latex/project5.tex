@@ -159,14 +159,32 @@ This gives the minimal kinetic energy to be able to reach infinity, therefore th
     v_0 &= \sqrt{\frac{2GM_{\odot}}r_0} = \sqrt{2\cdot4\pi^2} AU/yr = 2.8\pi AU/yr
 \end{flalign*}
 
-
 If we try to replace the gravitaional force from Equation \ref{eq:FG} with
 
 \begin{flalign*}
     F_G = \frac{GM_{\odot}M_E}{r^{\beta}}
 \end{flalign*}
 
-with $\beta \in [2,3]$. When $\beta$ = 2.
+with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3 the Earth begins to escape the sun. This would have been the case if the gravitaional force worked different, so we are since the gravitaional force keeps us in orbit around the Sun.
+
+\begin{figure}[H]
+    \makebox[\textwidth]{\makebox[1.5\textwidth]{%
+    \begin{subfigure}{.5\textwidth}
+            \centering
+            \includegraphics[width=250px]{./Plot/vary_beta_1.png}
+            %\caption{}
+    \end{subfigure} \hfill %
+    \begin{subfigure}{.5\textwidth}
+            \centering
+            \includegraphics[width=250px]{./Plot/vary_beta_2.png}
+            %\caption{}
+    \end{subfigure}\hfill}}
+    \caption{: The Earth-Sun system for different values of $\beta$.}
+    \label{fig:beta}
+    \end{figure}
+
+
+
 
 
 
