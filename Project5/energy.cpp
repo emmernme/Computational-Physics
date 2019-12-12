@@ -9,7 +9,7 @@ using namespace arma;
 
 int main(){
 
-    int n = 1.0e3;
+    int n = 1.0e5;
 
     //Defining
 
@@ -28,8 +28,21 @@ int main(){
     r(0,0) = r0x;
     r(0,1) = r0y;
 
+    clock_t start, finish;
+    start = clock();
     euler(a, v, r, n);
+    finish = clock();
+    double t_euler = (double) (finish-start)/CLOCKS_PER_SEC * 1000;
+
+    start = clock();
     verlet(a, v, r, n);
+    finish = clock();
+    double t_verlet = (double) (finish-start)/CLOCKS_PER_SEC *1000;
+
+    cout << "Integration points: " << n << endl;
+    cout << "Time taken for Euler method:  " << t_euler << "ms" << endl;
+    cout << "Time taken for Verlet method: " << t_verlet << "ms" << endl;
+
 
   /*
     vec E(n);
@@ -64,7 +77,7 @@ int main(){
     ofstream outfile;
     outfile.open("energy.dat");
     outfile << E_diff;
- */
+ 
 
     double omega;
     double I;
@@ -77,6 +90,6 @@ int main(){
     ofstream rotate;
     rotate.open("rotate.dat");
     rotate << L;
-
+*/
     return 0;
 }

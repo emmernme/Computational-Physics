@@ -22,10 +22,10 @@ void euler(mat a, mat v, mat r, int n){
         r(i+1,0) = r(i,0) + v(i,0)*dt; //x position
         r(i+1,1) = r(i,1) + v(i,1)*dt; //y position
     }
-
+/*
     ofstream values_output;
     values_output.open("euler.dat");
-    values_output << r;
+    values_output << r;*/
 }
 
 
@@ -57,8 +57,8 @@ void verlet(mat a, mat &v, mat &r, int n){
         v(i+1,1) = v(i,1) + (ay+a(i,1))*dt/2;
     }
 
-
+/*
     ofstream values_output;
     values_output.open("verlet.dat");
-    values_output << r;
+    values_output << r;*/
 }
