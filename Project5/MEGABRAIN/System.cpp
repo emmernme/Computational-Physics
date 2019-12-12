@@ -95,6 +95,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file){
 				planet.velocity[d] += 0.5 * dt*(acc[p][d] + acc_next[p][d]);
 			}
 		}
+		NormaliseSpeeds();
 		// Write data to file
 		output(out, dim);
     }
@@ -107,7 +108,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file){
 // Calculate the gravitational attraction between two planets
 void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	double r = p1.planetary_distance(p2);
-	if (r < 1e-8) return;
+	if (r < 1e-10) return;
 
 	double r_factor = pow(r, beta + 1);
 
