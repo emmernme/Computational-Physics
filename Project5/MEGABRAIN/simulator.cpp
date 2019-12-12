@@ -19,7 +19,7 @@ using namespace std;
 int main (int argv, char **argc){
 	int N = 200000;
 	int dim = 3;
-	double years = 5.0;
+	double years = 4.0;
 
 	double E_vel[4] = {2.0, 2.5, 2.82, 2.83};
 

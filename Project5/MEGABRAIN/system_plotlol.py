@@ -1,18 +1,19 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 from mpl_toolkits.mplot3d import Axes3D
 
 
-file1 = open("Vel 2_0.data", 'r')
+file1 = open("Vel 2.000000.data", 'r')
 file1.readline()
 
-file2 = open("Vel 2_5.data", 'r')
+file2 = open("Vel 2.500000.data", 'r')
 file2.readline()
 
-file3 = open("Vel 2_82.data", 'r')
+file3 = open("Vel 2.820000.data", 'r')
 file3.readline()
 
-file4 = open("Vel 2_83.data", 'r')
+file4 = open("Vel 2.830000.data", 'r')
 file4.readline()
 
 
@@ -45,7 +46,6 @@ for infile in files:
         for j in range(planet_count):
             pos = infile.readline().split('=')[1].split(',')
             planets[j]["position"][i] = [float(x.strip()) for x in pos]
-
     systems.append(planets)
 
 
@@ -58,28 +58,33 @@ ax.xaxis.set_pane_color((0, 0, 0, 1.0))
 ax.yaxis.set_pane_color((0, 0, 0, 1.0))
 ax.zaxis.set_pane_color((0, 0, 0, 1.0))
 ax.grid(b=False)
+ax.scatter([0],[0],[0], label=planets[0]["name"], color="#ffbd38", linewidth=10)
 
-for planets in systems:
+velocity = ['v = 2.0','v = 2.5', 'v = 2.82', 'v = 2.83']
+
+
+for k in range(len(systems)):
     for i in range(planet_count):
-        pos = planets[i]["position"]
+        pos = systems[k][i]["position"]
         if (planets[i]["name"] == "Sun"):
-            if (dim == 3):
-                ax.scatter([0], [0], [0], label=planets[i]["name"], color="#ccff00", linewidth=10)
-            else:
-                ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
+            continue
+            #if (dim == 3):
+                #ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
+            #else:
+            #ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
 
         else:
             if (dim == 3):
-                ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"])
+                ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=velocity[k])
             else:
                 ax.plot([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"])
-    
 
 
 ax.legend()
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
+plt.title('Escape velocity for the Earth')
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
