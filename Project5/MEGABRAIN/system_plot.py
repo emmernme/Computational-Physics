@@ -54,7 +54,7 @@ for i in range(planet_count):
             #ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
 
         else:
-            ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
+            ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ffbd38", linewidth=10)
 
     else:
         if (dim == 3):
@@ -70,5 +70,5 @@ ax.set_zlabel("z")
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
-plt.savefig(sys.argv[1] + '.png', dpi=300)
-#plt.show()
+#plt.savefig(sys.argv[1] + '.png', dpi=300)
+plt.show()
