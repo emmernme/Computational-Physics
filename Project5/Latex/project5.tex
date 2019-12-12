@@ -80,13 +80,20 @@ We then solve for $v^2r$, where $v$ is the velocity of Earth.
 
 where yr is short for years, which we use instead of seconds to decribe the motions in the solar system. We then solve this equation using Euler´s forward algorithm and the velocity Verlet method. The description of the mathematics behind this algorithm can be found in the \href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture slides}.
 
+For a system with more than one planet we need to add the magnitude of the force between Earth and the other planet, for example jupiter which is the most massive planet in the solar system. This force is given by
+
+\begin{flalign*}
+    F_{Eart-Jupiter} = \frac{GM_{Jupiter}M_{Earth}}{r^2_{Earth-Jupiter}}
+\end{flalign*}
+
+where $M_Jupiter$ is the mass of Jupiter and $r_{Earth-Jupiter}$ is the distance between Earth and Jupiter. To extend the model for all the planets in the solar system we add the other planets in the same way and choose the initial positions and velocities for all the planets from \href{https://ssd.jpl.nasa.gov/horizons.cgi#top}{NASA}.
 
 \subsection{Object orientation}
  We make a system which contains different classes, including the planet class which is a own class in it self $\smiley$
 
 
 \section{Results}
-We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and the velocity Verlet method. We saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. If we run our code with 100 000 integration points Euler takes 23.8 ms and uses 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy(Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy From these figures we can see that the energy and the angular momentum is conserved. These properties is consereved because if they were not conserved the Earth would not be in orbit with around the Sun. 
+We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and the velocity Verlet method. We saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. If we run our code with 100 000 integration points Euler takes 23.8 ms and uses 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy(Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy From these figures we can see that the energy and the angular momentum is conserved. These properties is consereved because if they were not conserved the Earth would not be in orbit with around the Sun.
 
 \begin{figure}[H]
     \begin{center}
