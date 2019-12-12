@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import sys
 from mpl_toolkits.mplot3d import Axes3D
 
 
-file1 = open("Vel 2_0.data", 'r')
-file1.readline()
+infile = open(sys.argv[1], 'r')
+infile.readline()
+info = infile.readline()
 
 file2 = open("Vel 2_5.data", 'r')
 file2.readline()
