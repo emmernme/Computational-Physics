@@ -80,17 +80,24 @@ We then solve for $v^2r$, where $v$ is the velocity of Earth.
 
 where yr is short for years, which we use instead of seconds to decribe the motions in the solar system. We then solve this equation using Euler´s forward algorithm and the velocity Verlet method. The description of the mathematics behind this algorithm can be found in the \href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture slides}.
 
+For a system with more than one planet we need to add the magnitude of the force between Earth and the other planet, for example jupiter which is the most massive planet in the solar system. This force is given by
+
+\begin{flalign*}
+    F_{Eart-Jupiter} = \frac{GM_{Jupiter}M_{Earth}}{r^2_{Earth-Jupiter}}
+\end{flalign*}
+
+where $M_Jupiter$ is the mass of Jupiter and $r_{Earth-Jupiter}$ is the distance between Earth and Jupiter. To extend the model for all the planets in the solar system we add the other planets in the same way and choose the initial positions and velocities for all the planets from \href{https://ssd.jpl.nasa.gov/horizons.cgi#top}{NASA}.
 
 \subsection{Object orientation}
  We make a system which contains different classes, including the planet class which is a own class in it self $\smiley$
 
 
 \section{Results}
-We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and the velocity Verlet method. We saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. If we run our code with 100 000 integration points Euler takes 23.8 ms and uses 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy(Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy From these figures we can see that the energy and the angular momentum is conserved. These properties is consereved because if they were not conserved the Earth would not be in orbit with around the Sun. 
+We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and the velocity Verlet method. We saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. If we run our code with 100 000 integration points Euler takes 23.8 ms and uses 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy(Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy From these figures we can see that the energy and the angular momentum is conserved. These properties is consereved because if they were not conserved the Earth would not be in orbit with around the Sun.
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{./Plot/xy_vs_time.png}
+        \includegraphics[width=0.8\textwidth]{./Plot/xy_vs_time.png}
         \caption{: }
         \label{fig:position}
     \end{center}
@@ -98,7 +105,7 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{./Plot/energy.png}
+        \includegraphics[width=0.8\textwidth]{./Plot/energy.png}
         \caption{: Energy}
         \label{fig:energy}
     \end{center}
@@ -106,13 +113,13 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{./Plot/angular_momentum.png}
+        \includegraphics[width=0.8\textwidth]{./Plot/angular_momentum.png}
         \caption{: Angular Momentum}
         \label{fig:am}
     \end{center}
 \end{figure}
 
-The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun. We have seen this both in our code but we can also see this in the mathematics.
+The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun. We have seen this both in our code but we can also see this in the mathematics. The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_orbit}
 
 \begin{flalign*}
     \frac{mv^2}r &= \frac{GM_{\odot}M_E}{r^2}\\
@@ -120,9 +127,13 @@ The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orb
     v &= \sqrt{\frac{4\pi^2}1} = 2\pi
 \end{flalign*}
 
-%Plot of the Eart orbiting the Sun
-
-% Er all energi bevart kinetisk og potensiell, og angular_momentum hvorfor er de konservert?
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{./Plot/Earth_orbit.png}
+        \caption{: Plot of the orbit of the Earth around the Sun.}
+        \label{fig:earth_orbit}
+    \end{center}
+\end{figure}
 
 We then consider a planet which begins at a distance 1 AU from the Sun, the inital velocity at when the planets begin to escape from the Sun is at 2.79$\pi$ AU/(yr), this means that at this inital velocity the planets orbits is no longer circular. This numerical value is quite accurate compared to the exact value. We can calculate this escape velocity exact by considering the work needed to move a planet over a small distance dr against the attractive force the planet feels. This work is given by:
 
@@ -137,6 +148,7 @@ This gives the minimal kinetic energy to be able to reach infinity, therefore th
     W + K &= 0 \rightarrow \frac{1}2 M_Ev_0^2 = G\frac{M_{\odot}M_}{r_0}\\
     v_0 &= \sqrt{\frac{2GM_{\odot}}r_0} = \sqrt{2\cdot4\pi^2} AU/yr = 2.8\pi AU/yr
 \end{flalign*}
+
 
 If we try to replace the gravitaional force from Equation \ref{eq:FG} with
 
@@ -159,7 +171,7 @@ with $\beta \in [2,3]$. When $\beta$ = 2.
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=\textwidth]{./Plot/}
+        \includegraphics[width=0.8\textwidth]{./Plot/}
         \caption{: }
         \label{}
     \end{center}
