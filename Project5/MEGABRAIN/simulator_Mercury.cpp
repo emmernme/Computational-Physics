@@ -22,6 +22,7 @@ int main (int argv, char **argc){
 	int dim = 3;
 	double years = 100.0;
 
+	// Titles end up as the legend for the run in system_plot_multiple.py
 	string titles[] = {"No relativity", "Relativity"};
 	const bool rel[] = {true, false};
 
