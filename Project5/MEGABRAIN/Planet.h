@@ -16,9 +16,10 @@ class Planet {
 		double *velocity;
 		double E_potential;
 		double E_kinetic;
+		bool print;
 
 		// Methods to initialize Planet
-		Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz);
+		Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz, bool print = true);
 
 		// Various Planet-functions
 		double planetary_distance(Planet secondPlanet);

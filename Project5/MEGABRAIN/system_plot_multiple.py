@@ -1,14 +1,17 @@
+# Give files though arguments:
+# python system_plot_muliple.py file1.dat file2.dat file3.dat
+
 import matplotlib.pyplot as plt
 import numpy as np
 import sys
 from mpl_toolkits.mplot3d import Axes3D
 
-file_count = sys.argc - 1
+file_count = len(sys.argv) - 1
 files = []
 for i in range(file_count):
     files.append(sys.argv[i+1])
 
-systems = []
+systems = {}
 for file in files:
     infile = open(file, 'r')
     infile.readline()
@@ -21,6 +24,8 @@ for file in files:
     dt = float(info[3])
     radius = float(info[4])
     planet_count = int(info[5])
+    beta = float(info[6])
+    title = info[7].strip()
 
     infile.readline()
 
@@ -38,11 +43,11 @@ for file in files:
         for j in range(planet_count):
             pos = infile.readline().split('=')[1].split(',')
             planets[j]["position"][i] = [float(x.strip()) for x in pos]
-    systems.append(planets)
+    systems[title] = planets
 
 
 plt.style.use("dark_background")
-fig = plt.figure()
+fig = plt.figure(figsize=(10.8, 7.2))
 ax = fig.gca(projection='3d')
 
 plt.gca().patch.set_facecolor('black')
@@ -57,66 +62,26 @@ ax.scatter([0],[0],[0], label=planets[0]["name"], color="#ffbd38", linewidth=10)
 #velocity = [r'$\beta$ = 2.0',r'$\beta$ = 2.5', r'$\beta$ = 2.8', r'$\beta$ = 2.9', r'$\beta$ = 2.95', r'$\beta$ = 2.99', r'$\beta$ = 3.0']
 
 
-for k in range(file_count):
+for title, planets in systems.items():
     for i in range(planet_count):
-        pos = systems[k][i]["position"]
+        pos = planets[i]["position"]
         if (planets[i]["name"] == "Sun"): continue
-        ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=velocity[k])
+        ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=title) #planets[i]["name"])
 
 
-ax.legend()
+ax.legend(loc="upper right")
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 ax.set_zlabel("z")
-plt.title(r'Different values for $\beta$')
+#plt.title(r'Different values for $\beta$')
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
-plt.savefig('vary_beta_1.png', dpi=300)
-plt.show()
+fig.tight_layout()
 
-
-
-
-plt.style.use("dark_background")
-fig = plt.figure()
-ax = fig.gca(projection='3d')
-
-plt.gca().patch.set_facecolor('black')
-ax.xaxis.set_pane_color((0, 0, 0, 1.0))
-ax.yaxis.set_pane_color((0, 0, 0, 1.0))
-ax.zaxis.set_pane_color((0, 0, 0, 1.0))
-ax.grid(b=False)
-ax.scatter([0],[0],[0], label=planets[0]["name"], color="#ffbd38", linewidth=10)
-
-
-
-for k in range(4,7):
-    for i in range(planet_count):
-        pos = systems[k][i]["position"]
-        if (planets[i]["name"] == "Sun"):
-            continue
-            #if (dim == 3):
-                #ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
-            #else:
-            #ax.scatter([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
-
-        else:
-            if (dim == 3):
-                ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=velocity[k])
-            else:
-                ax.plot([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"])
-
-
-ax.legend()
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
-plt.title(r'Different values for $\beta$')
-ax.set_xticks([])
-ax.set_yticks([])
-ax.set_zticks([])
-plt.savefig('vary_beta_2.png', dpi=300)
+#plt.savefig('vary_beta_1.png', dpi=300)
 plt.show()
 
 

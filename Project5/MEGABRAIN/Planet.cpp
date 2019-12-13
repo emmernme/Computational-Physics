@@ -4,7 +4,7 @@
 */
 #include "Planet.h"
 
-Planet::Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz){
+Planet::Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz, bool print){
 	double *p = new double[3];
 	p[0] = x;
 	p[1] = y;
@@ -19,6 +19,7 @@ Planet::Planet(string name, int dim, double mass, double x, double y, double z, 
 	this->mass = mass;
 	this->position = p;
 	this->velocity = v;
+	this->print = print;
 	
 	E_potential = 0.0;
 	E_kinetic = 0.0;

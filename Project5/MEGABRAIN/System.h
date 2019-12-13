@@ -4,6 +4,11 @@
 using namespace std;
 
 #pragma once
+const double _YEAR = 365.25;
+const double C = 173 * _YEAR;
+const double C2 = C*C;
+
+#pragma once
 class System {
 	public: 
 		// Associate with the planet class
@@ -18,13 +23,14 @@ class System {
 		double beta;
 		int planet_count;
 		vector<Planet> planets;
+		bool relativistic;
 
 		// Initialising methods, to create a system
-		System(double radius, double beta);
+		System(double radius, double beta = 2.0, bool relativistic = false);
 
 		// Main functions
 		void add_planet(Planet planet);
-		void VelocityVerlet(int dim, int N, double end_year, string filename);
+		void VelocityVerlet(int dim, int N, double end_year, string filename, string title="");
 		void GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F);
 		void NormaliseSpeeds();
 
