@@ -39,14 +39,13 @@
 \end{titlepage}
 
 \section*{Abstract}
+We have used the velocity Verlet algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force. We found that the initial velocity at when the Earth start to escape the sun is 2.99$\pi$. 
 
 \tableofcontents
 
 \newpage
 
 \section{Introduction}
-We have used the velocity Verlet algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force.
-
 
 
 \section{Method}
@@ -55,7 +54,7 @@ For a hypothetical solar system with only the Earth and the Sun Newton's law is 
 
 \begin{flalign}
     F_G =\frac{GM_{\odot}M_E}{r^2}
-    \ref{eq:FG}
+    \label{eq:FG}
 \end{flalign}
 
 In the above equation $M_{\odot}$ and $M_E$ is the mass of the Sun and the Earth. G is the gravitational constant and r is the distance between the Earth and the Sun. We neglect the motion of the Sun and only look at the motion of the Earth relative to the Sun. We can do this because we assume that the mass of the Sun is much larger than the mass of the Earth. The gravitiational force consits of a x and y component $F_{G,x}$ and $F_{Gy}$, we then use Newton's second law and obtain:
@@ -64,7 +63,7 @@ In the above equation $M_{\odot}$ and $M_E$ is the mass of the Sun and the Earth
     \frac{d^2x}{dt^2} = \frac{F_{G,x}}{M_E} \ \
     \text{and} \ \
     \frac{d^2y}{dt^2} = \frac{F_{G,y}}{M_E}
-    \ref{eq:diff}
+    \label{eq:diff}
 \end{flalign}
 
 We use that the average distance bewteen the Earth and the Sun is $1.5 \cdot 10^{11}$ m and we call this one astronomical unit (1 AU). We use the masses of the different planets including the Sun that are given in \href{http://compphysics.github.io/ComputationalPhysics/doc/Projects/2019/Project5/SolarSystem/pdf/SolarSystem.pdf}{the description of Project 5}.
@@ -136,7 +135,7 @@ We perform a Taylor expansion of the discretized equations with step length $h$
 We know the second derivative from Newton's second law where $x^{(2)}(t) = a(x,t)$. By adding the Taylor expansion for $x(t-h)$ and by using the discretized expressions $x(t_i \pm h)= x_{i\pm1}$ and $x_i = x(t_i)$ we gets
 
 \begin{flalign*}
-    x_{i+1} = 2x_i - x_{i-1} + h^2x_i^(2) + O(h^4)
+    x_{i+1} = 2x_i - x_{i-1} + h^2x_i^{(2)} + O(h^4)
 \end{flalign*}
 
 where the truncation error goes like $O(h^4)$. We can also compute the velocity which has a truncation error $O(h^2)$
@@ -199,6 +198,7 @@ where $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun
     tan \theta_p = \frac{y_p}{x_p}
 \end{flalign}
 
+
 \subsection{Object orientation}
  We make a system which contains different classes, including the planet class which is a own class in it self
 
@@ -230,13 +230,16 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
     \end{center}
 \end{figure}
 
-The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun. We have seen this both in our code but we can also see this in the mathematics. The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_orbit}
+\subsection{Initial velocity for circular orbit}
+The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun. We have seen this both in our code but we can also see this in the mathematics.
 
 \begin{flalign*}
     \frac{mv^2}r &= \frac{GM_{\odot}M_E}{r^2}\\
     v^2 &= \frac{GM_{\odot}}r\\
     v &= \sqrt{\frac{4\pi^2}1} = 2\pi
 \end{flalign*}
+
+The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_orbit}
 
 \begin{figure}[H]
     \begin{center}
@@ -246,6 +249,7 @@ The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orb
     \end{center}
 \end{figure}
 
+\subsection{Escape velocity}
 We then consider a planet which begins at a distance 1 AU from the Sun, the inital velocity at when the planets begin to escape from the Sun is at 2.79$\pi$ AU/(yr), this means that at this inital velocity the planets orbits is no longer circular. Figure \ref{fig:last} shows the last orbit with this stable initial velocity before the Earth escapes from the Sun.
 
 \begin{figure}[H]
@@ -267,16 +271,17 @@ This gives the minimal kinetic energy to be able to reach infinity, therefore th
 
 \begin{flalign*}
     W + K &= 0 \rightarrow \frac{1}2 M_Ev_0^2 = G\frac{M_{\odot}M_}{r_0}\\
-    v_0 &= \sqrt{\frac{2GM_{\odot}}r_0} = \sqrt{2\cdot4\pi^2} AU/yr = 2.8\pi AU/yr
+    v_0 &= \sqrt{\frac{2GM_{\odot}}{r_0}} = \sqrt{2\cdot4\pi^2} AU/yr = 2.8\pi AU/yr
 \end{flalign*}
 
+\subsection{Changing the gravitaional force}
 If we try to replace the gravitaional force from Equation \ref{eq:FG} with
 
 \begin{flalign*}
     F_G = \frac{GM_{\odot}M_E}{r^{\beta}}
 \end{flalign*}
 
-with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3 the Earth begins to escape the sun. This would have been the case if the gravitaional force worked different, so we are since the gravitaional force keeps us in orbit around the Sun.
+with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3 the Earth begins to escape the sun. This would have been the case if the gravitaional force worked different, so we are lucky since the gravitaional force keeps us in orbit around the Sun.
 
 \begin{figure}[H]
     \makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -294,6 +299,7 @@ with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These fig
     \label{fig:beta}
     \end{figure}
 
+\subsection{Adding Jupiter to the system}
 We then add Jupiter to our system and we evaluate how it affects our system when we increase Jupiters mass. The result when Jupiter has it's own mass is shown in Figure \ref{fig:jupiter1}. When we increase the mass with a factor of 10 the result does not differ from what we see in Figure \ref{fig:jupiter1}. Figure \ref{fig:jupiter} shows what will happen when we increase the mass of Jupiter with a factor of respectively 950 and 1000. These figures shows that when the mass of Jupiter gets large it will attract the Earth away from its normal orbit around the Sun. When we increse the mass with a factor of 1000 the Earth will escape the sun because the repulsive force bewteen Jupiter and the Earth become really big. When Jupiter's mass is increased with a factor of 1000 we needed about 20 000 steps for the system to be stable, that is equivalent to approximately 20 years.
 
 \begin{figure}[H]
@@ -320,34 +326,36 @@ We then add Jupiter to our system and we evaluate how it affects our system when
     \label{fig:jupiter}
     \end{figure}
 
+\subsection{Finished solar system}
 Further we have completed the whole solar system by adding more planets, we have plottet this with 500 000 integration points and over 164 years. The results is represented in Figure \ref{fig:solar}
-
 
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.8\textwidth]{./Plot/Solar_System.png}
         \caption{: Plot of the solar system.}
-        \label{fig: solar}
+        \label{fig:solar}
     \end{center}
 \end{figure}
 
 
+\subsection{Perihelion of Mercury}
 perihelion:
 The speed of Mercury at perihelion is 12.44 AU/yr, and the distance to the sun at perihelion is 0.3075 AU.
 
-sjekke ar endringen i perihelion med en ren newton kraft (uten relativistiks) er minst et par ganger mindre enn den observerte Perihelion precession of mercury
-
+sjekke at endringen i perihelion med en ren newton kraft (uten relativistiks) er minst et par ganger mindre enn den observerte Perihelion precession of mercury
 
 \section{Discussion}
-We have seen that the velocity Verlet method is more efficient for solving the differential equation
+We have seen that the velocity Verlet method is more efficient for solving the coupled differential equations.
 %Forskjeller mellom Verlet og Euler når vi tester algoritmene
 %Time de og
 
 %Can the obserevd perihelion precession of Mercury be explained by the general theory of relativity?
 
-\section{Appendix}
+\section{Conclusion}
+
 
 \section{Bibliography}
+
 
 \begin{figure}[H]
     \begin{center}
@@ -357,7 +365,7 @@ We have seen that the velocity Verlet method is more efficient for solving the d
     \end{center}
 \end{figure}
 
-\href{https://en.wikipedia.org/wiki/Escape_velocity}{}
+\href{https://en.wikipedia.org/wiki/Escape_velocity}{Escape velocity from Wikipedia}
 
 
 
