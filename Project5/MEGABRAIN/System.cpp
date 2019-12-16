@@ -19,7 +19,7 @@ System::System(double radius, double beta, bool relativistic) {
 
 void System::add_planet(Planet planet){
 	planets.push_back(planet);
-	if (planet.print == true) planet_count++;
+	planet_count++;
 	system_mass += planet.mass;
 }
 void System::calc_G(){
