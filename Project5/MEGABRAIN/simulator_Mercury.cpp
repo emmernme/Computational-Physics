@@ -19,7 +19,7 @@ using namespace std;
 
 int main (int argv, char **argc){
 	int N = 1e6;
-	int dim = 3;
+	int dim = 2;
 	double years = 100.0;
 
 	// Titles end up as the legend for the run in system_plot_multiple.py

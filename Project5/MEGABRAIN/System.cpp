@@ -13,6 +13,7 @@ System::System(double radius, double beta, bool relativistic) {
 	system_potential = 0;
 	G = 4*M_PI*M_PI;
 	planet_count = 0;
+	print_planet_count = 0;
 	this->beta = beta;
 	this->relativistic = relativistic;
 }
@@ -20,6 +21,7 @@ System::System(double radius, double beta, bool relativistic) {
 void System::add_planet(Planet planet){
 	planets.push_back(planet);
 	planet_count++;
+	if (planet.print) print_planet_count++;
 	system_mass += planet.mass;
 }
 void System::calc_G(){
@@ -46,9 +48,9 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 	ofstream out;
 	out.open(file);
 	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count],[beta],[title]" << endl;
-	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << planet_count << "," << beta << "," << title << endl;
+	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << print_planet_count << "," << beta << "," << title << endl;
 	out << "# Next lines: [planet ID],[planet name]" << endl;
-	for (int i = 0; i < planet_count; i++){
+	for (int i = 0; i < print_planet_count; i++){
 		if (planets[i].print == false) continue;
 		out << i << "," << planets[i].name << endl;
 	}

@@ -36,24 +36,18 @@ for i in range(n-1):
 
 plt.style.use("dark_background")
 fig = plt.figure(figsize=(10.8, 7.2))
-ax = fig.gca(projection='3d')
+ax = fig.gca()
 
 plt.gca().patch.set_facecolor('black')
-ax.xaxis.set_pane_color((0, 0, 0, 1.0))
+"""ax.xaxis.set_pane_color((0, 0, 0, 1.0))
 ax.yaxis.set_pane_color((0, 0, 0, 1.0))
-ax.zaxis.set_pane_color((0, 0, 0, 1.0))
+ax.zaxis.set_pane_color((0, 0, 0, 1.0))"""
 ax.grid(b=False)
 
-
+ax.scatter([0],[0], label="Sun", color="#ccff00", linewidth=10)
 for i in range(planet_count):
     pos = planets[i]["position"]
-    if (planets[i]["name"] == "Sun"):
-        if (dim == 3):
-            #ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], color="#ccff00", linewidth=10)
-            ax.scatter([0],[0],[0], label=planets[i]["name"], color="#ccff00", linewidth=10)
-
-    else:
-        ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"])
+    ax.plot([x[0] for x in pos], [x[1] for x in pos], label=planets[i]["name"])
 
 
 ax.legend(loc="upper right")
@@ -61,10 +55,8 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_xlabel("x")
 ax.set_ylabel("y")
-ax.set_zlabel("z")
 ax.set_xticks([])
 ax.set_yticks([])
-ax.set_zticks([])
 
 fig.tight_layout()
 
