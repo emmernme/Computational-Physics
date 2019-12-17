@@ -22,6 +22,7 @@ class System {
 		double G;
 		double beta;
 		int planet_count;
+		int print_planet_count;
 		vector<Planet> planets;
 		bool relativistic;
 
