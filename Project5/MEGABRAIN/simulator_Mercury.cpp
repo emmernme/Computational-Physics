@@ -1,7 +1,7 @@
 /*
 *	SIMULATE THE SHIT OUT OF THIS PROJECT
 *	Compile using
-	g++ simulator.cpp -o simulator.o  -std=c++11 -O3
+	g++ simulator_Mercury.cpp -o simulator_Mercury.o  -std=c++11 -O3
 */
 #include <iostream>
 #include <cmath>
