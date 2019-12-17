@@ -4,8 +4,9 @@ using namespace std;
 
 void euler(mat a, mat v, mat r, int n){
     int yr = 5;
+    
+    //Precalculating 
     double dt = (double) yr/ (double) n;
-
     double GM = 4 * pow(M_PI,2);
 
     //Forward Euler method
@@ -32,8 +33,9 @@ void euler(mat a, mat v, mat r, int n){
 
 void verlet(mat a, mat &v, mat &r, int n){
     int yr = 5;
+    
+    //Precalculating 
     double dt = (double) yr/ (double) n;
-
     double GM = 4 * pow(M_PI,2);
 
     //Verlet method
@@ -53,7 +55,7 @@ void verlet(mat a, mat &v, mat &r, int n){
         double ax = -r(i+1,0)/rad_new * a_abs_new; //Acceleration in x direction
         double ay = -r(i+1,1)/rad_new * a_abs_new; //Acceleration in y direction
 
-        v(i+1,0) = v(i,0) + (ax+a(i,0))*dt/2;
+        v(i+1,0) = v(i,0) + (ax+a(i,0))*dt/2; //Calculating the velocities for the next step
         v(i+1,1) = v(i,1) + (ay+a(i,1))*dt/2;
     }
 
