@@ -5,6 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import sys
 from mpl_toolkits.mplot3d import Axes3D
+import matplotlib as mpl
+from cycler import cycler
+
 
 file_count = len(sys.argv) - 1
 files = []
@@ -47,6 +50,7 @@ for file in files:
 
 
 plt.style.use("dark_background")
+mpl.rcParams['axes.prop_cycle'] = cycler(color='brgcmyk')
 fig = plt.figure(figsize=(10.8, 7.2))
 ax = fig.gca()
 
@@ -63,7 +67,7 @@ for title, planets in systems.items():
     for i in range(planet_count):
         pos = planets[i]["position"]
         if (planets[i]["name"] == "Sun"): continue
-        ax.plot([x[0] for x in pos], [x[1] for x in pos], linewidth=0.2, label=title) #planets[i]["name"])
+        ax.plot([x[0] for x in pos], [x[1] for x in pos], linewidth=1, label=title) #planets[i]["name"])
 
 
 ax.legend(loc="upper right")
@@ -71,10 +75,9 @@ ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
 ax.set_xlabel("x")
 ax.set_ylabel("y")
-#plt.title(r'Different values for $\beta$')
 ax.set_xticks([])
 ax.set_yticks([])
-ax.set_xlim([-0.05,0.31])
+ax.set_xlim([-0.005,0.31])
 ax.set_ylim([-0.26,0.26])
 fig.tight_layout()
 

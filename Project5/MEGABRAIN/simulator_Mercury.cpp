@@ -18,7 +18,7 @@
 using namespace std;
 
 int main (int argv, char **argc){
-	int N = 1e6;
+	int N = 2e7;
 	int dim = 2;
 	double years = 100.0;
 

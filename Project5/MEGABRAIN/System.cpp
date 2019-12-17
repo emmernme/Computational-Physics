@@ -116,6 +116,74 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 	delete [] F; delete [] F_next;
 }
 
+void System::VelocityVerletPerihelion(int dim, int N, double end_year){
+	// Calculate the time step
+    double dt = end_year / (double) N;
+
+	// Set up position and velocity matrices
+	double ** acc = setup_matrix(dim, planet_count);
+	double ** acc_next = setup_matrix(dim, planet_count);
+
+	double * F = new double[dim];
+	double * F_next = new double[dim];
+
+	// Prepare values used in calculations
+	calc_G();
+	NormaliseSpeeds();
+	
+	// Precalculating
+	double half_dt = 0.5*dt;
+	double half_dt_sqrd = 0.5*dt*dt;
+
+	// Loop over the time steps
+    for (int i = 0; i < N-1; i++){
+    	// Perform Velocity Verlet for each planet
+		for (int p = 0; p < planet_count; p++){
+			Planet &planet = planets[p];
+			double inv_m = 1/planet.mass; // Precalculate
+
+			// Reset forces
+			for (int d = 0; d < dim; d++){
+				F[d] = F_next[d] = 0.0; 
+			}
+
+			// Calculate the force contribution from all other planets
+			for (int p2 = 0; p2 < planet_count; p2++){
+				Planet &planet2 = planets[p2];
+				GravitationalForce(dim, planet, planet2, F);
+			}
+
+			// Calculate the acceleration for each dimension for the current planet, then the new position
+			for (int d = 0; d < dim; d++){
+				acc[p][d] = F[d] * inv_m;
+
+				// Calculate the new position with VV
+				planet.position[d] += planet.velocity[d] * dt + half_dt_sqrd*acc[p][d];
+			}
+
+			// When the new position is set, calculate the next velocity by calculating the next force contribution
+			// from the other planets for our planet's new position
+			for (int p2 = 0; p2 < planet_count; p2++){
+				Planet &planet2 = planets[p2];
+				GravitationalForce(dim, planet, planet2, F_next);
+			}
+			// Use the new acceleration to calculate the velocity of our planet
+			for (int d = 0; d < dim; d++){
+				acc_next[p][d] = F_next[d] * inv_m;
+
+				// Calculate the new velocity with VV
+				planet.velocity[d] += half_dt * (acc[p][d] + acc_next[p][d]);
+			}
+		}
+		// Make sure we look at the system compared to one planet's position
+		NormaliseSpeeds();
+
+    }
+	delete_matrix(acc, dim, planet_count);
+	delete_matrix(acc_next, dim, planet_count);
+	delete [] F; delete [] F_next;
+}
+
 // Calculate the gravitational attraction between two planets
 void System::GravitationalForce(int dim, Planet &p1, Planet &p2, double * &F){
 	double r = p1.planetary_distance(p2);
