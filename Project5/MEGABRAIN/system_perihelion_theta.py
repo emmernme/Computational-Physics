@@ -34,14 +34,19 @@ for i in range(n-1):
         pos = infile.readline().split('=')[1].split(',')
         planets[j]["position"][i] = [float(x.strip()) for x in pos]
 
-
+r = []
 theta = [] 
-for i in planets[0]["position"]:
-    r = sqrt(i[0]*i[0] + i[1]*i[1])
-    if 0.3075-1e-5 < r < 0.3075+1e-5:
+for i in range(len(planets[0]["position"])):
+    r_new = sqrt(i[0]*i[0] + i[1]*i[1])
+    if 0.3075-3e-7 < r_new < 0.3075+1e-7:
+        r.append(r_new)
         theta.append(atan(i[1]/i[0]))
 
-print(len(theta))
+for i in range(len(r)/100):
+    r[10000*i]
+
+print(len(r))
+
 
 
 """

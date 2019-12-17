@@ -6,7 +6,7 @@
 using namespace std;
 
 // Set up a new system with intitial properties
-System::System(double radius, double beta, bool relativistic) {
+System::System(double radius, double beta, bool relativistic, bool normaliseInitial, bool normalise) {
 	this->radius = radius;
 	this->system_mass = 0;
 	this->system_kinetic = 0;
@@ -15,7 +15,12 @@ System::System(double radius, double beta, bool relativistic) {
 	this->planet_count = 0;
 	this->print_planet_count = 0;
 	this->beta = beta;
-	this->relativistic = relativistic; // Whether to include the relativistic force contribution
+	// Whether to include the relativistic force contribution
+	this->relativistic = relativistic;
+	// Whether to normalise speeds relative to the Sun's speed throughout the calculations
+	this->normalise = normalise; 
+	// Whether to normalise speeds relative to the Sun's speed before beginning calculations
+	this->normaliseInitial = normaliseInitial; 
 }
 
 // Add a planet to the system
@@ -45,7 +50,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 	cout << "Starting VV. Planets: " << planet_count << ", G: " << G << ", beta: " << beta << endl;
 
 	// Normalise the speeds of all the planets according to the sun, so that the sun's speed is 0
-	NormaliseSpeeds();
+	if (normaliseInitial) NormaliseSpeeds();
 
 	// Prepare the out-file
 	ofstream out;
@@ -93,7 +98,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 		}
 
 		// Make sure we look at the system compared to one planet's position
-		NormaliseSpeeds();
+		if (normalise) NormaliseSpeeds();
 
 		// Write data to file
 		output(out, dim);
@@ -122,8 +127,16 @@ void System::VelocityVerletPerihelion(int dim, int N, double end_year){
 	double half_dt = 0.5*dt;
 	double half_dt_sqrd = 0.5*dt*dt;
 
+	//Setting values for calculating of the perihelion angle
+	double int_yr = N/end_year;
+	double r = planets[0].planetary_distance(planets[1]);
+	double r_new;
+	double theta;
+
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
+		
+
     	// Perform Velocity Verlet for each planet
 		for (int p = 0; p < planet_count; p++){
 			Planet &planet = planets[p];
@@ -164,6 +177,18 @@ void System::VelocityVerletPerihelion(int dim, int N, double end_year){
 		}
 		// Make sure we look at the system compared to the sun's position
 		NormaliseSpeeds(); // We actually might not need this, though...
+
+		
+		r_new = planets[0].planetary_distance(planets[1]); //Save the current postion of Mercury
+		if (i >= N - int_yr){	// Checks if we are in the last earth-year
+			if (r >= r_new){	// If the current position is closer to the sun than the past we will use this to calculate theta
+				theta = atan(planets[1].position[1]/planets[1].position[0]);
+				cout << "After " << i*dt << " years. ";
+				cout << "The radius is " << setprecision(15) << r_new << ", Theta is " << theta*180/3.1415 << " degrees" << endl;
+			}
+		}
+
+
     }
 	delete_matrix(acc, dim, planet_count);
 	delete_matrix(acc_next, dim, planet_count);
@@ -209,7 +234,7 @@ void System::prepare_output(ofstream &out, int dim, int N, double end_year, doub
 	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count],[beta],[title]" << endl;
 	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << print_planet_count << "," << beta << "," << title << endl;
 	out << "# Next lines: [planet ID],[planet name]" << endl;
-	for (int i = 0; i < print_planet_count; i++){
+	for (int i = 0; i < planet_count; i++){
 		if (planets[i].print == false) continue;
 		out << i << "," << planets[i].name << endl;
 	}

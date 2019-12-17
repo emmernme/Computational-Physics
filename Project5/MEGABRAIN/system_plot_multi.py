@@ -3,7 +3,7 @@ import numpy as np
 import sys
 from mpl_toolkits.mplot3d import Axes3D
 
-file_count = sys.argc - 1
+file_count = len(sys.argv) - 1
 files = []
 for i in range(file_count):
     files.append(sys.argv[i+1])
@@ -116,7 +116,7 @@ plt.title(r'Different values for $\beta$')
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
-plt.savefig('vary_beta_2.png', dpi=300)
+#plt.savefig('vary_beta_2.png', dpi=300)
 plt.show()
 
 

@@ -40,7 +40,7 @@ for i in range(n-1):
 
 # Set up the plot as we like it
 plt.style.use("dark_background")
-fig = plt.figure() #figsize=(10.8, 7.2))
+fig = plt.figure(figsize=(10.8, 7.2))
 ax = fig.gca(projection='3d')
 plt.gca().patch.set_facecolor('black')
 ax.xaxis.set_pane_color((0, 0, 0, 1.0))
@@ -49,13 +49,14 @@ ax.zaxis.set_pane_color((0, 0, 0, 1.0))
 ax.grid(b=False)
 
 # Plot the sun as a constant dot (saving memory and CPU)
-ax.scatter([0],[0],[0], label="Sun", color="#ccff00", linewidth=0.25)
 
 # Plot each planet in each system
 for i in range(planet_count):
     pos = planets[i]["position"]
-    if (planets[i]["name"] == "Sun"): continue
-    ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], linewidth=0.75)
+    if (planets[i]["name"] == "Sun"):
+        ax.scatter([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label="Sun", color="#ccff00", linewidth=0.25)
+    else:
+        ax.plot([x[0] for x in pos], [x[1] for x in pos], [x[2] for x in pos], label=planets[i]["name"], linewidth=0.25)
 
 # Customize the plot
 ax.legend(loc="upper right")

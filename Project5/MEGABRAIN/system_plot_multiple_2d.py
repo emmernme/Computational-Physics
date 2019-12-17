@@ -76,10 +76,10 @@ ax.set_yticks([])
 fig.tight_layout()
 
 # Set the zoom limits to focus on Mercury's perihelion position
-ax.set_xlim([-0.005,0.31])
-ax.set_ylim([-0.26,0.26])
+#ax.set_xlim([-0.005,0.31])
+#ax.set_ylim([-0.26,0.26])
 
-plt.savefig('Mercury_perihelion_zoom.png', dpi=300)
+#plt.savefig('Mercury_perihelion_zoom.png', dpi=300)
 plt.show()
 
 

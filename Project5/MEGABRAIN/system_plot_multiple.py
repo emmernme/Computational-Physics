@@ -1,5 +1,5 @@
 # Give files though arguments:
-# python system_plot_muliple.py file1.dat file2.dat file3.dat
+# python system_plot_multiple.py file1.dat file2.dat file3.dat
 
 import matplotlib.pyplot as plt
 import numpy as np

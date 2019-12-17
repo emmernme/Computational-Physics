@@ -29,9 +29,11 @@ class System {
 		int print_planet_count;
 		vector<Planet> planets;
 		bool relativistic;
+		bool normalise;
+		bool normaliseInitial;
 
 		// Initialising methods, to create a system
-		System(double radius, double beta = 2.0, bool relativistic = false);
+		System(double radius, double beta = 2.0, bool relativistic = false, bool normaliseInitial = true, bool normalise = true);
 
 		// Main functions
 		void add_planet(Planet planet);
