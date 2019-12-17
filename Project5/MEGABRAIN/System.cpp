@@ -6,7 +6,7 @@
 using namespace std;
 
 // Set up a new system with intitial properties
-System::System(double radius, double beta, bool relativistic) {
+System::System(double radius, double beta, bool relativistic, bool normaliseInitial, bool normalise) {
 	this->radius = radius;
 	this->system_mass = 0;
 	this->system_kinetic = 0;
@@ -15,7 +15,12 @@ System::System(double radius, double beta, bool relativistic) {
 	this->planet_count = 0;
 	this->print_planet_count = 0;
 	this->beta = beta;
-	this->relativistic = relativistic; // Whether to include the relativistic force contribution
+	// Whether to include the relativistic force contribution
+	this->relativistic = relativistic;
+	// Whether to normalise speeds relative to the Sun's speed throughout the calculations
+	this->normalise = normalise; 
+	// Whether to normalise speeds relative to the Sun's speed before beginning calculations
+	this->normaliseInitial = normaliseInitial; 
 }
 
 // Add a planet to the system
@@ -45,7 +50,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 	cout << "Starting VV. Planets: " << planet_count << ", G: " << G << ", beta: " << beta << endl;
 
 	// Normalise the speeds of all the planets according to the sun, so that the sun's speed is 0
-	NormaliseSpeeds();
+	if (normaliseInitial) NormaliseSpeeds();
 
 	// Prepare the out-file
 	ofstream out;
@@ -93,7 +98,7 @@ void System::VelocityVerlet(int dim, int N, double end_year, string file, string
 		}
 
 		// Make sure we look at the system compared to one planet's position
-		NormaliseSpeeds();
+		if (normalise) NormaliseSpeeds();
 
 		// Write data to file
 		output(out, dim);
@@ -229,7 +234,7 @@ void System::prepare_output(ofstream &out, int dim, int N, double end_year, doub
 	out << "# Next line: [dim],[# integration points],[years],[dt],[system radius],[planet count],[beta],[title]" << endl;
 	out << dim << "," << N << "," << end_year << "," << dt << "," << radius << "," << print_planet_count << "," << beta << "," << title << endl;
 	out << "# Next lines: [planet ID],[planet name]" << endl;
-	for (int i = 0; i < print_planet_count; i++){
+	for (int i = 0; i < planet_count; i++){
 		if (planets[i].print == false) continue;
 		out << i << "," << planets[i].name << endl;
 	}
