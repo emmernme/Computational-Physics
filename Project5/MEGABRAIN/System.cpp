@@ -127,8 +127,16 @@ void System::VelocityVerletPerihelion(int dim, int N, double end_year){
 	double half_dt = 0.5*dt;
 	double half_dt_sqrd = 0.5*dt*dt;
 
+	//Setting values for calculating of the perihelion angle
+	double int_yr = N/end_year;
+	double r = planets[0].planetary_distance(planets[1]);
+	double r_new;
+	double theta;
+
 	// Loop over the time steps
     for (int i = 0; i < N-1; i++){
+		
+
     	// Perform Velocity Verlet for each planet
 		for (int p = 0; p < planet_count; p++){
 			Planet &planet = planets[p];
@@ -169,6 +177,18 @@ void System::VelocityVerletPerihelion(int dim, int N, double end_year){
 		}
 		// Make sure we look at the system compared to the sun's position
 		NormaliseSpeeds(); // We actually might not need this, though...
+
+		
+		r_new = planets[0].planetary_distance(planets[1]); //Save the current postion of Mercury
+		if (i >= N - int_yr){	// Checks if we are in the last earth-year
+			if (r >= r_new){	// If the current position is closer to the sun than the past we will use this to calculate theta
+				theta = atan(planets[1].position[1]/planets[1].position[0]);
+				cout << "After " << i*dt << " years. ";
+				cout << "The radius is " << setprecision(15) << r_new << ", Theta is " << theta*180/3.1415 << " degrees" << endl;
+			}
+		}
+
+
     }
 	delete_matrix(acc, dim, planet_count);
 	delete_matrix(acc_next, dim, planet_count);

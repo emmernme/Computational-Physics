@@ -18,7 +18,7 @@
 using namespace std;
 
 int main (int argv, char **argc){
-	int N = 2e7;
+	int N = 1e8;
 	int dim = 2;
 	double years = 100.0;
 
@@ -36,12 +36,12 @@ int main (int argv, char **argc){
 		Planet Mercury("Mercury", dim, 1.65e-7, 0.3075, 0, 0, 0, 12.44/_YEAR, 0);
 
 		// Set up the Solar system
-		System Solar_system(10.0, 2, true);
+		System Solar_system(10.0, 2, rel[i]);
 		Solar_system.add_planet(Sun);
 		Solar_system.add_planet(Mercury);
 
 		// Simulate the passing of time
-		Solar_system.VelocityVerlet(dim, N, years, "Mercury_perihelion" + to_string(r) + ".dat", title);
+		Solar_system.VelocityVerletPerihelion(dim, N, years);
 	}
 
 	return 1;
