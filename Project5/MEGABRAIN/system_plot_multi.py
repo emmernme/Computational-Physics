@@ -116,7 +116,7 @@ plt.title(r'Different values for $\beta$')
 ax.set_xticks([])
 ax.set_yticks([])
 ax.set_zticks([])
-plt.savefig('vary_beta_2.png', dpi=300)
+#plt.savefig('vary_beta_2.png', dpi=300)
 plt.show()
 
 
