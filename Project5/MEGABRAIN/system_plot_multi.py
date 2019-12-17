@@ -3,7 +3,7 @@ import numpy as np
 import sys
 from mpl_toolkits.mplot3d import Axes3D
 
-file_count = sys.argc - 1
+file_count = len(sys.argv) - 1
 files = []
 for i in range(file_count):
     files.append(sys.argv[i+1])

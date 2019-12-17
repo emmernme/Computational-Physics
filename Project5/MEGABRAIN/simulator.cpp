@@ -17,26 +17,26 @@
 using namespace std;
 
 int main (int argv, char **argc){
-	int N = 200000;
+	int N = 1e7;
 	int dim = 3;
-	double years = 50.0;
+	double years = 500.0;
 
-	double betas[4] = {2.0, 2.5, 2.82, 2.83};
+	double velocity[2] = {2.82, 2.83};
 
-	for (double beta : betas){
+	for (double v : velocity){
 		Planet Sun("Sun", dim, 1.0,
 					0.0, 0.0, 0.0, 
 					0.0, 0.0, 0.0);
 		Planet Earth("Earth", dim, 0.00003,
 					1.0, 0.0, 0.0,
-					0.0, (2*M_PI + 0.1) / 365, 0); // Velocities in AU/day
-		System Solar_system(10.0, beta);
+					0.0, (v*M_PI) / 365, 0); // Velocities in AU/day
+		System Solar_system(10.0, 2);
 		Solar_system.add_planet(Sun);
 		Solar_system.add_planet(Earth);
 		//Solar_system.add_planet(Jupiter);
 
 		// Simulate the passing of time
-		Solar_system.VelocityVerlet(dim, N, years, "Vel "+ to_string(E) +".data");
+		Solar_system.VelocityVerlet(dim, N, years, "Vel "+ to_string(v) +".data", "Velocity"+to_string(v));
 
 	}
 
