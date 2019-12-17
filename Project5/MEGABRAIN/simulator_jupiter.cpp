@@ -42,7 +42,7 @@ int main (int argv, char **argc){
 		Solar_system.add_planet(Jupiter);
 
 		// Simulate the passing of time
-		Solar_system.VelocityVerlet(dim, N, years, "Earth+Jupiter " + to_string(m) + ".dat", "Mass factor " + to_string(m));
+		Solar_system.VelocityVerlet(dim, N, years, "Earth+Jupiter " + to_string(m) + ".dat", to_string(m));
 	}
 
 	return 1;
