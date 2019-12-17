@@ -1,5 +1,5 @@
 /*
-*	SIMULATE THE SHIT OUT OF THIS PROJECT
+*	Simulate a Solar System
 *	Compile using
 	g++ simulator.cpp -o simulator.o  -std=c++11 -O3
 */
