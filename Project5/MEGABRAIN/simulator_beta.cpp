@@ -1,7 +1,7 @@
 /*
-*	SIMULATE THE SHIT OUT OF THIS PROJECT
-*	Compile using
-	g++ simulator.cpp -o simulator.o  -std=c++11 -O3
+*	Simulate the Sun and Earth and Jupiter, for different beta values of the Universe
+*	Compile using:
+	g++ simulator_beta.cpp -o simulator_beta.o  -std=c++11 -O3
 */
 #include <iostream>
 #include <cmath>
@@ -37,8 +37,6 @@ int main (int argv, char **argc){
 
 		// Simulate the passing of time
 		Solar_system.VelocityVerlet(dim, N, years, "Beta "+ to_string(beta) +".data");
-
 	}
 	return 1;
 }
-

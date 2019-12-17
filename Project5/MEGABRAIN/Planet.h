@@ -7,9 +7,8 @@ using namespace std;
 #pragma once
 class Planet {
 	public:
-		double dim; // 2D or 3D?
-
 		// Planet properties
+		double dim; // 2D or 3D?
 		string name;
 		double mass;
 		double *position;
@@ -19,7 +18,7 @@ class Planet {
 		bool print;
 
 		// Methods to initialize Planet
-		Planet(string name, int dim, double mass, double x, double y, double z, double vx, double vy, double vz, bool print = true);
+		Planet(string name, int dim, double mass, double x, double y, double z, double vx_per_day, double vy_per_day, double vz_per_day, bool print = true);
 
 		// Various Planet-functions
 		double planetary_distance(Planet secondPlanet);
@@ -31,4 +30,5 @@ class Planet {
 		// Helpers
 		void print_position();
 		void print_velocity();
+		void self_destruct();
 };
