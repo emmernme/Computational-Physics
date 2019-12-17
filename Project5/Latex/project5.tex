@@ -39,7 +39,7 @@
 \end{titlepage}
 
 \section*{Abstract}
-We have used the velocity Verlet algorithm and Euler's algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force. Our results confirm that the energy is conserved at all times. We experienced that Verlet gives a more efficient calculation than Euler. We also found that the initial velocity for the Earth to obtain a circular orbit around the sun is 2$\pi$ and the initial velocity when the Earth start to escape the sun is 2.99$\pi$ AU/yr. We changed the gravitational force of the Earth and saw that this affected the Earths orbit around the Sun. We added Jupiter to the system and looked at how Jupiters mass affects the gravitaional force.
+We have used the velocity Verlet algorithm and Euler's forward algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force. Our results confirm that the energy is conserved at all times. We experienced that Verlet gives a more efficient calculation than Euler. We also found that the initial velocity for the Earth to obtain a circular orbit around the sun is 2$\pi$ and the initial velocity when the Earth start to escape the sun is $\sqrt{8}\pi$ AU/yr. We changed the gravitational force of the Earth and saw that this affected the Earths orbit around the Sun. We added Jupiter to the system and looked at how Jupiters mass affects the gravitational force.
 
 \tableofcontents
 
@@ -78,7 +78,7 @@ and
     F_y = - \frac{GM_{\odot}M_E}{r^2}sin(\theta) =  - \frac{GM_{\odot}M_E}{r^3} y
 \end{flalign*}
 
-for the x and y direction of the gravitaional force. These to equations can again be rewritten so we obtain four first-order coupled differential equations
+for the x and y direction of the gravitational force. These to equations can again be rewritten so we obtain four first-order coupled differential equations
 
 \begin{flalign*}
     \frac{dv_x}{dt} &= -\frac{GM_{\odot}}{r^3}x, \quad \quad
@@ -87,7 +87,7 @@ for the x and y direction of the gravitaional force. These to equations can agai
     \frac{dy}{dt} = v_y
 \end{flalign*}
 
-By introducing astronomical units, described above(r = 1AU) and with the equation for circular motion, with $a = v^2/r$ we can set F=ma equal to the expression for the gravitaional force.
+By introducing astronomical units, described above(r = 1AU) and with the equation for circular motion, with $a = v^2/r$ we can set F=ma equal to the expression for the gravitational force.
 
 \begin{flalign*}
     \frac{M_Ev^2}{r} = F = \frac{GM_{\odot}M_E}{r^2}
@@ -184,7 +184,7 @@ where $M_{Jupiter}$ is the mass of Jupiter and $r_{Earth-Jupiter}$ is the distan
 
 
 \subsection{Perihelion of Mercury}
-The perihelion of a planet is the point where the planet in orbit around the Sun is closest to the Sun. The general theory of relativity explains the anomalous perihelion precession of the planet Mercury. The observed value for the perihelion precession when the classical effects are subtracted is 43''(43 arc seconds) per century. The behavior of the orbit around the sun will not be the same for each round, this means that the perihelion will slowly precess around the Sun and we would need to add a general relativistic correction to the Newton gravitaional force. The force then becomes:
+The perihelion of a planet is the point where the planet in orbit around the Sun is closest to the Sun. The general theory of relativity explains the anomalous perihelion precession of the planet Mercury. The observed value for the perihelion precession when the classical effects are subtracted is 43''(43 arc seconds) per century. The behavior of the orbit around the sun will not be the same for each round, this means that the perihelion will slowly precess around the Sun and we would need to add a general relativistic correction to the Newton gravitational force. The force then becomes:
 
 \begin{flalign}
     F_G = \frac{GM_{Sun}M_{Mercury}}{r^2}\left[1 + \frac{3l^2}{r^2c^2} \right]
@@ -252,7 +252,7 @@ The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_o
 \end{figure}
 
 \subsection{Escape velocity}
-We then consider a planet which begins at a distance 1 AU from the Sun, the inital velocity at when the planets begin to escape from the Sun is at 2.79$\pi$ AU/(yr), this means that at this inital velocity the planets orbits is no longer circular. Figure \ref{fig:last} shows the last orbit with this stable initial velocity before the Earth escapes from the Sun.
+We then consider a planet which begins at a distance 1 AU from the Sun, the inital velocity at when the planets begin to escape from the Sun is at about 2.82$\pi$ AU/(yr), this means that at this inital velocity the planets orbits is no longer circular. Figure \ref{fig:last} shows the last orbit with this stable initial velocity before the Earth escapes from the Sun.
 
 \begin{figure}[H]
     \begin{center}
@@ -262,28 +262,15 @@ We then consider a planet which begins at a distance 1 AU from the Sun, the init
     \end{center}
 \end{figure}
 
-This numerical value is quite accurate compared to the exact value. We can calculate this escape velocity exact by considering the work needed to move a planet over a small distance dr against the attractive force the planet feels. This work is given by:
-
-\begin{flalign*}
-    dW &= F_G dr = -\frac{GM_{\odot}M_E}{r^2}\\
-    W &= \int_r_0^\infty - G\frac{M_{\odot}M_E}{r^2} = -G \frac{M_{\odot}M_E}{r_0}
-\end{flalign*}
-
-This gives the minimal kinetic energy to be able to reach infinity, therefore the escape velocity $v_0$ satisfies
-
-\begin{flalign*}
-    W + K &= 0 \rightarrow \frac{1}2 M_Ev_0^2 = G\frac{M_{\odot}M_}{r_0}\\
-    v_0 &= \sqrt{\frac{2GM_{\odot}}{r_0}} = \sqrt{2\cdot4\pi^2} AU/yr = 2.8\pi AU/yr
-\end{flalign*}
-
-\subsection{Changing the gravitaional force}
-If we try to replace the gravitaional force from Equation \ref{eq:FG} with
+\subsection{Changing the gravitational force}
+If we try to replace the gravitational force from Equation \ref{eq:FG} with
 
 \begin{flalign*}
     F_G = \frac{GM_{\odot}M_E}{r^{\beta}}
+    \label{eq:beta}
 \end{flalign*}
 
-with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3 the Earth begins to escape the sun. This would have been the case if the gravitaional force worked different, so we are lucky since the gravitaional force keeps us in orbit around the Sun.
+with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3 the Earth begins to escape the sun.
 
 \begin{figure}[H]
     \makebox[\textwidth]{\makebox[1.5\textwidth]{%
@@ -302,7 +289,7 @@ with $\beta \in [2,3]$. The results is shown in Figure \ref{fig:beta}. These fig
     \end{figure}
 
 \subsection{Adding Jupiter to the system}
-We then add Jupiter to our system and we evaluate how it affects our system when we increase Jupiters mass. The result when Jupiter has it's own mass is shown in Figure \ref{fig:jupiter1}. When we increase the mass with a factor of 10 the result does not differ from what we see in Figure \ref{fig:jupiter1}. Figure \ref{fig:jupiter} shows what will happen when we increase the mass of Jupiter with a factor of respectively 950 and 1000. These figures shows that when the mass of Jupiter gets large it will attract the Earth away from its normal orbit around the Sun. When we increse the mass with a factor of 1000 the Earth will escape the sun because the repulsive force bewteen Jupiter and the Earth become really big. When Jupiter's mass is increased with a factor of 1000 we needed about 20 000 steps for the system to be stable, that is equivalent to approximately 20 years.
+We then add Jupiter to our system and we evaluate how it affects our system when we increase Jupiters mass. The result when Jupiter has it's own mass is shown in Figure \ref{fig:jupiter1}. When we increase the mass with a factor of 10 the result does not differ from what we see in Figure \ref{fig:jupiter1}. Figure \ref{fig:jupiter} shows what will happen when we increase the mass of Jupiter with a factor of respectively 950 and 1000. These figures shows that when the mass of Jupiter gets large it will attract the Earth away from its normal orbit around the Sun. When we increase the mass with a factor of 1000 the Earth will escape the sun because the repulsive force bewteen Jupiter and the Earth become really big. When Jupiter's mass is increased with a factor of 1000 we needed about 20 000 steps for the system to be stable for 20 years.
 
 \begin{figure}[H]
     \begin{center}
@@ -372,13 +359,28 @@ We saw from our numerical results that the inital value for the Earth to have a 
     v &= \sqrt{\frac{4\pi^2}1} = 2\pi
 \end{flalign*}
 
+We found that the inital escape velocity was between 2.82$\pi$ and 2.83$\pi$ AU/yr. This numerical value is quite accurate compared to the exact value. We can calculate this escape velocity exact by considering the work needed to move a planet over a small distance $dr$ against the attractive force the planet feels. This work is given by:
 
+\begin{flalign*}
+    dW &= F_G dr = -\frac{GM_{\odot}M_E}{r^2}\\
+    W &= \int_r_0^\infty - G\frac{M_{\odot}M_E}{r^2} = -G \frac{M_{\odot}M_E}{r_0}
+\end{flalign*}
 
+This gives the minimal kinetic energy to be able to reach infinity, therefore the escape velocity $v_0$ satisfies
 
+\begin{flalign*}
+    W + K &= 0 \rightarrow \frac{1}2 M_Ev_0^2 = G\frac{M_{\odot}M_}{r_0}\\
+    v_0 &= \sqrt{\frac{2GM_{\odot}}{r_0}} = \sqrt{2\cdot4\pi^2} AU/yr = 2.828\pi AU/yr
+\end{flalign*}
 
-initalverdier fra nasa, realistisk, jorda fortsatt rund bane
-%Forskjeller mellom Verlet og Euler når vi tester algoritmene
-%Time de og
+So we see that the difference in our estimated escape velcoity and the analytical one is very small. From these results we observe that if the Earth would have a higher velocity around the Sun than it does we would be travelling away from the Sun, and we dont think that would have been appreciated here on the Earth.
+
+Further we examined how a change in the gravitational force would affect the Earth orbit around the Sun. We saw that when $\beta$ in Equation \ref{eq:beta} approches 3 the Earth starts to escape the Sun. This would have been the case if the gravitational force worked different, so we are lucky since the gravitational force keeps us in orbit around the Sun.
+
+When we added Jupiter to the system and examined what would happen if we increased Jupiter's mass to be approximately the mass of the Sun. We saw that when Jupiter's mass was increased with a factor of 950 the system would be stable up to 20 years, and we can see from the plot that the Earth starts to escape the system after 20 years. When Jupiter's mass gets this large our results show that it will affect the Earth's orbit becuse the Earth will be attracted to Jupiter. When we increase the mass with a factor of 1000 we see that the Earth will immediatley escape the system, while Jupiter will stay in its orbit around the Sun.
+
+When we simmulate all the planets inn the Solar system we use the initialvalues from NASA, this means realistic initalvalues. Our model shows that the Earth still goes in a circular orbit around the Sun, which indicates that our model gives a good representation of the real
+
 
 %Can the obserevd perihelion precession of Mercury be explained by the general theory of relativity?
 
@@ -388,19 +390,12 @@ initalverdier fra nasa, realistisk, jorda fortsatt rund bane
 \newpage
 \section{Bibliography}
 
-\begin{figure}[H]
-    \begin{center}
-        \includegraphics[width=0.8\textwidth]{./Plot/}
-        \caption{: }
-        \label{}
-    \end{center}
-\end{figure}
 
 \href{https://github.com/emmernme/MENA-Compfys/tree/master/Project5}{Link to our GitHub repository}\\
 
-\href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture Slides on Differential Equations, Hjorth-Jensen Morten}\\
+\noindent \href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture Slides on Differential Equations, Hjorth-Jensen Morten}\\
 
-\href{https://en.wikipedia.org/wiki/Escape_velocity}{Escape velocity from Wikipedia}\\
+\noindent \href{https://en.wikipedia.org/wiki/Escape_velocity}{Escape velocity from Wikipedia}\\
 
 
 
