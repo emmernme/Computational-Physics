@@ -66,7 +66,7 @@ int main (int argv, char **argc){
 	Solar_system.add_planet(Neptune);
 
 	// Simulate the passing of time, and write the resulting data to file
-	Solar_system.VelocityVerlet(dim, N, years, "Solar_system.data");
+	Solar_system.VelocityVerlet(dim, N, years, "Solar_system.dat", "Solar_system");
 	return 1;
 }
 

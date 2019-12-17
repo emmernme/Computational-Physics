@@ -199,8 +199,17 @@ where $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun
 \end{flalign}
 
 
-\subsection{Object orientation}
- We make a system which contains different classes, including the planet class which is a own class in it self
+\subsection{Programming}
+    For this project, we perform our calculations in a C++ program, and make plots of the resulting data in Python. In order to simplify and make the program flexible, extendable and structured, we implement object orientation. We have also adapted the program to be able to simulate velocities and positions of planets and the Sun in both two and three dimensions.\\
+
+    Our program consists of two classes – "System" and "Planet". "System" represents any system of bodies in the universe, allowing us to simulate unique systems with different initial properties and laws of physics. Our system can be modified to change the force of gravity's dependence on the inverse power of the distance between objects, through the factor $\beta$. In addition, we can decide whether or not the system should have a contributing force factor from relativistic forces. Finally, the "System" class has a function for performing Velocity Verlet-simulations over a given time span in order to simulate the movement of the planets over time. We also have a function that looks at the perihelion precession and the perihelion angle of a system.\\
+    "Planet" represents any object that can be added to the system. The bodies we look at are mainly the Sun and the Earth, but also Jupiter, Mercury and the rest of the planets, in different parts of this project. The "Planet" class initializes the planet with an initial position and velocity in space in astronomical units (AU and AU/day), and a mass relative to the Sun. The "Planet" class also includes several functions for calculating distances between objects in (our outside of) a system, and forces, acceleration and energy of the planet.\\
+
+    This object oriented structure allows us to easily simulate different systems we are interested in. Looking at how the orbit of the Earth and Jupiter around the Sun changes when the mass of Jupiter changes can then be done in just a few lines of code, in a simulator program utilizing the "System" and "Planet" classes.\\
+
+    In order to simulate a system with the sun in a constant position, we make sure that, for each step in the Velocity Verlet calculation, to calculate the velocities of the planets relative to the velocity of the Sun. This ensures that the Sun never has a velocity, so that we fix the movements of the planets relative to each other. In order to simplify, we chose to do this instead of manually adjusting for the center of mass of the system, as this would make the logic more complicated. This functionality is optional, and can be turned off easily in the creation of the "System" object.\\
+
+    Finally, we have several Python programs for plotting the calculated data of the system, allowing for both 2D and 3D plots, with black backgrounds and no ticks on the axes, as this would not be very relevant in the final report. We made different programs for plotting a single system and for plotting several systems in one plot. All the plotting programs assume the Sun's position is in origo, and unchanging, in order to be able to produce plots from large data sets, although we can easily modify the program to plot the Sun with a changing position, as the data files (optionally) can include the Sun's position as well.  
 
 
 \section{Results}
@@ -327,7 +336,7 @@ We then add Jupiter to our system and we evaluate how it affects our system when
     \end{figure}
 
 \subsection{Finished solar system}
-Further we have completed the whole solar system by adding more planets, we have plottet this with 500 000 integration points and over 164 years. The results is represented in Figure \ref{fig:solar}
+Further we have completed the whole solar system by adding more planets, we have plottet this with 500 000 integration points and over 164 years. The results is represented in Figure \ref{fig:solar}.
 
 \begin{figure}[H]
     \begin{center}
@@ -336,6 +345,8 @@ Further we have completed the whole solar system by adding more planets, we have
         \label{fig:solar}
     \end{center}
 \end{figure}
+
+From our results when testing the program, we see that if we don't fix the position of the sun, and give it the initial velocity it has according to the NASA initial values, the Sun moves toward the center of origin. In Figure \ref{fig:solar} we have fixed the Sun, as explained in the Programming section, with very similar results, with no visible differences in the plots.
 
 
 \subsection{Perihelion of Mercury}
