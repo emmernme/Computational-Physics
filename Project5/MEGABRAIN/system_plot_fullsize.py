@@ -40,7 +40,7 @@ for i in range(n-1):
 
 # Set up the plot as we like it
 plt.style.use("dark_background")
-fig = plt.figure(figsize=(10.8, 7.2))
+fig = plt.figure() #figsize=(10.8, 7.2))
 ax = fig.gca(projection='3d')
 plt.gca().patch.set_facecolor('black')
 ax.xaxis.set_pane_color((0, 0, 0, 1.0))
