@@ -39,14 +39,14 @@
 \end{titlepage}
 
 \section*{Abstract}
-We have used the velocity Verlet algorithm and Euler's algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force. Our results confirm that the energy is conserved at all times. We experienced that Verlet gives a more efficient calculation than Euler. We also found that the initial velocity for the Earth to obtain a circular orbit around the sun is 2$\pi$ and the initial velocity when the Earth start to escape the sun is 2.99$\pi$ AU/yr. We changed the gravitational force of the Earth and saw that this affected the Earths orbit around the Sun. We added Jupiter to the system and
+We have used the velocity Verlet algorithm and Euler's algorithm for solving coupled ordinary differential equations and object orientation for making a model for the soslar system. The equations we have used for this is based on Newton's law of motion due to the gravitational force. Our results confirm that the energy is conserved at all times. We experienced that Verlet gives a more efficient calculation than Euler. We also found that the initial velocity for the Earth to obtain a circular orbit around the sun is 2$\pi$ and the initial velocity when the Earth start to escape the sun is 2.99$\pi$ AU/yr. We changed the gravitational force of the Earth and saw that this affected the Earths orbit around the Sun. We added Jupiter to the system and looked at how Jupiters mass affects the gravitaional force.
 
 \tableofcontents
 
 \newpage
 
 \section{Introduction}
-We have made a model for the solar system by starting with a hypothetical solar system with only two bodies, the Sun and the Eart. We have used Newtons second law of motion to obtain the motion of the planets. Further we have added more planets to obtain a model for the whole solar system.
+We have made a model for the solar system by starting with a hypothetical solar system with only two bodies, the Sun and the Eart. We have used Newtons second law of motion to obtain the motion of the planets. Further we have added more planets to obtain a model for the whole solar system. We have also looked at how a relativistic constant affect the perihelion of Mercury.
 
 \section{Method}
 
@@ -188,6 +188,7 @@ The perihelion of a planet is the point where the planet in orbit around the Sun
 
 \begin{flalign}
     F_G = \frac{GM_{Sun}M_{Mercury}}{r^2}\left[1 + \frac{3l^2}{r^2c^2} \right]
+    \label{eq:perihelion}
 \end{flalign}
 
 where $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun and Mercury. The magnitude of the angular momentum is given by $l=|\vec{r} X \vec{v}|$ and c is the speed of light in vacuum. We obtain the perihelion angle $\thetha_p$ from the positions when Mercury is at its closest to the Sun, i.e the perihelion positions, $x_p$ and $y_p$. $\theta_p$ is then given by
@@ -207,7 +208,7 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.8\textwidth]{./Plot/xy_vs_time.png}
-        \caption{: }
+        \caption{: x and y position of the Earth relative to the Sun.}
         \label{fig:position}
     \end{center}
 \end{figure}
@@ -215,7 +216,8 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
 \begin{figure}[H]
     \begin{center}
         \includegraphics[width=0.8\textwidth]{./Plot/energy.png}
-        \caption{: Energy}
+        \caption{: Energy of the Earth plottet against time.
+        }
         \label{fig:energy}
     \end{center}
 \end{figure}
@@ -229,14 +231,7 @@ We have solved equation \ref{eq:v2r} using both Euler's forward algorithm and th
 \end{figure}
 
 \subsection{Initial velocity for circular orbit}
-The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun. We have seen this both in our code but we can also see this in the mathematics.
-
-\begin{flalign*}
-    \frac{mv^2}r &= \frac{GM_{\odot}M_E}{r^2}\\
-    v^2 &= \frac{GM_{\odot}}r\\
-    v &= \sqrt{\frac{4\pi^2}1} = 2\pi
-\end{flalign*}
-
+The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun.
 The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_orbit}
 
 \begin{figure}[H]
@@ -337,28 +332,40 @@ Further we have completed the whole solar system by adding more planets, we have
 
 
 \subsection{Perihelion of Mercury}
-perihelion:
+The speed of Mercury at perihelion is 12.44 AU/yr, and the distance to the Sun at perihelion is 0.3075 AU. With the realtivistic constant from Equation \ref{eq:perihelion} we get the results shown in Table \ref{tab:perihelion}.
 
 \begin{table}[h!]
-    \caption{: Perihelion of Mercury}
+    \caption{: $\theta_p$ of Mercury when the distance is 0.3075 AU}
     \label{tab:perihelion}
     \centering
-    \begin{tabular}{l c}
+    \begin{tabular}{l c c}
+
+              & Numerical angle & Real angle\\
         \hline
-        Observed    &       0.3075 AU\\
-        Relativistic    &   \\
-        Newtonian   &  \\
+        Relativistic    & 0.02524 & 0.01194 \\
+        Newtonian   & 0.01426  &  0 \\
         \hline
     \end{tabular}
 \end{table}
-The speed of Mercury at perihelion is 12.44 AU/yr, and the distance to the sun at perihelion is 0.3075 AU.
-
-sjekke at endringen i perihelion med en ren newton kraft (uten relativistiks) er minst et par ganger mindre enn den observerte Perihelion precession of mercury
 
 \section{Discussion}
-We have seen that the velocity Verlet method is more efficient for solving the coupled differential equations. We also see from our results that the kinetic and potential energy as well as the angular momentum is conserved.
-These properties is consereved because if they were not conserved the Earth would not be in orbit around the Sun.
+We have seen that the velocity Verlet method is more efficient for solving the coupled differential equations. The plot of the Earth's x and y position relative to the Sun follows a respectively a cosine and a sinus curve which shows that the Earth moves in a circular orbit around the Sun.
 
+We also see from our results that the kinetic and potential energy as well as the angular momentum is conserved. These properties is consereved because if they were not conserved the Earth would not be in orbit around the Sun.
+
+We saw from our numerical results that the inital value for the Earth to have a circular orbit around the Sun needs to be 2$\pi$. We can also see this analyticaly with the acceleration in the circular motion equal to $v^2/r$.
+
+\begin{flalign*}
+    \frac{mv^2}r &= \frac{GM_{\odot}M_E}{r^2}\\
+    v^2 &= \frac{GM_{\odot}}r\\
+    v &= \sqrt{\frac{4\pi^2}1} = 2\pi
+\end{flalign*}
+
+
+
+
+
+initalverdier fra nasa, realistisk, jorda fortsatt rund bane
 %Forskjeller mellom Verlet og Euler når vi tester algoritmene
 %Time de og
 
@@ -378,11 +385,11 @@ These properties is consereved because if they were not conserved the Earth woul
     \end{center}
 \end{figure}
 
-\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project5}{Link to our GitHub repository}
+\href{https://github.com/emmernme/MENA-Compfys/tree/master/Project5}{Link to our GitHub repository}\\
 
-\href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture Slides on Differential Equations, Hjorth-Jensen Morten}
+\href{http://compphysics.github.io/ComputationalPhysics/doc/pub/ode/pdf/ode-print.pdf}{Lecture Slides on Differential Equations, Hjorth-Jensen Morten}\\
 
-\href{https://en.wikipedia.org/wiki/Escape_velocity}{Escape velocity from Wikipedia}
+\href{https://en.wikipedia.org/wiki/Escape_velocity}{Escape velocity from Wikipedia}\\
 
 
 
