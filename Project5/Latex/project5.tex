@@ -48,12 +48,14 @@
     We confirmed that our model had a reasonable realism when simulating the full solar system with all the planets, and observing that the orbit of Neptun took approximately as long as expected.\\
     After completing the whole solar system, we examined the perihelion angle of Mercury with and without a relativistic contribution, and found that it was 0.02524$^o$ with the relativistic contribution.
 
+\newpage
+
 \tableofcontents
 
 \newpage
 
 \section{Introduction}
-    We will, in this project, study the solar system by implementing numerical solutions of the force of gravity between objects. We will start by looking at the Sun and the Earth, and study changes in the force of gravity, before moving on to add more planets, with varying mass, before finally simulating the entire solar system. We will finish off my looking at Mercury's perihelion.
+    We will, in this project, study the solar system by implementing numerical solutions of the force of gravity between objects. We will start by looking at the Sun and the Earth, and study changes in the force of gravity, before moving on to add more planets, with varying mass, before finally simulating the entire solar system. We will finish off my looking at Mercury's perihelion angle.
 
 \section{Method}
     For a hypothetical solar system with only the Earth and the Sun, the force on each object is given by Newton's law as one force, $F_G$.
@@ -63,7 +65,7 @@
         \label{eq:FG}
     \end{flalign}
 
-    In the above equation $M_{\odot}$ is the mass of the Sun and $M_E$ the mass of the Earth. $G$ is the gravitational constant, and $r $is the distance between the Earth and the Sun. We will neglect the motion of the Sun and only look at the motion of the Earth relative to the Sun. We can do this because we assume that the mass of the Sun is much larger than the mass of the Earth. The gravitiational force consists of $x$ and $y$ components, $F_{G,x}$ and $F_{Gy}$. We use Newton's second law and obtain:
+    In the above equation $M_{\odot}$ is the mass of the Sun and $M_E$ the mass of the Earth. $G$ is the gravitational constant, and $r$ is the distance between the Earth and the Sun. We will neglect the motion of the Sun and only look at the motion of the Earth relative to the Sun. We can do this because we assume that the mass of the Sun is much larger than the mass of the Earth, we also assume that the mass of the Earth dont have any extent. The gravitiational force consists of $x$ and $y$ components, $F_{G,x}$ and $F_{Gy}$. We use Newton's second law and obtain:
 
     \begin{flalign}
         \frac{d^2x}{dt^2} = \frac{F_{G,x}}{M_E} \ \
@@ -72,7 +74,9 @@
         \label{eq:diff}
     \end{flalign}
 
-    We use that the average distance bewteen the Earth and the Sun is $1.5 \cdot 10^{11}$ m, and we call this one astronomical unit (1 AU). We use the masses of the different planets including the Sun that are given in \href{http://compphysics.github.io/ComputationalPhysics/doc/Projects/2019/Project5/SolarSystem/pdf/SolarSystem.pdf}{the description of Project 5}, only relative to the Sun's mass.
+    later in the simulation we also add the y component in addition to x and y.
+
+    We use that the average distance bewteen the Earth and the Sun is $1.5 \cdot 10^{11}$ m, and we call this one astronomical unit (1 AU). We use the masses of the different planets including the Sun that are given in \href{http://compphysics.github.io/ComputationalPhysics/doc/Projects/2019/Project5/SolarSystem/pdf/SolarSystem.pdf}{the description of Project 5}, but relative to the Sun's mass.
 
     We introduce $x=r\ \cos(\theta), y = r\ \sin(\theta)$ and $r=\sqrt(x^2 + y^2)$. We can then rewrite the forces:
 
@@ -99,7 +103,7 @@
         \frac{M_Ev^2}{r} = F = \frac{GM_{\odot}M_E}{r^2}
     \end{flalign*}
 
-    We then solve for $v^2r$, where $v$ is the velocity of Earth. When we assume circular motion, we get: $v=2\pir/yr = 2\piAU/yr$.
+    We then solve for $v^2r$, where $v$ is the velocity of Earth. When we assume circular motion, we get: $v=2 \pi \ \ r/yr = 2 \pi \ \ AU /yr$.
 
     \begin{flalign}
         v^2r = G M_{\odot} = 4\pi^2 \ \ AU^3/(yr)^2
@@ -182,21 +186,21 @@
         For a system with more than one planet we need to add the magnitude of the force between Earth and the other planet. We will use Jupiter as an example, which is the most massive planet in the solar system. This force is given by:
 
         \begin{flalign*}
-            F_{Eart-Jupiter} = \frac{GM_{Jupiter}M_E}{r^2_{Earth-Jupiter}}
+            F_{Earth-Jupiter} = \frac{GM_{Jupiter}M_E}{r^2_{Earth-Jupiter}}
         \end{flalign*}
 
         where $M_{Jupiter}$ is the mass of Jupiter, and $r_{Earth-Jupiter}$ is the distance between Earth and Jupiter. To extend the model for all the planets in the solar system, we add the other planets in the same way and choose the initial positions and velocities for all the planets from \href{https://ssd.jpl.nasa.gov/horizons.cgi#top}{NASA}.
 
 
     \subsection{Perihelion of Mercury}
-        The perihelion of a planet is the point where the planet in orbit around the Sun is closest to the Sun. The general theory of relativity explains the anomalous perihelion precession of the planet Mercury. The observed value for the perihelion precession when the classical effects are subtracted is 43''(43 arc seconds) per century. The behavior of the orbit around the sun will not be the same for each round, this means that the perihelion will slowly precess around the Sun and we would need to add a general relativistic correction to the Newton gravitational force. The force then becomes:
+        The perihelion of a planet is the point where the planet in orbit around the Sun is closest to the Sun. The general theory of relativity explains the anomalous perihelion precession of the planet Mercury. The observed value for the perihelion precession is 43''(43 arc seconds) per century. The behavior of the orbit around the sun will not be the same for each round, this means that the perihelion will slowly precess around the Sun and we would need to add a general relativistic correction to the Newton gravitational force. The force then becomes:
 
         \begin{flalign}
             F_G = \frac{GM_{Sun}M_{Mercury}}{r^2}\left[1 + \frac{3l^2}{r^2c^2} \right]
             \label{eq:perihelion}
         \end{flalign}
 
-        Here $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun and Mercury. The magnitude of the angular momentum is given by $l=|\vec{r} X \vec{v}|$ and c is the speed of light in vacuum. We obtain the perihelion angle $\thetha_p$ from the positions when Mercury is at its closest to the Sun, i.e the perihelion positions, $x_p$ and $y_p$. $\theta_p$ is then given by:
+        Here $M_{Mercury}$ is the mass of Mercury and r is the distance bewteen the Sun and Mercury. The magnitude of the angular momentum is given by $l=|\vec{r} \times \vec{v}|$ and c is the speed of light in vacuum. We obtain the perihelion angle $\thetha_p$ from the positions when Mercury is at its closest to the Sun, i.e the perihelion positions, $x_p$ and $y_p$. $\theta_p$ is then given by:
 
         \begin{flalign}
             tan \theta_p = \frac{y_p}{x_p}
@@ -217,9 +221,9 @@
 
 
 \section{Results}
-    We have solved equation \ref{eq:v2r} to find the acceleration, and then both Euler's forward algorithm and the velocity Verlet method to find the position of a given planet. For the Earth-Sun system,running over 5 years for initial speed equal to 2$\pi$, we saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. These numbers represent how many iterations that is needed to get a orbit that looks fairly smooth. If you want a circular orbit where each year coincide, more iterations is needed. For many of the later results the number of iterations was big enough to have a steplength of 0,000005 years.\\
+    We have solved the modified version of equation \ref{eq:v2r} to find the acceleration. Then both Euler's forward algorithm and the velocity Verlet method to find the position of a given planet. For the Earth-Sun system, running over 5 years for initial speed equal to 2$\pi$, we saw that Euler's algorithm requiers a lot more calculation steps to become accurate than the Verlet algorithm. Euler's algorithm requires $5 \cdot 10^6$ steps while the Verlet algorithm requires only 500 steps. These numbers represent how many iterations that is needed to get a orbit that looks fairly smooth. If you want a circular orbit where every orbit coincide, more iterations is needed. For many of the later results the number of iterations was big enough to have a steplength of 0,000005 years.\\
 
-    If we run our code with 100 000 integration points, Euler takes 23.8 ms and uses 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy (Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy. From these figures we can see that the energy and the angular momentum is conserved.
+    If we run our code with 100 000 integration points, Euler takes 23.8 ms with 17 N flops while Verlet uses 35.7 ms with 38 N flops. We have therefore used the velocity Verlet method to calculate and plot the position, the energy and the angular momentum of the Earth. The results can be found in Figure \ref{fig:position}, \ref{fig:energy} and \ref{fig:am}. The plot of the energy (Figure\ref{fig:energy}) is obtained by a sum of the potential and the kinetic energy subtracted by the inital kinetic and potential energy. From Figure \ref{fig:energy} and \ref{fig:am} we can see that the energy and the angular momentum is conserved.
 
     \begin{figure}[H]
         \begin{center}
@@ -247,7 +251,7 @@
     \end{figure}
 
     \subsection{Initial velocity for circular orbit}
-        The initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun.
+        We can see from our simulations that the initial velocity needs to be minimum 2$\pi$ AU/(yr) to obtain a circular orbit of the Earth around the Sun.
         The plot of the Earth's orbit around the Sun is shown in Figure \ref{fig:earth_orbit}
 
         \begin{figure}[H]
@@ -259,23 +263,32 @@
         \end{figure}
 
     \subsection{Escape velocity}
-        When we consider a planet which begins at a distance 1 AU from the Sun, the inital velocity when the planet won't have an orbit at all, but will simply escape from the Sun, is approximately 2.82$\pi$ AU/(yr). At initial velocities over $2\pi$, the planet's orbit is no longer circular. Figure \ref{fig:last} shows the last orbit with a stable initial velocity before the Earth escapes from the Sun.
+        When we consider a planet which begins at a distance 1 AU from the Sun, the inital velocity when the planet won't have an orbit at all, but will simply escape from the Sun, is approximately 2.82$\pi$ AU/(yr). At initial velocities over $2\pi$, the planet's orbit is no longer circular. Figure \ref{fig:last} shows the Earth's orbit around the Sun with different initial velocities.
 
         \begin{figure}[H]
-            \begin{center}
-                \includegraphics[width=0.8\textwidth]{./Plot/last_stable_orbit.png}
-                \caption{: Plot of Earth's orbit around the sun before it escapes the sun.}
-                \label{fig:last}
-            \end{center}
+            \makebox[\textwidth]{\makebox[1.5\textwidth]{%
+            \begin{subfigure}{.5\textwidth}
+                    \centering
+                    \includegraphics[width=250px]{./Plot/escape_velocity.png}
+                    %\caption{}
+            \end{subfigure} \hfill %
+            \begin{subfigure}{.5\textwidth}
+                    \centering
+                    \includegraphics[width=250px]{./Plot/escape_velocity_2.png}
+                    %\caption{}
+            \end{subfigure}\hfill}}
+            \caption{: The Earth-Sun system with different initial velocities.}
+            \label{fig:last}
         \end{figure}
+
 
     \subsection{Changing the gravitational force}
         If we try to replace the gravitational force from Equation \ref{eq:FG} with
 
-        \begin{flalign*}
+        \begin{flalign}
             F_G = \frac{GM_{\odot}M_E}{r^{\beta}}
             \label{eq:beta}
-        \end{flalign*}
+        \end{flalign}
 
         with $\beta \in [2,3]$, we effectively modify the force of gravity. The results of this experiment is shown in Figure \ref{fig:beta}. These figures shows that when $\beta$ approches 3, the Earth begins to escape the sun.
 
@@ -379,16 +392,16 @@
         v_0 &= \sqrt{\frac{2GM_{\odot}}{r_0}} = \sqrt{2\cdot4\pi^2} AU/yr = 2.828\pi AU/yr
     \end{flalign*}
 
-    So we see that the difference in our estimated escape velocity and the analytical one is very small. From these results we observe that if the Earth would have a higher velocity around the Sun than it does, we would be travelling away from the Sun, and we don't think that would have been appreciated here on the Earth.
+    So we see that the difference in our estimated escape velocity and the analytical one is very small. From these results we observe that if the Earth would have a higher velocity around the Sun than it does, we would be travelling away from the Sun, and we don't think that would have been appreciated here on the Earth.\\
 
-    Further we examined how a change in the gravitational force would affect the Earth orbit around the Sun. We saw that when $\beta$ in Equation \ref{eq:beta} approches 3, the Earth starts to escape the Sun. This would have been the case if the gravitational force worked differently, so we are lucky that the gravitational force keeps us in orbit around the Sun.
+    Further we examined how a change in the gravitational force would affect the Earth orbit around the Sun. We saw that when $\beta$ in Equation \ref{eq:beta} approches 3, the Earth starts to escape the Sun. This would have been the case if the gravitational force worked differently, so we are lucky that the gravitational force keeps us in orbit around the Sun.\\
 
-    When we added Jupiter to the system and examined what would happen if we increased Jupiter's mass, we see that it will affect the Earth's orbit becuse the Earth will be attracted to Jupiter. When the mass is inreased by a factor of 950, we saw that the system would be stable only up to around 20 years. We can see from the plot that the Earth starts to escape the system after 20 years. When we increase the mass with a factor of 1000, we see that the Earth will immediatley escape the system, while Jupiter will stay in its orbit around the Sun.
+    When we added Jupiter to the system and examined what would happen if we increased Jupiter's mass, we see that it will affect the Earth's orbit becuse the Earth will be attracted to Jupiter. When the mass is inreased by a factor of 950, we saw that the system would be stable only up to around 20 years. We can see from the plot that the Earth starts to escape the system after 20 years. When we increase the mass with a factor of 1000, we see that the Earth will immediatley escape the system, while Jupiter will stay in its orbit around the Sun.\\
 
-    When we simulate all the planets in the Solar system, we use the initial values from NASA, which should give very accurate inital values. Our model shows that the Earth still goes in a circular orbit around the Sun. Aditionally, we can see that the orbit of Neptun is almost completed over a 164 year period, which coincides a lot with the known orbit time of Neptune. This indicates that our model gives a good representation of the real solar system.
+    When we simulate all the planets in the Solar system, we use the initial values from NASA, which should give very accurate inital values. Our model shows that the Earth still goes in a circular orbit around the Sun. Aditionally, we can see that the orbit of Neptun is almost completed over a 164 year period, which coincides a lot with the known orbit time of Neptune. This indicates that our model gives a good representation of the real solar system.\\
 
     %Can the obserevd perihelion precession of Mercury be explained by the general theory of relativity?
-    It is known that when the Newtonian calculation is used, we should expect no change in the perihelion angle as the years pass. Thus, the number that is given in the results may be the error the program makes in the numerical calculations. By subtracting this error from the perihelion angle calculated with theory of relativity we get an answer closer to the correct value ($0.02524^\circ - 0.01426^\circ = 0.01098^\circ = 39,5" $). The reason for this error can come as a result of few integration points or other losses of numerical precission. \\
+    When we are looking at Mercury's perihelion angle it is known that when the Newtonian calculation is used, we should expect no change in the perihelion angle as the years pass. Thus, the number that is given in the results may be the error the program makes in the numerical calculations. By subtracting this error from the perihelion angle calculated with theory of relativity we get an answer closer to the correct value ($0.02524^\circ - 0.01426^\circ = 0.01098^\circ = 39,5" $). The reason for this error can come as a result of few integration points or other losses of numerical precission. \\
     Since we also know that the perihelion angle changes, we can say that the general theory of relativity is the theory that explains the perihelion precession for Mercury.
 
 \section{Conclusion}
